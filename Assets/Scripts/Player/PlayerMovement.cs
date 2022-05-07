@@ -48,6 +48,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_ZRotationSpeed = .01f;
     [Tooltip("The maximum amount the player can z-rotate from resting position")]
     [SerializeField] private float m_MaxZRotation = 50f;
+    [Tooltip("minimum amount of x input needed to rotate ")]
+    [Range (0, 1)]
+    [SerializeField] private float m_MinXInputForZRotation = .1f;
 
     [Header("Camera")]
     [Tooltip("CameraMovement component")]
@@ -166,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
             transform.localEulerAngles.x,
             transform.localEulerAngles.y,
             Mathf.LerpAngle(m_CurrentAngle.z,
-                            inputX == 0 ? 0 : inputX < 0 ? m_MaxZRotation : -m_MaxZRotation, m_ZRotationSpeed));
+                            (inputX < m_MinXInputForZRotation && inputX > -m_MinXInputForZRotation) ? 0 : inputX < 0 ? m_MaxZRotation : -m_MaxZRotation, m_ZRotationSpeed));
 
         transform.localEulerAngles = m_CurrentAngle;
     }

@@ -3860,6 +3860,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6778128734792007147, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6778128735702367241, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3927,6 +3931,18 @@ PrefabInstance:
     - target: {fileID: 6778128736407315098, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_CrosshairPercentY
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778128736407315098, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_MinXInputForZRotation
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778128736407315098, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_AnimationCurve.m_Curve.Array.data[0].time
+      value: -0.0013795325
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778128736407315098, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_AnimationCurve.m_Curve.Array.data[0].value
+      value: 0.7004018
       objectReference: {fileID: 0}
     - target: {fileID: 7237329388739985513, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: bullet
