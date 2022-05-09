@@ -72,6 +72,7 @@ public class TileInspector : Editor
         float size = HandleUtility.GetHandleSize(point);
 
         // Display button and allow selection
+        Handles.DrawWireDisc(point, Vector3.forward, 10);
         if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
         {
             m_SelectedType = isStartPoint ? Tile.LOCATION_TYPES.START : Tile.LOCATION_TYPES.END;
