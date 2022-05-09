@@ -8,6 +8,9 @@ public class TileManager : MonoBehaviour
 
     [SerializeField] private Tile[] m_TilePrefabs;
     [SerializeField] private PlayerTest m_Player;
+    [SerializeField] private CatmullRomSpline m_CatmullRomSpline;
+    [SerializeField] private float m_DistanceToPlaceTile = 200f;
+    [SerializeField] private float m_DistanceToDeleteTile = 50f;
 
     private Tile[] m_PoolTiles = new Tile[20];
     private LinkedList<Tile> m_VisibleTiles = new LinkedList<Tile>();
@@ -80,7 +83,11 @@ public class TileManager : MonoBehaviour
             Vector3 newPos = lastCreated.EndPointWorld + newTile.VecStartToCenter;
             newTile.transform.position = newPos;
         }
-            
+
+        for (int i = 0; i < newTile.PlayerFollowPointsCount; i++)
+        {
+            m_CatmullRomSpline.AddPoint(newTile.GetPlayerFollowPointWorld(i));
+        }
     }
 
     private Tile FindAvailableTile()
@@ -93,7 +100,7 @@ public class TileManager : MonoBehaviour
             rand = (rand + 1) % (m_PoolTiles.Length - 1);
             numIterations++;
             if (numIterations == m_PoolTiles.Length)
-                throw new System.Exception("Stopped infinite loop");
+                throw new System.Exception("Stopped infinite loop when searching for available tile");
         }
         return m_PoolTiles[rand];
     }
@@ -102,7 +109,7 @@ public class TileManager : MonoBehaviour
     {
         Tile firstTile = m_VisibleTiles.First.Value;
 
-        if (Mathf.Abs(firstTile.TileEndDistanceFromPlayer(m_Player)) > 200)
+        if (firstTile.TileEndDistanceFromPlayer(m_Player) > m_DistanceToDeleteTile)
         {
             firstTile.gameObject.SetActive(false);
             m_VisibleTiles.RemoveFirst();
@@ -114,7 +121,7 @@ public class TileManager : MonoBehaviour
         // TODO: Make reliant on distance rather then z-position
         Tile lastTile = m_VisibleTiles.Last.Value;
         // add tile if player is within a certain distance from last tile
-        if (Mathf.Abs(lastTile.TileStartDistanceFromPlayer(m_Player)) < 50)
+        if (lastTile.TileEndDistanceFromPlayer(m_Player) < m_DistanceToPlaceTile)
         {
             InstantiateTile();
         }

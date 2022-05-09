@@ -64,6 +64,13 @@ public class Tile : MonoBehaviour
         return m_FollowPoint[index];
     }
 
+    public Vector3 GetPlayerFollowPointWorld(int index)
+    {
+        if (index >= PlayerFollowPointsCount || index < 0)
+            throw new System.Exception("Not a valid index in m_PlayerFollowPoints");
+        return transform.TransformPoint(m_FollowPoint[index]); 
+    }
+
     public Vector3 StartPoint { 
         get { return m_StartPoint; } 
         set { m_StartPoint = value; }
