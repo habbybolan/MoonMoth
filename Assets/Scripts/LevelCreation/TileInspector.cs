@@ -13,8 +13,8 @@ public class TileInspector : Editor
     protected Transform handleTransform;
     protected Quaternion handleRotation;
 
-    private const float handleSize = 0.04f;
-    private const float pickSize = 0.06f;
+    private const float handleSize = 0.15f;
+    private const float pickSize = 0.2f;
 
     private int m_SelectedIndex = -1;
     private Tile.LOCATION_TYPES m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
@@ -26,24 +26,26 @@ public class TileInspector : Editor
         handleRotation = Tools.pivotRotation == PivotRotation.Local ?
             handleTransform.rotation : Quaternion.identity;
 
-        //for (int i = 0; i < tile.PlayerFollowPointsCount; i++)
-        //{
-        //    ShowPoint(i);
-        //}
+        for (int i = 0; i < tile.PlayerFollowPointsCount; i++)
+        {
+            ShowPoint(i);
+        }
 
-        //ShowPoint(true);
-        //ShowPoint(false);
+        ShowPoint(true);
+        ShowPoint(false);
     }
     
     // Display all follow points in the tile
     private void ShowPoint(int index)
     {
+        Handles.color = Color.blue;
         Vector3 point = handleTransform.TransformPoint(tile.GetPlayerFollowPoint(index));
         float size = HandleUtility.GetHandleSize(point);
 
-        // allow node selection
+        // Display button and allow selection
         if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
         {
+            m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
             m_SelectedIndex = index;
             Repaint();
         }
@@ -65,14 +67,42 @@ public class TileInspector : Editor
     // Displays either the starting or ending point of the tile
     private void ShowPoint(bool isStartPoint)
     {
+        Handles.color = isStartPoint ? Color.green : Color.red;
+        Vector3 point = handleTransform.TransformPoint(isStartPoint ? tile.StartPoint : tile.EndPoint);
+        float size = HandleUtility.GetHandleSize(point);
 
+        // Display button and allow selection
+        if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
+        {
+            m_SelectedType = isStartPoint ? Tile.LOCATION_TYPES.START : Tile.LOCATION_TYPES.END;
+            Repaint();
+        }
+
+        // allow movement if button point selected
+        if (isStartPoint && m_SelectedType == Tile.LOCATION_TYPES.START ||
+            !isStartPoint && m_SelectedType == Tile.LOCATION_TYPES.END)
+        {
+            EditorGUI.BeginChangeCheck();
+            point = Handles.DoPositionHandle(point, handleRotation);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(tile, "Move Point");
+                EditorUtility.SetDirty(tile);
+                Vector3 newPoint = handleTransform.InverseTransformPoint(point);
+                if (isStartPoint)
+                    tile.StartPoint = newPoint;
+                else
+                    tile.EndPoint = newPoint;
+            }
+        }
     }
 
     private void ShowPoint(Vector3 position)
     {
-
+        
     }
 
+    // Buttons in inspector for adding/deleting follow points inside tile
     public override void OnInspectorGUI()
     {
         if (GUILayout.Button("Add Follow point"))

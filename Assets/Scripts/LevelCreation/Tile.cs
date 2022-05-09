@@ -4,41 +4,35 @@ using UnityEngine;
 using System;
 
 public class Tile : MonoBehaviour
-{
-    [SerializeField] private GameObject m_FollowPointPrefab;
-    [SerializeField] private GameObject m_StartPointPrefab;
-    [SerializeField] private GameObject m_EndPointPrefab; 
-
-    public GameObject[] m_PlayerFollowPoints;
-    public GameObject m_TileStartPoint;
-    public GameObject m_TileEndPoint;
+{ 
+    public Vector3[] m_FollowPoint;
+    public Vector3 m_StartPoint;
+    public Vector3 m_EndPoint; 
 
     public void Reset()
     {
-        GameObject firstFollowPoint = Instantiate(m_FollowPointPrefab, Vector3.zero, Quaternion.identity, transform);
-        m_PlayerFollowPoints = new GameObject[] { firstFollowPoint };
+        m_FollowPoint = new Vector3[] { transform.InverseTransformPoint(Vector3.zero) };
 
-        m_TileStartPoint = Instantiate(m_StartPointPrefab, new Vector3(0, 0, 10), Quaternion.identity, transform);
+        m_StartPoint = transform.InverseTransformPoint(new Vector3(0, 0, 10));
 
-        m_TileEndPoint = Instantiate(m_EndPointPrefab, new Vector3(0, 0, -10), Quaternion.identity, transform);
+        m_EndPoint = transform.InverseTransformPoint(new Vector3(0, 0, -10));
     }
 
     public float TileEndDistanceFromPlayer(PlayerTest player)
     {
-        return Vector3.Distance(m_TileEndPoint.transform.position, player.transform.position);
+        return Vector3.Distance(m_EndPoint, player.transform.position);
     }
 
     public float TileStartDistanceFromPlayer(PlayerTest player)
     {
-        return Vector3.Distance(m_TileStartPoint.transform.position, player.transform.position);
+        return Vector3.Distance(m_StartPoint, player.transform.position);
     }
 
     public void AddFollowPoint()
     {
-        GameObject followPoint = Instantiate(m_FollowPointPrefab, Vector3.zero, Quaternion.identity, transform);
-        Array.Resize(ref m_PlayerFollowPoints, PlayerFollowPointsCount + 1);
-        followPoint.transform.position = m_PlayerFollowPoints[PlayerFollowPointsCount - 2].transform.position + Vector3.forward;
-        m_PlayerFollowPoints[PlayerFollowPointsCount - 1] = followPoint;
+        Vector3 followPoint = m_FollowPoint[PlayerFollowPointsCount - 1] + Vector3.forward * 2;
+        Array.Resize(ref m_FollowPoint, PlayerFollowPointsCount + 1);
+        m_FollowPoint[PlayerFollowPointsCount - 1] = followPoint;
     }
 
     public void RemoveFollowPoint()
@@ -46,27 +40,35 @@ public class Tile : MonoBehaviour
         if (PlayerFollowPointsCount == 1)
             throw new Exception("Cannot have an empty follow points list");
 
-        DestroyImmediate(m_PlayerFollowPoints[m_PlayerFollowPoints.Length - 1]);
-        Array.Resize(ref m_PlayerFollowPoints, PlayerFollowPointsCount - 1);
+        Array.Resize(ref m_FollowPoint, PlayerFollowPointsCount - 1);
     }
 
     public int PlayerFollowPointsCount 
     { 
-        get { return m_PlayerFollowPoints.Length; }
+        get { return m_FollowPoint.Length; }
     }
 
     public Vector3 GetPlayerFollowPoint(int index)
     {
         if (index >= PlayerFollowPointsCount || index < 0)
             throw new System.Exception("Not a valid index in m_PlayerFollowPoints");
-        return m_PlayerFollowPoints[index].transform.position;
+        return m_FollowPoint[index];
+    }
+
+    public Vector3 StartPoint { 
+        get { return m_StartPoint; } 
+        set { m_StartPoint = value; }
+    }
+    public Vector3 EndPoint { 
+        get { return m_EndPoint; } 
+        set { m_EndPoint = value; }
     }
 
     public void SetPlayerFollowPoint(int index, Vector3 position)
     {
         if (index >= PlayerFollowPointsCount || index < 0)
             throw new System.Exception("Not a valid index in m_PlayerFollowPoints");
-        m_PlayerFollowPoints[index].transform.position = position;
+        m_FollowPoint[index] = position;
     }
 
 
