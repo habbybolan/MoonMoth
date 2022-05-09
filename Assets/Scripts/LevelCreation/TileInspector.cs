@@ -98,11 +98,6 @@ public class TileInspector : Editor
         }
     }
 
-    private void ShowPoint(Vector3 position)
-    {
-        
-    }
-
     // Buttons in inspector for adding/deleting follow points inside tile
     public override void OnInspectorGUI()
     {

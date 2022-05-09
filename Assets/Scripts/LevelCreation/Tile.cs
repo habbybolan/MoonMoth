@@ -7,7 +7,16 @@ public class Tile : MonoBehaviour
 { 
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
-    public Vector3 m_EndPoint; 
+    public Vector3 m_EndPoint;
+
+    private Vector3 m_VecStartToCenter;
+    private Vector3 m_VecCenterToEnd;
+
+    private void Awake()
+    {
+        m_VecStartToCenter = transform.position - transform.TransformPoint(m_StartPoint);
+        m_VecCenterToEnd = transform.TransformPoint(m_EndPoint) - transform.position;
+    }
 
     public void Reset()
     {
@@ -17,15 +26,15 @@ public class Tile : MonoBehaviour
 
         m_EndPoint = transform.InverseTransformPoint(new Vector3(0, 0, -10));
     }
-
+    
     public float TileEndDistanceFromPlayer(PlayerTest player)
     {
-        return Vector3.Distance(m_EndPoint, player.transform.position);
+        return Vector3.Distance(transform.TransformPoint(m_EndPoint), player.transform.position);
     }
 
     public float TileStartDistanceFromPlayer(PlayerTest player)
     {
-        return Vector3.Distance(m_StartPoint, player.transform.position);
+        return Vector3.Distance(transform.TransformPoint(m_StartPoint), player.transform.position);
     }
 
     public void AddFollowPoint()
@@ -64,12 +73,18 @@ public class Tile : MonoBehaviour
         set { m_EndPoint = value; }
     }
 
+    public Vector3 StartPointWorld { get { return transform.TransformPoint(StartPoint); } }
+    public Vector3 EndPointWorld { get { return transform.TransformPoint(EndPoint); } }
+
     public void SetPlayerFollowPoint(int index, Vector3 position)
     {
         if (index >= PlayerFollowPointsCount || index < 0)
             throw new System.Exception("Not a valid index in m_PlayerFollowPoints");
         m_FollowPoint[index] = position;
     }
+
+    public Vector3 VecStartToCenter { get { return m_VecStartToCenter; } }
+    public Vector3 VecCenterToEnd { get { return m_VecCenterToEnd; } }
 
 
     public enum LOCATION_TYPES
