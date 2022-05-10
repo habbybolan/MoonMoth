@@ -11,7 +11,6 @@ public class CatmullRomSpline : MonoBehaviour
     [SerializeField]
     private ControlPointMode[] modes;
 
-
     [SerializeField] private bool isConstantSpeed = true;
 
     public virtual Vector3 GetPoint(float t)

@@ -2,16 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SplineCreator : CatmullRomSpline
+public abstract class SplineCreator : CatmullRomSpline
 {
-    LinkedListNode<Tile> m_CurrTile;
-    private int m_CurrFollowPointInTile = 0; 
+    protected LinkedListNode<Tile> m_CurrTile;            // Tile holding the last added spline point
+    protected int m_CurrFollowPointInTile;    // Index of the follow point inside the current tile
 
-    public void AddNewPoint()
+    private bool m_IsInitialized = false;
+
+    public virtual void AddNewPoint()
     {
-        // TODO:
-        // Check curr tile to see if any more follow points exists
-        //      If so, add that to the spline and incremement index
-        //      Otherwise find next tile and set their first follow point as the next one in the spline
+        if (!m_IsInitialized)
+            throw new System.Exception("Spline Creator must be initialized first");
+    }
+
+    // Initialize some points on the spline
+    public void InitializeSpline()
+    {
+        m_CurrTile = TileManager.PropertyInstance.GetHead();
+        m_CurrFollowPointInTile = 0;
+
+        m_IsInitialized = true;
+        // TODO: Possibly very error prone
+        // Initialize 4 curves on spline at beginning
+        for (int i = 0; i < 2; i++)
+        {
+            AddNewPoint();
+        }
+        
+        
+    }
+
+    protected void GotoNextTile()
+    {
+        m_CurrTile = m_CurrTile.Next;
+        m_CurrFollowPointInTile = 0;
     }
 }

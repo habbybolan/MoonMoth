@@ -31,12 +31,12 @@ public class Tile : MonoBehaviour
         m_EnemyPointSet = new List<EnemySetWrapper> { new EnemySetWrapper(new Vector3(0, 0, 0)) };
     }
     
-    public float TileEndDistanceFromPlayer(PlayerTest player)
+    public float TileEndDistanceFromPlayer(CatmullWalker player)
     {
         return Vector3.Distance(transform.TransformPoint(m_EndPoint), player.transform.position);
     }
 
-    public float TileStartDistanceFromPlayer(PlayerTest player)
+    public float TileStartDistanceFromPlayer(CatmullWalker player)
     {
         return Vector3.Distance(transform.TransformPoint(m_StartPoint), player.transform.position);
     }
@@ -113,6 +113,20 @@ public class Tile : MonoBehaviour
             throw new Exception("Not a valid index in m_EnemyPointSet");
 
         return m_EnemyPointSet[index].EnemyPointSet;
+    }
+
+    public List<Vector3> GetEnemyPointSetWorld(int index)
+    {
+        if (index >= m_EnemyPointSet.Count || index < 0)
+            throw new Exception("Not a valid index in m_EnemyPointSet");
+
+        EnemySetWrapper set = m_EnemyPointSet[index];
+        List<Vector3> worldSet = new List<Vector3>();
+        for (int i = 0; i < set.EnemyPointSet.Count; i++)
+        {
+            worldSet.Add(transform.TransformPoint(set.EnemyPointSet[i]));
+        }
+        return worldSet;
     }
 
     public Vector3 GetPlayerFollowPoint(int index)

@@ -7,8 +7,7 @@ public class TileManager : MonoBehaviour
     static TileManager s_PropertyInstance;
 
     [SerializeField] private Tile[] m_TilePrefabs;
-    [SerializeField] private PlayerTest m_Player;
-    [SerializeField] private CatmullRomSpline m_CatmullRomSpline;
+    [SerializeField] private CatmullWalker m_Player;
     [SerializeField] private float m_DistanceToPlaceTile = 200f;
     [SerializeField] private float m_DistanceToDeleteTile = 50f;
 
@@ -83,11 +82,6 @@ public class TileManager : MonoBehaviour
             Vector3 newPos = lastCreated.EndPointWorld + newTile.VecStartToCenter;
             newTile.transform.position = newPos;
         }
-
-        for (int i = 0; i < newTile.PlayerFollowPointsCount; i++)
-        {
-            m_CatmullRomSpline.AddPoint(newTile.GetPlayerFollowPointWorld(i));
-        }
     }
 
     private Tile FindAvailableTile()
@@ -125,6 +119,11 @@ public class TileManager : MonoBehaviour
         {
             InstantiateTile();
         }
+    }
+
+    public LinkedListNode<Tile> GetHead()
+    {
+        return m_VisibleTiles.First;
     }
 
     // Update is called once per frame

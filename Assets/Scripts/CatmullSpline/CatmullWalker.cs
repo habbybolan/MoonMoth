@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CatmullWalker : MonoBehaviour
-{
-    public CatmullRomSpline m_Spline;
+{ 
+    public SplineCreator m_Spline;
 
     [SerializeField] private float m_Duration = 5f;
     [SerializeField] private float m_Speed = 1;
@@ -13,10 +13,17 @@ public class CatmullWalker : MonoBehaviour
     private int m_CurrCurve = -1;
     private float m_CurrCurveLength = 0;
 
+    private bool m_StartMoving = false;
+
     // Update is called once per frame
     void Update()
     {
-        if (m_Spline)
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            m_Spline.InitializeSpline();
+            m_StartMoving = true;
+        }
+        if (m_Spline && m_StartMoving)
             MovePlayerConstant();
     }
 
@@ -42,6 +49,7 @@ public class CatmullWalker : MonoBehaviour
         // Move to next curve
         if (m_Dist >= m_CurrCurveLength)
         {
+            m_Spline.AddNewPoint();
             m_Dist = 0;
             // Reset to beginning if reached end
             if (m_CurrCurve == m_Spline.CurveCount)
