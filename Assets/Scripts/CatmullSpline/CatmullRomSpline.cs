@@ -176,8 +176,6 @@ public class CatmullRomSpline : MonoBehaviour
         get { return points.Length; }
     }
 
-
-
     private Vector3 GetDirectionHelper(int ind0, int ind1, float t)
     {
         Vector3 p0, p1;
@@ -224,20 +222,6 @@ public class CatmullRomSpline : MonoBehaviour
         get
         {
             return (points.Length - 1);
-        }
-    }
-
-    public struct CatmullRomPoint
-    {
-        public Vector3 position;
-        public Vector3 tangent;
-        public Vector3 normal;
-
-        public CatmullRomPoint(Vector3 position, Vector3 tangent, Vector3 normal)
-        {
-            this.position = position;
-            this.tangent = tangent;
-            this.normal = normal;
         }
     }
 }
