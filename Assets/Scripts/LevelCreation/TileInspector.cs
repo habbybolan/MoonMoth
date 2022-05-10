@@ -28,16 +28,20 @@ public class TileInspector : Editor
         handleRotation = Tools.pivotRotation == PivotRotation.Local ?
             handleTransform.rotation : Quaternion.identity;
 
+        // Create buttons for all player follow points
         for (int i = 0; i < tile.PlayerFollowPointsCount; i++)
         {
             ShowPlayerFollowPoint(i);
         }
 
+        // Create buttons for all enemy follows sets and their points
         for (int i = 0; i < tile.EnemyFollowSetCount; i++)
         {
             ShowEnemyPointSet(i);
         }
+        // Create button for Start point
         ShowPoint(true);
+        // Create button for end point
         ShowPoint(false);
     }
     
@@ -71,12 +75,13 @@ public class TileInspector : Editor
         }
     }
 
+    // Display the enemy point set and a center point to control them all
     private void ShowEnemyPointSet(int index)
     {
         Handles.color = Color.yellow;
         List<Vector3> enemyPointSet = tile.GetEnemyPointSet(index);
         
-
+        // Loop through all points in the set, display and create select functionality
         for (int i = 0; i < enemyPointSet.Count; i++)
         {
             Vector3 point = enemyPointSet[i];
@@ -91,6 +96,7 @@ public class TileInspector : Editor
             }
         }
 
+        // Create a point that's the center of all points in the set to be able to move them all together
         Vector3 centerPoint = GetCenterPointBetweenVectors(enemyPointSet);
         float centerSize = HandleUtility.GetHandleSize(centerPoint);
         if (Handles.Button(centerPoint, handleRotation, centerSize * handleSize, centerSize * pickSize, Handles.DotHandleCap))
@@ -103,6 +109,7 @@ public class TileInspector : Editor
         if (m_EnemyPointSetSelectedIndex == index)
         {
             EditorGUI.BeginChangeCheck();
+            // If an enemy point in the set is selected
             if (m_EnemyPointInSetSelected >= 0)
             {
                 Vector3 point = enemyPointSet[m_EnemyPointInSetSelected];
@@ -111,9 +118,10 @@ public class TileInspector : Editor
                 {
                     Undo.RecordObject(tile, "Move Point");
                     EditorUtility.SetDirty(tile);
-                    tile.SetPointInEnemySet(index, handleTransform.InverseTransformPoint(point));
+                    tile.SetPointInEnemySet(index, m_EnemyPointInSetSelected, handleTransform.InverseTransformPoint(point));
                 }
             } 
+            // otherwise, the center point of the set was selected
             else
             {
                 Vector3 point = centerPoint;
@@ -129,6 +137,7 @@ public class TileInspector : Editor
         }
     }
 
+    // Get the vector center point between all points inside a set of enemy points
     private Vector3 GetCenterPointBetweenVectors(List<Vector3> vectors)
     {
         float xSum = 0;
@@ -190,6 +199,7 @@ public class TileInspector : Editor
     // Buttons in inspector for adding/deleting follow points inside tile
     public override void OnInspectorGUI()
     {
+        // Butotn for adding a player follow point
         if (GUILayout.Button("Add Follow point"))
         {
             Undo.RecordObject(tile, "Add Follow point");
@@ -197,6 +207,7 @@ public class TileInspector : Editor
             EditorUtility.SetDirty(tile);
         }
 
+        // Button for removing last created player follow point
         if (GUILayout.Button("Remove Follow point"))
         {
             Undo.RecordObject(tile, "Remove Follow point");
@@ -204,6 +215,7 @@ public class TileInspector : Editor
             EditorUtility.SetDirty(tile);
         }
 
+        // button for adding a new set of enemy follow points
         if (GUILayout.Button("Add enemy follow point set"))
         {
             Undo.RecordObject(tile, "Add enemy follow point set");
@@ -211,6 +223,7 @@ public class TileInspector : Editor
             EditorUtility.SetDirty(tile);
         }
 
+        // button for removing last created set of follow points
         if (GUILayout.Button("Remove enemy follow point set"))
         {
             Undo.RecordObject(tile, "Remove enemy follow point set");
@@ -218,8 +231,10 @@ public class TileInspector : Editor
             EditorUtility.SetDirty(tile);
         }
 
+        // if a point in the enemy point set is selected
         if (m_EnemyPointSetSelectedIndex >= 0)
         {
+            // add a new point to the enemy set
             if (GUILayout.Button("Add enemy follow point to set"))
             {
                 Undo.RecordObject(tile, "Add enemy follow point to set");
@@ -227,6 +242,7 @@ public class TileInspector : Editor
                 EditorUtility.SetDirty(tile);
             }
 
+            // remove the last point of the enemy set
             if (GUILayout.Button("Remove enemy follow point from set"))
             {
                 Undo.RecordObject(tile, "Remove enemy follow point from set");

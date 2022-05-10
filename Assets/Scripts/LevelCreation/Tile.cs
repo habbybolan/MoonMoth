@@ -9,7 +9,7 @@ public class Tile : MonoBehaviour
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
 
-    public List<List<Vector3>> m_EnemyPointSet;
+    public List<EnemySetWrapper> m_EnemyPointSet;
 
     private Vector3 m_VecStartToCenter;
     private Vector3 m_VecCenterToEnd;
@@ -28,8 +28,7 @@ public class Tile : MonoBehaviour
 
         m_EndPoint = transform.InverseTransformPoint(new Vector3(0, 0, -10));
 
-        m_EnemyPointSet = new List<List<Vector3>>();
-        m_EnemyPointSet.Add(new List<Vector3> { new Vector3(0, 0, 0) });
+        m_EnemyPointSet = new List<EnemySetWrapper> { new EnemySetWrapper(new Vector3(0, 0, 0)) };
     }
     
     public float TileEndDistanceFromPlayer(PlayerTest player)
@@ -59,32 +58,39 @@ public class Tile : MonoBehaviour
 
     public void AddEnemyPointSet()
     {
-        m_EnemyPointSet.Add(new List<Vector3> { m_EnemyPointSet[m_EnemyPointSet.Count - 1][0] + Vector3.forward * 2 });
+        m_EnemyPointSet.Add(new EnemySetWrapper(m_EnemyPointSet[m_EnemyPointSet.Count - 1].EnemyPointSet[0] + Vector3.forward * 2 ));
     }
 
     public void RemoveEnemyPointSet()
     {
+        if (m_EnemyPointSet.Count <= 1)
+            throw new Exception("Cannot have no enemy point sets");
         m_EnemyPointSet.RemoveAt(m_EnemyPointSet.Count - 1);
     }
 
-    public void AddPointToEnemySet(int index)
+    public void AddPointToEnemySet(int setIndex)
     {
-        // TODO:
+        List<Vector3> set = m_EnemyPointSet[setIndex].EnemyPointSet;
+        set.Add(set[set.Count - 1] + Vector3.left * 2);
     }
 
-    public void RemovePointFromEnemySet(int index) 
+    public void RemovePointFromEnemySet(int setIndex)  
     {
-        // TODO:
+        List<Vector3> set = m_EnemyPointSet[setIndex].EnemyPointSet;
+        if (set.Count <= 1)
+            throw new Exception("Cannot have an empty enemy points set");
+        set.RemoveAt(set.Count - 1);
     }
-
-    public void SetPointInEnemySet(int index, Vector3 newPos)
+     
+    public void SetPointInEnemySet(int setIndex, int pointIndex, Vector3 newPos)
     {
-        // TODO:
+        List<Vector3> set = m_EnemyPointSet[setIndex].EnemyPointSet;
+        set[pointIndex] = newPos;
     }
-
-    public void UpdateAllPointsInSet(int index, Vector3 translateDirection)
+     
+    public void UpdateAllPointsInSet(int setIndex, Vector3 translateDirection)
     {
-        List<Vector3> set = m_EnemyPointSet[index];
+        List<Vector3> set = m_EnemyPointSet[setIndex].EnemyPointSet;
         for (int i = 0; i < set.Count; i++)
         {
             set[i] += translateDirection;
@@ -106,7 +112,7 @@ public class Tile : MonoBehaviour
         if (index >= m_EnemyPointSet.Count || index < 0)
             throw new Exception("Not a valid index in m_EnemyPointSet");
 
-        return m_EnemyPointSet[index];
+        return m_EnemyPointSet[index].EnemyPointSet;
     }
 
     public Vector3 GetPlayerFollowPoint(int index)
