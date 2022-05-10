@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class SplineCreator : CatmullRomSpline
 {
-    protected LinkedListNode<Tile> m_CurrTile;            // Tile holding the last added spline point
-    protected int m_CurrFollowPointInTile;    // Index of the follow point inside the current tile
+    protected LinkedListNode<Tile> m_CurrTile;  // Tile holding the last added spline point
+    protected int m_CurrFollowPointInTile;      // Index of the follow point inside the current tile
 
     private bool m_IsInitialized = false;
 
@@ -22,14 +22,11 @@ public abstract class SplineCreator : CatmullRomSpline
         m_CurrFollowPointInTile = 0;
 
         m_IsInitialized = true;
-        // TODO: Possibly very error prone
-        // Initialize 4 curves on spline at beginning
-        for (int i = 0; i < 2; i++)
+        // Initialize with 3 curves
+        for (int i = 0; i < 3; i++)
         {
             AddNewPoint();
         }
-        
-        
     }
 
     protected void GotoNextTile()

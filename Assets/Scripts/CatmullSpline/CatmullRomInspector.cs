@@ -4,13 +4,13 @@ using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(EnemySplineCreator))]
-public class CatmullRomInspector : Editor
+[CustomEditor(typeof(PlayerSplineCreator))]
+public class CatmullRomInspector : Editor 
 {
 	protected const int stepsPerCurve = 10;
 	private const float directionScale = 0.5f;
 
-	protected EnemySplineCreator spline;
+	protected PlayerSplineCreator spline;
 	protected Transform handleTransform;
 	protected Quaternion handleRotation;
 
@@ -21,7 +21,7 @@ public class CatmullRomInspector : Editor
 
 	private void OnSceneGUI()
 	{
-		spline = target as EnemySplineCreator;
+		spline = target as PlayerSplineCreator;
 		handleTransform = spline.transform;
 		handleRotation = Tools.pivotRotation == PivotRotation.Local ?
 			handleTransform.rotation : Quaternion.identity;
@@ -103,7 +103,7 @@ public class CatmullRomInspector : Editor
 
 	public override void OnInspectorGUI()
 	{
-		spline = target as EnemySplineCreator;
+		spline = target as PlayerSplineCreator;
 		if (selectedIndex >= 0 && selectedIndex < spline.PointCount)
 		{
 			DrawSelectedPointInspector();
