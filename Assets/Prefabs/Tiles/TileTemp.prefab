@@ -55,9 +55,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FollowPoint:
-  - {x: -5.5824485, y: -6.9126105, z: 0.65007305}
-  m_StartPoint: {x: -5.5824485, y: -6.9126105, z: 10.650073}
-  m_EndPoint: {x: -5.5824485, y: -6.9126105, z: -9.349927}
+  - {x: -1.85, y: 0, z: 3.1}
+  m_StartPoint: {x: -1.85, y: 0, z: 13.1}
+  m_EndPoint: {x: -1.85, y: 0, z: -6.9}
+  m_EnemyPointSet:
+  - EnemyPointSet:
+    - {x: 0.03494072, y: 0, z: -0.51120996}
 --- !u!1 &7409872566400116044
 GameObject:
   m_ObjectHideFlags: 0

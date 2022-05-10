@@ -40,9 +40,9 @@ public class TileInspector : Editor
             ShowEnemyPointSet(i);
         }
         // Create button for Start point
-        ShowPoint(true);
+        ShowEndPoint(true);
         // Create button for end point
-        ShowPoint(false);
+        ShowEndPoint(false);
     }
     
     // Display all follow points in the tile
@@ -84,7 +84,7 @@ public class TileInspector : Editor
         // Loop through all points in the set, display and create select functionality
         for (int i = 0; i < enemyPointSet.Count; i++)
         {
-            Vector3 point = enemyPointSet[i];
+            Vector3 point = handleTransform.TransformPoint(enemyPointSet[i]);
             float size = HandleUtility.GetHandleSize(point);
             // Display button and allow selection
             if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
@@ -114,7 +114,7 @@ public class TileInspector : Editor
             // If an enemy point in the set is selected
             if (m_EnemyPointInSetSelected >= 0)
             {
-                Vector3 point = enemyPointSet[m_EnemyPointInSetSelected];
+                Vector3 point = handleTransform.TransformPoint(enemyPointSet[m_EnemyPointInSetSelected]);
                 point = Handles.DoPositionHandle(point, handleRotation);
                 if (EditorGUI.EndChangeCheck())
                 {
@@ -151,11 +151,11 @@ public class TileInspector : Editor
             ySum += vectors[i].y;
             zSum += vectors[i].z;
         }
-        return new Vector3(xSum, ySum, zSum) / vectors.Count + Vector3.up * 1.5f;
+        return handleTransform.TransformPoint(new Vector3(xSum, ySum, zSum) / vectors.Count + Vector3.up * 1.5f);
     }
 
     // Displays either the starting or ending point of the tile
-    private void ShowPoint(bool isStartPoint)
+    private void ShowEndPoint(bool isStartPoint)
     {
         Handles.color = isStartPoint ? Color.green : Color.red;
         Vector3 point = handleTransform.TransformPoint(isStartPoint ? tile.StartPoint : tile.EndPoint);
@@ -201,6 +201,7 @@ public class TileInspector : Editor
     // Buttons in inspector for adding/deleting follow points inside tile
     public override void OnInspectorGUI()
     {
+        GUILayout.Label("Player follow points");
         // Butotn for adding a player follow point
         if (GUILayout.Button("Add Follow point"))
         {
@@ -217,6 +218,7 @@ public class TileInspector : Editor
             EditorUtility.SetDirty(tile);
         }
 
+        GUILayout.Label("Enemy point sets");
         // button for adding a new set of enemy follow points
         if (GUILayout.Button("Add enemy follow point set"))
         {
@@ -236,6 +238,7 @@ public class TileInspector : Editor
         // if a point in the enemy point set is selected
         if (m_EnemyPointSetSelectedIndex >= 0)
         {
+            GUILayout.Label("Enemy points in selected set");
             // add a new point to the enemy set
             if (GUILayout.Button("Add enemy follow point to set"))
             {
