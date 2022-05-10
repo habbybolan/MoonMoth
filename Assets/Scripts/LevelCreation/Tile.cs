@@ -9,6 +9,8 @@ public class Tile : MonoBehaviour
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
 
+    public List<List<Vector3>> m_EnemyPointSet;
+
     private Vector3 m_VecStartToCenter;
     private Vector3 m_VecCenterToEnd;
 
@@ -25,6 +27,9 @@ public class Tile : MonoBehaviour
         m_StartPoint = transform.InverseTransformPoint(new Vector3(0, 0, 10));
 
         m_EndPoint = transform.InverseTransformPoint(new Vector3(0, 0, -10));
+
+        m_EnemyPointSet = new List<List<Vector3>>();
+        m_EnemyPointSet.Add(new List<Vector3> { new Vector3(0, 0, 0) });
     }
     
     public float TileEndDistanceFromPlayer(PlayerTest player)
@@ -52,9 +57,56 @@ public class Tile : MonoBehaviour
         Array.Resize(ref m_FollowPoint, PlayerFollowPointsCount - 1);
     }
 
+    public void AddEnemyPointSet()
+    {
+        m_EnemyPointSet.Add(new List<Vector3> { m_EnemyPointSet[m_EnemyPointSet.Count - 1][0] + Vector3.forward * 2 });
+    }
+
+    public void RemoveEnemyPointSet()
+    {
+        m_EnemyPointSet.RemoveAt(m_EnemyPointSet.Count - 1);
+    }
+
+    public void AddPointToEnemySet(int index)
+    {
+        // TODO:
+    }
+
+    public void RemovePointFromEnemySet(int index) 
+    {
+        // TODO:
+    }
+
+    public void SetPointInEnemySet(int index, Vector3 newPos)
+    {
+        // TODO:
+    }
+
+    public void UpdateAllPointsInSet(int index, Vector3 translateDirection)
+    {
+        List<Vector3> set = m_EnemyPointSet[index];
+        for (int i = 0; i < set.Count; i++)
+        {
+            set[i] += translateDirection;
+        }
+    }
+
     public int PlayerFollowPointsCount 
     { 
         get { return m_FollowPoint.Length; }
+    }
+
+    public int EnemyFollowSetCount
+    {
+        get { return m_EnemyPointSet.Count; }
+    }
+
+    public List<Vector3> GetEnemyPointSet(int index)
+    {
+        if (index >= m_EnemyPointSet.Count || index < 0)
+            throw new Exception("Not a valid index in m_EnemyPointSet");
+
+        return m_EnemyPointSet[index];
     }
 
     public Vector3 GetPlayerFollowPoint(int index)
