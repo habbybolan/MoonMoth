@@ -96,11 +96,13 @@ public class TileInspector : Editor
             }
         }
 
+        Handles.color = Color.cyan;
         // Create a point that's the center of all points in the set to be able to move them all together
         Vector3 centerPoint = GetCenterPointBetweenVectors(enemyPointSet);
         float centerSize = HandleUtility.GetHandleSize(centerPoint);
         if (Handles.Button(centerPoint, handleRotation, centerSize * handleSize, centerSize * pickSize, Handles.DotHandleCap))
         {
+            UnselectAll();
             m_EnemyPointSetSelectedIndex = index;
             Repaint();
         }
