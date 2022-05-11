@@ -7,7 +7,7 @@ public class TileManager : MonoBehaviour
     static TileManager s_PropertyInstance;
 
     [SerializeField] private Tile[] m_TilePrefabs;
-    [SerializeField] private CatmullWalker m_Player;
+    [SerializeField] private PlayerParentMovement m_Player;
     [SerializeField] private float m_DistanceToPlaceTile = 200f;
     [SerializeField] private float m_DistanceToDeleteTile = 50f;
 
