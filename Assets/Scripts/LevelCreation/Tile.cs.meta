@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 10d8d57b4c56e2847926013b41cdd2d4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_FollowPointPrefab: {fileID: 1126198705925126573, guid: 3b12193fa81e7a447a19157caa4a1d90, type: 3}
+  - m_StartPointPrefab: {fileID: 817392914225595768, guid: 23fa0328beffe0c4e8f9a691bb5e8c1d, type: 3}
+  - m_EndPointPrefab: {fileID: 6786418566435066043, guid: ae712e3705c294d44be444731faff1f1, type: 3}
+  - m_TileStartPoint: {instanceID: 0}
+  - m_TileEndPoint: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
