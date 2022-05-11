@@ -49,15 +49,22 @@ public class CatmullWalker : MonoBehaviour
         // Move to next curve
         if (m_Dist >= m_CurrCurveLength)
         {
-            m_Spline.AddNewPoint();
-            m_Dist = 0;
-            // Reset to beginning if reached end
-            if (m_CurrCurve == m_Spline.CurveCount)
-                m_CurrCurve = 1;
-            // Otherwise, move to next curve
-            else
-                m_CurrCurve++;
-            m_CurrCurveLength = m_Spline.GetCurveLength(m_CurrCurve);
+            NewCurveEntered();
         }
+    }
+
+    // called whenever a new tile has been entered.
+    // Virtual to allow any child class to add to the functionality
+    protected virtual void NewCurveEntered() 
+    {
+        m_Spline.AddNewPoint();
+        m_Dist = 0;
+        // Reset to beginning if reached end
+        if (m_CurrCurve == m_Spline.CurveCount)
+            m_CurrCurve = 1;
+        // Otherwise, move to next curve
+        else
+            m_CurrCurve++;
+        m_CurrCurveLength = m_Spline.GetCurveLength(m_CurrCurve);
     }
 }
