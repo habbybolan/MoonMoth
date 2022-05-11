@@ -20,7 +20,7 @@ public class CatmullWalker : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            m_Spline.InitializeSpline();
+            m_Spline.InitializeSplineAtHead();
             m_StartMoving = true;
         }
         if (m_Spline && m_StartMoving)
@@ -66,5 +66,10 @@ public class CatmullWalker : MonoBehaviour
         else
             m_CurrCurve++;
         m_CurrCurveLength = m_Spline.GetCurveLength(m_CurrCurve);
+    }
+
+    public Tile GetTileInFront(int index)
+    {
+        return m_Spline.GetTileInfront(index);
     }
 }

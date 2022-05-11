@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Firefly : MonoBehaviour
 {
+   
+    [SerializeField] private EnemySplineCreator m_EnemySplineCreator;
+
     private bool m_IsActive;    // If the firefly has been within range of the player and starts moving along spline
+    private FireflyCatmullWalker m_CatmullWalker;
+    
 
     private void Start()
     {
         m_IsActive = false;
+        m_CatmullWalker = GetComponent<FireflyCatmullWalker>();
+        m_EnemySplineCreator.InitializeSplineAtHead();
     }
 
     private void Update()
@@ -23,4 +30,6 @@ public class Firefly : MonoBehaviour
         // TODO:
         // Used for checking if should activate, or to control the speed of the firefly if too far/close to player
     }
+
+
 }
