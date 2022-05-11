@@ -18,11 +18,13 @@ public class CatmullWalker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+        if (!m_StartMoving)
         {
             m_Spline.InitializeSplineAtHead();
             m_StartMoving = true;
         }
+       
+
         if (m_Spline && m_StartMoving)
             MovePlayerConstant();
     }
