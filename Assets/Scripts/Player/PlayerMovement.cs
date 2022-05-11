@@ -8,8 +8,6 @@ using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement speed")]
-    [Tooltip("PlayerParentMovement component attached to parent")]
-    [SerializeField] private PlayerParentMovement m_ParentMovement;
     [Range(0, 1)]
     [Tooltip("Percent of control point's movement speed so player lags behind control point")]
     [SerializeField] private float m_MoveSpeedPercent = 0.2f;
@@ -200,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
         if (m_playerState == PLAYER_STATE.FLYING)
         {
             m_CameraMovement.PerformCameraZoom(m_DashDuration);
-            m_ParentMovement.PerformDash(m_DashDuration);
+            PlayerManager.PropertyInstance.Player.PerformDash(m_DashDuration);
             StartCoroutine(PlayerDash());
         }
     }
