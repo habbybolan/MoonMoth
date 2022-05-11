@@ -6,18 +6,30 @@ public class CatmullWalker : MonoBehaviour
 { 
     public SplineCreator m_Spline;
 
-    [SerializeField] private float m_Duration = 5f;
-    [SerializeField] private float m_Speed = 1;
+    [SerializeField] protected float m_Duration = 5f;
+    [SerializeField] protected float m_Speed = 1;
+    [SerializeField] protected bool m_IsFollowingspline = true;
 
     private float m_Dist = 0;
     private int m_CurrCurve = -1;
     private float m_CurrCurveLength = 0;
+    protected float m_CurrSpeed;
 
     private bool m_StartMoving = false;
+
+    private void Start()
+    {
+        m_CurrSpeed = m_Speed;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (!m_IsFollowingspline) {
+            transform.transform.Translate(Vector3.forward * m_Speed * Time.deltaTime);
+            return;
+        }
+
         if (!m_StartMoving)
         {
             m_Spline.InitializeSplineAtHead();
@@ -41,7 +53,7 @@ public class CatmullWalker : MonoBehaviour
         }
 
         // convert distance travelled to percent curve has been walked along
-        m_Dist += m_Speed * Time.deltaTime;
+        m_Dist += m_CurrSpeed * Time.deltaTime;
         float t = (m_Dist) / m_CurrCurveLength;
 
         Vector3 position = m_Spline.GetPointLocal(t, m_CurrCurve);

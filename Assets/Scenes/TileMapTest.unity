@@ -204,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TilePrefabs:
   - {fileID: 7409872566354526735, guid: 5c307f698ad975047a937e6f9b69efd8, type: 3}
-  m_Player: {fileID: 1990960553}
+  m_Player: {fileID: 0}
   m_DistanceToPlaceTile: 200
   m_DistanceToDeleteTile: 50
 --- !u!4 &951211377
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FireflyPrefab: {fileID: 1558234895877433502, guid: eaa692f3dd7bc0d43a835960379f8981, type: 3}
-  m_Player: {fileID: 1990960553}
+  m_Player: {fileID: 0}
   m_DelayToSpawn: 4
 --- !u!1 &1286058212
 GameObject:
@@ -364,7 +364,6 @@ GameObject:
   - component: {fileID: 1990960551}
   - component: {fileID: 1990960550}
   - component: {fileID: 1990960549}
-  - component: {fileID: 1990960553}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -451,22 +450,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &1990960553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990960547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00c869984c101d7479020b9eac94484c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Spline: {fileID: 92830010}
-  m_Duration: 5
-  m_Speed: 10
-  numTilesUntilSpawnFirefly: 10
 --- !u!1 &2045079083
 GameObject:
   m_ObjectHideFlags: 0

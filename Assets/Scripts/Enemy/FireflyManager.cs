@@ -10,7 +10,7 @@ public class FireflyManager : MonoBehaviour
     [SerializeField] private FireflyContainer m_FireflyPrefab; 
 
     // TODO: Change to an actual player script, temp CatmullWalker for testing
-    [SerializeField] private PlayerCatmullWalker m_Player;
+    [SerializeField] private PlayerParentMovement m_Player;
     [SerializeField] private float m_DelayToSpawn = 10f;
 
     static FireflyManager s_PropertyInstance;
