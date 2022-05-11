@@ -26,20 +26,22 @@ public class CatmullRomInspector : Editor
 		handleRotation = Tools.pivotRotation == PivotRotation.Local ?
 			handleTransform.rotation : Quaternion.identity;
 
-		Vector3 p0 = ShowPoint(0);
+		if (spline.PointCount > 2)
+        {
+			Vector3 p0 = ShowPoint(0);
 
-		for (int i = 1; i < spline.PointCount; i++)
-		{
+			for (int i = 1; i < spline.PointCount; i++)
+			{
+				Vector3 p1 = ShowPoint(i);
+				Handles.color = Color.gray;
+				Handles.DrawLine(p0, p1);
+				Handles.color = Color.white;
+				ShowCurve(i);
+				p0 = p1;
+			}
 
-			Vector3 p1 = ShowPoint(i);
-			Handles.color = Color.gray;
-			Handles.DrawLine(p0, p1);
-			Handles.color = Color.white;
-			ShowCurve(i);
-			p0 = p1;
-		}
-
-		ShowDirections();
+			ShowDirections();
+        }
 	}
 
 	private void ShowCurve(int curve)

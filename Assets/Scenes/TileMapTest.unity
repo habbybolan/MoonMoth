@@ -167,10 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de624c4b5f3ca084cbe6840703c19e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  modes: 
+  m_Points: []
   isConstantSpeed: 1
 --- !u!114 &665621976 stripped
 MonoBehaviour:
@@ -351,7 +348,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TilePrefabs:
   - {fileID: 8136119699854392509, guid: 3fb7a093bd87b3a4b9f12416619977c6, type: 3}
-  m_Player: {fileID: 665621976}
   m_DistanceToPlaceTile: 500
   m_DistanceToDeleteTile: 50
 --- !u!4 &951211377
@@ -382,7 +378,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FireflyPrefab: {fileID: 1558234895877433502, guid: eaa692f3dd7bc0d43a835960379f8981, type: 3}
-  m_Player: {fileID: 0}
   m_DelayToSpawn: 4
 --- !u!114 &951211379
 MonoBehaviour:
@@ -538,6 +533,14 @@ PrefabInstance:
       propertyPath: m_CrossHair
       value: 
       objectReference: {fileID: 671315058}
+    - target: {fileID: 6078942963552145898, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_CrosshairPercentX
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6078942963552145898, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_CrosshairPercentY
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 6778128734792007146, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: player
       value: 
