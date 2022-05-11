@@ -349,9 +349,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TilePrefabs:
-  - {fileID: 7409872566354526735, guid: 5c307f698ad975047a937e6f9b69efd8, type: 3}
+  - {fileID: 8136119699854392509, guid: 3fb7a093bd87b3a4b9f12416619977c6, type: 3}
   m_Player: {fileID: 665621976}
-  m_DistanceToPlaceTile: 200
+  m_DistanceToPlaceTile: 500
   m_DistanceToDeleteTile: 50
 --- !u!4 &951211377
 Transform:
