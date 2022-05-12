@@ -18,6 +18,7 @@ public abstract class SplineCreator : CatmullRomSpline
     // Initialize some points on the spline
     public void InitializeSplineAtHead()
     {
+        m_Points = null;
         m_CurrTile = TileManager.PropertyInstance.GetHead();
         m_CurrFollowPointInTile = 0;
 

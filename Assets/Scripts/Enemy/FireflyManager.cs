@@ -5,13 +5,10 @@ using UnityEngine;
 // Singleton manager dealing with the creation, management and deletion of all fireflies
 public class FireflyManager : MonoBehaviour
 {
-     
-    private List<FireflyContainer> m_FireflyList;
     [SerializeField] private FireflyContainer m_FireflyPrefab; 
-
-    // TODO: Change to an actual player script, temp CatmullWalker for testing
-    [SerializeField] private PlayerCatmullWalker m_Player;
     [SerializeField] private float m_DelayToSpawn = 10f;
+    
+    private List<FireflyContainer> m_FireflyList;
 
     static FireflyManager s_PropertyInstance;
     public static FireflyManager PropertyInstance

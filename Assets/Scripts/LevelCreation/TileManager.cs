@@ -7,7 +7,6 @@ public class TileManager : MonoBehaviour
     static TileManager s_PropertyInstance;
 
     [SerializeField] private Tile[] m_TilePrefabs;
-    [SerializeField] private CatmullWalker m_Player;
     [SerializeField] private float m_DistanceToPlaceTile = 200f;
     [SerializeField] private float m_DistanceToDeleteTile = 50f;
 
@@ -103,7 +102,9 @@ public class TileManager : MonoBehaviour
     {
         Tile firstTile = m_VisibleTiles.First.Value;
 
-        if (firstTile.TileEndDistanceFromPlayer(m_Player) > m_DistanceToDeleteTile)
+        float distanceFromEnd = firstTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.Player);
+        float distanceFromStart = firstTile.TileStartDistanceFromPlayer(PlayerManager.PropertyInstance.Player);
+        if (distanceFromEnd > m_DistanceToDeleteTile && distanceFromStart > distanceFromEnd + m_DistanceToDeleteTile)
         {
             firstTile.gameObject.SetActive(false);
             m_VisibleTiles.RemoveFirst();
@@ -115,7 +116,7 @@ public class TileManager : MonoBehaviour
         // TODO: Make reliant on distance rather then z-position
         Tile lastTile = m_VisibleTiles.Last.Value;
         // add tile if player is within a certain distance from last tile
-        if (lastTile.TileEndDistanceFromPlayer(m_Player) < m_DistanceToPlaceTile)
+        if (lastTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.Player) < m_DistanceToPlaceTile)
         {
             InstantiateTile();
         }
