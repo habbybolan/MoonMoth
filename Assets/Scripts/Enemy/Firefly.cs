@@ -6,6 +6,7 @@ public class Firefly : MonoBehaviour
 {
    
     [SerializeField] private EnemySplineCreator m_EnemySplineCreator;
+    [SerializeField] private float m_SensingRange = 50f;
 
     private bool m_IsActive;    // If the firefly has been within range of the player and starts moving along spline
     private FireflyCatmullWalker m_CatmullWalker;

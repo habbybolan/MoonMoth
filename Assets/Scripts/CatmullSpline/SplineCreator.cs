@@ -8,6 +8,7 @@ public abstract class SplineCreator : CatmullRomSpline
     protected int m_CurrFollowPointInTile;      // Index of the follow point inside the current tile
 
     private bool m_IsInitialized = false;
+    protected bool m_IsActive = true;
 
     public virtual void AddNewPoint()
     {
