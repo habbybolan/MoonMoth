@@ -14,22 +14,31 @@ public class Firefly : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Firefly spawned");
         m_IsActive = false;
         m_CatmullWalker = GetComponent<FireflyCatmullWalker>();
-        m_EnemySplineCreator.InitializeSplineAtHead();
+        m_CatmullWalker.IsFollowSpline = false;
+        m_EnemySplineCreator.InitializeSplineAtTile(PlayerManager.PropertyInstance.PlayerParent.spline.GetTileInfront(0));
     }
 
     private void Update()
     {
-        // TODO:
-        // If not active, check if within range of player
-        // otherwise, perform shoot/death/collision logic
+        if (!m_IsActive)
+        {
+            CheckIsInRangeOfPlayer();
+            return;
+        }
+        // TODO: DO other logic for shooting, animations, etc
     }
 
     private void CheckIsInRangeOfPlayer()
     {
-        // TODO:
-        // Used for checking if should activate, or to control the speed of the firefly if too far/close to player
+        Vector3 playerPosition = PlayerManager.PropertyInstance.PlayerParent.transform.position;
+        if (Vector3.Distance(playerPosition, transform.position) < 100)
+        {
+            m_IsActive = true;
+            m_CatmullWalker.IsFollowSpline = true;
+        }
     }
 
 

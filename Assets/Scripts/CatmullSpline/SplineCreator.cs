@@ -51,13 +51,13 @@ public abstract class SplineCreator : CatmullRomSpline
         m_CurrFollowPointInTile = 0;
     }
 
-    public Tile GetTileInfront(int index)
+    public LinkedListNode<Tile> GetTileInfront(int index)
     {
         LinkedListNode<Tile> curr = m_CurrTile;
         for (int i = 0; i < index; i++)
         {
             curr = curr.Next;
         }
-        return curr.Value;
+        return curr;
     }
 }

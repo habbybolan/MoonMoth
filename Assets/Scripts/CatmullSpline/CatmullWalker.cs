@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class CatmullWalker : MonoBehaviour
 { 
-    public SplineCreator m_Spline;
-
     [SerializeField] protected float m_Duration = 5f;
     [SerializeField] protected float m_Speed = 1;
     [SerializeField] protected bool m_IsFollowingspline = true;
+    [SerializeField] private SplineCreator m_Spline;
 
     private float m_Dist = 0;
     private int m_CurrCurve = -1;
@@ -17,16 +16,16 @@ public class CatmullWalker : MonoBehaviour
 
     private bool m_StartMoving = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         m_CurrSpeed = m_Speed;
+        transform.position = m_Spline.GetPoint(0);
     }
 
     // Update is called once per frame
-    void Update()
+    virtual protected void Update()
     {
         if (!m_IsFollowingspline) {
-            transform.transform.Translate(Vector3.forward * m_Speed * Time.deltaTime);
             return;
         }
 
@@ -67,8 +66,7 @@ public class CatmullWalker : MonoBehaviour
         }
     }
 
-    // called whenever a new tile has been entered.
-    // Virtual to allow any child class to add to the functionality
+    // called whenever a new curve has been entered.
     protected virtual void NewCurveEntered() 
     {
         m_Spline.AddNewPoint();
@@ -82,8 +80,15 @@ public class CatmullWalker : MonoBehaviour
         m_CurrCurveLength = m_Spline.GetCurveLength(m_CurrCurve);
     }
 
-    public Tile GetTileInFront(int index)
+    public bool IsFollowSpline 
     {
-        return m_Spline.GetTileInfront(index);
+        get { return m_IsFollowingspline;  }
+        set { m_IsFollowingspline = value; }
+    }
+
+
+    public SplineCreator spline
+    {
+        get { return m_Spline; }
     }
 }

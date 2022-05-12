@@ -33,7 +33,7 @@ public class FireflyManager : MonoBehaviour
 
     public void SpawnNewFirefly()
     {
-        // TODO: Spawn firefly in front of player
+        m_FireflyList.Add(Instantiate(m_FireflyPrefab));
     }
 
     // Coroutine to spawn a firefly after certain amount of time

@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
             s_PropertyInstance = this;
     }
 
-    public PlayerParentMovement Player
+    public PlayerParentMovement PlayerParent
     {
         get { return m_Player; }
     }
