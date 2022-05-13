@@ -100,15 +100,13 @@ public class TileManager : MonoBehaviour
 
     private void CheckRemoveTile()
     {
-        Tile firstTile = m_VisibleTiles.First.Value;
-
-        float distanceFromEnd = firstTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerParent);
-        float distanceFromStart = firstTile.TileStartDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerParent);
-        if (distanceFromEnd > m_DistanceToDeleteTile && distanceFromStart > distanceFromEnd + m_DistanceToDeleteTile)
-        {
-            firstTile.gameObject.SetActive(false);
-            m_VisibleTiles.RemoveFirst();
-        }
+        //Tile firstTile = m_VisibleTiles.First.Value;
+        //float distanceFromEnd = firstTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerParent);
+        //if (firstTile.IsPlayerTraversed && distanceFromEnd > m_DistanceToDeleteTile)
+        //{
+        //    firstTile.gameObject.SetActive(false);
+        //    m_VisibleTiles.RemoveFirst();
+        //}
     }
 
     private void CheckAddTile()
