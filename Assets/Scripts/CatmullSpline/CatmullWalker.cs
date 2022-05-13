@@ -15,8 +15,6 @@ public class CatmullWalker : MonoBehaviour
     private float m_CurrCurveLength = 0;
     protected float m_CurrSpeed;
 
-    private bool m_StartMoving = false;
-
     protected virtual void Start()
     {
         m_CurrSpeed = m_Speed;
@@ -52,7 +50,7 @@ public class CatmullWalker : MonoBehaviour
         float t = (m_Dist) / m_CurrCurveLength;
 
         Vector3 position = m_Spline.GetPointLocal(t, m_CurrCurve);
-        transform.localPosition = position;
+        transform.position = position;
         transform.LookAt(position + m_Spline.GetDirectionLocal(t, m_CurrCurve));
 
         // Move to next curve

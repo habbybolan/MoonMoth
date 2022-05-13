@@ -4,13 +4,13 @@ using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(EnemySplineCreator))]
+[CustomEditor(typeof(SplineCreator), true)]
 public class CatmullRomInspector : Editor 
 {
 	protected const int stepsPerCurve = 10;
 	private const float directionScale = 0.5f;
 
-	protected EnemySplineCreator spline;
+	protected SplineCreator spline;
 	protected Transform handleTransform;
 	protected Quaternion handleRotation;
 
@@ -22,7 +22,7 @@ public class CatmullRomInspector : Editor
 	// Draw the GUI
 	private void OnSceneGUI()
 	{
-		spline = target as EnemySplineCreator;
+		spline = target as SplineCreator;
 		handleTransform = spline.transform;
 		handleRotation = Tools.pivotRotation == PivotRotation.Local ?
 			handleTransform.rotation : Quaternion.identity;
@@ -109,7 +109,7 @@ public class CatmullRomInspector : Editor
 	// Add button to inspector for adding new curve
 	public override void OnInspectorGUI()
 	{
-		spline = target as EnemySplineCreator;
+		spline = target as SplineCreator;
 		if (selectedIndex >= 0 && selectedIndex < spline.PointCount)
 		{
 			DrawSelectedPointInspector();

@@ -6,8 +6,12 @@ public class FireflyCatmullWalker : CatmullWalker
 {
     [Tooltip("The offset distance each firefly will have in relation to the previous")]
     [SerializeField] private float m_DistanceOffsetFromPrev = 10f;
+    [Tooltip("The base distance the firefly is from the player and the distance from the player the firefly will start moving along spline")]
     [SerializeField] private float m_SensingRange = 50f;
-
+    [Tooltip("The speed multiplier to correct the firefly being too far/close to player")]
+    [Range(0f, 1f)]
+    [SerializeField] private float m_speedCorrection = .25f;
+     
     private bool m_IsActive;    // If the firefly has been within range of the player and starts moving along spline
 
     override protected void Start()
@@ -32,8 +36,12 @@ public class FireflyCatmullWalker : CatmullWalker
     }
 
     private void UpdateSpeed()
-    {
-        // TODO: Update the speed if too far/close to player
+    { 
+        float distFromPlayer = DistanceFromPlayer();
+        float targetDistance = TargetDistance();
+        // Alter speed of firesly if too far/close to player to keep at contant distance
+        float percentToChangeSpeed = (targetDistance - distFromPlayer) * m_speedCorrection;
+        m_CurrSpeed = m_Speed + m_Speed * percentToChangeSpeed;
     }
 
     private float DistanceFromPlayer()
@@ -42,9 +50,14 @@ public class FireflyCatmullWalker : CatmullWalker
         return Vector3.Distance(PlayerPos, transform.position);
     }
 
+    private float TargetDistance()
+    {
+        return m_SensingRange + (FireflyManager.PropertyInstance.FireflyCount - 1) * m_DistanceOffsetFromPrev; ;
+    }
+
     private void CheckIsInRangeOfPlayer()
     {
-        if (DistanceFromPlayer() < 100)
+        if (DistanceFromPlayer() < TargetDistance())
         {
             m_IsActive = true;
             IsFollowSpline = true;

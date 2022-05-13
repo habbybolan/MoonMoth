@@ -53,4 +53,6 @@ public class FireflyManager : MonoBehaviour
             yield return null;
         }
     }
+
+    public int FireflyCount { get { return m_FireflyList.Count; } }
 }
