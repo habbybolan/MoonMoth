@@ -368,6 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FireflyPrefab: {fileID: 1558234895877433502, guid: eaa692f3dd7bc0d43a835960379f8981, type: 3}
   m_DelayToSpawn: 4
+  m_FireflyLimit: 3
 --- !u!114 &951211379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,5 +672,17 @@ PrefabInstance:
       propertyPath: m_CrossHair
       value: 
       objectReference: {fileID: 671315058}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_DodgeSpeedX
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_DodgeSpeedY
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_DodgeDuration
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}

@@ -24,6 +24,7 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
+        
         // TODO: Find out how to add in editor when tile inspector enabled
         m_EndCollider = GetComponent<BoxCollider>();
     }

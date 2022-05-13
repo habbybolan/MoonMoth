@@ -23,14 +23,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_DodgeDuration = 1f;
     [Tooltip("Animation curve representing the movement modification during the dodge")]
     [SerializeField] private AnimationCurve m_AnimationCurve;
-    [Tooltip("How fast the player moves when dodging")]
-    [SerializeField] private float m_DodgeSpeed = 20f;
+    [Tooltip("How fast the player moves when dodging in X direction")]
+    [SerializeField] private float m_DodgeSpeedX = 20f;
+    [Tooltip("How fast the player moves when dodging in Y direction")]
+    [SerializeField] private float m_DodgeSpeedY = 20f;
     [Tooltip("If the camera should follow the player during the dodge")]
     [SerializeField] private bool m_CameraFollowOnDodge = true;
     [Tooltip("control point speed multiplier if control point is on the opposite side to the player in relation to the direction of the dodge")]
     [SerializeField] private float m_ControlPointMultiplier = 1.4f;
-    [Tooltip("control point offset to check if control point is on the opposite side to the player in relation to the direction of the dodge")]
-    [SerializeField] private float m_ControlPointOffsetLimit = 3f;
+    [Tooltip("control point offset to check if control point is on the opposite side to the player in relation to the X direction of the dodge")]
+    [SerializeField] private float m_ControlPointOffsetLimitX = 3f;
+    [Tooltip("control point offset to check if control point is on the opposite side to the player in relation to the Y direction of the dodge")]
+    [SerializeField] private float m_ControlPointOffsetLimitY = 3f;
+    [Tooltip("Max degrees the player can dodge upwards")]
+    [Range (0, 90)]
+    [SerializeField] private float m_MaxYDegrees = 45f;
 
     [Header("Dash")]
     [Tooltip("Duration of the dash")]
@@ -82,6 +89,8 @@ public class PlayerMovement : MonoBehaviour
     LayerMask playerMask;                   // Player mask
     Coroutine ShootCoroutine;               // Coroutine called when performed shooting action to allow cancelling the coroutine
 
+    private static float m_MaxYValue = -1;
+
     private void Awake()
     {
         playerInput = new InputActions();
@@ -108,6 +117,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        // if max y value not initialized, set it based on max y degrees for dodge
+        if (m_MaxYValue == -1)
+        {
+            m_MaxYValue = Mathf.Tan(m_MaxYDegrees);
+        }
+
         m_ControlObject.SetActive(m_IsShowControlObject);
 
         m_playerState = PLAYER_STATE.FLYING;
@@ -219,6 +234,8 @@ public class PlayerMovement : MonoBehaviour
     {
         m_CameraMovement.IsCameraFollow = m_CameraFollowOnDodge;
         float inputX = Input.GetAxis("Horizontal") != 0 ? Input.GetAxis("Horizontal") : Input.GetAxis("Mouse X");
+        float inputY = Input.GetAxis("Vertical") != 0 ? Input.GetAxis("Vertical") : Input.GetAxis("Mouse Y");
+        inputY = Mathf.Clamp(inputY, -m_MaxYDegrees, m_MaxYDegrees);
         float currZRot = transform.localRotation.eulerAngles.z;
 
         float inputXDirection = inputX == 0 ? -1 : inputX < 0 ? -1 : 1;
@@ -262,22 +279,30 @@ public class PlayerMovement : MonoBehaviour
             transform.localEulerAngles = m_CurrentAngle;
 
             // Get the move addition in x direction from dodge
-            float moveX = m_AnimationCurve.Evaluate(currDuration / m_DodgeDuration) * Time.deltaTime * m_DodgeSpeed;
+            float moveX = m_AnimationCurve.Evaluate(currDuration / m_DodgeDuration) * Time.deltaTime * m_DodgeSpeedX;
+            float moveY = Time.deltaTime * m_DodgeSpeedY;
 
-            // prevent the movement going slower than the max x/y move speed
-            moveX = Mathf.Max(moveX, Mathf.Abs(Time.deltaTime * m_BaseControlSpeed * m_MoveSpeedPercent));
+            transform.localPosition += Vector3.right * inputXDirection * moveX + Vector3.up * moveY * inputY;
 
-            transform.localPosition += Vector3.right * inputXDirection * moveX;
-
-            float controlPointMultiplier = 1f;
-            // if control point on opposite side of the player fromthe direction player is dodging, apply speed multiplier
-            if (inputXDirection < 0 && m_ControlPoint.x > transform.localPosition.x - m_ControlPointOffsetLimit ||
-                inputXDirection > 0 && m_ControlPoint.x < transform.localPosition.x + m_ControlPointOffsetLimit)
+            float controlPointMultiplierX = 1f;
+            // if control point on opposite side X of the player fromthe direction player is dodging, apply speed multiplier
+            if (inputXDirection < 0 && m_ControlPoint.x > transform.localPosition.x - m_ControlPointOffsetLimitX ||
+                inputXDirection > 0 && m_ControlPoint.x < transform.localPosition.x + m_ControlPointOffsetLimitX)
             {
-                controlPointMultiplier = m_ControlPointMultiplier;
+                controlPointMultiplierX = m_ControlPointMultiplier;
             }
 
-            m_ControlPoint += Vector3.right * inputXDirection * moveX * controlPointMultiplier;
+            float controlPointMultiplierY = 1f;
+            // if control point on opposite side Y of the player from the direction player is dodging, apply speed multiplier
+            if (inputY < 0 && m_ControlPoint.y > transform.localPosition.y - m_ControlPointOffsetLimitY ||
+                inputY > 0 && m_ControlPoint.y < transform.localPosition.y + m_ControlPointOffsetLimitY)
+            {
+                controlPointMultiplierY = m_ControlPointMultiplier;
+            }
+
+            // Update control point
+            m_ControlPoint += Vector3.right * inputXDirection * moveX * controlPointMultiplierX
+                           + Vector3.up * inputY * moveY * controlPointMultiplierY;
             m_ControlObject.transform.localPosition = m_ControlPoint;
 
 
