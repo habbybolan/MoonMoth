@@ -33,7 +33,9 @@ public class FireflyManager : MonoBehaviour
 
     public void SpawnNewFirefly()
     {
-        m_FireflyList.Add(Instantiate(m_FireflyPrefab));
+        FireflyContainer fireflyContainer = Instantiate(m_FireflyPrefab);
+        fireflyContainer.FireflyWalker.Offset = m_FireflyList.Count;
+        m_FireflyList.Add(fireflyContainer);
     }
 
     // Coroutine to spawn a firefly after certain amount of time
@@ -52,6 +54,14 @@ public class FireflyManager : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    public void OnFireflyDeath()
+    {
+        // TODO:
+        //  remove firefly from list
+        //  Drop light from firefly
+        //  Update offset positions of all alive fireflies in list
     }
 
     public int FireflyCount { get { return m_FireflyList.Count; } }

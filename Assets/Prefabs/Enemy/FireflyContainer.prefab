@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4411f765c956b3b4b8fe6411554ba4dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_FireflyWalker: {fileID: 5617976549049454143}
 --- !u!1 &1558234896668546474
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +220,6 @@ MonoBehaviour:
   m_IsFollowingspline: 1
   m_Spline: {fileID: 1558234896668546472}
   m_Speed: 5
-  m_DistanceOffsetFromPrev: 10
+  m_DistanceOffsetFromPrev: 20
   m_SensingRange: 100
   m_speedCorrection: 0.25
