@@ -198,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
         if (m_playerState == PLAYER_STATE.FLYING)
         {
             m_CameraMovement.PerformCameraZoom(m_DashDuration);
-            PlayerManager.PropertyInstance.Player.PerformDash(m_DashDuration);
+            PlayerManager.PropertyInstance.PlayerParent.PerformDash(m_DashDuration);
             StartCoroutine(PlayerDash());
         }
     }

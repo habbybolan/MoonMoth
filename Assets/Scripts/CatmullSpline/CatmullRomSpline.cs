@@ -10,6 +10,9 @@ public class CatmullRomSpline : MonoBehaviour
 
     [SerializeField] private bool isConstantSpeed = true;
 
+    // Get the point at a time t along the entire spline, where t [0, 1] is the time on the spline
+    // Time is not constant along the curve.
+    //  - If curve A is longer than curve B, the time t difference from the start and center of the curve will be the same t amount
     public virtual Vector3 GetPoint(float t)
     {
         int i; // index of current curve
@@ -40,7 +43,7 @@ public class CatmullRomSpline : MonoBehaviour
         return transform.TransformPoint(GetDirectionHelper(curve - 1, curve, t)).normalized;
     }
 
-
+    // Get the point on a specific curve at time t represented by the points at indexes ind0 and ind1
     private Vector3 GetPointHelper(int ind0, int ind1, float t)
     {
         Vector3 p0, p1;
@@ -117,6 +120,7 @@ public class CatmullRomSpline : MonoBehaviour
         return CatmullRom.GetCurveLength(p0, p1, m0, m1, 10);
     }
 
+    // Get the direction at a time t along the entire spline, where t [0, 1] is the time on the spline
     public virtual Vector3 GetDirection(float t)
     {
         int i; // index of current curve

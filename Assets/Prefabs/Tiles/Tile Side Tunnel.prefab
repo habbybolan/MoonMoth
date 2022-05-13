@@ -2047,6 +2047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4740359711817066311}
   - component: {fileID: 8136119699854392509}
+  - component: {fileID: 740151627449751401}
   m_Layer: 0
   m_Name: Tile Side Tunnel
   m_TagString: Untagged
@@ -2062,8 +2063,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3701864349297677241}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.55135, y: -9.377681, z: 28.564571}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -9.9589, y: -28.747, z: 20.215}
+  m_LocalScale: {x: 2.926911, y: 2.926911, z: 2.926911}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3887512345592375858}
@@ -2138,6 +2139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d8d57b4c56e2847926013b41cdd2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_EndCollider: {fileID: 0}
   m_FollowPoint:
   - {x: 7.0224495, y: 9.377681, z: 26.957909}
   - {x: 7.0224495, y: 9.377681, z: -20.547043}
@@ -2148,8 +2150,23 @@ MonoBehaviour:
     - {x: 4.9643817, y: 11.212977, z: 32.243958}
   - EnemyPointSet:
     - {x: 4.9643817, y: 11.212977, z: 12.331631}
+    - {x: -0.44541895, y: 11.212977, z: 12.331632}
   - EnemyPointSet:
     - {x: 4.9643817, y: 11.212977, z: -19.07402}
+    - {x: 10.158717, y: 11.212977, z: -19.07402}
+--- !u!65 &740151627449751401
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3701864349297677241}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.93, y: 14.71, z: 1}
+  m_Center: {x: 6.9, y: 11.98, z: -30.66}
 --- !u!1 &3721584036948859882
 GameObject:
   m_ObjectHideFlags: 0

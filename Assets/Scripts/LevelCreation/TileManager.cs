@@ -70,7 +70,7 @@ public class TileManager : MonoBehaviour
         int visibleCount = m_VisibleTiles.Count;
 
         m_VisibleTiles.AddLast(newTile);
-        newTile.gameObject.SetActive(true);
+        newTile.SetIsActive(true);
 
         // If first created, dont do anything
         if (visibleCount == 0)
@@ -101,12 +101,10 @@ public class TileManager : MonoBehaviour
     private void CheckRemoveTile()
     {
         Tile firstTile = m_VisibleTiles.First.Value;
-
-        float distanceFromEnd = firstTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.Player);
-        float distanceFromStart = firstTile.TileStartDistanceFromPlayer(PlayerManager.PropertyInstance.Player);
-        if (distanceFromEnd > m_DistanceToDeleteTile && distanceFromStart > distanceFromEnd + m_DistanceToDeleteTile)
+        float distanceFromEnd = firstTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerParent);
+        if (firstTile.IsTraversedByPlayer && distanceFromEnd > m_DistanceToDeleteTile)
         {
-            firstTile.gameObject.SetActive(false);
+            firstTile.SetIsActive(false);
             m_VisibleTiles.RemoveFirst();
         }
     }
@@ -116,7 +114,7 @@ public class TileManager : MonoBehaviour
         // TODO: Make reliant on distance rather then z-position
         Tile lastTile = m_VisibleTiles.Last.Value;
         // add tile if player is within a certain distance from last tile
-        if (lastTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.Player) < m_DistanceToPlaceTile)
+        if (lastTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerParent) < m_DistanceToPlaceTile)
         {
             InstantiateTile();
         }
