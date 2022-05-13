@@ -36,6 +36,11 @@ public abstract class SplineCreator : CatmullRomSpline
         InitializeStartingPoints();
     }
 
+    public bool IsInitialized
+    {
+        get { return m_IsInitialized; }
+    }
+
     // Initialize spline with starting points to keep the walker sufficienctly behind the end of the spline
     private void InitializeStartingPoints()
     {

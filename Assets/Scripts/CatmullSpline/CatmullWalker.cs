@@ -7,7 +7,7 @@ public class CatmullWalker : MonoBehaviour
     [SerializeField] protected float m_Duration = 5f;
     [SerializeField] protected float m_Speed = 1;
     [SerializeField] protected bool m_IsFollowingspline = true;
-    [SerializeField] private SplineCreator m_Spline;
+    [SerializeField] protected SplineCreator m_Spline;
 
     private float m_Dist = 0;
     private int m_CurrCurve = -1;
@@ -29,15 +29,10 @@ public class CatmullWalker : MonoBehaviour
             return;
         }
 
-        if (!m_StartMoving)
-        {
+        if (!m_Spline.IsInitialized)
             m_Spline.InitializeSplineAtHead();
-            m_StartMoving = true;
-        }
-       
 
-        if (m_Spline && m_StartMoving)
-            MovePlayerConstant();
+        MovePlayerConstant();
     }
 
     // Uses distance travelled so far inside current curve 

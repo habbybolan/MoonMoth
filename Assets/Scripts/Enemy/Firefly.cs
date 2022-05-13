@@ -17,8 +17,6 @@ public class Firefly : MonoBehaviour
         Debug.Log("Firefly spawned");
         m_IsActive = false;
         m_CatmullWalker = GetComponent<FireflyCatmullWalker>();
-        m_CatmullWalker.IsFollowSpline = false;
-        m_EnemySplineCreator.InitializeSplineAtTile(PlayerManager.PropertyInstance.PlayerParent.spline.GetTileInfront(0));
     }
 
     private void Update()
