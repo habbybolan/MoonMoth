@@ -337,7 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TilePrefabs:
   - {fileID: 8136119699854392509, guid: 3fb7a093bd87b3a4b9f12416619977c6, type: 3}
-  m_DistanceToPlaceTile: 500
+  m_DistanceToPlaceTile: 5000
   m_DistanceToDeleteTile: 50
 --- !u!4 &951211377
 Transform:
@@ -620,6 +620,10 @@ PrefabInstance:
       value: PlayerParent
       objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_Speed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Spline
       value: 
       objectReference: {fileID: 92830010}
@@ -675,5 +679,9 @@ PrefabInstance:
       propertyPath: m_CrossHair
       value: 
       objectReference: {fileID: 671315058}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_CameraOffsetFromParent
+      value: -30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}

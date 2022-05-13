@@ -44,7 +44,7 @@ public abstract class SplineCreator : CatmullRomSpline
     // Initialize spline with starting points to keep the walker sufficienctly behind the end of the spline
     private void InitializeStartingPoints()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             AddNewPoint();
         }
