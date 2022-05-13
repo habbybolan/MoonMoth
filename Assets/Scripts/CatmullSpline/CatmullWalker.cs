@@ -5,9 +5,10 @@ using UnityEngine;
 public class CatmullWalker : MonoBehaviour
 { 
     [SerializeField] protected float m_Duration = 5f;
-    [SerializeField] protected float m_Speed = 1;
+    
     [SerializeField] protected bool m_IsFollowingspline = true;
     [SerializeField] protected SplineCreator m_Spline;
+    [SerializeField] protected float m_Speed = 1;
 
     private float m_Dist = 0;
     private int m_CurrCurve = -1;
@@ -86,4 +87,6 @@ public class CatmullWalker : MonoBehaviour
     {
         get { return m_Spline; }
     }
+
+    public float Speed { get { return m_Speed; } }
 }
