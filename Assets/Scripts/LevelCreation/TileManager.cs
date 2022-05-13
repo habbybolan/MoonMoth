@@ -70,7 +70,7 @@ public class TileManager : MonoBehaviour
         int visibleCount = m_VisibleTiles.Count;
 
         m_VisibleTiles.AddLast(newTile);
-        newTile.gameObject.SetActive(true);
+        newTile.SetIsActive(true);
 
         // If first created, dont do anything
         if (visibleCount == 0)
@@ -100,13 +100,13 @@ public class TileManager : MonoBehaviour
 
     private void CheckRemoveTile()
     {
-        //Tile firstTile = m_VisibleTiles.First.Value;
-        //float distanceFromEnd = firstTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerParent);
-        //if (firstTile.IsPlayerTraversed && distanceFromEnd > m_DistanceToDeleteTile)
-        //{
-        //    firstTile.gameObject.SetActive(false);
-        //    m_VisibleTiles.RemoveFirst();
-        //}
+        Tile firstTile = m_VisibleTiles.First.Value;
+        float distanceFromEnd = firstTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerParent);
+        if (firstTile.IsTraversedByPlayer && distanceFromEnd > m_DistanceToDeleteTile)
+        {
+            firstTile.SetIsActive(false);
+            m_VisibleTiles.RemoveFirst();
+        }
     }
 
     private void CheckAddTile()
