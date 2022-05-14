@@ -22,5 +22,11 @@ public class PlayerCollision : MonoBehaviour
         {
             m_PlayerController.OnTerrainCollision(collision.contacts[0]);
         }
+
+        //Obstacle obstacle = collision.gameObject.GetComponent<Obstacle>();
+        //if (terrain != null)
+        //{
+        //    m_PlayerController.OnObstacleCollision(collision.contacts[0]);
+        //}
     }
 }

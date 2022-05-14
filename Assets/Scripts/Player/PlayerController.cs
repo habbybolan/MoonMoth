@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,8 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = new InputActions();
     }
+
+    
 
     private void Start()
     {
@@ -50,10 +53,11 @@ public class PlayerController : MonoBehaviour
         
         m_PlayerMovement.RotationLook();
 
-        if (m_playerState != PLAYER_STATE.TERRAIN_COLLIDED)
-        {
-            m_PlayerParentMovement.TryMove();
-        }
+        //if (m_playerState != PLAYER_STATE.TERRAIN_COLLIDED)
+        //{
+            
+        //}
+        m_PlayerParentMovement.TryMove();
        
         
         if (m_playerState == PLAYER_STATE.FLYING || m_playerState == PLAYER_STATE.DASHING || m_playerState == PLAYER_STATE.TERRAIN_COLLIDED)
@@ -68,15 +72,18 @@ public class PlayerController : MonoBehaviour
 
     public void OnTerrainCollision(ContactPoint contact)
     {
-        // Dont start another collision coroutine if currently in collision
-        if (m_playerState == PLAYER_STATE.TERRAIN_COLLIDED)
-            return;
-
         m_playerState = PLAYER_STATE.TERRAIN_COLLIDED;
         Vector3 normal = contact.normal;
         Vector3 contactPoint = contact.point;
         Debug.DrawRay(contactPoint, normal, Color.red, 10);
         StartCoroutine(m_PlayerParentMovement.TerrainCollision(FinishAction, contact));
+
+        m_PlayerMovement.TerrainCollision(contact);
+    }
+    
+    void OnObstacleCollision(ContactPoint contactPoint)
+    {
+        // TODO:
     }
 
     private void DoFire(InputAction.CallbackContext obj)
