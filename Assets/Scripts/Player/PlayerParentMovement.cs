@@ -7,6 +7,8 @@ public class PlayerParentMovement : CatmullWalker
 {
     [Header("Dash")]
     [Tooltip("Speed percentage increase forward")]
+
+    [Header("Movement")]
     [SerializeField] private float m_SpeedIncreasePercent = 0.5f;
     [SerializeField] private bool m_IsIndependentMovement = false;
 

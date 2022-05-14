@@ -365,6 +365,7 @@ public class PlayerMovement : MonoBehaviour
         FLYING,
         DODGING,
         DASHING,
+        COLLIDED,
         DAMAGED
     }
 }
