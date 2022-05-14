@@ -8,6 +8,15 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //Terrain terrain = collision.gameObject.GetComponent<Terrain>();
+        //if (terrain != null)
+        //{
+        //    m_PlayerController.OnTerrainCollision(collision.contacts[0]);
+        //}
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
         Terrain terrain = collision.gameObject.GetComponent<Terrain>();
         if (terrain != null)
         {
