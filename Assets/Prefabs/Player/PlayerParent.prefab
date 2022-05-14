@@ -405,6 +405,36 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}
   m_PrefabInstance: {fileID: 7576343697687589138}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &153797319
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342553640948534339}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &153797320
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342553640948534339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 17.3
+  m_Height: 71.73
+  m_Direction: 2
+  m_Center: {x: 0, y: -6.2, z: 5.1}
 --- !u!114 &7576343697687589149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,53 +485,40 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_DodgeSpeed: 30
+  m_DodgeSpeedX: 20
+  m_DodgeSpeedY: 20
   m_CameraFollowOnDodge: 1
   m_ControlPointMultiplier: 1.4
-  m_ControlPointOffsetLimit: 3
+  m_ControlPointOffsetLimitX: 3
+  m_ControlPointOffsetLimitY: 3
+  m_MaxYDegrees: 45
   m_DashDuration: 2.5
   m_RotateSpeed: 10
   m_focalPointOffset: 5
   m_ZRotationSpeed: 0.01
   m_MaxZRotation: 50
   m_MinXInputForZRotation: 0.1
-  m_CameraMovement: {fileID: 3977897140854792868}
   m_CrossHair: {fileID: 0}
   m_CrosshairPercentY: 0.05
   m_CrosshairPercentX: 0.05
   m_CameraOffsetFromParent: -30
   m_Weapon: {fileID: 960600189004128039}
   m_ShotMissedOffset: 1000
---- !u!54 &153797319
-Rigidbody:
+--- !u!114 &3324045045170556717
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7342553640948534339}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!136 &153797320
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342553640948534339}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 17.3
-  m_Height: 71.73
-  m_Direction: 2
-  m_Center: {x: 0, y: -6.2, z: 5.1}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e03b73b2fa69445added13f99edb0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlayerMovement: {fileID: 7576343697687589149}
+  m_PlayerParentMovement: {fileID: 3977897141832786758}
+  m_CameraMovement: {fileID: 3977897140854792868}
 --- !u!4 &7975361531800803065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}

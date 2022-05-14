@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1221,17 +1221,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516494768}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &556766688 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-  m_PrefabInstance: {fileID: 911829215}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd9be5d91c8f7a140937f5d0916c97d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &650859987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,8 +1593,16 @@ PrefabInstance:
       value: PlayerParent
       objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_Speed
+      value: 39.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_IsFollowingspline
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_IsIndependentMovement
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786759, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_RootOrder
@@ -1655,6 +1652,10 @@ PrefabInstance:
       propertyPath: m_CrossHair
       value: 
       objectReference: {fileID: 381662859}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_CameraOffsetFromParent
+      value: -15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
 --- !u!1 &912437643
@@ -3947,7 +3948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b910b3352a66c2a4f884494de08484af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Player: {fileID: 556766688}
+  m_PlayerController: {fileID: 0}
 --- !u!4 &2125208849
 Transform:
   m_ObjectHideFlags: 0

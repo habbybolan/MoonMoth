@@ -101,7 +101,7 @@ public class TileManager : MonoBehaviour
     private void CheckRemoveTile()
     {
         Tile firstTile = m_VisibleTiles.First.Value;
-        float distanceFromEnd = firstTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerParent);
+        float distanceFromEnd = firstTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerController.PlayerParent);
         if (firstTile.IsTraversedByPlayer && distanceFromEnd > m_DistanceToDeleteTile)
         {
             firstTile.SetIsActive(false);
@@ -114,7 +114,7 @@ public class TileManager : MonoBehaviour
         // TODO: Make reliant on distance rather then z-position
         Tile lastTile = m_VisibleTiles.Last.Value;
         // add tile if player is within a certain distance from last tile
-        if (lastTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerParent) < m_DistanceToPlaceTile)
+        if (lastTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerController.PlayerParent) < m_DistanceToPlaceTile)
         {
             InstantiateTile();
         }
