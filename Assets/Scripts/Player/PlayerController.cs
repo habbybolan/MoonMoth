@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         if (m_playerState == PLAYER_STATE.FLYING)
         {
             m_playerState = PLAYER_STATE.DODGING;
-            StartCoroutine(m_PlayerMovement.PlayerDodge(FinishAction));
+            StartCoroutine(m_PlayerMovement.PlayerDodge(FinishAction, m_MovementInput.ReadValue<Vector2>()));
         }   
     }
 

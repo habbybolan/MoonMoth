@@ -143,10 +143,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public IEnumerator PlayerDodge(System.Action callback)
+    public IEnumerator PlayerDodge(System.Action callback, Vector2 vec2Move)
     {
-        float inputX = Input.GetAxis("Horizontal") != 0 ? Input.GetAxis("Horizontal") : Input.GetAxis("Mouse X");
-        float inputY = Input.GetAxis("Vertical") != 0 ? Input.GetAxis("Vertical") : Input.GetAxis("Mouse Y");
+        float inputX = vec2Move.x;
+        float inputY = vec2Move.y;
         inputY = Mathf.Clamp(inputY, -m_MaxYValue, m_MaxYValue);
         float currZRot = transform.localRotation.eulerAngles.z;
 
