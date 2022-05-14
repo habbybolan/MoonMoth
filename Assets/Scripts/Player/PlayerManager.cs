@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
-{
-    [SerializeField] private PlayerParentMovement m_Player;
+{ 
+    [SerializeField] private PlayerController m_PlayerController;
 
     static PlayerManager s_PropertyInstance;
     public static PlayerManager PropertyInstance
@@ -21,8 +21,8 @@ public class PlayerManager : MonoBehaviour
             s_PropertyInstance = this;
     }
 
-    public PlayerParentMovement PlayerParent
+    public PlayerController PlayerController
     {
-        get { return m_Player; }
+        get { return m_PlayerController; }
     }
 }

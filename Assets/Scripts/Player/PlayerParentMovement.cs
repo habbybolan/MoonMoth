@@ -11,8 +11,8 @@ public class PlayerParentMovement : CatmullWalker
     [Header("Movement")]
     [SerializeField] private float m_SpeedIncreasePercent = 0.5f;
     [SerializeField] private bool m_IsIndependentMovement = false;
-
-    private PlayerMovement m_PlayerMovement;
+    [Tooltip("Duration of the dash")]
+    [SerializeField] private float m_DashDuration = 2.5f;
 
     protected override void Update()
     {
@@ -26,30 +26,23 @@ public class PlayerParentMovement : CatmullWalker
 
     override protected void Start()
     {
-        m_PlayerMovement = GetComponentInChildren<PlayerMovement>();
         base.Start(); 
     }
 
-    public void PerformDash(float duration)
-    {
-        StartCoroutine(DashSpeedChange(duration));
-    }
-
-    IEnumerator DashSpeedChange(float duration)
+    public IEnumerator Dash(System.Action callback)
     {
         float currDuration = 0f;
 
         m_CurrSpeed += m_CurrSpeed * m_SpeedIncreasePercent;
-        while (currDuration < duration)
+        while (currDuration < m_DashDuration)
         {
             currDuration += Time.deltaTime;
             yield return null;
         }
 
         m_CurrSpeed = m_Speed;
+        callback();
     }
 
-    public PlayerMovement playerMovement { 
-        get { return m_PlayerMovement; } 
-    }
+    public float DashDuration { get { return m_DashDuration; } }
 }

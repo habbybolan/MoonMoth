@@ -39,10 +39,6 @@ public class PlayerMovement : MonoBehaviour
     [Range (0, 45)]
     [SerializeField] private float m_MaxYDegrees = 45f;
 
-    [Header("Dash")]
-    [Tooltip("Duration of the dash")]
-    [SerializeField] private float m_DashDuration = 2.5f;
-
     [Header("Rotation")]
     [Tooltip("How quickly the player rotates along x-z axis")]
     [SerializeField] private float m_RotateSpeed = 10f;
@@ -58,8 +54,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_MinXInputForZRotation = .1f;
 
     [Header("Camera")]
-    [Tooltip("CameraMovement component")]
-    [SerializeField] private CameraMovement m_CameraMovement;
     [Tooltip("Crosshair UI component")]
     [SerializeField] private TextMeshProUGUI m_CrossHair;
     [Tooltip("Crosshair percent difference along y axis from the parent's origin to the control point's y location")]
@@ -79,41 +73,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 m_ControlPoint;         // Location of the controil point
     private Vector3 m_CurrentAngle;         // Currrent rotational angle in EulerAngles
-    private PLAYER_STATE m_playerState;     // Current player state given the actions performed / effects applied
-
     private float m_CurrControlSpeed;       // The current speed of the controller point movement
-
-    private InputActions playerInput;        // PlayerInput object to enable and create callbacks for inputs performed
-    private InputAction m_MovementInput;    // Input object for moving player along x-y axis
-
     LayerMask playerMask;                   // Player mask
-    Coroutine ShootCoroutine;               // Coroutine called when performed shooting action to allow cancelling the coroutine
-
-    private float m_MaxYValue = -1;
-
-    private void Awake()
-    {
-        playerInput = new InputActions();
-    }
-    private void OnEnable()
-    {
-        // Movement
-        m_MovementInput = playerInput.Player.Move;
-        m_MovementInput.Enable();
-
-        // Shoot
-        playerInput.Player.Fire.performed += ctx => ShootCoroutine = StartCoroutine(Shooting());
-        playerInput.Player.Fire.canceled += ctx => StopCoroutine(ShootCoroutine);
-        playerInput.Player.Fire.Enable();
-
-        // Dodge
-        playerInput.Player.Dodge.performed += DoDodge;
-        playerInput.Player.Dodge.Enable();
-
-        // Dash
-        playerInput.Player.Dash.performed += DoDash;
-        playerInput.Player.Dash.Enable();
-    }
+    private float m_MaxYValue;
 
     void Start()
     {
@@ -121,8 +83,6 @@ public class PlayerMovement : MonoBehaviour
         m_MaxYValue = Mathf.Tan(Mathf.Deg2Rad * m_MaxYDegrees);
 
         m_ControlObject.SetActive(m_IsShowControlObject);
-
-        m_playerState = PLAYER_STATE.FLYING;
         m_CurrControlSpeed = m_BaseControlSpeed;
         Camera.main.transform.localPosition = Vector3.forward * m_CameraOffsetFromParent;
 
@@ -135,24 +95,10 @@ public class PlayerMovement : MonoBehaviour
         m_CurrentAngle = Vector3.zero;
     }
 
-    void Update()
+    public void MoveAlongXYPlane(Vector2 Vec2Movement)
     {
-        RotationLook();
-        if (m_playerState == PLAYER_STATE.FLYING || m_playerState == PLAYER_STATE.DASHING)
-        {
-
-            HorizontalRotation();
-            MoveAlongXYPlane();
-        }
-
-        UpdateCrossHair();
-
-    }
-
-    void MoveAlongXYPlane()
-    {
-        float inputX = m_MovementInput.ReadValue<Vector2>().x;
-        float inputY = m_MovementInput.ReadValue<Vector2>().y;
+        float inputX = Vec2Movement.x;
+        float inputY = Vec2Movement.y;
 
         // move control points
         m_ControlPoint += new Vector3(inputX, inputY, 0) * m_CurrControlSpeed * Time.deltaTime;
@@ -163,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
         transform.localPosition += moveToDirection * Time.deltaTime * m_MoveSpeedPercent * m_CurrControlSpeed;
     }
 
-    void RotationLook()
+    public void RotationLook()
     {
         transform.localRotation = Quaternion.RotateTowards(
             transform.localRotation,
@@ -171,26 +117,24 @@ public class PlayerMovement : MonoBehaviour
             m_RotateSpeed);
     }
 
-    void HorizontalRotation()
+    public void HorizontalRotation(float xLook)
     {
-        float inputX = m_MovementInput.ReadValue<Vector2>().x;
-
         m_CurrentAngle = new Vector3(
             transform.localEulerAngles.x,
             transform.localEulerAngles.y,
             Mathf.LerpAngle(m_CurrentAngle.z,
-                            (inputX < m_MinXInputForZRotation && inputX > -m_MinXInputForZRotation) ? 0 : inputX < 0 ? m_MaxZRotation : -m_MaxZRotation, m_ZRotationSpeed));
+                            (xLook < m_MinXInputForZRotation && xLook > -m_MinXInputForZRotation) ? 0 : xLook < 0 ? m_MaxZRotation : -m_MaxZRotation, m_ZRotationSpeed));
 
         transform.localEulerAngles = m_CurrentAngle;
     }
 
-    private void UpdateCrossHair()
+    public void UpdateCrossHair()
     {
         m_CrossHair.transform.position = Camera.main.WorldToScreenPoint(
             CrossHairPoint);
     }
 
-    IEnumerator Shooting()
+    public IEnumerator Shooting()
     {
         while (true)
         {
@@ -199,39 +143,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void DoDodge(InputAction.CallbackContext obj)
+    public IEnumerator PlayerDodge(System.Action callback, Vector2 vec2Move)
     {
-        if (m_playerState == PLAYER_STATE.FLYING)
-            StartCoroutine(PlayerDodge());
-    }
-
-    private void DoDash(InputAction.CallbackContext obj)
-    {
-        if (m_playerState == PLAYER_STATE.FLYING)
-        {
-            m_CameraMovement.PerformCameraZoom(m_DashDuration);
-            PlayerManager.PropertyInstance.PlayerParent.PerformDash(m_DashDuration);
-            StartCoroutine(PlayerDash());
-        }
-    }
-
-    private IEnumerator PlayerDash()
-    {
-        m_playerState = PLAYER_STATE.DASHING;
-        float currDuration = 0f;
-        while (currDuration < m_DashDuration)
-        {
-            currDuration += Time.deltaTime;
-            yield return null;
-        }
-        m_playerState = PLAYER_STATE.FLYING;
-    }
-
-    private IEnumerator PlayerDodge()
-    {
-        m_CameraMovement.IsCameraFollow = m_CameraFollowOnDodge;
-        float inputX = Input.GetAxis("Horizontal") != 0 ? Input.GetAxis("Horizontal") : Input.GetAxis("Mouse X");
-        float inputY = Input.GetAxis("Vertical") != 0 ? Input.GetAxis("Vertical") : Input.GetAxis("Mouse Y");
+        float inputX = vec2Move.x;
+        float inputY = vec2Move.y;
         inputY = Mathf.Clamp(inputY, -m_MaxYValue, m_MaxYValue);
         float currZRot = transform.localRotation.eulerAngles.z;
 
@@ -262,7 +177,6 @@ public class PlayerMovement : MonoBehaviour
 
         float currDuration = 0;
 
-        m_playerState = PLAYER_STATE.DODGING;
         while (currDuration < m_DodgeDuration)
         {
             float angle = rotationAmount * (Time.deltaTime / m_DodgeDuration);
@@ -308,8 +222,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Finish dodge state
-        m_CameraMovement.IsCameraFollow = true;
-        m_playerState = PLAYER_STATE.FLYING;
+        callback();
     }
 
     private Vector3 GetLocationToFireAt()
@@ -358,14 +271,5 @@ public class PlayerMovement : MonoBehaviour
     public float CameraOffset
     {
         get { return m_CameraOffsetFromParent; }
-    }
-
-    enum PLAYER_STATE
-    {
-        FLYING,
-        DODGING,
-        DASHING,
-        COLLIDED,
-        DAMAGED
     }
 }
