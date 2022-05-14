@@ -14,14 +14,14 @@ public class PlayerParentMovement : CatmullWalker
     [Tooltip("Duration of the dash")]
     [SerializeField] private float m_DashDuration = 2.5f;
 
-    protected override void Update()
+    public override void TryMove()
     {
         if (m_IsIndependentMovement)
         {
             transform.transform.Translate(Vector3.forward * m_Speed * Time.deltaTime);
             return;
         }
-        base.Update();
+        base.TryMove();
     }
 
     override protected void Start()

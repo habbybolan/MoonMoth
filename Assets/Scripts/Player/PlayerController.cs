@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerMovement m_PlayerMovement;
     [SerializeField] private PlayerParentMovement m_PlayerParentMovement;
-
     [Tooltip("CameraMovement component")]
     [SerializeField] private CameraMovement m_CameraMovement;
 
@@ -48,16 +47,25 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        m_PlayerParentMovement.TryMove();
+
         m_PlayerMovement.RotationLook();
         if (m_playerState == PLAYER_STATE.FLYING || m_playerState == PLAYER_STATE.DASHING)
         {
-
             m_PlayerMovement.HorizontalRotation(m_MovementInput.ReadValue<Vector2>().x);
             m_PlayerMovement.MoveAlongXYPlane(m_MovementInput.ReadValue<Vector2>());
         }
 
         m_PlayerMovement.UpdateCrossHair();
     }
+
+    public void OnTerrainCollision(ContactPoint contact)
+    {
+        Vector3 normal = contact.normal;
+        Vector3 contactPoint = contact.point;
+        Debug.DrawRay(contactPoint, normal, Color.red, 10);
+    }
+
 
     private void DoFire(InputAction.CallbackContext obj)
     {
@@ -101,7 +109,8 @@ public class PlayerController : MonoBehaviour
     {
         FLYING,
         DODGING,
-        DASHING,
+        DASHING, 
+        TERRAIN_COLLIDED,
         DAMAGED
     }
 }

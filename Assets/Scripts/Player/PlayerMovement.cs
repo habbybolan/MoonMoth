@@ -76,9 +76,11 @@ public class PlayerMovement : MonoBehaviour
     private float m_CurrControlSpeed;       // The current speed of the controller point movement
     LayerMask playerMask;                   // Player mask
     private float m_MaxYValue;
+    private Rigidbody m_Rigidbody;
 
     void Start()
     {
+        m_Rigidbody = GetComponent<Rigidbody>();
         // Get the max input y value during a dodge based on degree limit set, with x dodge input -1/1
         m_MaxYValue = Mathf.Tan(Mathf.Deg2Rad * m_MaxYDegrees);
 
@@ -104,9 +106,9 @@ public class PlayerMovement : MonoBehaviour
         m_ControlPoint += new Vector3(inputX, inputY, 0) * m_CurrControlSpeed * Time.deltaTime;
         m_ControlObject.transform.localPosition = m_ControlPoint;
 
-        // Move towards control points
-        Vector3 moveToDirection = (new Vector3(m_ControlPoint.x, m_ControlPoint.y, transform.localPosition.z) - transform.localPosition);
-        transform.localPosition += moveToDirection * Time.deltaTime * m_MoveSpeedPercent * m_CurrControlSpeed;
+        // Move towards control points 
+        Vector3 distanceFromControl = (new Vector3(m_ControlPoint.x, m_ControlPoint.y, transform.localPosition.z) - transform.localPosition);
+        transform.localPosition += distanceFromControl * Time.deltaTime * m_MoveSpeedPercent * m_CurrControlSpeed;
     }
 
     public void RotationLook()
