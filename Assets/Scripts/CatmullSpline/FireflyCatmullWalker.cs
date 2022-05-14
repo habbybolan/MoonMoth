@@ -19,9 +19,9 @@ public class FireflyCatmullWalker : CatmullWalker
     {
         m_IsActive = false;
         // Copy the base movement speed of the player
-        m_Speed = PlayerManager.PropertyInstance.PlayerParent.Speed;
+        m_Speed = PlayerManager.PropertyInstance.PlayerController.PlayerParent.Speed;
         IsFollowSpline = false;
-        m_Spline.InitializeSplineAtTile(PlayerManager.PropertyInstance.PlayerParent.spline.GetTileInfront(0));
+        m_Spline.InitializeSplineAtTile(PlayerManager.PropertyInstance.PlayerController.PlayerParent.spline.GetTileInfront(0));
         base.Start();
     }
 
@@ -47,7 +47,7 @@ public class FireflyCatmullWalker : CatmullWalker
 
     private float DistanceFromPlayer()
     {
-        Vector3 PlayerPos = PlayerManager.PropertyInstance.PlayerParent.transform.position;
+        Vector3 PlayerPos = PlayerManager.PropertyInstance.PlayerController.PlayerParent.transform.position;
         return Vector3.Distance(PlayerPos, transform.position);
     }
 
