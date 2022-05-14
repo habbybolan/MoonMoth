@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerMovement m_PlayerMovement;
     [SerializeField] private PlayerParentMovement m_PlayerParentMovement;
+    [SerializeField] private Health m_Health;
 
     [Tooltip("CameraMovement component")]
     [SerializeField] private CameraMovement m_CameraMovement;
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        m_Health.LosePassiveHealth();
         m_PlayerMovement.RotationLook();
         if (m_playerState == PLAYER_STATE.FLYING || m_playerState == PLAYER_STATE.DASHING)
         {
