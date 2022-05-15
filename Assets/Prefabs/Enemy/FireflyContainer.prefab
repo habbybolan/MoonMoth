@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1558234895877433497}
   - component: {fileID: 1558234895877433502}
+  - component: {fileID: 1649497268981538213}
   m_Layer: 0
   m_Name: FireflyContainer
   m_TagString: Untagged
@@ -44,6 +45,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4411f765c956b3b4b8fe6411554ba4dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FireflyWalker: {fileID: 5617976549049454143}
+--- !u!114 &1649497268981538213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558234895877433496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf6a278b34587549a562aebb7d2cd05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_FireflyWalker: {fileID: 5617976549049454143}

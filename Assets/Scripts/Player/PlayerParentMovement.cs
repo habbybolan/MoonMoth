@@ -7,24 +7,46 @@ public class PlayerParentMovement : CatmullWalker
 {
     [Header("Dash")]
     [Tooltip("Speed percentage increase forward")]
+
+    [Header("Movement")]
     [SerializeField] private float m_SpeedIncreasePercent = 0.5f;
     [SerializeField] private bool m_IsIndependentMovement = false;
     [Tooltip("Duration of the dash")]
     [SerializeField] private float m_DashDuration = 2.5f;
+    
+    override protected void Start()
+    {
+        base.Start(); 
+    }
 
-    protected override void Update()
+    public override void TryMove()
     {
         if (m_IsIndependentMovement)
         {
             transform.transform.Translate(Vector3.forward * m_Speed * Time.deltaTime);
             return;
         }
-        base.Update();
+        base.TryMove();
     }
 
-    override protected void Start()
+    public IEnumerator TerrainCollision(System.Action callback, ContactPoint contact)
     {
-        base.Start(); 
+        Vector3 forward = -transform.forward;
+        // Angle between parent's forward movement and normal of contact
+        float degrees = Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(forward, contact.normal) / (Vector3.Magnitude(forward) * Vector3.Magnitude(contact.normal)));
+
+        float currDuration = 0f;
+        float duration = 2f;
+
+        m_CurrSpeed = 0;
+        while (currDuration < duration)
+        {
+            m_CurrSpeed = Mathf.Lerp(0, m_Speed, currDuration / duration);
+            currDuration += Time.deltaTime;
+            yield return null;
+        }
+        m_CurrSpeed = m_Speed;
+        callback();
     }
 
     public IEnumerator Dash(System.Action callback)
