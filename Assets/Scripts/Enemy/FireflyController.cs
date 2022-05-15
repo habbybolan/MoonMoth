@@ -10,8 +10,31 @@ public class FireflyController : MonoBehaviour
 {
     [SerializeField] private FireflyCatmullWalker m_FireflyWalker;
 
+    private FIREFLY_STATE m_State;
+
+    private void Start()
+    {
+        m_State = FIREFLY_STATE.WAITING;
+    }
+
     private void Update()
     {
+        if (m_State == FIREFLY_STATE.WAITING)
+            if (m_FireflyWalker.IsInRangeOfPlayer())
+            {
+                m_State = FIREFLY_STATE.ACTIVE;
+            } 
+            else
+            {
+                return;
+            }
+
         m_FireflyWalker.TryMove();
+    }
+
+    enum FIREFLY_STATE
+    {
+        WAITING,
+        ACTIVE
     }
 }
