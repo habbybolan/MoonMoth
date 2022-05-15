@@ -30,10 +30,7 @@ public abstract class Health : MonoBehaviour
     }
 
     public virtual void Damage(float percent, DAMAGE_TYPE damageType = DAMAGE_TYPE.PROJECTILE, Projectile.PROJECTILE_EFFECTS projectileEffects = Projectile.PROJECTILE_EFFECTS.NORMAL) 
-    {
-        if (damageType == DAMAGE_TYPE.PROJECTILE) 
-            Debug.Log("Projectile damage");
-        
+    {   
         RemoveHealth(percent);
     }
 
@@ -48,6 +45,7 @@ public abstract class Health : MonoBehaviour
 
     private void Death()
     {
+        Debug.Log("death");
         if (m_deathParticles != null)
         {
             Transform currentTransform = transform;

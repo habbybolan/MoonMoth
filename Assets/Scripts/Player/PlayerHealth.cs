@@ -8,7 +8,7 @@ using UnityEngine;
  */
 public class PlayerHealth : Health
 {
-    [SerializeField] private float m_InvincibilityDuration = 1f;
+    [SerializeField] private float m_InvincibilityDuration = 2f;
     [SerializeField] private PlayerController m_PlayerController;
     [Range(0f, 100f)]
     [SerializeField] private float m_TerrainDamageAmount = 5f;
@@ -25,10 +25,14 @@ public class PlayerHealth : Health
 
     public override void Damage(float percent, Health.DAMAGE_TYPE damageType = Health.DAMAGE_TYPE.PROJECTILE, Projectile.PROJECTILE_EFFECTS projectileEffects = Projectile.PROJECTILE_EFFECTS.NORMAL)
     {
+        // Dont take any damage if Invulnerable
+        if (healthState == HEALTH_STATE.INVULNERABLE)
+            return;
+
+        Debug.Log("Damage player");
         base.Damage(percent, damageType);
         if (damageType != DAMAGE_TYPE.TERRAIN)
         {
-            healthState = HEALTH_STATE.DAMAGED;
             StartCoroutine(InvulnerabilityFrames());
         }
     }
@@ -36,6 +40,7 @@ public class PlayerHealth : Health
     // Deals with invincibility frames after colliding with an obstacle
     public IEnumerator InvulnerabilityFrames()
     {
+        healthState = HEALTH_STATE.INVULNERABLE;
         float currDuration = 0f;
         while (currDuration < m_InvincibilityDuration)
         {
@@ -70,6 +75,6 @@ public class PlayerHealth : Health
     public enum HEALTH_STATE
     {
         VULNERABLE,
-        DAMAGED // invincibility frames
+        INVULNERABLE // invincibility frames after getting damaged by certain things
     }
 }
