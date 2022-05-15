@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float m_Speed = 100f;
+    [SerializeField] protected float m_Speed = 100f;
     [SerializeField] protected Rigidbody m_rigidBody;
 
     // Start is called before the first frame update
@@ -18,10 +18,9 @@ public class Projectile : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        // TODO: Do something
-        if (other.GetComponent<PlayerMovement>())
+        if (collision.gameObject.GetComponent<PlayerMovement>())
             return;
         Destroy(gameObject);
     }

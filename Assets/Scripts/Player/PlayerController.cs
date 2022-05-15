@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CameraMovement m_CameraMovement;
     [SerializeField] private PlayerCollision m_PlayerCollision;
     [SerializeField] private Health m_Health;
+    [SerializeField] private PlayerWeapon m_Weapon;
 
     private InputActions playerInput;        // PlayerInput object to enable and create callbacks for inputs performed
     private InputAction m_MovementInput;    // Input object for moving player along x-y axis
@@ -95,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
     private void DoFire(InputAction.CallbackContext obj)
     {
-        ShootCoroutine = StartCoroutine(m_PlayerMovement.Shooting());
+        ShootCoroutine = StartCoroutine(m_Weapon.Shooting());
     }
 
     private void StopFire(InputAction.CallbackContext obj)
