@@ -25,7 +25,7 @@ public class FireflyCatmullWalker : CatmullWalker
         base.Start();
     }
 
-    protected override void Update()
+    public override void TryMove()
     {
         if (!m_IsActive)
         {
@@ -33,7 +33,7 @@ public class FireflyCatmullWalker : CatmullWalker
             return;
         }
         UpdateSpeed();
-        base.Update();
+        base.TryMove();
     }
 
     private void UpdateSpeed()

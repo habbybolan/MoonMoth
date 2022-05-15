@@ -21,10 +21,11 @@ public class CatmullWalker : MonoBehaviour
         transform.position = m_Spline.GetPoint(0);
     }
 
-    // Update is called once per frame
-    virtual protected void Update()
+    // Called in controllers update method
+    public virtual void TryMove()
     {
-        if (!m_IsFollowingspline) {
+        if (!m_IsFollowingspline)
+        {
             return;
         }
 
