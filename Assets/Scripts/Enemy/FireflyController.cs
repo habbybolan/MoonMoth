@@ -9,6 +9,7 @@ using UnityEngine;
 public class FireflyController : MonoBehaviour
 {
     [SerializeField] private FireflyCatmullWalker m_FireflyWalker;
+    [SerializeField] private FireflyGun m_Weapon;
 
     private FIREFLY_STATE m_State;
 
@@ -20,15 +21,13 @@ public class FireflyController : MonoBehaviour
     private void Update()
     {
         if (m_State == FIREFLY_STATE.WAITING)
+            // Check if player is in range of waiting firefly
             if (m_FireflyWalker.IsInRangeOfPlayer())
-            {
                 m_State = FIREFLY_STATE.ACTIVE;
-            } 
             else
-            {
                 return;
-            }
 
+        m_Weapon.ShootAtPlayer();
         m_FireflyWalker.TryMove();
     }
 

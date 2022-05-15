@@ -24,8 +24,8 @@ public class FireflyCatmullWalker : CatmullWalker
 
     public override void TryMove()
     {
-        UpdateSpeed();
         base.TryMove();
+        UpdateSpeed();
     }
 
     private void UpdateSpeed()

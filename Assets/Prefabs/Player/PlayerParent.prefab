@@ -517,12 +517,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Duration: 5
-  m_IsFollowingspline: 1
   m_Spline: {fileID: 0}
   m_Speed: 75
   m_SpeedIncreasePercent: 0.5
-  m_IsIndependentMovement: 0
   m_DashDuration: 2.5
+  m_IsIndependentMovement: 0
 --- !u!1 &5888595633556916879
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Cooldown: 0.25
-  bullet: {fileID: 6734666718891834207, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
+  bullet: {fileID: 1898041674998200584, guid: 117e17bac98cb2d4691674ba32cfb26c, type: 3}
   m_ShotMissedOffset: 1000
 --- !u!1001 &7576343697687589138
 PrefabInstance:

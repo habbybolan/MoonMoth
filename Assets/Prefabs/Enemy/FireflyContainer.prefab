@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FireflyWalker: {fileID: 5617976549049454143}
+  m_Weapon: {fileID: 7657986405921782291}
 --- !u!1 &1558234896668546474
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +140,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5387338, y: 1.8453385, z: 3.1036}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5024763480508760630}
   m_Father: {fileID: 1558234895877433497}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -231,9 +233,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Duration: 5
-  m_IsFollowingspline: 1
   m_Spline: {fileID: 1558234896668546472}
   m_Speed: 5
   m_DistanceOffsetFromPrev: 20
   m_SensingRange: 100
   m_speedCorrection: 0.25
+--- !u!1 &6049100611718255477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5024763480508760630}
+  - component: {fileID: 7657986405921782291}
+  m_Layer: 0
+  m_Name: Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5024763480508760630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6049100611718255477}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.947287}
+  m_LocalScale: {x: 0.649885, y: 0.54190594, z: 0.32220647}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5617976549049454128}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7657986405921782291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6049100611718255477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e28f026c7469346b5edb230898ae3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Cooldown: 0.25
+  bullet: {fileID: 6734666718891834207, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}

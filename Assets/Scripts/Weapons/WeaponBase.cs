@@ -13,7 +13,7 @@ public class WeaponBase : MonoBehaviour
     {
         if (isCooldown)
             return;
-
+        Debug.Log("Shoot at player");
         Instantiate(bullet, transform.position, Quaternion.LookRotation(fireAtLocation - transform.position));
         StartCoroutine(WeaponCooldown());
     }
