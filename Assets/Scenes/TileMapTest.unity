@@ -174,7 +174,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
   m_PrefabInstance: {fileID: 7576343698478518932}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7576343698478518933}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98e03b73b2fa69445added13f99edb0a, type: 3}
@@ -380,10 +380,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_Health
-      value: 
-      objectReference: {fileID: 7576343698478518934}
     - target: {fileID: 3977897141832786757, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Name
       value: PlayerParent
@@ -437,29 +433,5 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 7576343698478518939, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+    - {fileID: 3879067760889582182, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
---- !u!1 &7576343698478518933 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7342553640948534339, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-  m_PrefabInstance: {fileID: 7576343698478518932}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7576343698478518934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7576343698478518933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3fdf590ea2c8b84fa544ea430c42086, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_currentHealth: 100
-  m_deathParticles: {fileID: 0}
-  m_deathParticlesDuration: 1
-  m_OnDeathEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_HealthPercentLosePerSecond: 1

@@ -12,7 +12,6 @@ public class FireflyGun : WeaponBase
     }
     public void ShootAtPlayer()
     {
-        Debug.Log(playerController.transform.position);
         Shoot(playerController.transform.position);
     }    
 }

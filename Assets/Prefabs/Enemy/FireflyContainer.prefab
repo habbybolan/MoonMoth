@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6453b9ee1540b548ae459733bc17f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentHealth: 100
+  m_MaxHealth: 100
   m_deathParticles: {fileID: 0}
   m_deathParticlesDuration: 1
   m_OnDeathEvent:
@@ -303,4 +303,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Cooldown: 0.25
-  bullet: {fileID: 6734666718891834207, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
+  bullet: {fileID: 7673361877805048376, guid: b389ca884d6e2474ba6ac6932db6d292, type: 3}

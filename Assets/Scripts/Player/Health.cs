@@ -8,55 +8,42 @@ using UnityEngine.Events;
  */
 public abstract class Health : MonoBehaviour
 {
-    [SerializeField] private float m_currentHealth = 100;
+    [SerializeField] private float m_MaxHealth = 100; 
     [SerializeField] private ParticleSystem m_deathParticles;
     [SerializeField] private float m_deathParticlesDuration = 1f;
     [SerializeField] private UnityEvent m_OnDeathEvent;
      
     [SerializeField] private float m_HealthPercentLosePerSecond = 1f;
 
-    private float m_maxHealth;
+    private float m_CurrentHealth; 
 
-    public float HealthPercentage => (float)m_currentHealth / m_maxHealth;
+    public float HealthPercentage => (float)m_CurrentHealth / m_MaxHealth;
 
-    private void Start()
+    protected virtual void Start()
     {
-        m_maxHealth = m_currentHealth;
+        m_CurrentHealth = m_MaxHealth;
     }
 
     public void LosePassiveHealth()
     {
-        float healthToLose = GetHealthPercent(m_HealthPercentLosePerSecond);
-        SetHealth(healthToLose * Time.deltaTime);
+        RemoveHealth(m_HealthPercentLosePerSecond * Time.deltaTime);
     }
 
-    public void Damage(float amount)
+    public virtual void Damage(float percent, DAMAGE_TYPE damageType = DAMAGE_TYPE.PROJECTILE, Projectile.PROJECTILE_EFFECTS projectileEffects = Projectile.PROJECTILE_EFFECTS.NORMAL) 
     {
-        m_currentHealth -= amount;
-        if (m_currentHealth <= 0)
+        if (damageType == DAMAGE_TYPE.PROJECTILE) 
+            Debug.Log("Projectile damage");
+        
+        RemoveHealth(percent);
+    }
+
+    private void RemoveHealth(float healthToLose)
+    {
+        m_CurrentHealth -= healthToLose;
+        if (m_CurrentHealth <= 0)
         {
             Death();
         }
-    }
-
-    public void Damage(int percent) 
-    {
-        float healthPercent = GetHealthPercent(percent);
-        SetHealth(healthPercent);
-    }
-
-    private void SetHealth(float healthToLose)
-    {
-        m_currentHealth -= healthToLose;
-        if (m_currentHealth <= 0)
-        {
-            Death();
-        }
-    }
-
-    private float GetHealthPercent(float percent)
-    {
-        return m_maxHealth * percent;
     }
 
     private void Death()
@@ -67,5 +54,12 @@ public abstract class Health : MonoBehaviour
             Destroy(Instantiate(m_deathParticles, currentTransform.position, currentTransform.rotation), m_deathParticlesDuration);
         }
         m_OnDeathEvent?.Invoke();
+    }
+
+    public enum DAMAGE_TYPE
+    {
+        TERRAIN,
+        OBSTACLE,
+        PROJECTILE
     }
 }

@@ -14,13 +14,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerParentMovement m_PlayerParentMovement;
     [Tooltip("CameraMovement component")]
     [SerializeField] private CameraMovement m_CameraMovement;
-    [SerializeField] private PlayerCollision m_PlayerCollision;
     [SerializeField] private Health m_Health;
     [SerializeField] private PlayerWeapon m_Weapon;
 
     private InputActions playerInput;        // PlayerInput object to enable and create callbacks for inputs performed
     private InputAction m_MovementInput;    // Input object for moving player along x-y axis
-    private PLAYER_STATE m_playerState;     // Current player state given the actions performed / effects applied
+    private PLAYER_ACTION_STATE m_playerState;     // Current player state given the actions performed / effects applied
     Coroutine ShootCoroutine;               // Coroutine called when performed shooting action to allow cancelling the coroutine
 
     private void Awake()
@@ -30,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        m_playerState = PLAYER_STATE.FLYING;
+        m_playerState = PLAYER_ACTION_STATE.FLYING;
     }
 
     private void OnEnable()
@@ -53,15 +52,15 @@ public class PlayerController : MonoBehaviour
         playerInput.Player.Dash.Enable();
     }
 
+    // Main Update controller for all Player components, Dealing with actions/effects that happen each frame
     void Update()
     {
-        m_Health.LosePassiveHealth();
+        //m_Health.LosePassiveHealth();
         m_PlayerMovement.RotationLook();
 
         m_PlayerParentMovement.TryMove();
-       
         
-        if (m_playerState == PLAYER_STATE.FLYING || m_playerState == PLAYER_STATE.DASHING || m_playerState == PLAYER_STATE.OBSTACLE_COLLIDED)
+        if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
             m_PlayerMovement.HorizontalRotation(m_MovementInput.ReadValue<Vector2>().x);
             m_PlayerMovement.MoveAlongXYPlane(m_MovementInput.ReadValue<Vector2>());
@@ -79,19 +78,7 @@ public class PlayerController : MonoBehaviour
 
         m_PlayerMovement.TerrainCollision(contact);
     }
-    
-    public void OnObstacleCollision(ContactPoint contactPoint)
-    {
-        // Only collide with terrain if doesn't have invincibility frames
-        if (m_playerState == PLAYER_STATE.OBSTACLE_COLLIDED)
-            return;
-
-        m_playerState = PLAYER_STATE.OBSTACLE_COLLIDED;
-
-        // TODO: Damage player
-        Debug.Log("Obstacle damage");
-        StartCoroutine(m_PlayerCollision.ObstacleCollision(FinishAction));
-    }
+   
 
     private void DoFire(InputAction.CallbackContext obj)
     {
@@ -105,9 +92,9 @@ public class PlayerController : MonoBehaviour
 
     private void DoDodge(InputAction.CallbackContext obj)
     {
-        if (m_playerState == PLAYER_STATE.FLYING)
+        if (m_playerState == PLAYER_ACTION_STATE.FLYING)
         {
-            m_playerState = PLAYER_STATE.DODGING;
+            m_playerState = PLAYER_ACTION_STATE.DODGING;
             StartCoroutine(m_PlayerMovement.PlayerDodge(FinishAction, m_MovementInput.ReadValue<Vector2>()));
         }   
     }
@@ -115,9 +102,9 @@ public class PlayerController : MonoBehaviour
 
     private void DoDash(InputAction.CallbackContext obj)
     {
-        if (m_playerState == PLAYER_STATE.FLYING)
+        if (m_playerState == PLAYER_ACTION_STATE.FLYING)
         {
-            m_playerState = PLAYER_STATE.DASHING;
+            m_playerState = PLAYER_ACTION_STATE.DASHING;
             m_CameraMovement.PerformCameraZoom(m_PlayerParentMovement.DashDuration);
             StartCoroutine(m_PlayerParentMovement.Dash(FinishAction));
         }
@@ -125,18 +112,17 @@ public class PlayerController : MonoBehaviour
 
     private void FinishAction()
     {
-        m_playerState = PLAYER_STATE.FLYING;
+        m_playerState = PLAYER_ACTION_STATE.FLYING;
     }
 
     public PlayerParentMovement PlayerParent { get { return m_PlayerParentMovement;  } }
     public PlayerMovement PlayerMovement { get { return m_PlayerMovement; } }
     public CameraMovement CameraMovement { get { return m_CameraMovement; } }
 
-    enum PLAYER_STATE
+    enum PLAYER_ACTION_STATE
     {
         FLYING,
         DODGING,
-        DASHING,  
-        OBSTACLE_COLLIDED
+        DASHING
     }
 }
