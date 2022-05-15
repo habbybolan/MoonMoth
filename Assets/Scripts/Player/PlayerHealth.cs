@@ -43,12 +43,7 @@ public class PlayerHealth : Health
     public IEnumerator InvulnerabilityFrames()
     {
         healthState = HEALTH_STATE.INVULNERABLE;
-        float currDuration = 0f;
-        while (currDuration < m_InvincibilityDuration)
-        {
-            currDuration += Time.deltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(m_InvincibilityDuration);
         healthState = HEALTH_STATE.VULNERABLE;
     }
 

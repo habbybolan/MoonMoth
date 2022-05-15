@@ -29,12 +29,7 @@ public class WeaponBase : MonoBehaviour
     IEnumerator WeaponCooldown()
     {
         isCooldown = true;
-        float currCooldownTime = 0f;
-        while (currCooldownTime < m_Cooldown)
-        {
-            currCooldownTime += Time.deltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(m_Cooldown);
         isCooldown = false;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /*
- * Attached to any object that has health and can be destroyed.
+ * Attached to any object that has health and can be destroyed / Shot at.
  */
 public abstract class Health : MonoBehaviour
 {

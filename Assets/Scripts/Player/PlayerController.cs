@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
     public void Death() 
     {
-        Debug.Log("Player DEAD");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("TileMapTest");
     }
 
     private void FinishAction()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // Singleton manager dealing with the creation, management and deletion of all fireflies
 public class FireflyManager : MonoBehaviour
@@ -50,6 +51,7 @@ public class FireflyManager : MonoBehaviour
         float currDuration = 0f;
 
         // Loop infinitely, spawning firefly after amount of time passed
+        // TODO: Only start counting again when able to spawn another
         while (true)
         {
             currDuration += Time.deltaTime;

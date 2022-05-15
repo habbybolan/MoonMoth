@@ -52,14 +52,8 @@ public class PlayerParentMovement : CatmullWalker
 
     public IEnumerator Dash(System.Action callback)
     {
-        float currDuration = 0f;
-
         m_CurrSpeed += m_CurrSpeed * m_SpeedIncreasePercent;
-        while (currDuration < m_DashDuration)
-        {
-            currDuration += Time.deltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(m_DashDuration);
 
         m_CurrSpeed = m_Speed;
         callback();
