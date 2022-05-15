@@ -4,12 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/*
+ * Deals with Player's Inputs, States and which methods to call each frame.
+ * Acts as the central hub for interacting with all Player components.
+ */
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerMovement m_PlayerMovement;
     [SerializeField] private PlayerParentMovement m_PlayerParentMovement;
     [Tooltip("CameraMovement component")]
     [SerializeField] private CameraMovement m_CameraMovement;
+    [SerializeField] private PlayerCollision m_PlayerCollision; 
 
     private InputActions playerInput;        // PlayerInput object to enable and create callbacks for inputs performed
     private InputAction m_MovementInput;    // Input object for moving player along x-y axis
@@ -20,8 +25,6 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = new InputActions();
     }
-
-    
 
     private void Start()
     {
@@ -60,7 +63,7 @@ public class PlayerController : MonoBehaviour
         m_PlayerParentMovement.TryMove();
        
         
-        if (m_playerState == PLAYER_STATE.FLYING || m_playerState == PLAYER_STATE.DASHING || m_playerState == PLAYER_STATE.TERRAIN_COLLIDED)
+        if (m_playerState == PLAYER_STATE.FLYING || m_playerState == PLAYER_STATE.DASHING || m_playerState == PLAYER_STATE.OBSTACLE_COLLIDED)
         {
             
             m_PlayerMovement.HorizontalRotation(m_MovementInput.ReadValue<Vector2>().x);
@@ -72,7 +75,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnTerrainCollision(ContactPoint contact)
     {
-        m_playerState = PLAYER_STATE.TERRAIN_COLLIDED;
         Vector3 normal = contact.normal;
         Vector3 contactPoint = contact.point;
         Debug.DrawRay(contactPoint, normal, Color.red, 10);
@@ -81,9 +83,17 @@ public class PlayerController : MonoBehaviour
         m_PlayerMovement.TerrainCollision(contact);
     }
     
-    void OnObstacleCollision(ContactPoint contactPoint)
+    public void OnObstacleCollision(ContactPoint contactPoint)
     {
-        // TODO:
+        // Only collide with terrain if doesn't have invincibility frames
+        if (m_playerState == PLAYER_STATE.OBSTACLE_COLLIDED)
+            return;
+
+        m_playerState = PLAYER_STATE.OBSTACLE_COLLIDED;
+
+        // TODO: Damage player
+        Debug.Log("Obstacle damage");
+        StartCoroutine(m_PlayerCollision.ObstacleCollision(FinishAction));
     }
 
     private void DoFire(InputAction.CallbackContext obj)
@@ -128,8 +138,8 @@ public class PlayerController : MonoBehaviour
     {
         FLYING,
         DODGING,
-        DASHING, 
-        TERRAIN_COLLIDED,
+        DASHING,  
+        OBSTACLE_COLLIDED,
         DAMAGED
     }
 }
