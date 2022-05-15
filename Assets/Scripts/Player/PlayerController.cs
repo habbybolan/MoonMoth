@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerParentMovement m_PlayerParentMovement;
     [Tooltip("CameraMovement component")]
     [SerializeField] private CameraMovement m_CameraMovement;
-    [SerializeField] private PlayerCollision m_PlayerCollision; 
+    [SerializeField] private PlayerCollision m_PlayerCollision;
+    [SerializeField] private Health m_Health;
 
     private InputActions playerInput;        // PlayerInput object to enable and create callbacks for inputs performed
     private InputAction m_MovementInput;    // Input object for moving player along x-y axis
@@ -53,13 +54,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
+        m_Health.LosePassiveHealth();
         m_PlayerMovement.RotationLook();
 
-        //if (m_playerState != PLAYER_STATE.TERRAIN_COLLIDED)
-        //{
-            
-        //}
         m_PlayerParentMovement.TryMove();
        
         
