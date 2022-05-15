@@ -62,11 +62,17 @@ public class FireflyManager : MonoBehaviour
         }
     }
 
-    public void OnFireflyDeath()
+    public void OnFireflyDeath(GameObject fireflyGameObject)
     {
+        for (int i = 0; i < m_FireflyList.Count; i++)
+        {
+            if (m_FireflyList[i].gameObject == fireflyGameObject)
+            {
+                Destroy(fireflyGameObject);
+                m_FireflyList.RemoveAt(i);
+            }
+        }
         // TODO:
-        //  remove firefly from list
-        //  Drop light from firefly
         //  Update offset positions of all alive fireflies in list
     }
 

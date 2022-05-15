@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerParentMovement m_PlayerParentMovement;
     [Tooltip("CameraMovement component")]
     [SerializeField] private CameraMovement m_CameraMovement;
-    [SerializeField] private Health m_Health;
+    [SerializeField] private PlayerHealth m_Health;
     [SerializeField] private PlayerWeapon m_Weapon;
 
     private InputActions playerInput;        // PlayerInput object to enable and create callbacks for inputs performed
@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         m_playerState = PLAYER_ACTION_STATE.FLYING;
+        m_Health.deathDelegate = Death;
+        m_Health.terrainCollisionDelegate = OnTerrainCollision;
+
     }
 
     private void OnEnable()
@@ -55,7 +58,7 @@ public class PlayerController : MonoBehaviour
     // Main Update controller for all Player components, Dealing with actions/effects that happen each frame
     void Update()
     {
-        //m_Health.LosePassiveHealth();
+        m_Health.LosePassiveHealth();
         m_PlayerMovement.RotationLook();
 
         m_PlayerParentMovement.TryMove();
@@ -108,6 +111,11 @@ public class PlayerController : MonoBehaviour
             m_CameraMovement.PerformCameraZoom(m_PlayerParentMovement.DashDuration);
             StartCoroutine(m_PlayerParentMovement.Dash(FinishAction));
         }
+    }
+
+    public void Death() 
+    {
+        Debug.Log("Player DEAD");
     }
 
     private void FinishAction()

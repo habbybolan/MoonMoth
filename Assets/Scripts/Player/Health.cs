@@ -11,11 +11,13 @@ public abstract class Health : MonoBehaviour
     [SerializeField] private float m_MaxHealth = 100; 
     [SerializeField] private ParticleSystem m_deathParticles;
     [SerializeField] private float m_deathParticlesDuration = 1f;
-    [SerializeField] private UnityEvent m_OnDeathEvent;
      
     [SerializeField] private float m_HealthPercentLosePerSecond = 1f;
 
-    private float m_CurrentHealth; 
+    private float m_CurrentHealth;
+
+    public delegate void DeathDelegate();
+    public DeathDelegate deathDelegate;
 
     public float HealthPercentage => (float)m_CurrentHealth / m_MaxHealth;
 
@@ -45,13 +47,12 @@ public abstract class Health : MonoBehaviour
 
     private void Death()
     {
-        Debug.Log("death");
         if (m_deathParticles != null)
         {
             Transform currentTransform = transform;
             Destroy(Instantiate(m_deathParticles, currentTransform.position, currentTransform.rotation), m_deathParticlesDuration);
         }
-        m_OnDeathEvent?.Invoke();
+        deathDelegate();
     }
 
     public enum DAMAGE_TYPE

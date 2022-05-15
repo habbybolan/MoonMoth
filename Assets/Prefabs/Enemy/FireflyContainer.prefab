@@ -62,6 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FireflyWalker: {fileID: 5617976549049454143}
   m_Weapon: {fileID: 7657986405921782291}
+  m_Health: {fileID: 299311464389059574}
 --- !u!1 &1558234896668546474
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,9 +255,6 @@ MonoBehaviour:
   m_MaxHealth: 100
   m_deathParticles: {fileID: 0}
   m_deathParticlesDuration: 1
-  m_OnDeathEvent:
-    m_PersistentCalls:
-      m_Calls: []
   m_HealthPercentLosePerSecond: 1
 --- !u!1 &6049100611718255477
 GameObject:

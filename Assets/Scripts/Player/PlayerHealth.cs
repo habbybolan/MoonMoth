@@ -9,13 +9,15 @@ using UnityEngine;
 public class PlayerHealth : Health
 {
     [SerializeField] private float m_InvincibilityDuration = 2f;
-    [SerializeField] private PlayerController m_PlayerController;
     [Range(0f, 100f)]
     [SerializeField] private float m_TerrainDamageAmount = 5f;
     [Range(0f, 100f)]
     [SerializeField] private float m_ObstacleDamageAmount = 5f; 
     
     private HEALTH_STATE healthState;       // If the player can be damaged or not by non-terrain damage types
+
+    public delegate void TerrainColisionDelegate(ContactPoint contact);
+    public TerrainColisionDelegate terrainCollisionDelegate; 
 
     protected override void Start()
     {
@@ -57,7 +59,7 @@ public class PlayerHealth : Health
         if (terrain != null)
         {
             // Deals with movement changes on terrain collision
-            m_PlayerController.OnTerrainCollision(collision.contacts[0]);
+            terrainCollisionDelegate(collision.contacts[0]);
             Damage(m_TerrainDamageAmount, DAMAGE_TYPE.TERRAIN);
         }
     }
