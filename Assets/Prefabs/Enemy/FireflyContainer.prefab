@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 5617976549049454131}
   - component: {fileID: 5617976549049454141}
   - component: {fileID: 5617976549049454143}
+  - component: {fileID: 299311464389059574}
   m_Layer: 0
   m_Name: Firefly
   m_TagString: Untagged
@@ -238,6 +239,25 @@ MonoBehaviour:
   m_DistanceOffsetFromPrev: 20
   m_SensingRange: 100
   m_speedCorrection: 0.25
+--- !u!114 &299311464389059574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5617976549049454132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6453b9ee1540b548ae459733bc17f9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_currentHealth: 100
+  m_deathParticles: {fileID: 0}
+  m_deathParticlesDuration: 1
+  m_OnDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HealthPercentLosePerSecond: 1
 --- !u!1 &6049100611718255477
 GameObject:
   m_ObjectHideFlags: 0

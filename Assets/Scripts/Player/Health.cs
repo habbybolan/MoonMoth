@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour
+/*
+ * Attached to any object that has health and can be destroyed.
+ */
+public abstract class Health : MonoBehaviour
 {
     [SerializeField] private float m_currentHealth = 100;
     [SerializeField] private ParticleSystem m_deathParticles;

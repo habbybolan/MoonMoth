@@ -63,7 +63,6 @@ public class PlayerController : MonoBehaviour
         
         if (m_playerState == PLAYER_STATE.FLYING || m_playerState == PLAYER_STATE.DASHING || m_playerState == PLAYER_STATE.OBSTACLE_COLLIDED)
         {
-            
             m_PlayerMovement.HorizontalRotation(m_MovementInput.ReadValue<Vector2>().x);
             m_PlayerMovement.MoveAlongXYPlane(m_MovementInput.ReadValue<Vector2>());
         }
@@ -113,6 +112,7 @@ public class PlayerController : MonoBehaviour
         }   
     }
 
+
     private void DoDash(InputAction.CallbackContext obj)
     {
         if (m_playerState == PLAYER_STATE.FLYING)
@@ -137,7 +137,6 @@ public class PlayerController : MonoBehaviour
         FLYING,
         DODGING,
         DASHING,  
-        OBSTACLE_COLLIDED,
-        DAMAGED
+        OBSTACLE_COLLIDED
     }
 }
