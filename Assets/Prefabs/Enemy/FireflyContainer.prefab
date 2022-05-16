@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1558234895877433497}
   - component: {fileID: 1558234895877433502}
+  - component: {fileID: 1649497268981538213}
   m_Layer: 0
   m_Name: FireflyContainer
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1558234895877433496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.0064, y: 3.0064, z: 3.0064}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5617976549049454128}
@@ -46,6 +47,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4411f765c956b3b4b8fe6411554ba4dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_FireflyWalker: {fileID: 5617976549049454143}
+--- !u!114 &1649497268981538213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558234895877433496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf6a278b34587549a562aebb7d2cd05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FireflyWalker: {fileID: 5617976549049454143}
 --- !u!1 &1558234896668546474
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,10 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e406325bddfb94f95397f0f2e515eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  modes: 
+  m_Points: []
   isConstantSpeed: 1
 --- !u!1 &5617976549049454132
 GameObject:
@@ -125,7 +137,7 @@ Transform:
   m_GameObject: {fileID: 5617976549049454132}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.49579, y: 0.59458, z: 1}
+  m_LocalScale: {x: 1.5387338, y: 1.8453385, z: 3.1036}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1558234895877433497}
@@ -159,7 +171,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 00143a4a9dd113042a40f6f659f3baea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -206,7 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212b636dd09667343ad4af1d074a1fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemySplineCreator: {fileID: 1558234896668546472}
 --- !u!114 &5617976549049454143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64f7013efd42b1c49bca2111a0e4acf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Spline: {fileID: 1558234896668546472}
   m_Duration: 5
+  m_IsFollowingspline: 1
+  m_Spline: {fileID: 1558234896668546472}
   m_Speed: 5
+  m_DistanceOffsetFromPrev: 20
+  m_SensingRange: 100
+  m_speedCorrection: 0.25

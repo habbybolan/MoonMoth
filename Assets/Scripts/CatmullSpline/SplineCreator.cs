@@ -8,6 +8,7 @@ public abstract class SplineCreator : CatmullRomSpline
     protected int m_CurrFollowPointInTile;      // Index of the follow point inside the current tile
 
     private bool m_IsInitialized = false;
+    protected bool m_IsActive = true;
 
     public virtual void AddNewPoint()
     {
@@ -18,6 +19,7 @@ public abstract class SplineCreator : CatmullRomSpline
     // Initialize some points on the spline
     public void InitializeSplineAtHead()
     {
+        m_Points = null;
         m_CurrTile = TileManager.PropertyInstance.GetHead();
         m_CurrFollowPointInTile = 0;
 
@@ -34,10 +36,15 @@ public abstract class SplineCreator : CatmullRomSpline
         InitializeStartingPoints();
     }
 
+    public bool IsInitialized
+    {
+        get { return m_IsInitialized; }
+    }
+
     // Initialize spline with starting points to keep the walker sufficienctly behind the end of the spline
     private void InitializeStartingPoints()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             AddNewPoint();
         }
@@ -49,13 +56,13 @@ public abstract class SplineCreator : CatmullRomSpline
         m_CurrFollowPointInTile = 0;
     }
 
-    public Tile GetTileInfront(int index)
+    public LinkedListNode<Tile> GetTileInfront(int index)
     {
         LinkedListNode<Tile> curr = m_CurrTile;
         for (int i = 0; i < index; i++)
         {
             curr = curr.Next;
         }
-        return curr.Value;
+        return curr;
     }
 }

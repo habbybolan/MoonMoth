@@ -4,7 +4,8 @@ using UnityEngine;
 using System;
 
 public class Tile : MonoBehaviour
-{ 
+{
+    [SerializeField] private BoxCollider m_EndCollider;  
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
@@ -13,11 +14,19 @@ public class Tile : MonoBehaviour
 
     private Vector3 m_VecStartToCenter;
     private Vector3 m_VecCenterToEnd;
+    private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
 
     private void Awake()
     {
         m_VecStartToCenter = transform.position - transform.TransformPoint(m_StartPoint);
         m_VecCenterToEnd = transform.TransformPoint(m_EndPoint) - transform.position;
+    }
+
+    private void Start()
+    {
+        
+        // TODO: Find out how to add in editor when tile inspector enabled
+        m_EndCollider = GetComponent<BoxCollider>();
     }
 
     public void Reset()
@@ -30,7 +39,23 @@ public class Tile : MonoBehaviour
 
         m_EnemyPointSet = new List<EnemySetWrapper> { new EnemySetWrapper(new Vector3(0, 0, 0)) };
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerMovement m = other.GetComponent<PlayerMovement>();   
+        // if collided with PlayerMovement 
+        if (m != null)
+        {
+            m_IsTraversedByPlayer = true;
+        }
+    }
+
+    public void SetIsActive(bool IsActive)
+    {
+        gameObject.SetActive(IsActive);
+        if (IsActive) m_IsTraversedByPlayer = false;
+    }
+
     public float TileEndDistanceFromPlayer(CatmullWalker player)
     {
         return Vector3.Distance(transform.TransformPoint(m_EndPoint), player.transform.position);
@@ -164,6 +189,8 @@ public class Tile : MonoBehaviour
 
     public Vector3 VecStartToCenter { get { return m_VecStartToCenter; } }
     public Vector3 VecCenterToEnd { get { return m_VecCenterToEnd; } }
+
+    public bool IsTraversedByPlayer { get { return m_IsTraversedByPlayer;  } }
 
 
     public enum LOCATION_TYPES

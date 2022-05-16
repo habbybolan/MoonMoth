@@ -4,13 +4,13 @@ using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(PlayerSplineCreator))]
+[CustomEditor(typeof(SplineCreator), true)]
 public class CatmullRomInspector : Editor 
 {
 	protected const int stepsPerCurve = 10;
 	private const float directionScale = 0.5f;
 
-	protected PlayerSplineCreator spline;
+	protected SplineCreator spline;
 	protected Transform handleTransform;
 	protected Quaternion handleRotation;
 
@@ -19,35 +19,40 @@ public class CatmullRomInspector : Editor
 
 	private int selectedIndex = -1;
 
+	// Draw the GUI
 	private void OnSceneGUI()
 	{
-		spline = target as PlayerSplineCreator;
+		spline = target as SplineCreator;
 		handleTransform = spline.transform;
 		handleRotation = Tools.pivotRotation == PivotRotation.Local ?
 			handleTransform.rotation : Quaternion.identity;
 
-		Vector3 p0 = ShowPoint(0);
+		if (spline.PointCount > 2)
+        {
+			Vector3 p0 = ShowPoint(0);
 
-		for (int i = 1; i < spline.PointCount; i++)
-		{
+			for (int i = 1; i < spline.PointCount; i++)
+			{
+				Vector3 p1 = ShowPoint(i);
+				Handles.color = Color.gray;
+				Handles.DrawLine(p0, p1);
+				Handles.color = Color.white;
+				ShowCurve(i);
+				p0 = p1;
+			}
 
-			Vector3 p1 = ShowPoint(i);
-			Handles.color = Color.gray;
-			Handles.DrawLine(p0, p1);
-			Handles.color = Color.white;
-			ShowCurve(i);
-			p0 = p1;
-		}
-
-		ShowDirections();
+			ShowDirections();
+        }
 	}
 
+	// Show a specific curve by the the curve index, drawing a curve between the 2 points
 	private void ShowCurve(int curve)
 	{
 		Handles.color = Color.white;
 		int start = (curve - 1) * stepsPerCurve;
 		int steps = stepsPerCurve * spline.CurveCount;
 		Vector3 lineStart = spline.GetPoint(start / (float)steps);
+		// Get time t along the curve, using the number of steps and the curve index
 		for (int i = start + 1; i <= stepsPerCurve * (curve); i++)
 		{
 			Vector3 lineEnd = spline.GetPoint(i / (float)steps);
@@ -57,6 +62,7 @@ public class CatmullRomInspector : Editor
 		}
 	}
 
+	// Show the tangents of the spline
 	protected void ShowDirections()
 	{
 		Handles.color = Color.green;
@@ -72,7 +78,7 @@ public class CatmullRomInspector : Editor
 	}
 
 
-
+	// Show a point on the spline by index of the point
 	protected Vector3 ShowPoint(int index)
 	{
 		Vector3 point = handleTransform.TransformPoint(spline.GetControlPoint(index));
@@ -100,10 +106,10 @@ public class CatmullRomInspector : Editor
 		return point;
 	}
 
-
+	// Add button to inspector for adding new curve
 	public override void OnInspectorGUI()
 	{
-		spline = target as PlayerSplineCreator;
+		spline = target as SplineCreator;
 		if (selectedIndex >= 0 && selectedIndex < spline.PointCount)
 		{
 			DrawSelectedPointInspector();

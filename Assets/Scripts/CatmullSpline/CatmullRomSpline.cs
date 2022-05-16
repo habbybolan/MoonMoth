@@ -6,13 +6,13 @@ using System;
 public class CatmullRomSpline : MonoBehaviour
 {
     [SerializeField]
-    protected Vector3[] points;
-
-    [SerializeField]
-    private ControlPointMode[] modes;
+    protected Vector3[] m_Points;
 
     [SerializeField] private bool isConstantSpeed = true;
 
+    // Get the point at a time t along the entire spline, where t [0, 1] is the time on the spline
+    // Time is not constant along the curve.
+    //  - If curve A is longer than curve B, the time t difference from the start and center of the curve will be the same t amount
     public virtual Vector3 GetPoint(float t)
     {
         int i; // index of current curve
@@ -21,7 +21,7 @@ public class CatmullRomSpline : MonoBehaviour
         if (t >= 1f)
         {
             t = 1f;
-            i = points.Length - 2;
+            i = m_Points.Length - 2;
         }
         else
         {
@@ -43,12 +43,12 @@ public class CatmullRomSpline : MonoBehaviour
         return transform.TransformPoint(GetDirectionHelper(curve - 1, curve, t)).normalized;
     }
 
-
+    // Get the point on a specific curve at time t represented by the points at indexes ind0 and ind1
     private Vector3 GetPointHelper(int ind0, int ind1, float t)
     {
         Vector3 p0, p1;
-        p0 = points[ind0];
-        p1 = points[ind1];
+        p0 = m_Points[ind0];
+        p1 = m_Points[ind1];
 
         Vector3 m0, m1; //Tangents
 
@@ -61,13 +61,13 @@ public class CatmullRomSpline : MonoBehaviour
         }
         else
         {
-            m0 = p1 - points[ind0 - 1];
+            m0 = p1 - m_Points[ind0 - 1];
         }
 
         // m1
-        if (ind1 < points.Length - 2)
+        if (ind1 < m_Points.Length - 2)
         {
-            m1 = points[ind1 + 1] - p0;
+            m1 = m_Points[ind1 + 1] - p0;
         }
         else
         {
@@ -88,8 +88,8 @@ public class CatmullRomSpline : MonoBehaviour
         int ind0 = curve - 1;
         int ind1 = curve;
 
-        Vector3 p0 = points[ind0];
-        Vector3 p1 = points[ind1];
+        Vector3 p0 = m_Points[ind0];
+        Vector3 p1 = m_Points[ind1];
         Vector3 m0, m1; //Tangents
 
         // Tangent M[k] = (P[k+1] - P[k-1])
@@ -101,13 +101,13 @@ public class CatmullRomSpline : MonoBehaviour
         }
         else
         {
-            m0 = p1 - points[ind0 - 1];
+            m0 = p1 - m_Points[ind0 - 1];
         }
 
         // m1
-        if (ind1 < points.Length - 2)
+        if (ind1 < m_Points.Length - 2)
         {
-            m1 = points[ind1 + 1] - p0;
+            m1 = m_Points[ind1 + 1] - p0;
         }
         else
         {
@@ -120,6 +120,7 @@ public class CatmullRomSpline : MonoBehaviour
         return CatmullRom.GetCurveLength(p0, p1, m0, m1, 10);
     }
 
+    // Get the direction at a time t along the entire spline, where t [0, 1] is the time on the spline
     public virtual Vector3 GetDirection(float t)
     {
         int i; // index of current curve
@@ -128,7 +129,7 @@ public class CatmullRomSpline : MonoBehaviour
         if (t >= 1f)
         {
             t = 1f;
-            i = points.Length - 2;
+            i = m_Points.Length - 2;
         }
         else
         {
@@ -140,46 +141,43 @@ public class CatmullRomSpline : MonoBehaviour
         return transform.TransformPoint(GetDirectionHelper(i, i + 1, t)).normalized;
     }
 
-    public void Reset()
-    {
-        points = new Vector3[] {
-            new Vector3(0f, 0f, 0f),
-            new Vector3(0f, 0f, 1f)
-        };
-    }
-
     // Adding new curve to the spline to make it continuous
     public void AddCurve()
     {
-        Vector3 point = points[points.Length - 1];
-        Array.Resize(ref points, points.Length + 1);
+        Vector3 point = m_Points[m_Points.Length - 1];
+        Array.Resize(ref m_Points, m_Points.Length + 1);
         point.x += 20f;
-        points[points.Length - 1] = point;
+        m_Points[m_Points.Length - 1] = point;
     }
 
     public void AddPoint(Vector3 newPoint)
     {
         Vector3 localPoint = transform.InverseTransformPoint(newPoint);
-        Array.Resize(ref points, points.Length + 1);
-        points[points.Length - 1] = localPoint;
+        if (m_Points == null)
+        {
+            m_Points = new Vector3[] { };
+        }
+        Array.Resize(ref m_Points, m_Points.Length + 1);
+        
+        m_Points[m_Points.Length - 1] = localPoint;
     }
 
     // Move a point on the curve
     public void SetControlPoint(int index, Vector3 point)
     {
-        points[index] = point;
+        m_Points[index] = point;
     }
 
     public int PointCount
     {
-        get { return points.Length; }
+        get { return m_Points.Length; }
     }
 
     private Vector3 GetDirectionHelper(int ind0, int ind1, float t)
     {
         Vector3 p0, p1;
-        p0 = points[ind0];
-        p1 = points[ind1];
+        p0 = m_Points[ind0];
+        p1 = m_Points[ind1];
 
         Vector3 m0, m1; //Tangents
 
@@ -192,13 +190,13 @@ public class CatmullRomSpline : MonoBehaviour
         }
         else
         {
-            m0 = p1 - points[ind0 - 1];
+            m0 = p1 - m_Points[ind0 - 1];
         }
 
         // m1
-        if (ind1 < points.Length - 2)
+        if (ind1 < m_Points.Length - 2)
         {
-            m1 = points[ind1 + 1] - p0;
+            m1 = m_Points[ind1 + 1] - p0;
         }
         else
         {
@@ -213,14 +211,14 @@ public class CatmullRomSpline : MonoBehaviour
 
     public Vector3 GetControlPoint(int index)
     {
-        return points[index];
+        return m_Points[index];
     }
 
     public int CurveCount
     {
         get
         {
-            return (points.Length - 1);
+            return (m_Points.Length - 1);
         }
     }
 }

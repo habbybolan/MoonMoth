@@ -8,10 +8,16 @@ public class PlayerSplineCreator : SplineCreator
     public override void AddNewPoint()
     {
         base.AddNewPoint();
+        
         Tile currTile = m_CurrTile.Value;
+        Vector3 point = currTile.GetPlayerFollowPointWorld(m_CurrFollowPointInTile);
+        m_CurrFollowPointInTile++;
 
-        Vector3 point = currTile.GetPlayerFollowPointWorld(0);
         AddPoint(point);
-        GotoNextTile();
+        // reached all of player follow point sets, goto next tile
+        if (currTile.PlayerFollowPointsCount <= m_CurrFollowPointInTile)
+        {
+            GotoNextTile();
+        }
     }
 }

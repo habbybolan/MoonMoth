@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemySplineCreator : SplineCreator
 {
+    private void Start()
+    {
+        m_IsActive = false;
+    }
+
     public override void AddNewPoint()
     {
         base.AddNewPoint();
