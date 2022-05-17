@@ -137,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator PlayerDodge(System.Action callback, Vector2 vec2Move)
     {
+        // TODO: Cannot leave as only reading x, y values when angled tiles are added (will have to x, y relative to the player parent object)
         float inputX = vec2Move.x;
         float inputY = vec2Move.y;
         inputY = Mathf.Clamp(inputY, -m_MaxYValue, m_MaxYValue);
