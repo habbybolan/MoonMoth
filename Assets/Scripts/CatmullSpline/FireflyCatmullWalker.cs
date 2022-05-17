@@ -12,28 +12,20 @@ public class FireflyCatmullWalker : CatmullWalker
     [Range(0f, 1f)]
     [SerializeField] private float m_speedCorrection = .25f;
      
-    private bool m_IsActive;    // If the firefly has been within range of the player and starts moving along spline
     private int m_Offset = 0; // Current firefly offset number, 0 if oldest firefly spawned
 
     override protected void Start()
     {
-        m_IsActive = false;
         // Copy the base movement speed of the player
         m_Speed = PlayerManager.PropertyInstance.PlayerController.PlayerParent.Speed;
-        IsFollowSpline = false;
         m_Spline.InitializeSplineAtTile(PlayerManager.PropertyInstance.PlayerController.PlayerParent.spline.GetTileInfront(0));
         base.Start();
     }
 
     public override void TryMove()
     {
-        if (!m_IsActive)
-        {
-            CheckIsInRangeOfPlayer();
-            return;
-        }
-        UpdateSpeed();
         base.TryMove();
+        UpdateSpeed();
     }
 
     private void UpdateSpeed()
@@ -56,13 +48,9 @@ public class FireflyCatmullWalker : CatmullWalker
         return m_SensingRange + m_Offset * m_DistanceOffsetFromPrev; ;
     }
 
-    private void CheckIsInRangeOfPlayer()
+    public bool IsInRangeOfPlayer()
     {
-        if (DistanceFromPlayer() < TargetDistance())
-        {
-            m_IsActive = true;
-            IsFollowSpline = true;
-        }
+        return DistanceFromPlayer() < TargetDistance();
     }
 
     public int Offset { 

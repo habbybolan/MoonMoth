@@ -5,8 +5,6 @@ using UnityEngine;
 public class CatmullWalker : MonoBehaviour
 { 
     [SerializeField] protected float m_Duration = 5f;
-    
-    [SerializeField] protected bool m_IsFollowingspline = true;
     [SerializeField] protected SplineCreator m_Spline;
     [SerializeField] protected float m_Speed = 1;
 
@@ -24,11 +22,6 @@ public class CatmullWalker : MonoBehaviour
     // Called in controllers update method
     public virtual void TryMove()
     {
-        if (!m_IsFollowingspline)
-        {
-            return;
-        }
-
         if (!m_Spline.IsInitialized)
             m_Spline.InitializeSplineAtHead();
 
@@ -74,13 +67,6 @@ public class CatmullWalker : MonoBehaviour
             m_CurrCurve++;
         m_CurrCurveLength = m_Spline.GetCurveLength(m_CurrCurve);
     }
-
-    public bool IsFollowSpline 
-    {
-        get { return m_IsFollowingspline;  }
-        set { m_IsFollowingspline = value; }
-    }
-
 
     public SplineCreator spline
     {

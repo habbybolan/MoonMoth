@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Camera")]
     [Tooltip("Crosshair UI component")]
-    [SerializeField] private TextMeshProUGUI m_CrossHair;
+    [SerializeField] private RectTransform m_Crosshair;
     [Tooltip("Crosshair percent difference along y axis from the parent's origin to the control point's y location")]
     [Range(0, 1)]
     [SerializeField] private float m_CrosshairPercentY = 0.05f;
@@ -65,17 +65,10 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Camera z offset from the parent origin")]
     [SerializeField] private float m_CameraOffsetFromParent = -15;
 
-    [Header("Weapon")]
-    [Tooltip("WeaponBase component")]
-    [SerializeField] private WeaponBase m_Weapon;
-    [Tooltip("Offset forwards from the crosshair to shoot projectile towards on a missed shot (No Collider hit)")]
-    [SerializeField] private float m_ShotMissedOffset = 1000f;
-
     private Vector3 m_ControlPoint;         // Location of the controil point
     private Vector3 m_CurrentAngle;         // Currrent rotational angle in EulerAngles
     private float m_CurrControlSpeed;       // The current speed of the controller point movement
-    LayerMask playerMask;                   // Player mask
-    private float m_MaxYValue;
+    private float m_MaxYValue;              // Max input Y value for dodge, clamped by m_MaxYDegrees
     private Rigidbody m_Rigidbody;
 
     void Start()
@@ -90,7 +83,6 @@ public class PlayerMovement : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        playerMask = LayerMask.GetMask("Player");
 
         m_ControlPoint = transform.parent.InverseTransformPoint(Camera.main.ViewportToWorldPoint(new Vector3(.5f, .5f, -m_CameraOffsetFromParent)));
         m_ControlObject.transform.localPosition = m_ControlPoint;
@@ -132,17 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpdateCrossHair()
     {
-        m_CrossHair.transform.position = Camera.main.WorldToScreenPoint(
-            CrossHairPoint);
-    }
-
-    public IEnumerator Shooting()
-    {
-        while (true)
-        {
-            m_Weapon.Shoot(GetLocationToFireAt());
-            yield return null;
-        }
+        m_Crosshair.position = Camera.main.WorldToScreenPoint(CrossHairPoint);
     }
 
     public void TerrainCollision(ContactPoint contact)
@@ -155,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator PlayerDodge(System.Action callback, Vector2 vec2Move)
     {
+        // TODO: Cannot leave as only reading x, y values when angled tiles are added (will have to x, y relative to the player parent object)
         float inputX = vec2Move.x;
         float inputY = vec2Move.y;
         inputY = Mathf.Clamp(inputY, -m_MaxYValue, m_MaxYValue);
@@ -235,24 +218,6 @@ public class PlayerMovement : MonoBehaviour
         callback();
     }
 
-    private Vector3 GetLocationToFireAt()
-    {
-        Vector3 crossHairPoint = Camera.main.ScreenToWorldPoint(m_CrossHair.transform.position);
-        Vector3 crossHairOffset = Camera.main.ScreenToWorldPoint(m_CrossHair.transform.position + Vector3.forward);
-
-        Debug.DrawRay(crossHairPoint, crossHairOffset - crossHairPoint, Color.red);
-
-        RaycastHit hit;
-        if (Physics.Raycast(crossHairPoint, (crossHairOffset - crossHairPoint), out hit, Mathf.Infinity, ~playerMask))
-        {
-            return hit.point;
-        }
-        else
-        {
-            return crossHairPoint + (crossHairOffset - crossHairPoint).normalized * m_ShotMissedOffset;
-        }
-    }
-
     public Vector3 ControlPosition
     {
         get { return m_ControlPoint; }
@@ -266,6 +231,11 @@ public class PlayerMovement : MonoBehaviour
             float xOffset = (transform.parent.position.x - m_ControlObject.transform.position.x) * m_CrosshairPercentX;
             return new Vector3(m_ControlObject.transform.position.x + xOffset, m_ControlObject.transform.position.y + yOffset, transform.position.z);
         }
+    }
+
+    public Ray CrosshairScreenRay
+    {
+        get { return Camera.main.ScreenPointToRay(m_Crosshair.position);  }
     }
 
     public Vector3 CrossHairPointLocal

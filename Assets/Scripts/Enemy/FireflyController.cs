@@ -9,9 +9,41 @@ using UnityEngine;
 public class FireflyController : MonoBehaviour
 {
     [SerializeField] private FireflyCatmullWalker m_FireflyWalker;
+    [SerializeField] private FireflyGun m_Weapon;
+    [SerializeField] private FireflyHealth m_Health;
+
+    private FIREFLY_STATE m_State;
+
+    private void Start()
+    {
+        m_State = FIREFLY_STATE.WAITING;
+        m_Health.deathDelegate = Death;
+    }
 
     private void Update()
     {
+        if (m_State == FIREFLY_STATE.WAITING)
+            // Check if player is in range of waiting firefly
+            if (m_FireflyWalker.IsInRangeOfPlayer())
+                m_State = FIREFLY_STATE.ACTIVE;
+            else
+                return;
+
+        m_Weapon.ShootAtPlayer();
         m_FireflyWalker.TryMove();
+    }
+
+    public void Death()
+    {
+        Debug.Log("Firely killed");
+        FireflyManager.PropertyInstance.OnFireflyDeath(gameObject);
+        //  TODO:
+        //   - Drop light from firefly
+    }
+
+    enum FIREFLY_STATE
+    {
+        WAITING,
+        ACTIVE
     }
 }
