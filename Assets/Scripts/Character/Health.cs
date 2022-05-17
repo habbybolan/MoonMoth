@@ -31,9 +31,13 @@ public abstract class Health : MonoBehaviour
         RemoveHealth(m_HealthPercentLosePerSecond * Time.deltaTime);
     }
 
-    public virtual void Damage(float percent, DAMAGE_TYPE damageType = DAMAGE_TYPE.PROJECTILE, Projectile.PROJECTILE_EFFECTS projectileEffects = Projectile.PROJECTILE_EFFECTS.NORMAL) 
-    {   
-        RemoveHealth(percent);
+    public virtual void Damage(DamageInfo damageInfo) 
+    {
+        // prevent all things from hitting themselves
+        if (damageInfo.m_Instigator == damageInfo.m_Victim)
+            return;
+
+        RemoveHealth(damageInfo.m_Percent);
     }
 
     private void RemoveHealth(float healthToLose)
@@ -55,10 +59,4 @@ public abstract class Health : MonoBehaviour
         deathDelegate();
     }
 
-    public enum DAMAGE_TYPE
-    {
-        TERRAIN,
-        OBSTACLE,
-        PROJECTILE
-    }
 }

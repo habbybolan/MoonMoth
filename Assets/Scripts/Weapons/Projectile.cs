@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float m_DamageAmount = 5f;
     [SerializeField] protected Rigidbody m_rigidBody;
 
+    private GameObject m_Owner;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,13 +34,14 @@ public class Projectile : MonoBehaviour
         Health health = collision.gameObject.GetComponent<Health>();
         if (health != null)
         {
-            health.Damage(m_DamageAmount, Health.DAMAGE_TYPE.PROJECTILE);
+            DamageInfo damageInfo = new DamageInfo(m_DamageAmount, m_Owner, health.gameObject);
+            health.Damage(damageInfo);
         }
     }
 
-    public enum PROJECTILE_EFFECTS
-    {
-        NORMAL,
-        SLOW
+    public GameObject Owner 
+    { 
+        get { return m_Owner; }
+        set { m_Owner = value; }
     }
 }

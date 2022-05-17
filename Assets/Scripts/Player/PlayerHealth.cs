@@ -25,15 +25,15 @@ public class PlayerHealth : Health
         base.Start();
     }
 
-    public override void Damage(float percent, Health.DAMAGE_TYPE damageType = Health.DAMAGE_TYPE.PROJECTILE, Projectile.PROJECTILE_EFFECTS projectileEffects = Projectile.PROJECTILE_EFFECTS.NORMAL)
+    public override void Damage(DamageInfo damageInfo)
     {
         // Dont take any damage if Invulnerable
         if (healthState == HEALTH_STATE.INVULNERABLE)
             return;
 
         Debug.Log("Damage player");
-        base.Damage(percent, damageType);
-        if (damageType != DAMAGE_TYPE.TERRAIN)
+        base.Damage(damageInfo);
+        if (damageInfo.m_DamageType != DamageInfo.DAMAGE_TYPE.TERRAIN)
         {
             StartCoroutine(InvulnerabilityFrames());
         }
@@ -55,7 +55,7 @@ public class PlayerHealth : Health
         {
             // Deals with movement changes on terrain collision
             terrainCollisionDelegate(collision.contacts[0]);
-            Damage(m_TerrainDamageAmount, DAMAGE_TYPE.TERRAIN);
+            Damage(new DamageInfo(m_TerrainDamageAmount, terrain.gameObject, gameObject, DamageInfo.DAMAGE_TYPE.TERRAIN));
         }
     }
 
@@ -65,7 +65,7 @@ public class PlayerHealth : Health
         Obstacle obstacle = collision.gameObject.GetComponent<Obstacle>();
         if (obstacle != null)
         {
-            Damage(m_ObstacleDamageAmount, DAMAGE_TYPE.OBSTACLE);
+            Damage(new DamageInfo(m_ObstacleDamageAmount, obstacle.gameObject, gameObject, DamageInfo.DAMAGE_TYPE.OBSTACLE));
         }
     }
 

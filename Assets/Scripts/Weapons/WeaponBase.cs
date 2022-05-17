@@ -5,16 +5,13 @@ using UnityEngine;
 public class WeaponBase : MonoBehaviour
 {
     [SerializeField] protected float m_Cooldown = 0.25f;
-    [SerializeField] protected Projectile bullet;
+    [SerializeField] protected Projectile m_BulletPrefab;
 
     protected bool isCooldown = false;
 
-    public void Shoot(Vector3 fireAtLocation)
+    public void ShootPosition(Vector3 fireAtLocation)
     {
-        if (isCooldown)
-            return;
-        Instantiate(bullet, transform.position, Quaternion.LookRotation(fireAtLocation - transform.position));
-        StartCoroutine(WeaponCooldown());
+        ShootDirection(fireAtLocation - transform.position);
     }
 
     public void ShootDirection(Vector3 shootDirection)
@@ -22,7 +19,8 @@ public class WeaponBase : MonoBehaviour
         if (isCooldown)
             return;
 
-        Instantiate(bullet, transform.position, Quaternion.LookRotation(shootDirection));
+        Projectile projectileShot = Instantiate(m_BulletPrefab, transform.position, Quaternion.LookRotation(shootDirection));
+        projectileShot.Owner = gameObject;
         StartCoroutine(WeaponCooldown());
     }
 

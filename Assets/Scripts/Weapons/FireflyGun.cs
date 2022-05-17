@@ -12,6 +12,6 @@ public class FireflyGun : WeaponBase
     }
     public void ShootAtPlayer()
     {
-        Shoot(playerController.transform.position);
+        ShootPosition(playerController.transform.position);
     }    
 }
