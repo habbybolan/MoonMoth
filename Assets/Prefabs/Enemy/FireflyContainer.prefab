@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Duration: 5
   m_Spline: {fileID: 1558234896668546472}
   m_Speed: 5
-  m_DistanceOffsetFromPrev: 5
+  m_DistanceOffsetFromPrev: 10
   m_SensingRange: 15
   m_speedCorrection: 0.25
   m_IsIndependent: 0
@@ -260,7 +260,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!136 &5948399780124131391
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -319,6 +319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e28f026c7469346b5edb230898ae3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Cooldown: 1000
+  m_Cooldown: 1
   m_BulletPrefab: {fileID: 6535628969521129046, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
   m_WeaponOwner: {fileID: 6438522909048636053}
