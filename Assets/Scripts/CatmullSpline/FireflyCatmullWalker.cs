@@ -12,7 +12,7 @@ public class FireflyCatmullWalker : CatmullWalker
     [Range(0f, 1f)]
     [SerializeField] private float m_speedCorrection = .25f;
      
-    private int m_Offset = 0; // Current firefly offset number, 0 if oldest firefly spawned
+    private float m_Offset = 0; // Current firefly offset number, 0 if oldest firefly spawned
 
     override protected void Start()
     {
@@ -53,7 +53,18 @@ public class FireflyCatmullWalker : CatmullWalker
         return DistanceFromPlayer() < TargetDistance();
     }
 
-    public int Offset { 
+    public void Decrementoffset()
+    {
+        if (m_Offset == 0)
+        {
+            Debug.LogWarning("Cannot decrement offset when already at 0");
+            return;
+        }
+            
+        m_Offset--;
+    }
+
+    public float Offset { 
         get { return m_Offset;  } 
         set { m_Offset = value; }
     }

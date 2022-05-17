@@ -66,12 +66,18 @@ public class FireflyManager : MonoBehaviour
 
     public void OnFireflyDeath(GameObject fireflyGameObject)
     {
+        bool isDeleted = false;
         for (int i = 0; i < m_FireflyList.Count; i++)
         {
-            if (m_FireflyList[i].gameObject == fireflyGameObject)
+            // Decrement offset of all fireflies after one killed
+            if (isDeleted)
+                m_FireflyList[i].FireflyWalker.Decrementoffset();
+
+            if (GameObject.ReferenceEquals(m_FireflyList[i].gameObject, fireflyGameObject))
             {
                 Destroy(fireflyGameObject);
                 m_FireflyList.RemoveAt(i);
+                isDeleted = true;
             }
         }
         // TODO:

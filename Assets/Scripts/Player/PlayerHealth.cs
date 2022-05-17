@@ -31,7 +31,6 @@ public class PlayerHealth : Health
         if (healthState == HEALTH_STATE.INVULNERABLE)
             return;
 
-        Debug.Log("Damage player");
         base.Damage(damageInfo);
         if (damageInfo.m_DamageType != DamageInfo.DAMAGE_TYPE.TERRAIN)
         {
