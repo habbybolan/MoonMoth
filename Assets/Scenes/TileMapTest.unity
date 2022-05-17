@@ -488,7 +488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7576343698478518934, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_isPlayerInvincible
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7576343698478518936, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_BulletPrefab
