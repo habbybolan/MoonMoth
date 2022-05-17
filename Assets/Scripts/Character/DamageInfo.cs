@@ -19,7 +19,7 @@ public class DamageInfo
         m_HitEffect = hitEffect;
     }
 
-
+    // Type of damage object that caused damage
     public enum DAMAGE_TYPE
     {
         TERRAIN,
@@ -27,6 +27,7 @@ public class DamageInfo
         PROJECTILE
     }
      
+    // special effect damage type has
     public enum HIT_EFFECT
     {
         NORMAL,

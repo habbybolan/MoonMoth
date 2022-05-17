@@ -8,12 +8,10 @@ public class PlayerWeapon : WeaponBase
     [SerializeField] private float m_ShotMissedOffset = 1000f;
 
     private PlayerController m_Controller;      // Player Controller
-    LayerMask playerMask;                       // Player mask
 
     private void Start()
     {
         m_Controller = PlayerManager.PropertyInstance.PlayerController;
-        playerMask = LayerMask.GetMask("Player");
     }
 
     public IEnumerator Shooting()

@@ -34,7 +34,8 @@ public abstract class Health : MonoBehaviour
     public virtual void Damage(DamageInfo damageInfo) 
     {
         // prevent all things from hitting themselves
-        if (damageInfo.m_Instigator == damageInfo.m_Victim)
+        if (damageInfo.m_Instigator == damageInfo.m_Victim || 
+            damageInfo.m_Instigator.tag == damageInfo.m_Victim.tag)
             return;
 
         RemoveHealth(damageInfo.m_Percent);

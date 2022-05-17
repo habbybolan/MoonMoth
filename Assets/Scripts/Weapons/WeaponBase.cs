@@ -7,6 +7,9 @@ public class WeaponBase : MonoBehaviour
     [SerializeField] protected float m_Cooldown = 0.25f;
     [SerializeField] protected Projectile m_BulletPrefab;
 
+    // Owner that contains the tag (the 'team' they are on)
+    [SerializeField] protected Health m_WeaponOwner;
+
     protected bool isCooldown = false;
 
     public void ShootPosition(Vector3 fireAtLocation)
@@ -20,7 +23,7 @@ public class WeaponBase : MonoBehaviour
             return;
 
         Projectile projectileShot = Instantiate(m_BulletPrefab, transform.position, Quaternion.LookRotation(shootDirection));
-        projectileShot.Owner = gameObject;
+        projectileShot.Owner = m_WeaponOwner.gameObject;
         StartCoroutine(WeaponCooldown());
     }
 

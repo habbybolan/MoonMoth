@@ -567,7 +567,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Cooldown: 0.25
-  bullet: {fileID: 2130856289903436801, guid: 117e17bac98cb2d4691674ba32cfb26c, type: 3}
+  m_BulletPrefab: {fileID: 2130856289903436801, guid: 117e17bac98cb2d4691674ba32cfb26c, type: 3}
+  m_WeaponOwner: {fileID: 7576343698478518934}
   m_ShotMissedOffset: 1000
 --- !u!1001 &7576343697687589138
 PrefabInstance:
@@ -635,6 +636,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}
       propertyPath: m_Name
       value: moth_body
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}
