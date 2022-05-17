@@ -55,6 +55,22 @@ public class PlayerController : MonoBehaviour
         playerInput.Player.Dash.Enable();
     }
 
+    private void OnDisable()
+    {
+        // Shoot
+        playerInput.Player.Fire.performed -= DoFire;
+        playerInput.Player.Fire.canceled -= StopFire;
+        playerInput.Player.Fire.Disable();
+
+        // Dodge
+        playerInput.Player.Dodge.performed -= DoDodge;
+        playerInput.Player.Dodge.Disable();
+
+        // Dash
+        playerInput.Player.Dash.performed -= DoDash;
+        playerInput.Player.Dash.Disable();
+    }
+
     // Main Update controller for all Player components, Dealing with actions/effects that happen each frame
     void Update()
     {
