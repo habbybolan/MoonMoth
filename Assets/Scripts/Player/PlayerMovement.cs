@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void TerrainCollision(ContactPoint contact)
     {
-        Vector3 vecTranslate = new Vector3(contact.normal.x, contact.normal.y, 0).normalized * 10f * -1;
+        Vector3 vecTranslate = new Vector3(contact.normal.x, contact.normal.y, 0).normalized * 3f * -1;
         m_ControlPoint += vecTranslate;
         m_ControlObject.transform.localPosition = m_ControlPoint;
         transform.localPosition += vecTranslate;
