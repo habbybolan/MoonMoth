@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FireflyWalker: {fileID: 5617976549049454143}
   m_Weapon: {fileID: 7657986405921782291}
-  m_Health: {fileID: 299311464389059574}
+  m_Health: {fileID: 6438522909048636053}
 --- !u!1 &1558234896668546474
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,10 +120,11 @@ GameObject:
   - component: {fileID: 5617976549049454128}
   - component: {fileID: 5617976549049454129}
   - component: {fileID: 5617976549049454130}
-  - component: {fileID: 5617976549049454131}
   - component: {fileID: 5617976549049454141}
   - component: {fileID: 5617976549049454143}
-  - component: {fileID: 299311464389059574}
+  - component: {fileID: 6438522909048636053}
+  - component: {fileID: 5867213276493437872}
+  - component: {fileID: 5948399780124131391}
   m_Layer: 0
   m_Name: Firefly
   m_TagString: Enemy
@@ -197,19 +198,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5617976549049454131
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5617976549049454132}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.69
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5617976549049454141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +228,8 @@ MonoBehaviour:
   m_DistanceOffsetFromPrev: 5
   m_SensingRange: 15
   m_speedCorrection: 0.25
---- !u!114 &299311464389059574
+  m_IsIndependent: 0
+--- !u!114 &6438522909048636053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,6 +245,36 @@ MonoBehaviour:
   m_deathParticles: {fileID: 0}
   m_deathParticlesDuration: 1
   m_HealthPercentLosePerSecond: 1
+--- !u!54 &5867213276493437872
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5617976549049454132}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1
+--- !u!136 &5948399780124131391
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5617976549049454132}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6049100611718255477
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6049100611718255477}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.947287}
+  m_LocalPosition: {x: 0, y: 0, z: -1.928}
   m_LocalScale: {x: 0.649885, y: 0.54190594, z: 0.32220647}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -300,6 +319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e28f026c7469346b5edb230898ae3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Cooldown: 0.75
+  m_Cooldown: 1000
   m_BulletPrefab: {fileID: 6535628969521129046, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
-  m_WeaponOwner: {fileID: 299311464389059574}
+  m_WeaponOwner: {fileID: 6438522909048636053}

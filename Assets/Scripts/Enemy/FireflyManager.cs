@@ -40,6 +40,7 @@ public class FireflyManager : MonoBehaviour
             return;
 
         // Spawn new firefly
+
         FireflyContainer fireflyContainer = Instantiate(m_FireflyPrefab);
         fireflyContainer.FireflyWalker.Offset = m_FireflyList.Count;
         m_FireflyList.Add(fireflyContainer);

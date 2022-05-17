@@ -246,8 +246,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FireflyPrefab: {fileID: 1558234895877433502, guid: eaa692f3dd7bc0d43a835960379f8981, type: 3}
-  m_DelayToSpawn: 4
-  m_FireflyLimit: 3
+  m_DelayToSpawn: 1
+  m_FireflyLimit: 1
 --- !u!114 &951211379
 MonoBehaviour:
   m_ObjectHideFlags: 0
