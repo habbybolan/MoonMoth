@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -212,8 +212,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TilePrefabs:
+  - {fileID: 8136119699854392509, guid: 8d70444a95e53fc44a7f0ab62b918fb7, type: 3}
+  - {fileID: 2366708732479644673, guid: 249b2f286bd7e7f46898630a60700eac, type: 3}
   - {fileID: 8136119699854392509, guid: 3fb7a093bd87b3a4b9f12416619977c6, type: 3}
-  m_DistanceToPlaceTile: 1000
+  - {fileID: -9129767675161248748, guid: 1b765c3a851b20d42b21591835a40eb5, type: 3}
+  m_DistanceToPlaceTile: 500
   m_DistanceToDeleteTile: 50
 --- !u!4 &951211377
 Transform:
@@ -242,8 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123ba1257a1eb3d46be4571d579370be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FireflyPrefab: {fileID: 1558234895877433502, guid: eaa692f3dd7bc0d43a835960379f8981, type: 3}
-  m_DelayToSpawn: 4
+  m_FireflyPrefab: {fileID: 4206230536891125252, guid: add9e2afb9114954f86ca2dea61cb8a2, type: 3}
+  m_DelayToSpawn: 10
   m_FireflyLimit: 3
 --- !u!114 &951211379
 MonoBehaviour:
@@ -401,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Speed
-      value: 50
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Spline
@@ -459,10 +462,58 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_DodgeSpeedX
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_DodgeSpeedY
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_DodgeDuration
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_BaseControlSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_CrosshairPercentX
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_CameraOffsetFromParent
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576343698478518934, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_isPlayerInvincible
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7576343698478518936, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_BulletPrefab
       value: 
       objectReference: {fileID: 2130856289903436801, guid: 117e17bac98cb2d4691674ba32cfb26c, type: 3}
+    - target: {fileID: 7975361531800803065, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.0172491
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975361531800803065, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.0172491
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975361531800803065, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.0172491
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975361531800803065, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.055041
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975361531800803065, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.080329
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3879067760889582182, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}

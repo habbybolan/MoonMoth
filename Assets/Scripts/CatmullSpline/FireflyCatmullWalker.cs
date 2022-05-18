@@ -11,20 +11,32 @@ public class FireflyCatmullWalker : CatmullWalker
     [Tooltip("The speed multiplier to correct the firefly being too far/close to player")]
     [Range(0f, 1f)]
     [SerializeField] private float m_speedCorrection = .25f;
+    [SerializeField] private bool m_IsIndependent = false;
      
-    private int m_Offset = 0; // Current firefly offset number, 0 if oldest firefly spawned
+    private float m_Offset = 0; // Current firefly offset number, 0 if oldest firefly spawned
 
     override protected void Start()
     {
         // Copy the base movement speed of the player
         m_Speed = PlayerManager.PropertyInstance.PlayerController.PlayerParent.Speed;
-        m_Spline.InitializeSplineAtTile(PlayerManager.PropertyInstance.PlayerController.PlayerParent.spline.GetTileInfront(0));
-        base.Start();
+        if (!m_IsIndependent)
+        {
+            m_Spline.InitializeSplineAtTile(PlayerManager.PropertyInstance.PlayerController.PlayerParent.spline.GetTileInfront(0));
+            base.Start();
+        }
+        
     }
 
     public override void TryMove()
     {
+        if (m_IsIndependent)
+        {
+            transform.Translate(Vector3.forward * -15 * Time.deltaTime);
+            return;
+        }
+
         base.TryMove();
+        
         UpdateSpeed();
     }
 
@@ -53,7 +65,18 @@ public class FireflyCatmullWalker : CatmullWalker
         return DistanceFromPlayer() < TargetDistance();
     }
 
-    public int Offset { 
+    public void Decrementoffset()
+    {
+        if (m_Offset == 0)
+        {
+            Debug.LogWarning("Cannot decrement offset when already at 0");
+            return;
+        }
+            
+        m_Offset--;
+    }
+
+    public float Offset { 
         get { return m_Offset;  } 
         set { m_Offset = value; }
     }

@@ -10,7 +10,7 @@ public class FireflyController : MonoBehaviour
 {
     [SerializeField] private FireflyCatmullWalker m_FireflyWalker;
     [SerializeField] private FireflyGun m_Weapon;
-    [SerializeField] private FireflyHealth m_Health;
+    [SerializeField] private Health m_Health;
 
     private FIREFLY_STATE m_State;
 

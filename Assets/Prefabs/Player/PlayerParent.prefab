@@ -663,7 +663,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!136 &153797320
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -780,6 +780,7 @@ MonoBehaviour:
   m_InvincibilityDuration: 1
   m_TerrainDamageAmount: 5
   m_ObstacleDamageAmount: 5
+  m_isPlayerInvincible: 0
 --- !u!4 &7975361531800803065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}

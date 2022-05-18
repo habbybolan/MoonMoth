@@ -12,7 +12,8 @@ public class PlayerHealth : Health
     [Range(0f, 100f)]
     [SerializeField] private float m_TerrainDamageAmount = 5f;
     [Range(0f, 100f)]
-    [SerializeField] private float m_ObstacleDamageAmount = 5f; 
+    [SerializeField] private float m_ObstacleDamageAmount = 5f;
+    [SerializeField] private bool m_isPlayerInvincible = false;
     
     private HEALTH_STATE healthState;       // If the player can be damaged or not by non-terrain damage types
 
@@ -27,11 +28,13 @@ public class PlayerHealth : Health
 
     public override void Damage(DamageInfo damageInfo)
     {
+        if (m_isPlayerInvincible)
+            return;
+
         // Dont take any damage if Invulnerable
         if (healthState == HEALTH_STATE.INVULNERABLE)
             return;
 
-        Debug.Log("Damage player");
         base.Damage(damageInfo);
         if (damageInfo.m_DamageType != DamageInfo.DAMAGE_TYPE.TERRAIN)
         {
