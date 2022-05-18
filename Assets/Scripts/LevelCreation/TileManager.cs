@@ -10,7 +10,7 @@ public class TileManager : MonoBehaviour
     [SerializeField] private float m_DistanceToPlaceTile = 200f;
     [SerializeField] private float m_DistanceToDeleteTile = 50f;
 
-    private Tile[] m_PoolTiles = new Tile[30];
+    private Tile[] m_PoolTiles = new Tile[40];
     private LinkedList<Tile> m_VisibleTiles = new LinkedList<Tile>();
 
     public static TileManager PropertyInstance

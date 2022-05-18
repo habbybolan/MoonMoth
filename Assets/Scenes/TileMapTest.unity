@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123ba1257a1eb3d46be4571d579370be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FireflyPrefab: {fileID: 1558234895877433502, guid: eaa692f3dd7bc0d43a835960379f8981, type: 3}
+  m_FireflyPrefab: {fileID: 4206230536891125252, guid: add9e2afb9114954f86ca2dea61cb8a2, type: 3}
   m_DelayToSpawn: 10
   m_FireflyLimit: 3
 --- !u!114 &951211379
@@ -488,7 +488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7576343698478518934, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_isPlayerInvincible
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7576343698478518936, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_BulletPrefab
