@@ -64,6 +64,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_CrosshairPercentX = 0.05f;
     [Tooltip("Camera z offset from the parent origin")]
     [SerializeField] private float m_CameraOffsetFromParent = -15;
+    [Tooltip("Initial Y offset of crosshair")]
+    [SerializeField] private float m_InitialYCrosshairOffset = 1f; 
 
     private Vector3 m_ControlPoint;         // Location of the controil point
     private Vector3 m_CurrentAngle;         // Currrent rotational angle in EulerAngles
@@ -229,7 +231,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float yOffset = (transform.parent.position.y - m_ControlObject.transform.position.y) * m_CrosshairPercentY;
             float xOffset = (transform.parent.position.x - m_ControlObject.transform.position.x) * m_CrosshairPercentX;
-            return new Vector3(m_ControlObject.transform.position.x + xOffset, m_ControlObject.transform.position.y + yOffset, transform.position.z);
+            return new Vector3(m_ControlObject.transform.position.x + xOffset, m_ControlObject.transform.position.y + yOffset + m_InitialYCrosshairOffset, transform.position.z);
         }
     }
 

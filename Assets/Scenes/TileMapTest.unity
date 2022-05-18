@@ -486,6 +486,10 @@ PrefabInstance:
       propertyPath: m_CameraOffsetFromParent
       value: -7
       objectReference: {fileID: 0}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_InitialYCrosshairOffset
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7576343698478518934, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_isPlayerInvincible
       value: 0
