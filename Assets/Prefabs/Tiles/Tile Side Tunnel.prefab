@@ -2090,6 +2090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4740359711817066311}
   - component: {fileID: 8136119699854392509}
+  - component: {fileID: 8006055771059123504}
   m_Layer: 0
   m_Name: Tile Side Tunnel
   m_TagString: Untagged
@@ -2186,6 +2187,19 @@ MonoBehaviour:
   - EnemyPointSet:
     - {x: 8.757856, y: 7.1050487, z: -6.1990013}
     - {x: 2.9643817, y: 8.576365, z: -6.1990013}
+--- !u!65 &8006055771059123504
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3701864349297677241}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12, y: 14.88, z: 1}
+  m_Center: {x: 6.44, y: 12.3, z: -33}
 --- !u!1 &3721584036948859882
 GameObject:
   m_ObjectHideFlags: 0

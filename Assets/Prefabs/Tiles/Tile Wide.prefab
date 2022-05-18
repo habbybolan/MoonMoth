@@ -2376,6 +2376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4740359711817066311}
   - component: {fileID: -9129767675161248748}
+  - component: {fileID: 5525120407225678411}
   m_Layer: 0
   m_Name: Tile Wide
   m_TagString: Untagged
@@ -2486,6 +2487,19 @@ MonoBehaviour:
     - {x: -15.313805, y: 15.270503, z: -9.868429}
   - EnemyPointSet:
     - {x: -19.072044, y: 12.228996, z: -44.02621}
+--- !u!65 &5525120407225678411
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3701864349297677241}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.44, y: 15.5, z: 1}
+  m_Center: {x: -19.49, y: 15.42, z: -60.35}
 --- !u!1 &3721584036948859882
 GameObject:
   m_ObjectHideFlags: 0

@@ -2284,6 +2284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4740359711817066311}
   - component: {fileID: 2366708732479644673}
+  - component: {fileID: 4908214944122680364}
   m_Layer: 0
   m_Name: Tile Narrow
   m_TagString: Untagged
@@ -2385,6 +2386,19 @@ MonoBehaviour:
     - {x: 7.0673695, y: 9.447985, z: -12.999704}
   - EnemyPointSet:
     - {x: -0.43711758, y: 7.758523, z: -29.75727}
+--- !u!65 &4908214944122680364
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3701864349297677241}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.56, y: 15.01, z: 1}
+  m_Center: {x: 1.03, y: 8.03, z: -41.6}
 --- !u!1 &3721584036948859882
 GameObject:
   m_ObjectHideFlags: 0
