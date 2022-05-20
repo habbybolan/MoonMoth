@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float m_DamageAmount = 5f;
     [SerializeField] protected Rigidbody m_rigidBody;
 
-    private GameObject m_Owner;
+    protected GameObject m_Owner;
 
     // Start is called before the first frame update
     void Start()
