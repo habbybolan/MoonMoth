@@ -13,10 +13,10 @@ public class FireflyController : CharacterController<FireflyHealth>
 
     private FIREFLY_STATE m_State;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         m_State = FIREFLY_STATE.WAITING;
-        m_Health.deathDelegate = Death;
     }
 
     private void Update()

@@ -17,9 +17,9 @@ public class SpiderController : CharacterController<SpiderHealth>
         // TODO:
     }
 
-    private void Start()
+    protected override void Start()
     {
-        // TODO:
+        base.Start();
     }
 
     private void Update()

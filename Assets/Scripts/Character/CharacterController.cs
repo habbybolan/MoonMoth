@@ -10,7 +10,7 @@ public abstract class CharacterController<T> : MonoBehaviour where T : Health
 
     protected virtual void Start()
     {
-        
+        m_Health.deathDelegate = Death;
     }
 
     protected abstract void ApplyEffect(DamageInfo.HIT_EFFECT effect);

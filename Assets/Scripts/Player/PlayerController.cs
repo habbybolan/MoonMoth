@@ -26,10 +26,10 @@ public class PlayerController : CharacterController<PlayerHealth>
         playerInput = new InputActions();
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         m_playerState = PLAYER_ACTION_STATE.FLYING;
-        m_Health.deathDelegate = Death;
         m_Health.terrainCollisionDelegate = OnTerrainCollision;
 
     }
