@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 951211376}
   - component: {fileID: 951211378}
   - component: {fileID: 951211379}
+  - component: {fileID: 951211380}
   m_Layer: 0
   m_Name: = Manager
   m_TagString: Untagged
@@ -207,6 +208,7 @@ MonoBehaviour:
   - {fileID: -9129767675161248748, guid: 1b765c3a851b20d42b21591835a40eb5, type: 3}
   m_DistanceToPlaceTile: 500
   m_DistanceToDeleteTile: 50
+  m_TilePoolSize: 40
 --- !u!4 &951211377
 Transform:
   m_ObjectHideFlags: 0
@@ -250,6 +252,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerController: {fileID: 5117766106858986937}
+--- !u!114 &951211380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951211375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba38030926a47841ae78c2e83a630a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SpiderPrefab: {fileID: 4211784419857639165, guid: 614c253834c29d24595c1a26d9802af3, type: 3}
 --- !u!1 &1286058212
 GameObject:
   m_ObjectHideFlags: 0

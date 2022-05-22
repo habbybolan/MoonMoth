@@ -46,7 +46,7 @@ public class TileInspector : Editor
         ShowEndPoint(false);
 
         // Create buttons for all Spider spawn points
-        for (int i = 0; i < tile.SpiderSpawns.Count; i++)
+        for (int i = 0; i < tile.GetSpiderSpawnCount(); i++)
         {
             ShowSpiderSpawns(i);
         }

@@ -11,6 +11,9 @@ public class TileManager : MonoBehaviour
     [SerializeField] private float m_DistanceToDeleteTile = 50f;
     [SerializeField] private int m_TilePoolSize = 40;
 
+    public delegate void TileAddedDelegate(Tile addedTile); 
+    public TileAddedDelegate d_TileAddedDelegate;  
+    
     private Tile[] m_PoolTiles;
     private LinkedList<Tile> m_VisibleTiles = new LinkedList<Tile>();
 
@@ -83,6 +86,8 @@ public class TileManager : MonoBehaviour
             Vector3 newPos = lastCreated.EndPointWorld + newTile.VecStartToCenter;
             newTile.transform.position = newPos;
         }
+        // notify delegate a tile was created
+        d_TileAddedDelegate(newTile);
     }
 
     private Tile FindAvailableTile()

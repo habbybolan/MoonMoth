@@ -17,7 +17,7 @@ public abstract class Health : MonoBehaviour
     private float m_CurrentHealth;
 
     public delegate void DeathDelegate();
-    public DeathDelegate deathDelegate;
+    public DeathDelegate d_DeathDelegate; 
 
     public float HealthPercentage => (float)m_CurrentHealth / m_MaxHealth;
 
@@ -58,7 +58,7 @@ public abstract class Health : MonoBehaviour
             Transform currentTransform = transform;
             Destroy(Instantiate(m_deathParticles, currentTransform.position, currentTransform.rotation), m_deathParticlesDuration);
         }
-        deathDelegate();
+        d_DeathDelegate();
     }
 
 }

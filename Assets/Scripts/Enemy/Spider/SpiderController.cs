@@ -6,6 +6,16 @@ public class SpiderController : CharacterController<SpiderHealth>
 {
     [SerializeField] private SpiderWebHealth m_SpiderWebHealth;
     [SerializeField] private SpiderMovement m_SpiderMovement;
+    
+    protected override void Start()
+    {
+        base.Start();
+    }
+
+    private void Update()
+    {
+        // TODO:
+    }
 
     public override void Death()
     {
@@ -17,13 +27,5 @@ public class SpiderController : CharacterController<SpiderHealth>
         // TODO:
     }
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
-    private void Update()
-    {
-        // TODO:
-    }
+    
 }

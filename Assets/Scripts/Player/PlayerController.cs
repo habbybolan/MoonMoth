@@ -31,7 +31,6 @@ public class PlayerController : CharacterController<PlayerHealth>
         base.Start();
         m_playerState = PLAYER_ACTION_STATE.FLYING;
         m_Health.terrainCollisionDelegate = OnTerrainCollision;
-
     }
 
     private void OnEnable()

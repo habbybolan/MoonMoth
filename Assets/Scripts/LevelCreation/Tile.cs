@@ -6,6 +6,7 @@ using System;
 public class Tile : MonoBehaviour
 {
     [SerializeField] private BoxCollider m_EndCollider;  
+
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
@@ -25,9 +26,12 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
-        
-        // TODO: Find out how to add in editor when tile inspector enabled
         m_EndCollider = GetComponent<BoxCollider>();
+
+        foreach (Vector3 spawn in m_SpiderSpawns)
+        {
+
+        }
     }
 
     public void Reset()
@@ -136,6 +140,10 @@ public class Tile : MonoBehaviour
             throw new System.Exception("Spider list already empty");
         m_SpiderSpawns.RemoveAt(m_SpiderSpawns.Count - 1);
     }
+    public int GetSpiderSpawnCount()
+    {
+        return m_SpiderSpawns.Count;
+    }
 
     public int PlayerFollowPointsCount 
     { 
@@ -198,6 +206,12 @@ public class Tile : MonoBehaviour
         if (index >= m_SpiderSpawns.Count || index < 0)
             throw new System.Exception("Not a valid index in m_SpiderSpawns");
         return m_SpiderSpawns[index];
+    }
+    public Vector3 GetSpiderSpawnWorld(int index)
+    {
+        if (index >= m_SpiderSpawns.Count || index < 0)
+            throw new System.Exception("Not a valid index in m_SpiderSpawns");
+        return transform.TransformPoint(m_SpiderSpawns[index]);
     }
     public void SetSpiderSpawn(int index, Vector3 point)
     {
