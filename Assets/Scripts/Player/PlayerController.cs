@@ -95,6 +95,11 @@ public class PlayerController : CharacterController<PlayerHealth>
 
         m_PlayerMovement.TerrainCollision(contact);
     }
+
+    public float DistanceFromPlayer(Vector3 pointToCompare)
+    {
+        return Vector3.Distance(pointToCompare, transform.position);
+    }
    
 
     private void DoFire(InputAction.CallbackContext obj)

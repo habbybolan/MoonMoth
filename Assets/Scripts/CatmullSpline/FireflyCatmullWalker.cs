@@ -52,8 +52,7 @@ public class FireflyCatmullWalker : CatmullWalker
 
     private float DistanceFromPlayer()
     {
-        Vector3 PlayerPos = PlayerManager.PropertyInstance.PlayerController.PlayerParent.transform.position;
-        return Vector3.Distance(PlayerPos, transform.position);
+        return PlayerManager.PropertyInstance.PlayerController.DistanceFromPlayer(transform.position);
     }
 
     private float TargetDistance()
