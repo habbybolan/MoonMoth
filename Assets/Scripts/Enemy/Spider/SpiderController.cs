@@ -8,6 +8,8 @@ public class SpiderController : CharacterController<SpiderHealth>
     [SerializeField] private SpiderMovement m_SpiderMovement;
     [SerializeField] private SpiderWeapon m_SpiderWeapon;
     [SerializeField] private float m_ShootDistance = 50f;
+
+    private int m_TileID;   // ID of the tile the spider spawned on, used for deleting spiders when tile deleted
     
     protected override void Start()
     {
@@ -22,11 +24,9 @@ public class SpiderController : CharacterController<SpiderHealth>
         }
     }
 
-    
-
     public override void Death()
     {
-        // TODO:
+        SpiderManager.PropertyInstance.OnSpiderDeath(gameObject);
     }
 
     protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)
@@ -34,5 +34,10 @@ public class SpiderController : CharacterController<SpiderHealth>
         // TODO:
     }
 
+    public int TileID
+    {
+        get { return m_TileID; }
+        set { m_TileID = value; }
+    }
     
 }

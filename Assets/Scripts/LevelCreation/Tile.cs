@@ -5,18 +5,19 @@ using System;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private BoxCollider m_EndCollider;  
+    [SerializeField] private BoxCollider m_EndCollider;
 
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
-    
+
     public List<Vector3> m_SpiderSpawns;
     public List<EnemySetWrapper> m_EnemyPointSet;
 
     private Vector3 m_VecStartToCenter;
     private Vector3 m_VecCenterToEnd;
     private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
+    private int m_ID;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
+        m_ID = TileManager.GetNewID();
         m_EndCollider = GetComponent<BoxCollider>();
 
         foreach (Vector3 spawn in m_SpiderSpawns)
@@ -49,7 +51,7 @@ public class Tile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerMovement m = other.GetComponent<PlayerMovement>();   
+        PlayerMovement m = other.GetComponent<PlayerMovement>();
         // if collided with PlayerMovement 
         if (m != null)
         {
@@ -90,7 +92,7 @@ public class Tile : MonoBehaviour
 
     public void AddEnemyPointSet()
     {
-        m_EnemyPointSet.Add(new EnemySetWrapper(m_EnemyPointSet[m_EnemyPointSet.Count - 1].EnemyPointSet[0] + Vector3.forward * 2 ));
+        m_EnemyPointSet.Add(new EnemySetWrapper(m_EnemyPointSet[m_EnemyPointSet.Count - 1].EnemyPointSet[0] + Vector3.forward * 2));
     }
 
     public void RemoveEnemyPointSet()
@@ -106,20 +108,20 @@ public class Tile : MonoBehaviour
         set.Add(set[set.Count - 1] + Vector3.left * 2);
     }
 
-    public void RemovePointFromEnemySet(int setIndex)  
+    public void RemovePointFromEnemySet(int setIndex)
     {
         List<Vector3> set = m_EnemyPointSet[setIndex].EnemyPointSet;
         if (set.Count <= 1)
             throw new Exception("Cannot have an empty enemy points set");
         set.RemoveAt(set.Count - 1);
     }
-     
+
     public void SetPointInEnemySet(int setIndex, int pointIndex, Vector3 newPos)
     {
         List<Vector3> set = m_EnemyPointSet[setIndex].EnemyPointSet;
         set[pointIndex] = newPos;
     }
-     
+
     public void UpdateAllPointsInSet(int setIndex, Vector3 translateDirection)
     {
         List<Vector3> set = m_EnemyPointSet[setIndex].EnemyPointSet;
@@ -145,8 +147,8 @@ public class Tile : MonoBehaviour
         return m_SpiderSpawns.Count;
     }
 
-    public int PlayerFollowPointsCount 
-    { 
+    public int PlayerFollowPointsCount
+    {
         get { return m_FollowPoint.Length; }
     }
 
@@ -188,15 +190,15 @@ public class Tile : MonoBehaviour
     {
         if (index >= PlayerFollowPointsCount || index < 0)
             throw new System.Exception("Not a valid index in m_PlayerFollowPoints");
-        return transform.TransformPoint(m_FollowPoint[index]); 
+        return transform.TransformPoint(m_FollowPoint[index]);
     }
 
-    public Vector3 StartPoint { 
-        get { return m_StartPoint; } 
+    public Vector3 StartPoint {
+        get { return m_StartPoint; }
         set { m_StartPoint = value; }
     }
-    public Vector3 EndPoint { 
-        get { return m_EndPoint; } 
+    public Vector3 EndPoint {
+        get { return m_EndPoint; }
         set { m_EndPoint = value; }
     }
 
@@ -215,7 +217,7 @@ public class Tile : MonoBehaviour
     }
     public void SetSpiderSpawn(int index, Vector3 point)
     {
-        m_SpiderSpawns[index] = point;  
+        m_SpiderSpawns[index] = point;
     }
 
     public Vector3 StartPointWorld { get { return transform.TransformPoint(StartPoint); } }
@@ -231,7 +233,9 @@ public class Tile : MonoBehaviour
     public Vector3 VecStartToCenter { get { return m_VecStartToCenter; } }
     public Vector3 VecCenterToEnd { get { return m_VecCenterToEnd; } }
 
-    public bool IsTraversedByPlayer { get { return m_IsTraversedByPlayer;  } }
+    public bool IsTraversedByPlayer { get { return m_IsTraversedByPlayer; } }
+
+    public int ID { get { return m_ID; } }
 
 
     public enum LOCATION_TYPES

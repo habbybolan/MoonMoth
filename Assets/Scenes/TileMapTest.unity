@@ -202,10 +202,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TilePrefabs:
-  - {fileID: 8136119699854392509, guid: 8d70444a95e53fc44a7f0ab62b918fb7, type: 3}
-  - {fileID: 2366708732479644673, guid: 249b2f286bd7e7f46898630a60700eac, type: 3}
-  - {fileID: 8136119699854392509, guid: 3fb7a093bd87b3a4b9f12416619977c6, type: 3}
   - {fileID: -9129767675161248748, guid: 1b765c3a851b20d42b21591835a40eb5, type: 3}
+  - {fileID: 8136119699854392509, guid: 3fb7a093bd87b3a4b9f12416619977c6, type: 3}
+  - {fileID: 2366708732479644673, guid: 249b2f286bd7e7f46898630a60700eac, type: 3}
+  - {fileID: 8136119699854392509, guid: 8d70444a95e53fc44a7f0ab62b918fb7, type: 3}
   m_DistanceToPlaceTile: 500
   m_DistanceToDeleteTile: 50
   m_TilePoolSize: 40

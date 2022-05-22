@@ -12,10 +12,15 @@ public class TileManager : MonoBehaviour
     [SerializeField] private int m_TilePoolSize = 40;
 
     public delegate void TileAddedDelegate(Tile addedTile); 
-    public TileAddedDelegate d_TileAddedDelegate;  
-    
+    public TileAddedDelegate d_TileAddedDelegate;
+
+    public delegate void TileDeletedDelegate(Tile deletedTile); 
+    public TileDeletedDelegate d_TileDeletedDelegate; 
+
     private Tile[] m_PoolTiles;
     private LinkedList<Tile> m_VisibleTiles = new LinkedList<Tile>();
+
+    private static int m_IDCount;
 
     public static TileManager PropertyInstance
     { 
@@ -61,6 +66,11 @@ public class TileManager : MonoBehaviour
         {
             InstantiateTile();
         }
+    }
+
+    public static int GetNewID()
+    {
+        return m_IDCount++;
     }
 
     private void InstantiateTile()
@@ -113,6 +123,7 @@ public class TileManager : MonoBehaviour
         {
             firstTile.SetIsActive(false);
             m_VisibleTiles.RemoveFirst();
+            d_TileDeletedDelegate(firstTile);
         }
     }
 
