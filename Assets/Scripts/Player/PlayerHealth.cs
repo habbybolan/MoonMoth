@@ -52,6 +52,7 @@ public class PlayerHealth : Health
 
     private void OnCollisionEnter(Collision collision)
     {
+        // TODO: Remove once proper terrain collision added
         // Collision check on Terrain
         Terrain terrain = collision.gameObject.GetComponent<Terrain>();
         if (terrain != null)
@@ -64,6 +65,7 @@ public class PlayerHealth : Health
 
     private void OnCollisionStay(Collision collision)
     {
+        // TODO: Make obstacle script call Health instead of health listerning on collision
         // Collision check on Obstacle
         Obstacle obstacle = collision.gameObject.GetComponent<Obstacle>();
         if (obstacle != null)

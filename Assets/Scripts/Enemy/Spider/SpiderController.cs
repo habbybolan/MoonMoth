@@ -2,11 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderController : MonoBehaviour
+public class SpiderController : CharacterController<SpiderHealth>
 {
-    [SerializeField] private SpiderHealth m_SpiderHealth;
     [SerializeField] private SpiderWebHealth m_SpiderWebHealth;
     [SerializeField] private SpiderMovement m_SpiderMovement;
+
+    public override void Death()
+    {
+        // TODO:
+    }
+
+    protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)
+    {
+        // TODO:
+    }
 
     private void Start()
     {

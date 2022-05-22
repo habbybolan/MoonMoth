@@ -8,13 +8,12 @@ using UnityEngine.InputSystem;
  * Deals with Player's Inputs, States and which methods to call each frame.
  * Acts as the central hub for interacting with all Player components.
  */
-public class PlayerController : MonoBehaviour
+public class PlayerController : CharacterController<PlayerHealth>
 {
     [SerializeField] private PlayerMovement m_PlayerMovement;
     [SerializeField] private PlayerParentMovement m_PlayerParentMovement;
     [Tooltip("CameraMovement component")]
     [SerializeField] private CameraMovement m_CameraMovement;
-    [SerializeField] private PlayerHealth m_Health;
     [SerializeField] private PlayerWeapon m_Weapon;
 
     private InputActions playerInput;        // PlayerInput object to enable and create callbacks for inputs performed
@@ -129,7 +128,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Death() 
+    public override void Death() 
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("TileMapTest");
     }
@@ -137,6 +136,11 @@ public class PlayerController : MonoBehaviour
     private void FinishAction()
     {
         m_playerState = PLAYER_ACTION_STATE.FLYING;
+    }
+
+    protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)
+    {
+        // TODO: implement slow
     }
 
     public PlayerParentMovement PlayerParent { get { return m_PlayerParentMovement;  } }
