@@ -16,9 +16,10 @@ public class TileInspector : Editor
     private const float pickSize = 0.2f;
 
     private int m_PlayerPointSelectedIndex = -1;
+    private int m_SpiderSpawnSelected = -1;
 
-    private int m_EnemyPointSetSelectedIndex = -1;
-    private int m_EnemyPointInSetSelected = -1;
+    private int m_FireflyPointSetSelectedIndex = -1;
+    private int m_FireflyPointInSetSelected = -1;
     private Tile.LOCATION_TYPES m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
 
     private void OnSceneGUI()
@@ -43,6 +44,41 @@ public class TileInspector : Editor
         ShowEndPoint(true);
         // Create button for end point
         ShowEndPoint(false);
+
+        // Create buttons for all Spider spawn points
+        for (int i = 0; i < tile.SpiderSpawns.Count; i++)
+        {
+            ShowSpiderSpawns(i);
+        }
+    }
+
+    private void ShowSpiderSpawns(int index)
+    {
+        Handles.color = new Color(115, 43, 204);
+        Vector3 point = handleTransform.TransformPoint(tile.GetSpiderSpawn(index));
+        float size = HandleUtility.GetHandleSize(point);
+
+        // Display button and allow selection
+        if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
+        {
+            UnselectAll();
+            m_SelectedType = Tile.LOCATION_TYPES.SPIDER;
+            m_SpiderSpawnSelected = index;
+            Repaint();
+        }
+
+        // allow movement if button point selected
+        if (m_SpiderSpawnSelected == index)
+        {
+            EditorGUI.BeginChangeCheck();
+            point = Handles.DoPositionHandle(point, handleRotation);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(tile, "Move Point");
+                EditorUtility.SetDirty(tile);
+                tile.SetSpiderSpawn(index, handleTransform.InverseTransformPoint(point));
+            }
+        }
     }
     
     // Display all follow points in the tile
@@ -58,6 +94,7 @@ public class TileInspector : Editor
             UnselectAll();
             m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
             m_PlayerPointSelectedIndex = index;
+            m_SpiderSpawnSelected = -1;
             Repaint();
         }
 
@@ -90,8 +127,8 @@ public class TileInspector : Editor
             if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
             {
                 UnselectAll();
-                m_EnemyPointInSetSelected = i;
-                m_EnemyPointSetSelectedIndex = index;
+                m_FireflyPointInSetSelected = i;
+                m_FireflyPointSetSelectedIndex = index;
                 Repaint();
             }
         }
@@ -103,24 +140,24 @@ public class TileInspector : Editor
         if (Handles.Button(centerPoint, handleRotation, centerSize * handleSize, centerSize * pickSize, Handles.DotHandleCap))
         {
             UnselectAll();
-            m_EnemyPointSetSelectedIndex = index;
+            m_FireflyPointSetSelectedIndex = index;
             Repaint();
         }
 
         // allow movement if button point selected
-        if (m_EnemyPointSetSelectedIndex == index)
+        if (m_FireflyPointSetSelectedIndex == index)
         {
             EditorGUI.BeginChangeCheck();
             // If an enemy point in the set is selected
-            if (m_EnemyPointInSetSelected >= 0)
+            if (m_FireflyPointInSetSelected >= 0)
             {
-                Vector3 point = handleTransform.TransformPoint(enemyPointSet[m_EnemyPointInSetSelected]);
+                Vector3 point = handleTransform.TransformPoint(enemyPointSet[m_FireflyPointInSetSelected]);
                 point = Handles.DoPositionHandle(point, handleRotation);
                 if (EditorGUI.EndChangeCheck())
                 {
                     Undo.RecordObject(tile, "Move Point");
                     EditorUtility.SetDirty(tile);
-                    tile.SetPointInEnemySet(index, m_EnemyPointInSetSelected, handleTransform.InverseTransformPoint(point));
+                    tile.SetPointInEnemySet(index, m_FireflyPointInSetSelected, handleTransform.InverseTransformPoint(point));
                 }
             } 
             // otherwise, the center point of the set was selected
@@ -193,8 +230,9 @@ public class TileInspector : Editor
     private void UnselectAll()
     {
         m_PlayerPointSelectedIndex = -1;
-        m_EnemyPointSetSelectedIndex = -1;
-        m_EnemyPointInSetSelected = -1;
+        m_FireflyPointSetSelectedIndex = -1;
+        m_FireflyPointInSetSelected = -1;
+        m_SpiderSpawnSelected = -1;
         m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
 }
 
@@ -218,6 +256,23 @@ public class TileInspector : Editor
             EditorUtility.SetDirty(tile);
         }
 
+        GUILayout.Label("Spider spawn points");
+        // Button for adding new Spider spawn point
+        if (GUILayout.Button("Add spider spawn"))
+        {
+            Undo.RecordObject(tile, "Add Spider spawn");
+            tile.AddSpiderPoint();
+            EditorUtility.SetDirty(tile);
+        }
+
+        // Button for adding new Spider spawn point
+        if (GUILayout.Button("Remove spider spawn"))
+        {
+            Undo.RecordObject(tile, "Remove Spider spawn");
+            tile.RemoveSpiderPoint();
+            EditorUtility.SetDirty(tile);
+        }
+
         GUILayout.Label("Enemy point sets");
         // button for adding a new set of enemy follow points
         if (GUILayout.Button("Add enemy follow point set"))
@@ -236,14 +291,14 @@ public class TileInspector : Editor
         }
 
         // if a point in the enemy point set is selected
-        if (m_EnemyPointSetSelectedIndex >= 0)
+        if (m_FireflyPointSetSelectedIndex >= 0)
         {
             GUILayout.Label("Enemy points in selected set");
             // add a new point to the enemy set
             if (GUILayout.Button("Add enemy follow point to set"))
             {
                 Undo.RecordObject(tile, "Add enemy follow point to set");
-                tile.AddPointToEnemySet(m_EnemyPointSetSelectedIndex);
+                tile.AddPointToEnemySet(m_FireflyPointSetSelectedIndex);
                 EditorUtility.SetDirty(tile);
             }
 
@@ -251,7 +306,7 @@ public class TileInspector : Editor
             if (GUILayout.Button("Remove enemy follow point from set"))
             {
                 Undo.RecordObject(tile, "Remove enemy follow point from set");
-                tile.RemovePointFromEnemySet(m_EnemyPointSetSelectedIndex);
+                tile.RemovePointFromEnemySet(m_FireflyPointSetSelectedIndex);
                 EditorUtility.SetDirty(tile);
             }
         }

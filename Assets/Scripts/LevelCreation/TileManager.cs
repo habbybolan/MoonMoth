@@ -9,8 +9,9 @@ public class TileManager : MonoBehaviour
     [SerializeField] private Tile[] m_TilePrefabs;
     [SerializeField] private float m_DistanceToPlaceTile = 200f;
     [SerializeField] private float m_DistanceToDeleteTile = 50f;
+    [SerializeField] private int m_TilePoolSize = 40;
 
-    private Tile[] m_PoolTiles = new Tile[40];
+    private Tile[] m_PoolTiles;
     private LinkedList<Tile> m_VisibleTiles = new LinkedList<Tile>();
 
     public static TileManager PropertyInstance
@@ -20,6 +21,7 @@ public class TileManager : MonoBehaviour
 
     private void Awake()
     {
+        m_PoolTiles = new Tile[m_TilePoolSize];
         // Singleton
         if (s_PropertyInstance != null && s_PropertyInstance != this)
             Destroy(this);

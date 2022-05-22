@@ -9,7 +9,8 @@ public class Tile : MonoBehaviour
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
-
+    
+    public List<Vector3> m_SpiderSpawns;
     public List<EnemySetWrapper> m_EnemyPointSet;
 
     private Vector3 m_VecStartToCenter;
@@ -38,6 +39,8 @@ public class Tile : MonoBehaviour
         m_EndPoint = transform.InverseTransformPoint(new Vector3(0, 0, -10));
 
         m_EnemyPointSet = new List<EnemySetWrapper> { new EnemySetWrapper(new Vector3(0, 0, 0)) };
+
+        m_SpiderSpawns = new List<Vector3>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -122,6 +125,18 @@ public class Tile : MonoBehaviour
         }
     }
 
+    public void AddSpiderPoint()
+    {
+        m_SpiderSpawns.Add(new Vector3(0, 0, 0));
+    }
+
+    public void RemoveSpiderPoint()
+    {
+        if (m_SpiderSpawns.Count == 0)
+            throw new System.Exception("Spider list already empty");
+        m_SpiderSpawns.RemoveAt(m_SpiderSpawns.Count - 1);
+    }
+
     public int PlayerFollowPointsCount 
     { 
         get { return m_FollowPoint.Length; }
@@ -177,6 +192,18 @@ public class Tile : MonoBehaviour
         set { m_EndPoint = value; }
     }
 
+    public List<Vector3> SpiderSpawns { get { return m_SpiderSpawns; } }
+    public Vector3 GetSpiderSpawn(int index)
+    {
+        if (index >= m_SpiderSpawns.Count || index < 0)
+            throw new System.Exception("Not a valid index in m_SpiderSpawns");
+        return m_SpiderSpawns[index];
+    }
+    public void SetSpiderSpawn(int index, Vector3 point)
+    {
+        m_SpiderSpawns[index] = point;  
+    }
+
     public Vector3 StartPointWorld { get { return transform.TransformPoint(StartPoint); } }
     public Vector3 EndPointWorld { get { return transform.TransformPoint(EndPoint); } }
 
@@ -197,6 +224,7 @@ public class Tile : MonoBehaviour
     {
         FOLLOW,
         START,
-        END
+        END,
+        SPIDER
     }
 }
