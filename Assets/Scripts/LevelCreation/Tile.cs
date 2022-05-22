@@ -23,17 +23,13 @@ public class Tile : MonoBehaviour
     {
         m_VecStartToCenter = transform.position - transform.TransformPoint(m_StartPoint);
         m_VecCenterToEnd = transform.TransformPoint(m_EndPoint) - transform.position;
+        m_ID = TileManager.GetNewID();
     }
 
     private void Start()
     {
-        m_ID = TileManager.GetNewID();
+        
         m_EndCollider = GetComponent<BoxCollider>();
-
-        foreach (Vector3 spawn in m_SpiderSpawns)
-        {
-
-        }
     }
 
     public void Reset()

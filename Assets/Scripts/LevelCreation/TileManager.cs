@@ -11,16 +11,18 @@ public class TileManager : MonoBehaviour
     [SerializeField] private float m_DistanceToDeleteTile = 50f;
     [SerializeField] private int m_TilePoolSize = 40;
 
+    // Delegate for every time a new tile is added
     public delegate void TileAddedDelegate(Tile addedTile); 
     public TileAddedDelegate d_TileAddedDelegate;
 
+    // Delegate for every time the oldest visible tile is deleted
     public delegate void TileDeletedDelegate(Tile deletedTile); 
     public TileDeletedDelegate d_TileDeletedDelegate; 
 
     private Tile[] m_PoolTiles;
     private LinkedList<Tile> m_VisibleTiles = new LinkedList<Tile>();
 
-    private static int m_IDCount;
+    private static int m_IDCount = 0;
 
     public static TileManager PropertyInstance
     { 
@@ -40,13 +42,18 @@ public class TileManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitializeStartTile();
+    }
+
+    private void InitializeStartTile() 
+    {
         // create uniform distribution of all prefab tiles
         int numEachTile = m_PoolTiles.Length / m_TilePrefabs.Length;
         int indexPrefab = 0;
         int indexPool = 0;
         int numEachCurrTile = 0;
 
-        // Initialize pool of GameObjects
+        // Initialize pool of Tiles
         while (indexPool < m_PoolTiles.Length)
         {
             // Reached max number of current prefab inside pool and not at last prefab
@@ -62,10 +69,7 @@ public class TileManager : MonoBehaviour
             numEachCurrTile++;
         }
 
-        for (int i = 0; i < 5; i++)
-        {
-            InstantiateTile();
-        }
+        InstantiateTile();
     }
 
     public static int GetNewID()
@@ -87,16 +91,20 @@ public class TileManager : MonoBehaviour
         m_VisibleTiles.AddLast(newTile);
         newTile.SetIsActive(true);
 
-        // If first created, dont do anything
+        // First tile being created
         if (visibleCount == 0)
+        {
+            // notify delegate a tile was created
+            d_TileAddedDelegate(newTile);
             return;
-        
+        }
+
         if (lastCreated != null)
         {
             Vector3 newPos = lastCreated.EndPointWorld + newTile.VecStartToCenter;
             newTile.transform.position = newPos;
         }
-        // notify delegate a tile was created
+
         d_TileAddedDelegate(newTile);
     }
 
@@ -121,9 +129,9 @@ public class TileManager : MonoBehaviour
         float distanceFromEnd = firstTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerController.PlayerParent);
         if (firstTile.IsTraversedByPlayer && distanceFromEnd > m_DistanceToDeleteTile)
         {
-            firstTile.SetIsActive(false);
-            m_VisibleTiles.RemoveFirst();
             d_TileDeletedDelegate(firstTile);
+            firstTile.SetIsActive(false);
+            m_VisibleTiles.RemoveFirst();  
         }
     }
 

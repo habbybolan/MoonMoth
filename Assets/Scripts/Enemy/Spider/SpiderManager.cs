@@ -21,13 +21,10 @@ public class SpiderManager : MonoBehaviour
             Destroy(this);
         else
             s_PropertyInstance = this;
-    }
-
-    private void Start()
-    {
-        m_Spiders = new List<SpiderController>();
+        
         TileManager.PropertyInstance.d_TileAddedDelegate += SpawnNewSpiders;
         TileManager.PropertyInstance.d_TileDeletedDelegate += DeleteSpidersAtTile;
+        m_Spiders = new List<SpiderController>();
     }
 
     private void SpawnNewSpiders(Tile tile)
@@ -45,14 +42,11 @@ public class SpiderManager : MonoBehaviour
     private void DeleteSpidersAtTile(Tile tile)
     {
         int id = tile.ID;
-        for (int i = 0; i < m_Spiders.Count; i++)
+
+        // Delete all spiders assocuated with this tile
+        while (m_Spiders.Count > 0 && m_Spiders[0].TileID == id)
         {
-            // delete spider if it contains the tile id that was deleted
-            if (m_Spiders[i].TileID == id)
-                DeleteSpiderAtIndex(i, m_Spiders[i].gameObject);
-            // otherwise, no other spider has that tileID since only the last spawned tile is deleted at a time
-            else
-                break;
+            DeleteSpiderAtIndex(0, m_Spiders[0].gameObject);
         }
     }
 
