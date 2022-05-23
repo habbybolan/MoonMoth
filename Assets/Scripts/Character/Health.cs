@@ -8,14 +8,14 @@ using UnityEngine.Events;
  */
 public abstract class Health : MonoBehaviour
 {
-    [SerializeField] private float m_MaxHealth = 100; 
+    [SerializeField] protected float m_MaxHealth = 100; 
     [SerializeField] private ParticleSystem m_deathParticles;
     [SerializeField] private float m_deathParticlesDuration = 1f;
      
     [SerializeField] private float m_HealthPercentLosePerSecond = 1f;
     [SerializeField] private bool m_IsInvincible = false;   // for developer use, makes Health script invincible
 
-    private float m_CurrentHealth;
+    protected float m_CurrentHealth;
 
     public delegate void DeathDelegate();
     public DeathDelegate d_DeathDelegate; 
@@ -40,7 +40,7 @@ public abstract class Health : MonoBehaviour
         {
             return;
         }
-        RemoveHealth(damageInfo.m_Percent);
+        RemoveHealth(damageInfo.m_DamageAmount);
     }
 
     private void RemoveHealth(float healthToLose)

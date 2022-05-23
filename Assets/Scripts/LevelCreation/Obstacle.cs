@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Range(0f, 100f)]
+    [SerializeField] private float m_DamageAmount = 10f;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        PlayerHealth playerHealth = collision.collider.GetComponent<PlayerHealth>();
+        if (playerHealth)
+        {
+            playerHealth.Damage(new DamageInfo(m_DamageAmount, gameObject, playerHealth.gameObject, DamageInfo.DAMAGE_TYPE.OBSTACLE));
+        }
     }
 }

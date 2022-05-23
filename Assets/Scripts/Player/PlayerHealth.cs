@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /*
  * Deals with any object that can interact and damage the player.
@@ -11,8 +12,7 @@ public class PlayerHealth : Health
     [SerializeField] private float m_InvincibilityDuration = 2f;
     [Range(0f, 100f)]
     [SerializeField] private float m_TerrainDamageAmount = 5f;
-    [Range(0f, 100f)]
-    [SerializeField] private float m_ObstacleDamageAmount = 5f;
+    [SerializeField] private TextMeshProUGUI m_HealthText; 
     
     private HEALTH_STATE healthState;       // If the player can be damaged or not by non-terrain damage types
 
@@ -23,6 +23,7 @@ public class PlayerHealth : Health
     {
         healthState = HEALTH_STATE.VULNERABLE;
         base.Start();
+        m_HealthText.text = m_MaxHealth.ToString();
     }
 
     public override void Damage(DamageInfo damageInfo)
@@ -36,6 +37,7 @@ public class PlayerHealth : Health
         {
             StartCoroutine(InvulnerabilityFrames());
         }
+        m_HealthText.text = m_CurrentHealth.ToString();
     }
 
     // Deals with invincibility frames after colliding with an obstacle
@@ -56,17 +58,6 @@ public class PlayerHealth : Health
             // Deals with movement changes on terrain collision
             terrainCollisionDelegate(collision.contacts[0]);
             Damage(new DamageInfo(m_TerrainDamageAmount, terrain.gameObject, gameObject, DamageInfo.DAMAGE_TYPE.TERRAIN));
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        // TODO: Make obstacle script call Health instead of health listerning on collision
-        // Collision check on Obstacle
-        Obstacle obstacle = collision.gameObject.GetComponent<Obstacle>();
-        if (obstacle != null)
-        {
-            Damage(new DamageInfo(m_ObstacleDamageAmount, obstacle.gameObject, gameObject, DamageInfo.DAMAGE_TYPE.OBSTACLE));
         }
     }
 
