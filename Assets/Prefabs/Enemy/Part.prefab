@@ -175,8 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0d97448ede88944a6e6480005f3e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHealth: 100
+  m_MaxHealth: 1
   m_deathParticles: {fileID: 0}
   m_deathParticlesDuration: 1
   m_HealthPercentLosePerSecond: 1
+  m_IsInvincible: 0
   m_CharacterJoint: {fileID: 9219880697342073253}

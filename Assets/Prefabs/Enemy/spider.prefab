@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98147589723634350}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.77}
+  m_LocalPosition: {x: 0, y: 0.262, z: 2.394}
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Cooldown: 0.25
-  m_BulletPrefab: {fileID: 6535628969521129046, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
+  m_BulletPrefab: {fileID: 6433918627619563452, guid: a915b20a76558b642829ac8e712c1fea, type: 3}
   m_WeaponOwner: {fileID: 4211784419857639162}
 --- !u!1 &1148214147491451616
 GameObject:
@@ -670,7 +670,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6253388253971538032}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.04469714, y: 0.04469714, z: 0.04469714}
   m_ConstrainProportionsScale: 0
@@ -683,7 +683,7 @@ Transform:
   - {fileID: 6236973499908149771}
   m_Father: {fileID: 3546746549286730817}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &6432638958134573372
 GameObject:
   m_ObjectHideFlags: 0

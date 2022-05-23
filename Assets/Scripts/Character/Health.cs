@@ -13,6 +13,7 @@ public abstract class Health : MonoBehaviour
     [SerializeField] private float m_deathParticlesDuration = 1f;
      
     [SerializeField] private float m_HealthPercentLosePerSecond = 1f;
+    [SerializeField] private bool m_IsInvincible = false;   // for developer use, makes Health script invincible
 
     private float m_CurrentHealth;
 
@@ -44,6 +45,10 @@ public abstract class Health : MonoBehaviour
 
     private void RemoveHealth(float healthToLose)
     {
+        // for developer use
+        if (m_IsInvincible)
+            return;
+
         m_CurrentHealth -= healthToLose;
         if (m_CurrentHealth <= 0)
         {
@@ -51,7 +56,7 @@ public abstract class Health : MonoBehaviour
         }
     }
 
-    private void Death()
+    protected virtual void Death()
     {
         if (m_deathParticles != null)
         {

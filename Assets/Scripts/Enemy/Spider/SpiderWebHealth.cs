@@ -16,9 +16,13 @@ public class SpiderWebHealth : Health
     public override void Damage(DamageInfo damageInfo) 
     {
         if (damageInfo.m_Instigator.tag == "Player")
-        {
-            m_CharacterJoint.connectedBody = null;
-            m_SpiderWeb.SpiderWebBroke();
-        }
+            base.Damage(damageInfo);
+    }
+
+    protected override void Death()
+    {
+        // manually call Controller script since attaching delegate to every web piece seems too much
+        m_CharacterJoint.connectedBody = null;
+        m_SpiderWeb.SpiderWebBroke();
     }
 }
