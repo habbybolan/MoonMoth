@@ -451,5 +451,9 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7567728280031370026, guid: fe1eafebbe9eb71498c492653bd2c3ae, type: 3}
+      propertyPath: m_BaseControlSpeed
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe1eafebbe9eb71498c492653bd2c3ae, type: 3}
