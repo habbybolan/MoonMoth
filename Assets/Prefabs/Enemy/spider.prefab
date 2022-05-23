@@ -350,6 +350,7 @@ MonoBehaviour:
   m_SpiderWebHealth: {fileID: 0}
   m_SpiderMovement: {fileID: 0}
   m_SpiderWeapon: {fileID: 7212150307857748203}
+  m_SpiderWeb: {fileID: 6788250443946503172}
   m_ShootDistance: 50
 --- !u!114 &4211784419857639162
 MonoBehaviour:

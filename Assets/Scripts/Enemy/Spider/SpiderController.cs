@@ -7,6 +7,7 @@ public class SpiderController : CharacterController<SpiderHealth>
     [SerializeField] private SpiderWebHealth m_SpiderWebHealth;
     [SerializeField] private SpiderMovement m_SpiderMovement;
     [SerializeField] private SpiderWeapon m_SpiderWeapon;
+    [SerializeField] private SpiderWeb m_SpiderWeb;
     [SerializeField] private float m_ShootDistance = 50f;
 
     private int m_TileID;   // ID of the tile the spider spawned on, used for deleting spiders when tile deleted
@@ -39,5 +40,7 @@ public class SpiderController : CharacterController<SpiderHealth>
         get { return m_TileID; }
         set { m_TileID = value; }
     }
+
+    public SpiderWeb spiderWeb { get { return m_SpiderWeb; } }
     
 }

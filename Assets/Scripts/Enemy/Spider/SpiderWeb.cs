@@ -80,4 +80,14 @@ public class SpiderWeb : MonoBehaviour
             transform.Find((transform.childCount).ToString()).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
         }
     }
+
+    public void DeleteAll()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform child = transform.GetChild(i);
+            Destroy(child.gameObject);
+        }
+        Destroy(gameObject);
+    }
 }

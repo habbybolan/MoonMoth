@@ -67,6 +67,7 @@ public class SpiderManager : MonoBehaviour
     private void DeleteSpiderAtIndex(int index, GameObject spiderToDelete)
     {
         Destroy(spiderToDelete);
+        m_Spiders[index].spiderWeb.DeleteAll();
         m_Spiders.RemoveAt(index);
     }
 }
