@@ -5,27 +5,30 @@ using System;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private BoxCollider m_EndCollider;  
+    [SerializeField] private BoxCollider m_EndCollider;
+
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
 
+    public List<Vector3> m_SpiderSpawns;
     public List<EnemySetWrapper> m_EnemyPointSet;
 
     private Vector3 m_VecStartToCenter;
     private Vector3 m_VecCenterToEnd;
     private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
+    private int m_ID;
 
     private void Awake()
     {
         m_VecStartToCenter = transform.position - transform.TransformPoint(m_StartPoint);
         m_VecCenterToEnd = transform.TransformPoint(m_EndPoint) - transform.position;
+        m_ID = TileManager.GetNewID();
     }
 
     private void Start()
     {
         
-        // TODO: Find out how to add in editor when tile inspector enabled
         m_EndCollider = GetComponent<BoxCollider>();
     }
 
@@ -38,11 +41,13 @@ public class Tile : MonoBehaviour
         m_EndPoint = transform.InverseTransformPoint(new Vector3(0, 0, -10));
 
         m_EnemyPointSet = new List<EnemySetWrapper> { new EnemySetWrapper(new Vector3(0, 0, 0)) };
+
+        m_SpiderSpawns = new List<Vector3>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerMovement m = other.GetComponent<PlayerMovement>();   
+        PlayerMovement m = other.GetComponent<PlayerMovement>();
         // if collided with PlayerMovement 
         if (m != null)
         {
@@ -83,7 +88,7 @@ public class Tile : MonoBehaviour
 
     public void AddEnemyPointSet()
     {
-        m_EnemyPointSet.Add(new EnemySetWrapper(m_EnemyPointSet[m_EnemyPointSet.Count - 1].EnemyPointSet[0] + Vector3.forward * 2 ));
+        m_EnemyPointSet.Add(new EnemySetWrapper(m_EnemyPointSet[m_EnemyPointSet.Count - 1].EnemyPointSet[0] + Vector3.forward * 2));
     }
 
     public void RemoveEnemyPointSet()
@@ -99,20 +104,20 @@ public class Tile : MonoBehaviour
         set.Add(set[set.Count - 1] + Vector3.left * 2);
     }
 
-    public void RemovePointFromEnemySet(int setIndex)  
+    public void RemovePointFromEnemySet(int setIndex)
     {
         List<Vector3> set = m_EnemyPointSet[setIndex].EnemyPointSet;
         if (set.Count <= 1)
             throw new Exception("Cannot have an empty enemy points set");
         set.RemoveAt(set.Count - 1);
     }
-     
+
     public void SetPointInEnemySet(int setIndex, int pointIndex, Vector3 newPos)
     {
         List<Vector3> set = m_EnemyPointSet[setIndex].EnemyPointSet;
         set[pointIndex] = newPos;
     }
-     
+
     public void UpdateAllPointsInSet(int setIndex, Vector3 translateDirection)
     {
         List<Vector3> set = m_EnemyPointSet[setIndex].EnemyPointSet;
@@ -122,8 +127,24 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public int PlayerFollowPointsCount 
-    { 
+    public void AddSpiderPoint()
+    {
+        m_SpiderSpawns.Add(new Vector3(0, 0, 0));
+    }
+
+    public void RemoveSpiderPoint()
+    {
+        if (m_SpiderSpawns.Count == 0)
+            throw new System.Exception("Spider list already empty");
+        m_SpiderSpawns.RemoveAt(m_SpiderSpawns.Count - 1);
+    }
+    public int GetSpiderSpawnCount()
+    {
+        return m_SpiderSpawns.Count;
+    }
+
+    public int PlayerFollowPointsCount
+    {
         get { return m_FollowPoint.Length; }
     }
 
@@ -165,16 +186,34 @@ public class Tile : MonoBehaviour
     {
         if (index >= PlayerFollowPointsCount || index < 0)
             throw new System.Exception("Not a valid index in m_PlayerFollowPoints");
-        return transform.TransformPoint(m_FollowPoint[index]); 
+        return transform.TransformPoint(m_FollowPoint[index]);
     }
 
-    public Vector3 StartPoint { 
-        get { return m_StartPoint; } 
+    public Vector3 StartPoint {
+        get { return m_StartPoint; }
         set { m_StartPoint = value; }
     }
-    public Vector3 EndPoint { 
-        get { return m_EndPoint; } 
+    public Vector3 EndPoint {
+        get { return m_EndPoint; }
         set { m_EndPoint = value; }
+    }
+
+    public List<Vector3> SpiderSpawns { get { return m_SpiderSpawns; } }
+    public Vector3 GetSpiderSpawn(int index)
+    {
+        if (index >= m_SpiderSpawns.Count || index < 0)
+            throw new System.Exception("Not a valid index in m_SpiderSpawns");
+        return m_SpiderSpawns[index];
+    }
+    public Vector3 GetSpiderSpawnWorld(int index)
+    {
+        if (index >= m_SpiderSpawns.Count || index < 0)
+            throw new System.Exception("Not a valid index in m_SpiderSpawns");
+        return transform.TransformPoint(m_SpiderSpawns[index]);
+    }
+    public void SetSpiderSpawn(int index, Vector3 point)
+    {
+        m_SpiderSpawns[index] = point;
     }
 
     public Vector3 StartPointWorld { get { return transform.TransformPoint(StartPoint); } }
@@ -190,13 +229,16 @@ public class Tile : MonoBehaviour
     public Vector3 VecStartToCenter { get { return m_VecStartToCenter; } }
     public Vector3 VecCenterToEnd { get { return m_VecCenterToEnd; } }
 
-    public bool IsTraversedByPlayer { get { return m_IsTraversedByPlayer;  } }
+    public bool IsTraversedByPlayer { get { return m_IsTraversedByPlayer; } }
+
+    public int ID { get { return m_ID; } }
 
 
     public enum LOCATION_TYPES
     {
         FOLLOW,
         START,
-        END
+        END,
+        SPIDER
     }
 }

@@ -9,9 +9,21 @@ public class TileManager : MonoBehaviour
     [SerializeField] private Tile[] m_TilePrefabs;
     [SerializeField] private float m_DistanceToPlaceTile = 200f;
     [SerializeField] private float m_DistanceToDeleteTile = 50f;
+    [SerializeField] private int m_TilePoolSize = 40;
 
-    private Tile[] m_PoolTiles = new Tile[40];
+    // Delegate for every time a new tile is added
+    public delegate void TileAddedDelegate(Tile addedTile); 
+    public TileAddedDelegate d_TileAddedDelegate;
+
+    // Delegate for every time the oldest visible tile is deleted
+    public delegate void TileDeletedDelegate(Tile deletedTile); 
+    public TileDeletedDelegate d_TileDeletedDelegate; 
+
+    private Tile[] m_PoolTiles;
     private LinkedList<Tile> m_VisibleTiles = new LinkedList<Tile>();
+
+    private static int m_IDCount = 0;
+    private bool m_IsInitialized = false;   // If all starting tiles have been initialize
 
     public static TileManager PropertyInstance
     { 
@@ -20,6 +32,7 @@ public class TileManager : MonoBehaviour
 
     private void Awake()
     {
+        m_PoolTiles = new Tile[m_TilePoolSize];
         // Singleton
         if (s_PropertyInstance != null && s_PropertyInstance != this)
             Destroy(this);
@@ -30,13 +43,19 @@ public class TileManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitializeStartTile();
+        m_IsInitialized = true;
+    }
+
+    private void InitializeStartTile() 
+    {
         // create uniform distribution of all prefab tiles
         int numEachTile = m_PoolTiles.Length / m_TilePrefabs.Length;
         int indexPrefab = 0;
         int indexPool = 0;
         int numEachCurrTile = 0;
 
-        // Initialize pool of GameObjects
+        // Initialize pool of Tiles
         while (indexPool < m_PoolTiles.Length)
         {
             // Reached max number of current prefab inside pool and not at last prefab
@@ -52,10 +71,14 @@ public class TileManager : MonoBehaviour
             numEachCurrTile++;
         }
 
+        // Initialize level with some tiles
         for (int i = 0; i < 5; i++)
-        {
             InstantiateTile();
-        }
+    }
+
+    public static int GetNewID()
+    {
+        return m_IDCount++;
     }
 
     private void InstantiateTile()
@@ -72,15 +95,21 @@ public class TileManager : MonoBehaviour
         m_VisibleTiles.AddLast(newTile);
         newTile.SetIsActive(true);
 
-        // If first created, dont do anything
+        // First tile being created
         if (visibleCount == 0)
+        {
+            // notify delegate a tile was created
+            d_TileAddedDelegate(newTile);
             return;
-        
+        }
+
         if (lastCreated != null)
         {
             Vector3 newPos = lastCreated.EndPointWorld + newTile.VecStartToCenter;
             newTile.transform.position = newPos;
         }
+
+        d_TileAddedDelegate(newTile);
     }
 
     private Tile FindAvailableTile()
@@ -104,8 +133,9 @@ public class TileManager : MonoBehaviour
         float distanceFromEnd = firstTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerController.PlayerParent);
         if (firstTile.IsTraversedByPlayer && distanceFromEnd > m_DistanceToDeleteTile)
         {
+            d_TileDeletedDelegate(firstTile);
             firstTile.SetIsActive(false);
-            m_VisibleTiles.RemoveFirst();
+            m_VisibleTiles.RemoveFirst();  
         }
     }
 
@@ -119,6 +149,8 @@ public class TileManager : MonoBehaviour
             InstantiateTile();
         }
     }
+
+    public bool IsInitialized { get { return m_IsInitialized; } }
 
     public LinkedListNode<Tile> GetHead()
     {

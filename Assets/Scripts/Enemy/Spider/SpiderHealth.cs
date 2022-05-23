@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireflyGun : EnemyWeapon
+// Health script for the spider
+public class SpiderHealth : Health
 {
-       
+    // TODO:
 }
