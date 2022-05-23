@@ -12,6 +12,14 @@ public class EnemyWeapon : WeaponBase
     }
     public void ShootAtPlayer()
     {
-        ShootPosition(playerController.transform.position);
+        // Only shoot at player if there's a line of sight to them
+        RaycastHit hit;
+        Vector3 playerPosition = playerController.transform.position;
+        if (Physics.Raycast(transform.position, playerPosition - transform.position, out hit))
+        {
+            if (hit.collider.tag == "Player")
+                ShootPosition(playerPosition);
+        }
+        
     }
 }

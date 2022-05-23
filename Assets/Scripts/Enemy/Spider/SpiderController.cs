@@ -37,6 +37,7 @@ public class SpiderController : CharacterController<SpiderHealth>
 
         if (PlayerManager.PropertyInstance.PlayerController.DistanceFromPlayer(transform.position) < m_ShootDistance)
         {
+            m_SpiderMovement.LookTowardPlayer();
             m_SpiderWeapon.ShootAtPlayer();
         }
     }

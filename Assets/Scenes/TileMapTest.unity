@@ -440,9 +440,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3969141224958232945, guid: fe1eafebbe9eb71498c492653bd2c3ae, type: 3}
+      propertyPath: m_Speed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3969141224958232945, guid: fe1eafebbe9eb71498c492653bd2c3ae, type: 3}
       propertyPath: m_Spline
       value: 
       objectReference: {fileID: 92830010}
+    - target: {fileID: 3969141224958232945, guid: fe1eafebbe9eb71498c492653bd2c3ae, type: 3}
+      propertyPath: m_IsIndependentMovement
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3969141224958232946, guid: fe1eafebbe9eb71498c492653bd2c3ae, type: 3}
       propertyPath: m_Name
       value: PlayerParent
@@ -450,6 +458,10 @@ PrefabInstance:
     - target: {fileID: 3969141224958232946, guid: fe1eafebbe9eb71498c492653bd2c3ae, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7567728278674765985, guid: fe1eafebbe9eb71498c492653bd2c3ae, type: 3}
+      propertyPath: m_IsInvincible
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7567728280031370026, guid: fe1eafebbe9eb71498c492653bd2c3ae, type: 3}
       propertyPath: m_BaseControlSpeed
