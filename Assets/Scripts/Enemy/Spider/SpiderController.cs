@@ -41,6 +41,21 @@ public class SpiderController : CharacterController<SpiderHealth>
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        // if spider collides with terrain while falling, then destroy it
+        if (m_State == SpiderState.FALLING)
+        {
+            // TODO: Change collision check for terrain and obstacles (checking for health)
+            Terrain terrain = collision.gameObject.GetComponent<Terrain>();
+            if (terrain != null)
+            {
+                SpiderManager.PropertyInstance.OnSpiderDeath(gameObject);
+            }
+        }
+        
+    }
+
     public override void Death()
     {
         SpiderManager.PropertyInstance.OnSpiderDeath(gameObject);

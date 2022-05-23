@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8422168046355632222}
   - component: {fileID: 8309391193813493063}
   - component: {fileID: 9219880697342073253}
-  - component: {fileID: 4941634582700039962}
+  - component: {fileID: 5441418102619988055}
   m_Layer: 0
   m_Name: Part
   m_TagString: Enemy
@@ -163,7 +163,7 @@ CharacterJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &4941634582700039962
+--- !u!114 &5441418102619988055
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,7 +172,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2213021387093853698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320839b0e962d6941ac3c36bb87a9a9f, type: 3}
+  m_Script: {fileID: 11500000, guid: dc0d97448ede88944a6e6480005f3e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MaxHealth: 100
+  m_deathParticles: {fileID: 0}
+  m_deathParticlesDuration: 1
+  m_HealthPercentLosePerSecond: 1
   m_CharacterJoint: {fileID: 9219880697342073253}
