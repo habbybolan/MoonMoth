@@ -5,25 +5,27 @@ using UnityEngine;
 public class SpiderWeb : MonoBehaviour
 {
     [SerializeField] GameObject m_PartPrefab;
+    [SerializeField] GameObject m_StartingPoint;
+    [SerializeField] GameObject m_Spider;
 
     [Range(1f, 1000f)]
     [SerializeField] private float m_Length = 1;
+    [SerializeField] private bool m_AutoLength = true;
 
     [SerializeField] private float m_partDistance = 0.21f;
 
-    [SerializeField] bool reset, spawn, snapFirst, snapLast;
+    [SerializeField] bool spawn = true, snapLast = true;
+
+    private LayerMask m_LayerMask;
+
+    private void Start()
+    {
+        m_LayerMask = 1 << 9;
+        m_StartingPoint.transform.parent = null;
+    }
 
     private void Update()
     {
-        if (reset)
-        {
-            foreach(GameObject temp in GameObject.FindGameObjectsWithTag("Enemy"))
-            {
-                Destroy(temp);
-            }
-            reset = false;
-        }
-
         if (spawn)
         {
             Spawn();
@@ -33,23 +35,38 @@ public class SpiderWeb : MonoBehaviour
 
     public void Spawn()
     {
+        if (m_AutoLength)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(m_StartingPoint.transform.position, Vector3.up, out hit, m_LayerMask))
+            {
+                m_Length = hit.distance;
+            } else
+            {
+                Debug.LogWarning("Raycast for spider web could not find a ceiling");
+            }
+        }
+
         int count = (int)( m_Length / m_partDistance);
 
         for (int i = 0; i < count; i++)
         {
             GameObject tmp;
 
-            tmp = Instantiate(m_PartPrefab, new Vector3 (transform.position.x, transform.position.y + m_partDistance * (i + 1), transform.position.z), Quaternion.identity, transform);
+            tmp = Instantiate(m_PartPrefab, new Vector3 (transform.position.x, transform.position.y + m_partDistance * (i + 1), transform.position.z), Quaternion.identity, m_StartingPoint.transform);
             tmp.transform.eulerAngles = new Vector3(180, 0, 0);
 
             tmp.name = transform.childCount.ToString();
 
             if (i == 0)
             {
-                Destroy(tmp.GetComponent<CharacterJoint>());
-                if (snapFirst)
+                // attach first to spider
+                if (m_Spider != null)
                 {
-                    tmp.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                    tmp.GetComponent<CharacterJoint>().connectedBody = m_Spider.GetComponent<Rigidbody>();
+                } else
+                {
+                    Destroy(tmp.GetComponent<CharacterJoint>());
                 }
             }
             else
