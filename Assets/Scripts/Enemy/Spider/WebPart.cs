@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class WebPart : MonoBehaviour
 {
+    private SpiderWeb m_SpiderWeb;
+
+    private void Start()
+    {
+        m_SpiderWeb = transform.parent.gameObject.GetComponent<SpiderWeb>();
+    }
     [SerializeField] private CharacterJoint m_CharacterJoint;
 
     private void OnCollisionEnter(Collision collision)
@@ -11,6 +17,7 @@ public class WebPart : MonoBehaviour
         if (collision.collider.CompareTag("Player") && m_CharacterJoint.connectedBody != null)
         {
             m_CharacterJoint.connectedBody = null;
+            m_SpiderWeb.SpiderWebBroke();
         }
     }
 }

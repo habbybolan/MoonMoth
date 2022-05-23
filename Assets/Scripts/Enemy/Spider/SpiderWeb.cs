@@ -11,12 +11,13 @@ public class SpiderWeb : MonoBehaviour
     [Range(1f, 1000f)]
     [SerializeField] private float m_Length = 1;
     [SerializeField] private bool m_AutoLength = true;
-
     [SerializeField] private float m_partDistance = 0.21f;
-
     [SerializeField] bool spawn = true, snapLast = true;
 
     private LayerMask m_LayerMask;
+
+    public delegate void WebDestroyedDelegate();
+    public WebDestroyedDelegate d_WebDestroyedDelegate;
 
     private void Start()
     {
@@ -89,5 +90,10 @@ public class SpiderWeb : MonoBehaviour
             Destroy(child.gameObject);
         }
         Destroy(gameObject);
+    }
+
+    public void SpiderWebBroke()
+    {
+        d_WebDestroyedDelegate();
     }
 }
