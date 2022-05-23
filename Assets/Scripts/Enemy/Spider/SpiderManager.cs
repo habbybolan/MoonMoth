@@ -58,7 +58,7 @@ public class SpiderManager : MonoBehaviour
         {
             if (GameObject.ReferenceEquals(m_Spiders[i].gameObject, spiderToDelete))
             {
-                DeleteSpiderAtIndex(i, spiderToDelete);
+                m_Spiders[i].gameObject.SetActive(false);
                 break;
             }
         }
