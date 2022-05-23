@@ -21,6 +21,7 @@ public class FireflyCatmullWalker : CatmullWalker
         m_Speed = PlayerManager.PropertyInstance.PlayerController.PlayerParent.Speed;
         if (!m_IsIndependent)
         {
+            // TODO: Make it easier to get spawn point of firefly
             m_Spline.InitializeSplineAtTile(PlayerManager.PropertyInstance.PlayerController.PlayerParent.spline.GetTileInfront(0));
             base.Start();
         }
@@ -51,8 +52,7 @@ public class FireflyCatmullWalker : CatmullWalker
 
     private float DistanceFromPlayer()
     {
-        Vector3 PlayerPos = PlayerManager.PropertyInstance.PlayerController.PlayerParent.transform.position;
-        return Vector3.Distance(PlayerPos, transform.position);
+        return PlayerManager.PropertyInstance.PlayerController.DistanceFromPlayer(transform.position);
     }
 
     private float TargetDistance()

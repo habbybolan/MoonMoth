@@ -8,13 +8,12 @@ using UnityEngine.InputSystem;
  * Deals with Player's Inputs, States and which methods to call each frame.
  * Acts as the central hub for interacting with all Player components.
  */
-public class PlayerController : MonoBehaviour
+public class PlayerController : CharacterController<PlayerHealth>
 {
     [SerializeField] private PlayerMovement m_PlayerMovement;
     [SerializeField] private PlayerParentMovement m_PlayerParentMovement;
     [Tooltip("CameraMovement component")]
     [SerializeField] private CameraMovement m_CameraMovement;
-    [SerializeField] private PlayerHealth m_Health;
     [SerializeField] private PlayerWeapon m_Weapon;
 
     private InputActions playerInput;        // PlayerInput object to enable and create callbacks for inputs performed
@@ -27,12 +26,11 @@ public class PlayerController : MonoBehaviour
         playerInput = new InputActions();
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         m_playerState = PLAYER_ACTION_STATE.FLYING;
-        m_Health.deathDelegate = Death;
         m_Health.terrainCollisionDelegate = OnTerrainCollision;
-
     }
 
     private void OnEnable()
@@ -74,14 +72,19 @@ public class PlayerController : MonoBehaviour
     // Main Update controller for all Player components, Dealing with actions/effects that happen each frame
     void Update()
     {
+        if (!TileManager.PropertyInstance.IsInitialized)
+            return;
+
         m_Health.LosePassiveHealth();
         m_PlayerMovement.RotationLook();
 
+        // move parent along spline
         m_PlayerParentMovement.TryMove();
         
         if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
             m_PlayerMovement.HorizontalRotation(m_MovementInput.ReadValue<Vector2>().x);
+            // move player body along local x, y plane based on inputs
             m_PlayerMovement.MoveAlongXYPlane(m_MovementInput.ReadValue<Vector2>());
         }
 
@@ -96,6 +99,11 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(m_PlayerParentMovement.TerrainCollision(FinishAction, contact));
 
         m_PlayerMovement.TerrainCollision(contact);
+    }
+
+    public float DistanceFromPlayer(Vector3 pointToCompare)
+    {
+        return Vector3.Distance(pointToCompare, transform.position);
     }
    
 
@@ -129,7 +137,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Death() 
+    public override void Death() 
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("TileMapTest");
     }
@@ -137,6 +145,11 @@ public class PlayerController : MonoBehaviour
     private void FinishAction()
     {
         m_playerState = PLAYER_ACTION_STATE.FLYING;
+    }
+
+    protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)
+    {
+        // TODO: implement slow
     }
 
     public PlayerParentMovement PlayerParent { get { return m_PlayerParentMovement;  } }

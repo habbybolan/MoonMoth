@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireflyGun : EnemyWeapon
+public class SpiderWeapon : EnemyWeapon
 {
-       
+    
 }
