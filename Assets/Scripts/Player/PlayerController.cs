@@ -72,6 +72,9 @@ public class PlayerController : CharacterController<PlayerHealth>
     // Main Update controller for all Player components, Dealing with actions/effects that happen each frame
     void Update()
     {
+        if (!TileManager.PropertyInstance.IsInitialized)
+            return;
+
         m_Health.LosePassiveHealth();
         m_PlayerMovement.RotationLook();
 

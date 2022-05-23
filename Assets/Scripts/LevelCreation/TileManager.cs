@@ -23,6 +23,7 @@ public class TileManager : MonoBehaviour
     private LinkedList<Tile> m_VisibleTiles = new LinkedList<Tile>();
 
     private static int m_IDCount = 0;
+    private bool m_IsInitialized = false;   // If all starting tiles have been initialize
 
     public static TileManager PropertyInstance
     { 
@@ -43,6 +44,7 @@ public class TileManager : MonoBehaviour
     void Start()
     {
         InitializeStartTile();
+        m_IsInitialized = true;
     }
 
     private void InitializeStartTile() 
@@ -69,7 +71,9 @@ public class TileManager : MonoBehaviour
             numEachCurrTile++;
         }
 
-        InstantiateTile();
+        // Initialize level with some tiles
+        for (int i = 0; i < 5; i++)
+            InstantiateTile();
     }
 
     public static int GetNewID()
@@ -145,6 +149,8 @@ public class TileManager : MonoBehaviour
             InstantiateTile();
         }
     }
+
+    public bool IsInitialized { get { return m_IsInitialized; } }
 
     public LinkedListNode<Tile> GetHead()
     {
