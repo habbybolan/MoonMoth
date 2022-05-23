@@ -14,6 +14,8 @@ public class Tile : MonoBehaviour
     public List<Vector3> m_SpiderSpawns;
     public List<EnemySetWrapper> m_EnemyPointSet;
 
+    public List<Stalag> m_Stalags;
+
     private Vector3 m_VecStartToCenter;
     private Vector3 m_VecCenterToEnd;
     private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
@@ -28,8 +30,14 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
-        
         m_EndCollider = GetComponent<BoxCollider>();
+
+        if (m_Stalags == null)
+            m_Stalags = new List<Stalag>();
+        if (m_SpiderSpawns == null)
+            m_SpiderSpawns = new List<Vector3>();
+        if (m_EnemyPointSet == null)
+            m_EnemyPointSet = new List<EnemySetWrapper>();
     }
 
     public void Reset()
@@ -43,6 +51,8 @@ public class Tile : MonoBehaviour
         m_EnemyPointSet = new List<EnemySetWrapper> { new EnemySetWrapper(new Vector3(0, 0, 0)) };
 
         m_SpiderSpawns = new List<Vector3>();
+
+        m_Stalags = new List<Stalag>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -233,12 +243,51 @@ public class Tile : MonoBehaviour
 
     public int ID { get { return m_ID; } }
 
+    // Stalag
+    public Stalag GetStalagSpawnPoint(int index)
+    {
+        return m_Stalags[index];
+    }
+    public Stalag GetStalagSpawnPointWorld(int index)
+    {
+        return m_Stalags[index];
+    }
+    public int GetStalagSpawnCount()
+    {
+        return m_Stalags.Count;
+    }
+    public void AddStalagSpawnPoint()
+    {
+        m_Stalags.Add(new Stalag(Vector3.zero));
+    }
+    public void RemoveStalagPoint()
+    {
+        if (m_Stalags.Count == 0)
+            throw new System.Exception("List of stalags already empty");
+        m_Stalags.RemoveAt(m_Stalags.Count - 1);
+    }
+    public void UpdateStalgPoint(int index, Vector3 position)
+    {
+        m_Stalags[index].Position = position;
+    }
+    public void ChangeStalagOrientation(int index)
+    {
+        // flip the orientation of the stalag
+        m_Stalags[index].ChangeStalgOrientation();
+    }
+    public bool GetIsStalagPointingUp(int index)
+    {
+        return m_Stalags[index].GetIsPointUp();
+    }
 
     public enum LOCATION_TYPES
     {
         FOLLOW,
         START,
         END,
-        SPIDER
+        SPIDER,
+        STALAG,
     }
+
+    
 }
