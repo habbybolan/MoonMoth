@@ -134,10 +134,12 @@ public class TileManager : MonoBehaviour
         if (firstTile.IsTraversedByPlayer && distanceFromEnd > m_DistanceToDeleteTile)
         {
             d_TileDeletedDelegate(firstTile);
+            firstTile.DeleteAllSpawned();
             firstTile.SetIsActive(false);
             m_VisibleTiles.RemoveFirst();  
         }
     }
+
 
     private void CheckAddTile()
     {

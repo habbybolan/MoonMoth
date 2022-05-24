@@ -13,13 +13,15 @@ public class Tile : MonoBehaviour
 
     public List<Vector3> m_SpiderSpawns;
     public List<EnemySetWrapper> m_EnemyPointSet;
-
     public List<Stalag> m_Stalags;
 
     private Vector3 m_VecStartToCenter;
     private Vector3 m_VecCenterToEnd;
     private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
     private int m_ID;
+
+    private List<GameObject> m_SpawnedTileObjects;  // list of objects connected to tile for deletion
+    public StalagScriptable m_StalagPrefab;
 
     private void Awake()
     {
@@ -38,6 +40,24 @@ public class Tile : MonoBehaviour
             m_SpiderSpawns = new List<Vector3>();
         if (m_EnemyPointSet == null)
             m_EnemyPointSet = new List<EnemySetWrapper>();
+
+        // Spawn all stalag prefabs
+        m_SpawnedTileObjects = new List<GameObject>();
+        foreach (Stalag stalag in m_Stalags)
+        {
+            // TODO: Use a difficulty coefficient to randomly spawn stalags
+            Obstacle obstacle = Instantiate(m_StalagPrefab.StalagPrefab, transform.TransformPoint(stalag.m_Position), stalag.m_IsPointingUp ? Quaternion.identity : m_StalagPrefab.StalagPrefab.transform.rotation * Quaternion.Euler(Vector3.forward * 180));
+            m_SpawnedTileObjects.Add(obstacle.gameObject);
+        }
+    }
+
+    public void DeleteAllSpawned()
+    {
+        foreach (GameObject obj in m_SpawnedTileObjects)
+        {
+            Destroy(obj);
+        }
+        m_SpawnedTileObjects = new List<GameObject>();
     }
 
     public void Reset()

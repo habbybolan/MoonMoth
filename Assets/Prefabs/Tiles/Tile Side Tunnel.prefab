@@ -550,6 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &1014409947172982568
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,6 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &1556279647661297132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,6 +1421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &2515269936756215522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,6 +1533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &2706100853246892277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2178,6 +2182,7 @@ MonoBehaviour:
   - {x: 7.0224495, y: 9.377681, z: -20.547043}
   m_StartPoint: {x: 5.4985886, y: 11.399059, z: 41.90369}
   m_EndPoint: {x: 5.0023932, y: 10.500639, z: -33.366768}
+  m_SpiderSpawns: []
   m_EnemyPointSet:
   - EnemyPointSet:
     - {x: 4.9643817, y: 11.212977, z: 32.243958}
@@ -2187,6 +2192,8 @@ MonoBehaviour:
   - EnemyPointSet:
     - {x: 8.757856, y: 7.1050487, z: -6.1990013}
     - {x: 2.9643817, y: 8.576365, z: -6.1990013}
+  m_Stalags: []
+  m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
 --- !u!65 &8006055771059123504
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2848,6 +2855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &5316907353114179182
 GameObject:
   m_ObjectHideFlags: 0
@@ -3606,6 +3614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &6134990113985724737
 GameObject:
   m_ObjectHideFlags: 0
@@ -3937,6 +3946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &7016427093264665651
 GameObject:
   m_ObjectHideFlags: 0
@@ -4267,6 +4277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &7452778616758839769
 GameObject:
   m_ObjectHideFlags: 0
