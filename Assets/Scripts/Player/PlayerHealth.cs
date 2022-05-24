@@ -28,6 +28,14 @@ public class PlayerHealth : Health
 
     public override void Damage(DamageInfo damageInfo)
     {
+        // Tick damage cannot be blocked
+        if (damageInfo.m_DamageType == DamageInfo.DAMAGE_TYPE.TICK)
+        {
+            base.Damage(damageInfo);
+            m_HealthText.text = m_CurrentHealth.ToString();
+            return;
+        }
+
         // Dont take any damage if Invulnerable
         if (healthState == HEALTH_STATE.INVULNERABLE)
             return;

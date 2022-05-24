@@ -24,13 +24,15 @@ public class DamageInfo
     {
         TERRAIN,
         OBSTACLE,
-        PROJECTILE
+        PROJECTILE,     
+        TICK            // Damage that always occurs, no I-Frames for tick damage
     }
      
     // special effect damage type has
     public enum HIT_EFFECT
     {
         NORMAL,
-        SLOW
+        SLOW,
+        POISON  
     }
 }

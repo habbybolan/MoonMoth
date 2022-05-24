@@ -6,13 +6,13 @@ using UnityEngine.Events;
 /*
  * Attached to any object that has health and can be destroyed / Shot at.
  */
-public abstract class Health : MonoBehaviour
+public class Health : MonoBehaviour
 {
     [SerializeField] protected float m_MaxHealth = 100; 
     [SerializeField] private ParticleSystem m_deathParticles;
     [SerializeField] private float m_deathParticlesDuration = 1f;
      
-    [SerializeField] private float m_HealthPercentLosePerSecond = 1f;
+    [SerializeField] private float m_HealthPercentLosePerSecond = 0f;
     [SerializeField] private bool m_IsInvincible = false;   // for developer use, makes Health script invincible
 
     protected float m_CurrentHealth;
@@ -65,5 +65,4 @@ public abstract class Health : MonoBehaviour
         }
         d_DeathDelegate();
     }
-
 }
