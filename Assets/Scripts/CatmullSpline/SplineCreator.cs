@@ -65,4 +65,12 @@ public abstract class SplineCreator : CatmullRomSpline
         }
         return curr;
     }
+
+    public void IntializeAtEndOfHead()
+    {
+        m_CurrTile = TileManager.PropertyInstance.GetHead();
+        m_CurrFollowPointInTile = m_CurrTile.Value.EnemyFollowSetCount - 1;
+        m_IsInitialized = true;
+        InitializeStartingPoints();
+    }
 }
