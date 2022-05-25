@@ -573,6 +573,7 @@ MonoBehaviour:
   m_deathParticles: {fileID: 0}
   m_deathParticlesDuration: 1
   m_HealthPercentLosePerSecond: 1
+  m_IsInvincible: 0
 --- !u!114 &2125045404698981339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,8 +590,9 @@ MonoBehaviour:
   m_Spline: {fileID: 4206230537702241074}
   m_Speed: 5
   m_DistanceOffsetFromPrev: 10
-  m_SensingRange: 15
-  m_speedCorrection: 0.25
+  m_DistanceFromCamera: 15
+  m_BoostSpeed: 1.15
+  m_SpeedCorrection: 0.1
   m_IsIndependent: 0
 --- !u!1 &8090891662064940744
 GameObject:
