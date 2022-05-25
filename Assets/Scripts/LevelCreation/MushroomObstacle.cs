@@ -10,6 +10,7 @@ public class MushroomObstacle : Obstacle
     [SerializeField] private float m_PoisonTickRate = .1f;
     [SerializeField] private float m_ExplosionTimeAfterSensing = 1f;
     [SerializeField] private float m_TickDamageAmount = 1f;
+    public ParticleSystem m_MushroomExplosionParticle;
 
     private LayerMask m_ObstacleLayerMask;
     private STATE m_State = STATE.WAITING;
@@ -47,6 +48,10 @@ public class MushroomObstacle : Obstacle
     IEnumerator StartExplosion()
     {
         // TODO: Start poison cloud particles
+
+        Instantiate(m_MushroomExplosionParticle,transform.position,Quaternion.identity);
+        
+        
 
         m_State = STATE.EXPLODED;
         float currDuration = 0;

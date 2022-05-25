@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
         // Play dodge particles
         if (m_DodgeParticles != null)
         {
-            // TODO: Spawn dodge particles
+            Instantiate(m_DodgeParticles,transform.position,Quaternion.identity,transform); 
         }
        
 

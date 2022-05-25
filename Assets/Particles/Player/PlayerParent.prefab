@@ -779,6 +779,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7483894711331120201, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483894711331120201, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a41d4b16494bf7246977b3f6e6142498, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}
 --- !u!1 &7342553640948534339 stripped
@@ -914,7 +922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxHealth: 100
-  m_deathParticles: {fileID: 0}
+  m_deathParticles: {fileID: 3724928139645373970, guid: 5c9621af3bcb72f4abeaf37c094dcf6f, type: 3}
   m_deathParticlesDuration: 1
   m_HealthPercentLosePerSecond: 1
   m_IsInvincible: 0
