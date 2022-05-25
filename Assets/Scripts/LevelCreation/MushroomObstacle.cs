@@ -11,7 +11,6 @@ public class MushroomObstacle : Obstacle
     [SerializeField] private float m_ExplosionTimeAfterSensing = 1f;
     [SerializeField] private float m_TickDamageAmount = 1f;
 
-    private bool m_IsWaiting = true;    // If the mushroom has not been activated by the player
     private LayerMask m_ObstacleLayerMask;
     private STATE m_State = STATE.WAITING;
 
@@ -82,15 +81,21 @@ public class MushroomObstacle : Obstacle
 
     void OnDrawGizmosSelected()
     {
-        if (!m_IsWaiting)
+        if (m_State == STATE.EXPLODED)
         {
-            // Draw a yellow sphere at the transform's position
+            // Show range of poison cloud once spawned
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(transform.position, m_PoisonRadiusRange);
         }
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, m_SensingRadiusRange);
+        if (m_State == STATE.WAITING)
+        {
+            // Show sensing range while waiting state
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(transform.position, m_SensingRadiusRange);
+        }
+
+        
 
     }
 

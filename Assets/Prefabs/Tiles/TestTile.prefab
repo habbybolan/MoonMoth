@@ -5669,9 +5669,12 @@ MonoBehaviour:
   - {x: -32.84128, y: -3.265541, z: 105.731995}
   m_StartPoint: {x: -30.4586, y: 0.16526031, z: -39.90674}
   m_EndPoint: {x: -30.499264, y: 0.3283081, z: 131.97836}
+  m_SpiderSpawns: []
   m_EnemyPointSet:
   - EnemyPointSet:
     - {x: -30.693531, y: -1.2947464, z: 14.31015}
+  m_Stalags: []
+  m_StalagPrefab: {fileID: 0}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0
