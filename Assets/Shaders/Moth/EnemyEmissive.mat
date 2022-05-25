@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyEmissive
-  m_Shader: {fileID: -6465566751694194690, guid: 3aa0ca5a4a5b4e74081e93332804b673, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: d3448fb6e3c74f44b97e77b297b126fd, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
