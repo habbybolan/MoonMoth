@@ -11176,7 +11176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d8d57b4c56e2847926013b41cdd2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EndCollider: {fileID: 0}
   m_FollowPoint:
   - {x: -32.84128, y: -3.265541, z: 43.813553}
   - {x: -32.84128, y: -3.265541, z: 105.731995}
@@ -11199,6 +11198,8 @@ MonoBehaviour:
   - EnemyPointSet:
     - {x: -26.168913, y: -5.583397, z: 102.17784}
     - {x: -47.35588, y: -6.405609, z: 102.17784}
+  m_Stalags: []
+  m_StalagPrefab: {fileID: 0}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0

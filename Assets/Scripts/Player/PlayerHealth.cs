@@ -23,7 +23,7 @@ public class PlayerHealth : Health
     {
         healthState = HEALTH_STATE.VULNERABLE;
         base.Start();
-        m_HealthText.text = m_MaxHealth.ToString();
+        SetHealthText();
     }
 
     public override void Damage(DamageInfo damageInfo)
@@ -32,7 +32,7 @@ public class PlayerHealth : Health
         if (damageInfo.m_DamageType == DamageInfo.DAMAGE_TYPE.TICK)
         {
             base.Damage(damageInfo);
-            m_HealthText.text = m_CurrentHealth.ToString();
+            SetHealthText();
             return;
         }
 
@@ -45,7 +45,12 @@ public class PlayerHealth : Health
         {
             StartCoroutine(InvulnerabilityFrames());
         }
-        m_HealthText.text = m_CurrentHealth.ToString();
+        SetHealthText();
+    }
+
+    private void SetHealthText()
+    {
+        m_HealthText.text = Mathf.Floor(m_CurrentHealth).ToString();
     }
 
     // Deals with invincibility frames after colliding with an obstacle

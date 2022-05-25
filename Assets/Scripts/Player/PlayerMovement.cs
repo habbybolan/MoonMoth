@@ -65,7 +65,10 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Camera z offset from the parent origin")]
     [SerializeField] private float m_CameraOffsetFromParent = -15;
     [Tooltip("Initial Y offset of crosshair")]
-    [SerializeField] private float m_InitialYCrosshairOffset = 1f; 
+    [SerializeField] private float m_InitialYCrosshairOffset = 1f;
+
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem m_DodgeParticles;
 
     private Vector3 m_ControlPoint;         // Location of the controil point
     private Vector3 m_CurrentAngle;         // Currrent rotational angle in EulerAngles
@@ -140,7 +143,13 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator PlayerDodge(System.Action callback, Vector2 vec2Move)
     {
-        // TODO: Cannot leave as only reading x, y values when angled tiles are added (will have to x, y relative to the player parent object)
+        // Play dodge particles
+        if (m_DodgeParticles != null)
+        {
+            // TODO: Spawn dodge particles
+        }
+       
+
         float inputX = vec2Move.x;
         float inputY = vec2Move.y;
         inputY = Mathf.Clamp(inputY, -m_MaxYValue, m_MaxYValue);
