@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
         // Play dodge particles
         if (m_DodgeParticles != null)
         {
-            Instantiate(m_DodgeParticles,transform.position,Quaternion.identity,transform); 
+            StartCoroutine(PlayDodgeParticles());
         }
        
 
@@ -228,6 +228,13 @@ public class PlayerMovement : MonoBehaviour
 
         // Finish dodge state
         callback();
+    }
+
+    IEnumerator PlayDodgeParticles()
+    {
+        ParticleSystem dodgeParticles = Instantiate(m_DodgeParticles, transform.position, Quaternion.identity, transform);
+        yield return new WaitForSeconds(m_DodgeDuration);
+        dodgeParticles.Stop();
     }
 
     public Vector3 ControlPosition

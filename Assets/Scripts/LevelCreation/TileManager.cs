@@ -8,7 +8,6 @@ public class TileManager : MonoBehaviour
 
     [SerializeField] private Tile[] m_TilePrefabs;
     [SerializeField] private float m_DistanceToPlaceTile = 200f;
-    [SerializeField] private float m_DistanceToDeleteTile = 50f;
     [SerializeField] private int m_TilePoolSize = 40;
 
     // Delegate for every time a new tile is added
