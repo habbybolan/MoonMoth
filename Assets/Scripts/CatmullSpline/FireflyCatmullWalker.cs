@@ -21,8 +21,7 @@ public class FireflyCatmullWalker : CatmullWalker
         m_Speed = PlayerManager.PropertyInstance.PlayerController.PlayerParent.Speed;
         if (!m_IsIndependent)
         {
-            // TODO: Make it easier to get spawn point of firefly
-            m_Spline.InitializeSplineAtTile(PlayerManager.PropertyInstance.PlayerController.PlayerParent.spline.GetTileInfront(0));
+            m_Spline.IntializeAtEndOfHead();
             base.Start();
         }
         
@@ -48,6 +47,7 @@ public class FireflyCatmullWalker : CatmullWalker
         if (zDistanceFromCamera < PlayerManager.PropertyInstance.PlayerController.PlayerMovement.CameraOffset - 5)
         {
             m_CurrSpeed = m_Speed * 1.5f;
+            return;
         }
         float targetDistance = TargetDistance();
         // Alter speed of firesly if too far/close to player to keep at contant distance
@@ -64,7 +64,7 @@ public class FireflyCatmullWalker : CatmullWalker
     {
         // COnvert firefly position to player's parent local space
         Vector3 localPlayerPos = PlayerManager.PropertyInstance.PlayerController.PlayerParent.transform.InverseTransformPoint(transform.position);
-        return Vector3.Magnitude(localPlayerPos);
+        return localPlayerPos.z;
     }
 
     private float TargetDistance()

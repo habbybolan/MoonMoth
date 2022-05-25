@@ -127,11 +127,12 @@ public class TileManager : MonoBehaviour
         return m_PoolTiles[rand];
     }
 
+    // Delete 2 tiles back once player has traversed the back 2 tiles
     private void CheckRemoveTile()
     {
         Tile firstTile = m_VisibleTiles.First.Value;
-        float distanceFromEnd = firstTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerController.PlayerParent);
-        if (firstTile.IsTraversedByPlayer && distanceFromEnd > m_DistanceToDeleteTile)
+        Tile secondTile = m_VisibleTiles.First.Next.Value;
+        if (firstTile.IsTraversedByPlayer && secondTile.IsTraversedByPlayer)
         {
             d_TileDeletedDelegate(firstTile);
             firstTile.DeleteAllSpawned();
