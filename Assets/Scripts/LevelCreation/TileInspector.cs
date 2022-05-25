@@ -284,6 +284,7 @@ public class TileInspector : Editor
     // Buttons in inspector for adding/deleting follow points inside tile
     public override void OnInspectorGUI()
     {
+        base.OnInspectorGUI();
         GUILayout.Label("Player follow points");
         // Butotn for adding a player follow point
         if (GUILayout.Button("Add Follow point"))

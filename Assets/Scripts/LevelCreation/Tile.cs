@@ -5,7 +5,7 @@ using System;
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private BoxCollider m_EndCollider;
+    
 
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
@@ -19,6 +19,7 @@ public class Tile : MonoBehaviour
     private Vector3 m_VecCenterToEnd;
     private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
     private int m_ID;
+    private BoxCollider m_EndCollider;
 
     private List<GameObject> m_SpawnedTileObjects;  // list of objects connected to tile for deletion
     public StalagScriptable m_StalagPrefab;
