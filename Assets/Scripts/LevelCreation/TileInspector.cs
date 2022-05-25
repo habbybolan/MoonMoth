@@ -18,6 +18,8 @@ public class TileInspector : Editor
     private int m_PlayerPointSelectedIndex = -1;
     private int m_SpiderSpawnSelected = -1;
 
+    private int m_StalagSpawnSelected = -1;
+
     private int m_FireflyPointSetSelectedIndex = -1;
     private int m_FireflyPointInSetSelected = -1;
     private Tile.LOCATION_TYPES m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
@@ -49,6 +51,10 @@ public class TileInspector : Editor
         for (int i = 0; i < tile.GetSpiderSpawnCount(); i++)
         {
             ShowSpiderSpawns(i);
+        }
+        for (int i = 0; i < tile.GetStalagSpawnCount(); i++)
+        {
+            ShowStalagSpawnPoint(i);
         }
     }
 
@@ -110,6 +116,44 @@ public class TileInspector : Editor
                 tile.SetPlayerFollowPoint(index, handleTransform.InverseTransformPoint(point));
             }
         }
+    }
+
+    // Display all follow points in the tile
+    private void ShowStalagSpawnPoint(int index) 
+    {
+        Handles.color = Color.grey;
+        Vector3 point = handleTransform.TransformPoint(tile.GetStalagSpawnPoint(index).Position);
+        float size = HandleUtility.GetHandleSize(point);
+
+        // Display button and allow selection
+        if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
+        {
+            UnselectAll();
+            m_SelectedType = Tile.LOCATION_TYPES.STALAG;
+            m_StalagSpawnSelected = index;
+            Repaint();
+        }
+
+        // allow movement if button point selected
+        if (m_StalagSpawnSelected == index)
+        {
+            EditorGUI.BeginChangeCheck();
+            point = Handles.DoPositionHandle(point, handleRotation);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(tile, "Move Point");
+                EditorUtility.SetDirty(tile);
+                tile.UpdateStalgPoint(index, handleTransform.InverseTransformPoint(point));
+            }
+        }
+
+        Handles.ArrowHandleCap(
+            0,
+            point,
+            tile.GetIsStalagPointingUp(index) ? Quaternion.LookRotation(Vector3.up) : Quaternion.LookRotation(Vector3.down),
+            size,
+            EventType.Repaint
+        );
     }
 
     // Display the enemy point set and a center point to control them all
@@ -233,6 +277,7 @@ public class TileInspector : Editor
         m_FireflyPointSetSelectedIndex = -1;
         m_FireflyPointInSetSelected = -1;
         m_SpiderSpawnSelected = -1;
+        m_StalagSpawnSelected = -1;
         m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
 }
 
@@ -271,6 +316,34 @@ public class TileInspector : Editor
             Undo.RecordObject(tile, "Remove Spider spawn");
             tile.RemoveSpiderPoint();
             EditorUtility.SetDirty(tile);
+        }
+
+        GUILayout.Label("Stalag Spawn point");
+        // Button for adding new stalag spawn point
+        if (GUILayout.Button("Add stalag spawn"))
+        {
+            Undo.RecordObject(tile, "Add stalag spawn");
+            tile.AddStalagSpawnPoint();
+            EditorUtility.SetDirty(tile);
+        }
+
+        // Button for removing last created stalag point
+        if (GUILayout.Button("Remove stalag spawn"))
+        {
+            Undo.RecordObject(tile, "Remove stalag spawn");
+            tile.RemoveStalagPoint();
+            EditorUtility.SetDirty(tile);
+        }
+
+        if (m_StalagSpawnSelected >= 0)
+        {
+            // Button for changing if the the stalg is point up or down
+            if (GUILayout.Button("Change stalag orientation"))
+            {
+                Undo.RecordObject(tile, "Change stalag orientation");
+                tile.ChangeStalagOrientation(m_StalagSpawnSelected);
+                EditorUtility.SetDirty(tile);
+            }
         }
 
         GUILayout.Label("Enemy point sets");
