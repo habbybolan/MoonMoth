@@ -62,6 +62,32 @@ public class TileInspector : Editor
         }
     }
 
+    Transform objectTouched = null; //the reference of the last object hit
+
+    private void InputPressed()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            if (m_StalagSpawnSelected != 0)
+            {
+                // TODO:
+
+                //Ray worldRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
+                //RaycastHit hitInfo;
+                //if (Physics.Raycast(worldRay, out hitInfo, Mathf.Infinity))
+                //{
+                //    if (hitInfo.collider.gameObject != null)
+                //    {
+                //        objectTouched = hitInfo.collider.gameObject;
+                //        tile.
+                //        objectPreview.position = hitInfo.point;
+                //        objectPreview.rotation = hitInfo.normal;
+                //    }
+                //}
+            }
+        }
+    }
+
     private void ShowSpiderSpawns(int index)
     {
         Handles.color = new Color(115, 43, 204);
@@ -434,13 +460,14 @@ public class TileInspector : Editor
             if (GUILayout.Button("Remove lost moth point"))
             {
                 Undo.RecordObject(tile, "Remove lost moth point");
+                
                 tile.RemoveLostMothPoint(m_LostMothPointSelected);
                 EditorUtility.SetDirty(tile);
                 UnselectAll();
             }
         }
-
-       
     }
+
+    
 }
 #endif

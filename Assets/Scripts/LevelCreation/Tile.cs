@@ -109,11 +109,15 @@ public class Tile : MonoBehaviour
         return Vector3.Distance(transform.TransformPoint(m_StartPoint), player.transform.position);
     }
 
+    private Vector3 GetLocalPosInEditor()
+    {
+        return transform.InverseTransformPoint(SceneView.lastActiveSceneView.camera.transform.position);
+    }
+
     public void AddFollowPoint()
     {
-        Vector3 followPoint = m_FollowPoint[PlayerFollowPointsCount - 1] + Vector3.forward * 2;
         Array.Resize(ref m_FollowPoint, PlayerFollowPointsCount + 1);
-        m_FollowPoint[PlayerFollowPointsCount - 1] = followPoint;
+        m_FollowPoint[PlayerFollowPointsCount - 1] = GetLocalPosInEditor();
     }
 
     public void RemoveFollowPoint()
@@ -126,7 +130,7 @@ public class Tile : MonoBehaviour
 
     public void AddEnemyPointSet()
     {
-        m_EnemyPointSet.Add(new EnemySetWrapper(m_EnemyPointSet[m_EnemyPointSet.Count - 1].EnemyPointSet[0] + Vector3.forward * 2));
+        m_EnemyPointSet.Add(new EnemySetWrapper(GetLocalPosInEditor()));
     }
 
     public void RemoveEnemyPointSet()
@@ -167,7 +171,7 @@ public class Tile : MonoBehaviour
 
     public void AddSpiderPoint()
     {
-        m_SpiderSpawns.Add(new Vector3(0, 0, 0));
+        m_SpiderSpawns.Add(GetLocalPosInEditor());
     }
 
     public void RemoveSpiderPoint()
@@ -287,7 +291,7 @@ public class Tile : MonoBehaviour
     }
     public void AddStalagSpawnPoint()
     {
-        m_Stalags.Add(new Stalag(Vector3.zero));
+        m_Stalags.Add(new Stalag(GetLocalPosInEditor()));
     }
     public void RemoveStalagPoint()
     {
@@ -325,7 +329,7 @@ public class Tile : MonoBehaviour
     } 
     public void AddLostMothPoint()
     {
-        m_LostMothPoints.Add(SceneView.lastActiveSceneView.camera.transform.position);
+        m_LostMothPoints.Add(GetLocalPosInEditor());
     }
     public void RemoveLostMothPoint(int index)
     {
