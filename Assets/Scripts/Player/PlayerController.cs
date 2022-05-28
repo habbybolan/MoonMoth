@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 /*
  * Deals with Player's Inputs, States and which methods to call each frame.
@@ -16,14 +17,20 @@ public class PlayerController : CharacterController<PlayerHealth>
     [SerializeField] private CameraMovement m_CameraMovement;
     [SerializeField] private PlayerWeapon m_Weapon;
 
+    [Header("Lost Moth")]
+    [SerializeField] private TextMeshProUGUI m_LostMothUI;
+    [SerializeField] private float m_LostMothUIDisplayTime = 1.5f;
+
     private InputActions playerInput;        // PlayerInput object to enable and create callbacks for inputs performed
     private InputAction m_MovementInput;    // Input object for moving player along x-y axis
     private PLAYER_ACTION_STATE m_playerState;     // Current player state given the actions performed / effects applied
     Coroutine ShootCoroutine;               // Coroutine called when performed shooting action to allow cancelling the coroutine
+    private int m_LostMothCount = 0;
 
     private void Awake()
     {
         playerInput = new InputActions();
+        m_LostMothUI.enabled = false;
     }
 
     protected override void Start()
@@ -135,6 +142,20 @@ public class PlayerController : CharacterController<PlayerHealth>
             m_CameraMovement.PerformCameraZoom(m_PlayerParentMovement.DashDuration);
             StartCoroutine(m_PlayerParentMovement.Dash(FinishAction));
         }
+    }
+
+    public void LostMothCollected()
+    {
+        m_LostMothCount++;
+        m_LostMothUI.text = m_LostMothCount.ToString();
+        StartCoroutine(LostMothDisplay());
+    }
+
+    IEnumerator LostMothDisplay()
+    {
+        m_LostMothUI.enabled = true;
+        yield return new WaitForSeconds(m_LostMothUIDisplayTime);
+        m_LostMothUI.enabled = false;
     }
 
     public override void Death() 

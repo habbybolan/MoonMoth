@@ -12566,7 +12566,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4431003395948721834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.1785233, y: 87.12743, z: -295.9}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12592,8 +12592,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FollowPoint:
-  - {x: -32.84128, y: -3.265541, z: 28.564056}
-  - {x: -32.84128, y: -3.265541, z: 80.63368}
+  - {x: -32.84128, y: -2.290585, z: 1.936178}
+  - {x: -33.43802, y: -3.835889, z: 80.63368}
   m_StartPoint: {x: -30.48426, y: 0.37075806, z: -42.253326}
   m_EndPoint: {x: -30.499264, y: 0.3283081, z: 131.26689}
   m_SpiderSpawns:
@@ -12614,7 +12614,11 @@ MonoBehaviour:
     - {x: -26.168913, y: -5.583397, z: 102.17784}
     - {x: -47.35588, y: -6.405609, z: 102.17784}
   m_Stalags: []
-  m_StalagPrefab: {fileID: 0}
+  m_LostMothPoints:
+  - {x: -28.513796, y: 0.9390259, z: -14.62207}
+  - {x: -25.055544, y: 2.4026337, z: 14.777313}
+  m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
+  m_LostMoth: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0

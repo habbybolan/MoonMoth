@@ -2,38 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor;
 
+[ExecuteInEditMode]
 public class Tile : MonoBehaviour
 {
-    
-
+    // Manually set points
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
-
     public List<Vector3> m_SpiderSpawns;
     public List<EnemySetWrapper> m_EnemyPointSet;
     public List<Stalag> m_Stalags;
-
+    public List<Vector3> m_LostMothPoints;
     private Vector3 m_VecStartToCenter;
     private Vector3 m_VecCenterToEnd;
+    
+    // prefabs
+    public StalagScriptable m_StalagPrefab;
+    public LostMoth m_LostMoth;
+
     private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
     private int m_ID;
     private BoxCollider m_EndCollider;
 
     private List<GameObject> m_SpawnedTileObjects;  // list of objects connected to tile for deletion
-    public StalagScriptable m_StalagPrefab;
 
     private void Awake()
     {
         m_VecStartToCenter = transform.position - transform.TransformPoint(m_StartPoint);
         m_VecCenterToEnd = transform.TransformPoint(m_EndPoint) - transform.position;
         m_ID = TileManager.GetNewID();
-    }
-
-    private void Start()
-    {
-        m_EndCollider = GetComponent<BoxCollider>();
 
         if (m_Stalags == null)
             m_Stalags = new List<Stalag>();
@@ -41,6 +40,13 @@ public class Tile : MonoBehaviour
             m_SpiderSpawns = new List<Vector3>();
         if (m_EnemyPointSet == null)
             m_EnemyPointSet = new List<EnemySetWrapper>();
+        if (m_LostMothPoints == null)
+            m_LostMothPoints = new List<Vector3>();
+    }
+
+    private void Start()
+    {
+        m_EndCollider = GetComponent<BoxCollider>();
 
         // Spawn all stalag prefabs
         m_SpawnedTileObjects = new List<GameObject>();
@@ -49,6 +55,11 @@ public class Tile : MonoBehaviour
             // TODO: Use a difficulty coefficient to randomly spawn stalags
             Obstacle obstacle = Instantiate(m_StalagPrefab.StalagPrefab, transform.TransformPoint(stalag.m_Position), stalag.m_IsPointingUp ? Quaternion.identity : m_StalagPrefab.StalagPrefab.transform.rotation * Quaternion.Euler(Vector3.forward * 180));
             m_SpawnedTileObjects.Add(obstacle.gameObject);
+        }
+        foreach (Vector3 lostMoth in m_LostMothPoints)
+        {
+            LostMoth lostMothObj = Instantiate(m_LostMoth, transform.TransformPoint(lostMoth), Quaternion.identity);
+            m_SpawnedTileObjects.Add(lostMothObj.gameObject);
         }
     }
 
@@ -64,16 +75,12 @@ public class Tile : MonoBehaviour
     public void Reset()
     {
         m_FollowPoint = new Vector3[] { transform.InverseTransformPoint(Vector3.zero) };
-
         m_StartPoint = transform.InverseTransformPoint(new Vector3(0, 0, 10));
-
         m_EndPoint = transform.InverseTransformPoint(new Vector3(0, 0, -10));
-
         m_EnemyPointSet = new List<EnemySetWrapper> { new EnemySetWrapper(new Vector3(0, 0, 0)) };
-
         m_SpiderSpawns = new List<Vector3>();
-
         m_Stalags = new List<Stalag>();
+        m_LostMothPoints = new List<Vector3>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -102,11 +109,15 @@ public class Tile : MonoBehaviour
         return Vector3.Distance(transform.TransformPoint(m_StartPoint), player.transform.position);
     }
 
+    private Vector3 GetLocalPosInEditor()
+    {
+        return transform.InverseTransformPoint(SceneView.lastActiveSceneView.camera.transform.position);
+    }
+
     public void AddFollowPoint()
     {
-        Vector3 followPoint = m_FollowPoint[PlayerFollowPointsCount - 1] + Vector3.forward * 2;
         Array.Resize(ref m_FollowPoint, PlayerFollowPointsCount + 1);
-        m_FollowPoint[PlayerFollowPointsCount - 1] = followPoint;
+        m_FollowPoint[PlayerFollowPointsCount - 1] = GetLocalPosInEditor();
     }
 
     public void RemoveFollowPoint()
@@ -119,7 +130,7 @@ public class Tile : MonoBehaviour
 
     public void AddEnemyPointSet()
     {
-        m_EnemyPointSet.Add(new EnemySetWrapper(m_EnemyPointSet[m_EnemyPointSet.Count - 1].EnemyPointSet[0] + Vector3.forward * 2));
+        m_EnemyPointSet.Add(new EnemySetWrapper(GetLocalPosInEditor()));
     }
 
     public void RemoveEnemyPointSet()
@@ -160,7 +171,7 @@ public class Tile : MonoBehaviour
 
     public void AddSpiderPoint()
     {
-        m_SpiderSpawns.Add(new Vector3(0, 0, 0));
+        m_SpiderSpawns.Add(GetLocalPosInEditor());
     }
 
     public void RemoveSpiderPoint()
@@ -264,7 +275,8 @@ public class Tile : MonoBehaviour
 
     public int ID { get { return m_ID; } }
 
-    // Stalag
+    // Stalags ***********
+
     public Stalag GetStalagSpawnPoint(int index)
     {
         return m_Stalags[index];
@@ -279,7 +291,7 @@ public class Tile : MonoBehaviour
     }
     public void AddStalagSpawnPoint()
     {
-        m_Stalags.Add(new Stalag(Vector3.zero));
+        m_Stalags.Add(new Stalag(GetLocalPosInEditor()));
     }
     public void RemoveStalagPoint()
     {
@@ -301,13 +313,42 @@ public class Tile : MonoBehaviour
         return m_Stalags[index].GetIsPointUp();
     }
 
+    // Lost Moths ************
+
+    public Vector3 GetLostMothPoint(int index)
+    {
+        return m_LostMothPoints[index];
+    }
+    public void UpdateLostMothPoint(int index, Vector3 position)
+    {
+        m_LostMothPoints[index] = position;
+    }
+    public int GetLostMothCount()
+    {
+        return m_LostMothPoints.Count;
+    } 
+    public void AddLostMothPoint()
+    {
+        m_LostMothPoints.Add(GetLocalPosInEditor());
+    }
+    public void RemoveLostMothPoint(int index)
+    {
+        if (index >= GetLostMothCount())
+        {
+            Debug.LogWarning("Lost moth index out of range");
+            return;
+        }
+        m_LostMothPoints.RemoveAt(index);
+    }
+
     public enum LOCATION_TYPES
     {
         FOLLOW,
-        START,
+        START, 
         END,
         SPIDER,
         STALAG,
+        LOST_MOTH,
     }
 
     
