@@ -4,9 +4,8 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - m_EndCollider: {instanceID: 0}
   - m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
-  - testObs: {fileID: 8046770995568307375, guid: f02e75b0a6a62b04582be1c600ced6ab, type: 3}
+  - m_LostMoth: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

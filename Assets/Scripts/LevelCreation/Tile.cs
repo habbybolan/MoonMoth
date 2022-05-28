@@ -7,23 +7,26 @@ using UnityEditor;
 [ExecuteInEditMode]
 public class Tile : MonoBehaviour
 {
+    // Manually set points
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
-
     public List<Vector3> m_SpiderSpawns;
     public List<EnemySetWrapper> m_EnemyPointSet;
     public List<Stalag> m_Stalags;
     public List<Vector3> m_LostMothPoints;
-
     private Vector3 m_VecStartToCenter;
     private Vector3 m_VecCenterToEnd;
+    
+    // prefabs
+    public StalagScriptable m_StalagPrefab;
+    public LostMoth m_LostMoth;
+
     private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
     private int m_ID;
     private BoxCollider m_EndCollider;
 
     private List<GameObject> m_SpawnedTileObjects;  // list of objects connected to tile for deletion
-    public StalagScriptable m_StalagPrefab;
 
     private void Awake()
     {
@@ -52,6 +55,11 @@ public class Tile : MonoBehaviour
             // TODO: Use a difficulty coefficient to randomly spawn stalags
             Obstacle obstacle = Instantiate(m_StalagPrefab.StalagPrefab, transform.TransformPoint(stalag.m_Position), stalag.m_IsPointingUp ? Quaternion.identity : m_StalagPrefab.StalagPrefab.transform.rotation * Quaternion.Euler(Vector3.forward * 180));
             m_SpawnedTileObjects.Add(obstacle.gameObject);
+        }
+        foreach (Vector3 lostMoth in m_LostMothPoints)
+        {
+            LostMoth lostMothObj = Instantiate(m_LostMoth, transform.TransformPoint(lostMoth), Quaternion.identity);
+            m_SpawnedTileObjects.Add(lostMothObj.gameObject);
         }
     }
 

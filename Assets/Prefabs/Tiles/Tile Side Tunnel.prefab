@@ -2176,7 +2176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d8d57b4c56e2847926013b41cdd2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EndCollider: {fileID: 0}
   m_FollowPoint:
   - {x: 7.0224495, y: 9.377681, z: 26.957909}
   - {x: 7.0224495, y: 9.377681, z: -20.547043}
@@ -2193,7 +2192,9 @@ MonoBehaviour:
     - {x: 8.757856, y: 7.1050487, z: -6.1990013}
     - {x: 2.9643817, y: 8.576365, z: -6.1990013}
   m_Stalags: []
+  m_LostMothPoints: []
   m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
+  m_LostMoth: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
 --- !u!65 &8006055771059123504
 BoxCollider:
   m_ObjectHideFlags: 0

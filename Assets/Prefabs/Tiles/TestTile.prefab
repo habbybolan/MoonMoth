@@ -11083,15 +11083,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d8d57b4c56e2847926013b41cdd2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EndCollider: {fileID: 0}
   m_FollowPoint:
   - {x: -32.84128, y: -3.265541, z: 43.813553}
   - {x: -32.84128, y: -3.265541, z: 105.731995}
   m_StartPoint: {x: -30.4586, y: 0.16526031, z: -39.90674}
   m_EndPoint: {x: -30.499264, y: 0.3283081, z: 131.26689}
+  m_SpiderSpawns: []
   m_EnemyPointSet:
   - EnemyPointSet:
     - {x: -30.693531, y: -1.2947464, z: 14.31015}
+  m_Stalags: []
+  m_LostMothPoints: []
+  m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
+  m_LostMoth: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0

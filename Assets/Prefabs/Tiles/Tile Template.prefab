@@ -11909,7 +11909,9 @@ MonoBehaviour:
   m_Stalags:
   - m_Position: {x: -28.98415, y: 16.523254, z: -15.465027}
     m_IsPointingUp: 0
-  m_StalagPrefab: {fileID: 0}
+  m_LostMothPoints: []
+  m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
+  m_LostMoth: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0
