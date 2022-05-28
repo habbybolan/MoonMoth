@@ -15,14 +15,14 @@ public class TileInspector : Editor
     private const float handleSize = 0.15f;
     private const float pickSize = 0.2f;
 
+    private Tile.LOCATION_TYPES m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
     private int m_PlayerPointSelectedIndex = -1;
     private int m_SpiderSpawnSelected = -1;
-
     private int m_StalagSpawnSelected = -1;
-
     private int m_FireflyPointSetSelectedIndex = -1;
     private int m_FireflyPointInSetSelected = -1;
-    private Tile.LOCATION_TYPES m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
+    private int m_LostMothPointSelected = -1;
+   
 
     private void OnSceneGUI()
     {
@@ -55,6 +55,10 @@ public class TileInspector : Editor
         for (int i = 0; i < tile.GetStalagSpawnCount(); i++)
         {
             ShowStalagSpawnPoint(i);
+        }
+        for (int i = 0; i < tile.GetLostMothCount(); i++)
+        {
+            ShowLostMothPoint(i);
         }
     }
 
@@ -100,7 +104,6 @@ public class TileInspector : Editor
             UnselectAll();
             m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
             m_PlayerPointSelectedIndex = index;
-            m_SpiderSpawnSelected = -1;
             Repaint();
         }
 
@@ -114,6 +117,36 @@ public class TileInspector : Editor
                 Undo.RecordObject(tile, "Move Point");
                 EditorUtility.SetDirty(tile);
                 tile.SetPlayerFollowPoint(index, handleTransform.InverseTransformPoint(point));
+            }
+        }
+    }
+
+    // Display lost moth point
+    private void ShowLostMothPoint(int index)
+    {
+        Handles.color = Color.black;
+        Vector3 point = handleTransform.TransformPoint(tile.GetLostMothPoint(index));
+        float size = HandleUtility.GetHandleSize(point);
+
+        // Display button and allow selection
+        if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
+        {
+            UnselectAll();
+            m_SelectedType = Tile.LOCATION_TYPES.LOST_MOTH;
+            m_LostMothPointSelected = index;
+            Repaint();
+        }
+
+        // allow movement if button point selected
+        if (m_LostMothPointSelected == index)
+        {
+            EditorGUI.BeginChangeCheck();
+            point = Handles.DoPositionHandle(point, handleRotation);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(tile, "Move Point");
+                EditorUtility.SetDirty(tile);
+                tile.UpdateLostMothPoint(index, handleTransform.InverseTransformPoint(point));
             }
         }
     }
@@ -278,6 +311,7 @@ public class TileInspector : Editor
         m_FireflyPointInSetSelected = -1;
         m_SpiderSpawnSelected = -1;
         m_StalagSpawnSelected = -1;
+        m_LostMothPointSelected = -1;
         m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
 }
 
@@ -384,6 +418,29 @@ public class TileInspector : Editor
                 EditorUtility.SetDirty(tile);
             }
         }
+
+        GUILayout.Label("Lost Moth Point");
+        // button for adding a new set of enemy follow points
+        if (GUILayout.Button("Add lost moth point"))
+        {
+            Undo.RecordObject(tile, "Add lost moth point");
+            tile.AddLostMothPoint(); 
+            EditorUtility.SetDirty(tile);
+        }
+
+        if (m_LostMothPointSelected >= 0)
+        {
+             // button for removing last created set of follow points
+            if (GUILayout.Button("Remove lost moth point"))
+            {
+                Undo.RecordObject(tile, "Remove lost moth point");
+                tile.RemoveLostMothPoint(m_LostMothPointSelected);
+                EditorUtility.SetDirty(tile);
+                UnselectAll();
+            }
+        }
+
+       
     }
 }
 #endif
