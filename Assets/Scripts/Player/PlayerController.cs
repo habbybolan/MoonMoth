@@ -21,10 +21,16 @@ public class PlayerController : CharacterController<PlayerHealth>
     [SerializeField] private TextMeshProUGUI m_LostMothUI;
     [SerializeField] private float m_LostMothUIDisplayTime = 1.5f;
 
+    [Header("Aim Mode")]
+    [Range(0.1f, 1)]
+    [SerializeField] private float m_AimModeTimescaleChange = 0.5f;
+
     private InputActions playerInput;        // PlayerInput object to enable and create callbacks for inputs performed
     private InputAction m_MovementInput;    // Input object for moving player along x-y axis
     private PLAYER_ACTION_STATE m_playerState;     // Current player state given the actions performed / effects applied
     Coroutine ShootCoroutine;               // Coroutine called when performed shooting action to allow cancelling the coroutine
+
+    private bool m_IsAimMode = false;
     private int m_LostMothCount = 0;
 
     private void Awake()
@@ -58,6 +64,24 @@ public class PlayerController : CharacterController<PlayerHealth>
         // Dash
         playerInput.Player.Dash.performed += DoDash;
         playerInput.Player.Dash.Enable();
+
+        // AimMode
+        playerInput.Player.AimModeStart.performed += OnAimModeStart;
+        playerInput.Player.AimModeStart.Enable();
+        playerInput.Player.AimModeEnd.performed += OnAimModeEnd;
+        playerInput.Player.AimModeEnd.Enable();
+    }
+
+    private void OnAimModeStart(InputAction.CallbackContext obj)
+    {
+        Time.timeScale = m_AimModeTimescaleChange;
+        m_PlayerMovement.AimModeEnter();
+    }
+
+    private void OnAimModeEnd(InputAction.CallbackContext obj)
+    {
+        Time.timeScale = 1f;
+        m_PlayerMovement.AimModeExit();
     }
 
     private void OnDisable()

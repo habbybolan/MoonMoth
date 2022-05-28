@@ -71,6 +71,24 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AimModeStart"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d45109c-fe51-4783-a441-d4a712f2262d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AimModeEnd"",
+                    ""type"": ""Button"",
+                    ""id"": ""afd46c16-6ef0-4dee-b9c8-f440cb3817a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -170,6 +188,28 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6576ab6-721d-413c-a2d8-6bbb8d887a06"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""AimModeStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf9665e1-ce5f-4ccf-98d6-571dcc68a564"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimModeEnd"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -762,6 +802,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
+        m_Player_AimModeStart = m_Player.FindAction("AimModeStart", throwIfNotFound: true);
+        m_Player_AimModeEnd = m_Player.FindAction("AimModeEnd", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -838,6 +880,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Dodge;
+    private readonly InputAction m_Player_AimModeStart;
+    private readonly InputAction m_Player_AimModeEnd;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -847,6 +891,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
+        public InputAction @AimModeStart => m_Wrapper.m_Player_AimModeStart;
+        public InputAction @AimModeEnd => m_Wrapper.m_Player_AimModeEnd;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -871,6 +917,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+                @AimModeStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimModeStart;
+                @AimModeStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimModeStart;
+                @AimModeStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimModeStart;
+                @AimModeEnd.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimModeEnd;
+                @AimModeEnd.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimModeEnd;
+                @AimModeEnd.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimModeEnd;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -890,6 +942,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
+                @AimModeStart.started += instance.OnAimModeStart;
+                @AimModeStart.performed += instance.OnAimModeStart;
+                @AimModeStart.canceled += instance.OnAimModeStart;
+                @AimModeEnd.started += instance.OnAimModeEnd;
+                @AimModeEnd.performed += instance.OnAimModeEnd;
+                @AimModeEnd.canceled += instance.OnAimModeEnd;
             }
         }
     }
@@ -1051,6 +1109,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnAimModeStart(InputAction.CallbackContext context);
+        void OnAimModeEnd(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
