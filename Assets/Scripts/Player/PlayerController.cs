@@ -129,8 +129,6 @@ public class PlayerController : CharacterController<PlayerHealth>
         }
 
         m_PlayerMovement.MothXYMovemnent();
-
-        m_PlayerMovement.UpdateCrossHair();
     }
 
     private void FixedUpdate()
@@ -140,6 +138,7 @@ public class PlayerController : CharacterController<PlayerHealth>
             // move player body along local x, y plane based on inputs
             m_PlayerMovement.ControlPointXYMovement(m_MovementInput.ReadValue<Vector2>());
         }
+        m_PlayerMovement.UpdateCrossHair();
     }
 
     // Update each enemy duration for AimMode boost, removing if it hit 0

@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_CameraOffsetFromParent = -15;
     [Tooltip("Initial Y offset of crosshair")]
     [SerializeField] private float m_InitialYCrosshairOffset = 1f;
+    [SerializeField] private Transform m_ReticlePoint;
 
     [Header("Particles")]
     [SerializeField] private ParticleSystem m_DodgeParticles;
@@ -153,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
     public void UpdateCrossHair()
     {
         m_Crosshair.position = Camera.main.WorldToScreenPoint(CrossHairPoint);
+        m_ReticlePoint.position = CrossHairPoint;
     }
 
     public IEnumerator PlayerDodge(System.Action callback, Vector2 vec2Move)
