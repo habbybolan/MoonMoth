@@ -101,6 +101,12 @@ public class PlayerController : CharacterController<PlayerHealth>
         // Dash
         playerInput.Player.Dash.performed -= DoDash;
         playerInput.Player.Dash.Disable();
+
+        // Aim Mode
+        playerInput.Player.AimModeStart.performed -= OnAimModeStart;
+        playerInput.Player.AimModeStart.Disable();
+        playerInput.Player.AimModeEnd.performed -= OnAimModeEnd;
+        playerInput.Player.AimModeEnd.Disable();
     }
 
     // Main Update controller for all Player components, Dealing with actions/effects that happen each frame
