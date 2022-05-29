@@ -465,7 +465,8 @@ GameObject:
   - component: {fileID: 3977897140022987253}
   - component: {fileID: 3977897140022987252}
   - component: {fileID: 3977897140022987259}
-  m_Layer: 0
+  - component: {fileID: 546655778}
+  m_Layer: 11
   m_Name: ControlPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,8 +549,24 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 4.09
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &546655778
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3977897140022987257}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &3977897140854792872
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +714,7 @@ GameObject:
   - component: {fileID: 3977897141832786758}
   m_Layer: 0
   m_Name: PlayerParent
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -897,7 +914,7 @@ MonoBehaviour:
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -1187,6 +1204,13 @@ MonoBehaviour:
   m_LostMothUI: {fileID: 1318840746}
   m_LostMothUIDisplayTime: 1.5
   m_AimModeTimescaleChange: 0.5
+  m_AimModePercentLossPerSec: 20
+  m_AimModePercentGainedPerSec: 1
+  m_AimModeCooldown: 3
+  m_AimModeMoonReticle: {fileID: 1284923513141670478}
+  m_EnemyPercentBoost: 10
+  m_MaxNumberOfEnemyBoost: 3
+  m_EnemyBoostDuration: 1.5
 --- !u!114 &7576343697687589149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1199,10 +1223,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1616b1e3f70b84f4db6c432144dbd350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MoveSpeedPercent: 0.2
-  m_IsShowControlObject: 0
+  m_MothMoveSpeed: 20
+  m_IsShowControlObject: 1
   m_ControlObject: {fileID: 3977897140022987257}
-  m_BaseControlSpeed: 25
+  m_BaseControlSpeed: 1500
   m_AimModeSpeedIncrease: 1.8
   m_DodgeDuration: 0.5
   m_AnimationCurve:
@@ -1272,7 +1296,7 @@ MonoBehaviour:
   m_deathParticles: {fileID: 3724928139645373970, guid: 5c9621af3bcb72f4abeaf37c094dcf6f, type: 3}
   m_deathParticlesDuration: 1
   m_HealthPercentLosePerSecond: 1
-  m_IsInvincible: 0
+  m_IsInvincible: 1
   m_InvincibilityDuration: 1
   m_TerrainDamageAmount: 5
   m_HealthText: {fileID: 734772372}

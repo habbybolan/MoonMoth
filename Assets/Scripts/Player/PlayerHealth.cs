@@ -16,9 +16,6 @@ public class PlayerHealth : Health
     
     private HEALTH_STATE healthState;       // If the player can be damaged or not by non-terrain damage types
 
-    public delegate void TerrainColisionDelegate(ContactPoint contact);
-    public TerrainColisionDelegate terrainCollisionDelegate; 
-
     protected override void Start()
     {
         healthState = HEALTH_STATE.VULNERABLE;
@@ -59,19 +56,6 @@ public class PlayerHealth : Health
         healthState = HEALTH_STATE.INVULNERABLE;
         yield return new WaitForSeconds(m_InvincibilityDuration);
         healthState = HEALTH_STATE.VULNERABLE;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        // TODO: Remove once proper terrain collision added
-        // Collision check on Terrain
-        Terrain terrain = collision.gameObject.GetComponent<Terrain>();
-        if (terrain != null)
-        {
-            // Deals with movement changes on terrain collision
-            terrainCollisionDelegate(collision.contacts[0]);
-            Damage(new DamageInfo(m_TerrainDamageAmount, terrain.gameObject, gameObject, DamageInfo.DAMAGE_TYPE.TERRAIN));
-        }
     }
 
     public enum HEALTH_STATE

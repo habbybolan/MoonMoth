@@ -29,15 +29,15 @@ public class SpiderManager : MonoBehaviour
 
     private void SpawnNewSpiders(Tile tile)
     {
-        // TODO: use difficulty coeffient to choose which points to spawn spiders at
-        for (int i = 0; i < tile.GetSpiderSpawnCount(); i++)
-        {
-            Vector3 position = tile.GetSpiderSpawnWorld(i);
-            SpiderController controller = Instantiate(m_SpiderPrefab, position, Quaternion.identity);
-            // set TIleID of spider to know when to remove from world
-            controller.TileID = tile.ID;
-            m_Spiders.Add(controller);
-        }
+        //// TODO: use difficulty coeffient to choose which points to spawn spiders at
+        //for (int i = 0; i < tile.GetSpiderSpawnCount(); i++)
+        //{
+        //    Vector3 position = tile.GetSpiderSpawnWorld(i);
+        //    SpiderController controller = Instantiate(m_SpiderPrefab, position, Quaternion.identity);
+        //    // set TIleID of spider to know when to remove from world
+        //    controller.TileID = tile.ID;
+        //    m_Spiders.Add(controller);
+        //}
     }
 
     private void DeleteSpidersAtTile(Tile tile)
