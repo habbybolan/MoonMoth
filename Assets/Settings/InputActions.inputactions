@@ -49,6 +49,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "AimModeStart",
+                    "type": "Button",
+                    "id": "6d45109c-fe51-4783-a441-d4a712f2262d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AimModeEnd",
+                    "type": "Button",
+                    "id": "afd46c16-6ef0-4dee-b9c8-f440cb3817a1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -148,6 +166,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6576ab6-721d-413c-a2d8-6bbb8d887a06",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "AimModeStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf9665e1-ce5f-4ccf-98d6-571dcc68a564",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AimModeEnd",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

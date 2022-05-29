@@ -18,6 +18,11 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Base speed of the control point")]
     [SerializeField] private float m_BaseControlSpeed = 25f;
 
+    [Header("Aim Mode")]
+    [Tooltip("The speed increase on player movement while in aim mode to move faster in relation to everything else")]
+    [Range(1, 3)] 
+    [SerializeField] private float m_AimModeSpeedIncrease = 1.8f;
+
     [Header("Dodge")]
     [Tooltip("The duration the dodge lasts")]
     [SerializeField] private float m_DodgeDuration = 1f;
@@ -116,6 +121,16 @@ public class PlayerMovement : MonoBehaviour
             m_RotateSpeed);
     }
 
+    public void AimModeEnter()
+    {
+        m_CurrControlSpeed *= m_AimModeSpeedIncrease;
+    }
+
+    public void AimModeExit()
+    {
+        m_CurrControlSpeed = m_BaseControlSpeed;
+    }
+
     public void HorizontalRotation(float xLook)
     {
         m_CurrentAngle = new Vector3(
@@ -157,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
 
         float inputXDirection = inputX == 0 ? -1 : inputX < 0 ? -1 : 1;
 
-        float rotationAmount;
+        float rotationAmount;   // Amount to rotate to perform at least a full rotation, given current rotation
         float difference = Mathf.Abs(360 - transform.localRotation.eulerAngles.z);
         // player angled to the right
         if (currZRot > 180)

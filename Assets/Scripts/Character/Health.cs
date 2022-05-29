@@ -18,7 +18,8 @@ public class Health : MonoBehaviour
     protected float m_CurrentHealth;
 
     public delegate void DeathDelegate();
-    public DeathDelegate d_DeathDelegate; 
+    public DeathDelegate d_DeathDelegate;
+    private GameObject m_LastInstigator;
 
     public float HealthPercentage => (float)m_CurrentHealth / m_MaxHealth;
 
@@ -40,6 +41,7 @@ public class Health : MonoBehaviour
         {
             return;
         }
+        m_LastInstigator = damageInfo.m_Instigator;
         RemoveHealth(damageInfo.m_DamageAmount);
     }
 
@@ -52,6 +54,11 @@ public class Health : MonoBehaviour
         m_CurrentHealth -= healthToLose;
         if (m_CurrentHealth <= 0)
         {
+            // If enemy dies, notify PlayerController
+            if (gameObject.tag == "Enemy")
+            {
+                PlayerManager.PropertyInstance.PlayerController.OnEnemyKilled();
+            }
             Death();
         }
     }
