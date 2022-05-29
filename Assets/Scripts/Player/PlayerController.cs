@@ -126,13 +126,20 @@ public class PlayerController : CharacterController<PlayerHealth>
         if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
             m_PlayerMovement.HorizontalRotation(m_MovementInput.ReadValue<Vector2>().x);
-            // move player body along local x, y plane based on inputs
-            m_PlayerMovement.ControlPointXYMovement(m_MovementInput.ReadValue<Vector2>());
         }
 
         m_PlayerMovement.MothXYMovemnent();
 
         m_PlayerMovement.UpdateCrossHair();
+    }
+
+    private void FixedUpdate()
+    {
+        if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
+        {
+            // move player body along local x, y plane based on inputs
+            m_PlayerMovement.ControlPointXYMovement(m_MovementInput.ReadValue<Vector2>());
+        }
     }
 
     // Update each enemy duration for AimMode boost, removing if it hit 0

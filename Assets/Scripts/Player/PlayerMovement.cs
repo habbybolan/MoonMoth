@@ -110,9 +110,8 @@ public class PlayerMovement : MonoBehaviour
         float inputX = Vec2Movement.x;
         float inputY = Vec2Movement.y;
 
-        m_ControlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 1000);
-
-        m_ControlRigidBody.velocity = new Vector3(inputX, inputY, 0) * m_CurrControlSpeed * Time.deltaTime + Vector3.forward * m_ControlSpeedMultiplier * Time.deltaTime;
+        m_ControlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 10);
+        m_ControlRigidBody.velocity = new Vector3(inputX, inputY, 0) * m_CurrControlSpeed + Vector3.forward * m_ControlSpeedMultiplier;
     }
 
     public void MothXYMovemnent()
@@ -212,12 +211,6 @@ public class PlayerMovement : MonoBehaviour
 
             transform.localEulerAngles = m_CurrentAngle;
 
-            // Get the move addition in x and y direction
-            float moveX = m_AnimationCurve.Evaluate(currDuration / m_DodgeDuration) * Time.deltaTime * m_DodgeSpeedX;
-            float moveY = Time.deltaTime * m_DodgeSpeedY;
-
-            //transform.localPosition += Vector3.right * inputXDirection * moveX + Vector3.up * moveY * inputY;
-
             float controlPointMultiplierX = 1f;
             // if control point on opposite side X of the player fromthe direction player is dodging, apply speed multiplier
             if (inputXDirection < 0 && ControlPosition.x > transform.localPosition.x - m_ControlPointOffsetLimitX ||
@@ -235,8 +228,8 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // Update control point
-            m_ControlRigidBody.velocity =   Vector3.right * inputX * controlPointMultiplierX * m_BaseControlSpeed * Time.deltaTime +
-                                            Vector3.up * inputY * controlPointMultiplierY * m_BaseControlSpeed * Time.deltaTime;
+            m_ControlRigidBody.velocity =   Vector3.right * inputXDirection * controlPointMultiplierX * m_BaseControlSpeed +
+                                            Vector3.up * inputY * controlPointMultiplierY * m_BaseControlSpeed;
 
             currDuration += Time.deltaTime;
             yield return null;
