@@ -58,7 +58,6 @@ public class PlayerController : CharacterController<PlayerHealth>
     {
         base.Start();
         m_playerState = PLAYER_ACTION_STATE.FLYING;
-        m_Health.terrainCollisionDelegate = OnTerrainCollision;
     }
 
     private void OnEnable()
@@ -128,8 +127,10 @@ public class PlayerController : CharacterController<PlayerHealth>
         {
             m_PlayerMovement.HorizontalRotation(m_MovementInput.ReadValue<Vector2>().x);
             // move player body along local x, y plane based on inputs
-            m_PlayerMovement.MoveAlongXYPlane(m_MovementInput.ReadValue<Vector2>());
+            m_PlayerMovement.ControlPointXYMovement(m_MovementInput.ReadValue<Vector2>());
         }
+
+        m_PlayerMovement.MothXYMovemnent();
 
         m_PlayerMovement.UpdateCrossHair();
     }
@@ -213,16 +214,6 @@ public class PlayerController : CharacterController<PlayerHealth>
             m_AimModeCurrPercent += (m_AimModePercentGainedPerSec + (m_EnemyPercentBoost *Mathf.Min(m_MaxNumberOfEnemyBoost, enemyBoostCount))) * Time.deltaTime;
         }
         m_AimModeMoonReticle.fillAmount = (m_AimModeCurrPercent / 100);
-    }
-
-    public void OnTerrainCollision(ContactPoint contact)
-    {
-        Vector3 normal = contact.normal;
-        Vector3 contactPoint = contact.point;
-        Debug.DrawRay(contactPoint, normal, Color.red, 10);
-        StartCoroutine(m_PlayerParentMovement.TerrainCollision(FinishAction, contact));
-
-        m_PlayerMovement.TerrainCollision(contact);
     }
 
     public float DistanceFromPlayer(Vector3 pointToCompare)

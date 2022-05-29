@@ -29,7 +29,7 @@ public class SpiderManager : MonoBehaviour
 
     private void SpawnNewSpiders(Tile tile)
     {
-        // TODO: use difficulty coeffient to choose which points to spawn spiders at
+        //// TODO: use difficulty coeffient to choose which points to spawn spiders at
         for (int i = 0; i < tile.GetSpiderSpawnCount(); i++)
         {
             Vector3 position = tile.GetSpiderSpawnWorld(i);

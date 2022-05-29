@@ -14,7 +14,11 @@ public class PlayerParentMovement : CatmullWalker
     [Header("Movement")]
     [SerializeField] private bool m_IsIndependentMovement = false;
     
-    
+    public Vector3 GetClosestPointToPlayer()
+    {
+        return m_Spline.GetClosestPointToCharacter(m_CurrCurve, PlayerManager.PropertyInstance.PlayerController.transform.position);
+    }
+
     override protected void Start()
     {
         base.Start(); 

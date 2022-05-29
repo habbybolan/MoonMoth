@@ -176,37 +176,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1284923513141670478, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1284923513141670478, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_FillClockwise
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_EnemyPercentBoost
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_AimModeMoonReticle
-      value: 
-      objectReference: {fileID: 1841567744}
-    - target: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_EnemyBoostDuration
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_AimModePercentGainedPerSec
-      value: 1
+    - target: {fileID: 546655778, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786757, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Name
       value: PlayerParent
-      objectReference: {fileID: 0}
-    - target: {fileID: 3977897141832786757, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Spline
@@ -254,6 +230,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786759, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_IsShowControlObject
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -588,14 +568,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpiderPrefab: {fileID: 4211784419857639165, guid: 614c253834c29d24595c1a26d9802af3, type: 3}
---- !u!114 &1841567744 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1284923513141670478, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-  m_PrefabInstance: {fileID: 153880104}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
