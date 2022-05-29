@@ -55,7 +55,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1382965300}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 59.99995
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -85,8 +85,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 7576343697687589149}
-  m_DashZoomTime: 0.35
-  m_CameraZoomAmount: 0.8
+  m_CameraFovChangeRate: 2
+  m_BaseFov: 60
+  m_DashFovOffset: 20
+  m_AimModeFovOffset: -20
 --- !u!1 &734772370
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,8 +287,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_XDamping: 1
-  m_YDamping: 1
+  m_XDamping: 3
+  m_YDamping: 3
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
@@ -825,8 +827,7 @@ MonoBehaviour:
   m_Duration: 5
   m_Spline: {fileID: 0}
   m_Speed: 15
-  m_SpeedIncreasePercent: 0.5
-  m_DashDuration: 2.5
+  m_SpeedIncreasePercent: 1
   m_IsIndependentMovement: 0
 --- !u!1 &5336965513765966291
 GameObject:
@@ -1273,16 +1274,9 @@ MonoBehaviour:
   m_PlayerParentMovement: {fileID: 3977897141832786758}
   m_CameraMovement: {fileID: 375853361}
   m_Weapon: {fileID: 7576343698478518936}
+  m_MoonBarAbility: {fileID: 1007931874}
   m_LostMothUI: {fileID: 1318840746}
   m_LostMothUIDisplayTime: 1.5
-  m_AimModeTimescaleChange: 0.5
-  m_AimModePercentLossPerSec: 20
-  m_AimModePercentGainedPerSec: 1
-  m_AimModeCooldown: 3
-  m_AimModeMoonReticle: {fileID: 1284923513141670478}
-  m_EnemyPercentBoost: 10
-  m_MaxNumberOfEnemyBoost: 3
-  m_EnemyBoostDuration: 1.5
 --- !u!114 &7576343697687589149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1374,6 +1368,26 @@ MonoBehaviour:
   m_InvincibilityDuration: 1
   m_TerrainDamageAmount: 5
   m_HealthText: {fileID: 734772372}
+--- !u!114 &1007931874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342553640948534339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f93357a2fae064cb5f0aaf8593beef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AimModeTimescaleChange: 0.5
+  m_MoonBarPercentLossPerSec: 20
+  m_MoonBarPercentGainedPerSec: 1
+  m_MoonBarCooldown: 3
+  m_EnemyPercentBoost: 10
+  m_MaxNumberOfEnemyBoost: 3
+  m_EnemyBoostDuration: 2
+  m_MoonBarReticle: {fileID: 1284923513141670478}
 --- !u!4 &7975361531800803065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}

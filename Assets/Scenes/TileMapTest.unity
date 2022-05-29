@@ -176,38 +176,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2144779323}
     m_Modifications:
-    - target: {fileID: 375853361, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_BaseFov
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 375853361, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_DashFovOffset
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 375853361, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_AimModeFovOffset
-      value: -20
-      objectReference: {fileID: 0}
-    - target: {fileID: 375853361, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_CameraFovChangeRate
-      value: 2
+    - target: {fileID: 375853360, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 375853362, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Lens.FieldOfView
-      value: 59.62891
+      value: 59.99995
       objectReference: {fileID: 0}
     - target: {fileID: 829801875, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_XDamping
-      value: 3
+      propertyPath: m_SoftZoneWidth
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 829801875, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_YDamping
-      value: 3
+      propertyPath: m_SoftZoneHeight
+      value: 0.44
       objectReference: {fileID: 0}
-    - target: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_MoonBarAbility
-      value: 
-      objectReference: {fileID: 1007931874}
+    - target: {fileID: 829801875, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_UnlimitedSoftZone
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 829801875, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_LookaheadSmoothing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786757, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Name
       value: PlayerParent
@@ -216,10 +208,6 @@ PrefabInstance:
       propertyPath: m_Spline
       value: 
       objectReference: {fileID: 92830010}
-    - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_SpeedIncreasePercent
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786759, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -304,7 +292,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
   m_PrefabInstance: {fileID: 153880104}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1007931868}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98e03b73b2fa69445added13f99edb0a, type: 3}
@@ -457,17 +445,6 @@ Transform:
   m_Father: {fileID: 331443371}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -144.579, y: -30, z: 0}
---- !u!114 &663040612 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1284923513141670478, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-  m_PrefabInstance: {fileID: 153880104}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &728148996
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,31 +649,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpiderPrefab: {fileID: 4211784419857639165, guid: 614c253834c29d24595c1a26d9802af3, type: 3}
---- !u!1 &1007931868 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7342553640948534339, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-  m_PrefabInstance: {fileID: 153880104}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1007931874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1007931868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0f93357a2fae064cb5f0aaf8593beef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AimModeTimescaleChange: 0.5
-  m_MoonBarPercentLossPerSec: 20
-  m_MoonBarPercentGainedPerSec: 1
-  m_MoonBarCooldown: 3
-  m_EnemyPercentBoost: 10
-  m_MaxNumberOfEnemyBoost: 3
-  m_EnemyBoostDuration: 2
-  m_MoonBarReticle: {fileID: 663040612}
 --- !u!1 &1213463291
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,7 +750,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 59.62891
+  field of view: 59.99995
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -830,7 +782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
+  m_IgnoreTimeScale: 1
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
