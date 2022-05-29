@@ -5,66 +5,45 @@ using Cinemachine;
 
 public class CameraMovement : MonoBehaviour
 {
-    
-
-    [Tooltip("PlayerMovement component")]
     [SerializeField] private PlayerMovement player;
-
+    [SerializeField] private float m_CameraFovChangeRate = 2f;
+    [SerializeField] private float m_BaseFov = 60f;
     [Header("Dash")]
-    [Tooltip("The duration for the camera to zoom in/out")]
-    [SerializeField] private float m_DashZoomTime = 0.35f;
-    [Tooltip("Percentage the camera zooms in relation to its offset to the parent")]
-    [Range(0, 1)]
-    [SerializeField] private float m_CameraZoomAmount = 0.8f;
+    [Tooltip("Amount to zoom while dashing, positive for zooming out")]
     [Range(-30, 30)]
-    [SerializeField] private float m_DashFovOffset = 15f;
+    [SerializeField] private float m_DashFovOffset = 20f;
 
     [Header("Aim Mode")]
+    [Tooltip("Amount to zoom while in aim mode, negative for zooming in")]
     [Range (-30, 30)]
-    [SerializeField] private float m_AimModeFovOffset = -15;
+    [SerializeField] private float m_AimModeFovOffset = -20;
 
-    private float m_BaseFov;                    // starting FOV of the camera
+    private float m_TargetFov;
     private CinemachineVirtualCamera m_Camera;
 
     private void Start()
     {
         m_Camera = GetComponent<CinemachineVirtualCamera>();
-        m_BaseFov = m_Camera.m_Lens.FieldOfView;
+        m_TargetFov = m_BaseFov;
     }
 
-    public void PerformCameraZoom(float duration)
+    private void Update()
     {
-        StartCoroutine(CameraZoomForDuration(duration));
+        m_Camera.m_Lens.FieldOfView += (m_TargetFov - m_Camera.m_Lens.FieldOfView) * m_CameraFovChangeRate * Time.deltaTime;
     }
 
-    IEnumerator CameraZoomForDuration(float duration)
+    public void CameraAimModeZoom()
     {
-        float currDuration = 0f;
-        float zStartingLoc = transform.localPosition.z;
-
-        // Length the zoom takes
-        float targetEndZoomTime = m_DashZoomTime;
-
-        while (currDuration < duration)
-        {
-            LerpToZoomPosition(zStartingLoc, player.CameraOffset / m_CameraZoomAmount, currDuration / targetEndZoomTime);
-            currDuration += Time.deltaTime;
-            yield return null;
-        }
-
-        currDuration = 0f;
-        zStartingLoc = transform.localPosition.z;
-        while (currDuration < targetEndZoomTime)
-        {
-            LerpToZoomPosition(zStartingLoc, player.CameraOffset, currDuration / targetEndZoomTime);
-            currDuration += Time.deltaTime;
-            yield return null;
-        }
+        m_TargetFov = m_BaseFov + m_AimModeFovOffset;
     }
 
-    private void LerpToZoomPosition(float zStart, float zEnd, float t)
+    public void CameraDashZoom()
     {
-        float zPos = Mathf.Lerp(zStart, zEnd, t);
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, zPos);
+        m_TargetFov = m_BaseFov + m_DashFovOffset;
+    }
+
+    public void ResetZoom()
+    {
+        m_TargetFov = m_BaseFov;
     }
 }

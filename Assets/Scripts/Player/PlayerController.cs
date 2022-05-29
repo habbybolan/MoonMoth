@@ -55,15 +55,19 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     private void AimModeStart() {
         m_PlayerMovement.AimModeEnter();
+        m_CameraMovement.CameraAimModeZoom();
     }
     private void AimModeEnd() {
         m_PlayerMovement.AimModeExit();
+        m_CameraMovement.ResetZoom();
     }
     private void DashModeStart() {
         m_PlayerParentMovement.DashStart();
+        m_CameraMovement.CameraDashZoom();
     }
     private void DashModeEnd() {
         m_PlayerParentMovement.DashEnd();
+        m_CameraMovement.ResetZoom();
     }
 
     private void OnEnable()

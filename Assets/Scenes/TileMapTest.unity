@@ -176,9 +176,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2144779323}
     m_Modifications:
+    - target: {fileID: 375853361, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_BaseFov
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 375853361, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_DashFovOffset
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 375853361, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_AimModeFovOffset
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 375853361, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_CameraFovChangeRate
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 375853362, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Lens.FieldOfView
-      value: 60
+      value: 59.62891
       objectReference: {fileID: 0}
     - target: {fileID: 829801875, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_XDamping
@@ -782,7 +798,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 59.62891
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
