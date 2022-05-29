@@ -16,6 +16,26 @@ public abstract class SplineCreator : CatmullRomSpline
             throw new System.Exception("Spline Creator must be initialized first");
     }
 
+    public Vector3 GetClosestPointToCharacter(int currCurve, Vector3 characterPosition)
+    {
+        Vector3 closestPoint = Vector3.zero;
+        float closestDistance = Mathf.Infinity;
+        for (int i = 0; i < 10; i++)
+        {
+            Vector3 point = GetPoint(i / 10);
+            float distance = Vector3.Distance(point, characterPosition);
+            // if found a new closet point
+            if (distance < closestDistance)
+            {
+                closestPoint = point;
+                closestDistance = distance;
+                // otherwise moveing past closest point, previous closest point must be closest
+            }
+            else break;
+        }
+        return closestPoint;
+    }
+
     // Initialize some points on the spline
     public void InitializeSplineAtHead()
     {

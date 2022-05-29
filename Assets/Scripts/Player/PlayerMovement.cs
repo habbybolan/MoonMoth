@@ -147,13 +147,13 @@ public class PlayerMovement : MonoBehaviour
         m_Crosshair.position = Camera.main.WorldToScreenPoint(CrossHairPoint);
     }
 
-    public void TerrainCollision(ContactPoint contact)
+    public void TerrainCollision(Vector3 closestPoint)
     {
-        // TODO: Remove once terrain collision implemented
-        Vector3 vecTranslate = new Vector3(contact.normal.x, -contact.normal.y, 0).normalized * 3f * -1;
-        m_ControlPoint += vecTranslate;
+        // Get direction from player to closest point on the spline 
+        Vector3 vecTranslate = (closestPoint - transform.position).normalized * 5;
+        // only move in x,y direction
+        m_ControlPoint += new Vector3(vecTranslate.x, vecTranslate.y, 0);
         m_ControlObject.transform.localPosition = m_ControlPoint;
-        transform.localPosition += vecTranslate;
     }
 
     public IEnumerator PlayerDodge(System.Action callback, Vector2 vec2Move)

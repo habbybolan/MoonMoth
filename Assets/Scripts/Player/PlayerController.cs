@@ -126,6 +126,22 @@ public class PlayerController : CharacterController<PlayerHealth>
         }
 
         m_PlayerMovement.UpdateCrossHair();
+
+        CheckTerrainCollision();
+    }
+
+    private void CheckTerrainCollision()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2f);
+        foreach(var hitCollider in hitColliders)
+        {
+            if (hitCollider.gameObject.tag == "Terrain")
+            {
+                // TODO: Get the actual closest point on spline instead of last point
+                Vector3 closestPoint = m_PlayerParentMovement.GetClosestPointToPlayer();
+                m_PlayerMovement.TerrainCollision(closestPoint);
+            }
+        }
     }
 
     // Update each enemy duration for AimMode boost, removing if it hit 0
@@ -211,12 +227,12 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void OnTerrainCollision(ContactPoint contact)
     {
-        Vector3 normal = contact.normal;
-        Vector3 contactPoint = contact.point;
-        Debug.DrawRay(contactPoint, normal, Color.red, 10);
-        StartCoroutine(m_PlayerParentMovement.TerrainCollision(FinishAction, contact));
+        //Vector3 normal = contact.normal;
+        //Vector3 contactPoint = contact.point;
+        //Debug.DrawRay(contactPoint, normal, Color.red, 10);
+        //StartCoroutine(m_PlayerParentMovement.TerrainCollision(FinishAction, contact));
 
-        m_PlayerMovement.TerrainCollision(contact);
+        //m_PlayerMovement.TerrainCollision(contact);
     }
 
     public float DistanceFromPlayer(Vector3 pointToCompare)
