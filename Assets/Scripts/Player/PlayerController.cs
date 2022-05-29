@@ -121,8 +121,10 @@ public class PlayerController : CharacterController<PlayerHealth>
         {
             m_PlayerMovement.HorizontalRotation(m_MovementInput.ReadValue<Vector2>().x);
             // move player body along local x, y plane based on inputs
-            m_PlayerMovement.MoveAlongXYPlane(m_MovementInput.ReadValue<Vector2>());
+            m_PlayerMovement.ControlPointXYMovement(m_MovementInput.ReadValue<Vector2>());
         }
+
+        m_PlayerMovement.MothXYMovemnent();
 
         m_PlayerMovement.UpdateCrossHair();
     }

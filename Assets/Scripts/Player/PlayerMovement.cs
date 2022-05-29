@@ -9,13 +9,13 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement speed")]
     [Tooltip("Percent of control point's movement speed so player lags behind control point")]
-    [SerializeField] private float m_MothMoveSpeed = 25f; 
+    [SerializeField] private float m_BaseMothMoveSpeed = 5f; 
     [Tooltip("To show visual representation of control point player follows")]
     [SerializeField] private bool m_IsShowControlObject = false;
     [Tooltip("Prefab representing the visuals of the control point")]
     [SerializeField] private GameObject m_ControlObject;
     [Tooltip("Base speed of the control point")]
-    [SerializeField] private float m_BaseControlSpeed = 25f;
+    [SerializeField] private float m_BaseControlSpeed = 2000f;
 
     [Header("Aim Mode")]
     [Tooltip("The speed increase on player movement while in aim mode to move faster in relation to everything else")]
@@ -42,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Max degrees the player can dodge in y direction")]
     [Range (0, 45)]
     [SerializeField] private float m_MaxYDegrees = 45f;
+    [Tooltip("The moth's speed increase while dodging")]
+    [Range(1, 10)]
+    [SerializeField] private float m_DodgeSpeedIncrease = 2f;
 
     [Header("Rotation")]
     [Tooltip("How quickly the player rotates along x-z axis")]
@@ -81,9 +84,11 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody m_ControlRigidBody;
 
     private float m_ControlSpeedMultiplier = 1f;
+    private float m_CurrMothMoveSpeed;
 
     void Start()
     {
+        m_CurrMothMoveSpeed = m_BaseMothMoveSpeed;
         m_ControlRigidBody = m_ControlObject.GetComponent<Rigidbody>();
         // Get the max input y value during a dodge based on degree limit set, with x dodge input -1/1
         m_MaxYValue = Mathf.Tan(Mathf.Deg2Rad * m_MaxYDegrees);
@@ -100,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         m_CurrentAngle = Vector3.zero;
     }
 
-    public void MoveAlongXYPlane(Vector2 Vec2Movement)
+    public void ControlPointXYMovement(Vector2 Vec2Movement)
     {
         float inputX = Vec2Movement.x;
         float inputY = Vec2Movement.y;
@@ -108,10 +113,13 @@ public class PlayerMovement : MonoBehaviour
         m_ControlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 1000);
 
         m_ControlRigidBody.velocity = new Vector3(inputX, inputY, 0) * m_CurrControlSpeed * Time.deltaTime + Vector3.forward * m_ControlSpeedMultiplier * Time.deltaTime;
+    }
 
+    public void MothXYMovemnent()
+    {
         // Move towards control points 
         Vector3 distanceFromControl = (new Vector3(ControlPosition.x, ControlPosition.y, transform.localPosition.z) - transform.localPosition);
-        transform.localPosition += distanceFromControl * Time.deltaTime * m_MothMoveSpeed;
+        transform.localPosition += distanceFromControl * Time.deltaTime * m_CurrMothMoveSpeed;
     }
 
     public void RotationLook()
@@ -155,7 +163,10 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(PlayDodgeParticles());
         }
-       
+
+        m_CurrMothMoveSpeed *= m_DodgeSpeedIncrease;
+
+
 
         float inputX = vec2Move.x;
         float inputY = vec2Move.y;
@@ -205,7 +216,7 @@ public class PlayerMovement : MonoBehaviour
             float moveX = m_AnimationCurve.Evaluate(currDuration / m_DodgeDuration) * Time.deltaTime * m_DodgeSpeedX;
             float moveY = Time.deltaTime * m_DodgeSpeedY;
 
-            transform.localPosition += Vector3.right * inputXDirection * moveX + Vector3.up * moveY * inputY;
+            //transform.localPosition += Vector3.right * inputXDirection * moveX + Vector3.up * moveY * inputY;
 
             float controlPointMultiplierX = 1f;
             // if control point on opposite side X of the player fromthe direction player is dodging, apply speed multiplier
@@ -224,16 +235,14 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // Update control point
-            //m_ControlPoint += Vector3.right * inputXDirection * moveX * controlPointMultiplierX
-            //               + Vector3.up * inputY * moveY * controlPointMultiplierY;
-            m_ControlObject.transform.localPosition =   Vector3.right * inputXDirection * moveX * controlPointMultiplierX +
-                                                        Vector3.up * inputY * moveY * controlPointMultiplierY;
-
+            m_ControlRigidBody.velocity =   Vector3.right * inputX * controlPointMultiplierX * m_BaseControlSpeed * Time.deltaTime +
+                                            Vector3.up * inputY * controlPointMultiplierY * m_BaseControlSpeed * Time.deltaTime;
 
             currDuration += Time.deltaTime;
             yield return null;
         }
 
+        m_CurrMothMoveSpeed = m_BaseMothMoveSpeed;
         // Finish dodge state
         callback();
     }
