@@ -55,15 +55,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Dash"",
-                    ""type"": ""Button"",
-                    ""id"": ""f1e0b966-415a-473f-97d7-732473551600"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Dodge"",
                     ""type"": ""Button"",
                     ""id"": ""528c4eda-add4-4928-bf74-080761e2052c"",
@@ -88,6 +79,24 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DashStart"",
+                    ""type"": ""Button"",
+                    ""id"": ""f678f9bf-79b6-49b3-b601-daa94d78dd02"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DashEnd"",
+                    ""type"": ""Button"",
+                    ""id"": ""2faa649d-d858-480b-aa64-7e78c1b9e92d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 }
             ],
@@ -149,28 +158,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e8faabda-806d-4599-83c0-fcae613a0012"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""371c8eee-c379-42db-a869-167fd1f6e4be"",
-                    ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""75cbecb2-5cb9-43bf-91d3-6b6baef8e6b6"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
@@ -210,6 +197,28 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""AimModeEnd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5af9ef70-955b-41ad-aac6-8b88de81a502"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DashStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a4d7d8c-856c-41c7-9239-868058cafdc2"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DashEnd"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -800,10 +809,11 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
-        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_AimModeStart = m_Player.FindAction("AimModeStart", throwIfNotFound: true);
         m_Player_AimModeEnd = m_Player.FindAction("AimModeEnd", throwIfNotFound: true);
+        m_Player_DashStart = m_Player.FindAction("DashStart", throwIfNotFound: true);
+        m_Player_DashEnd = m_Player.FindAction("DashEnd", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -878,10 +888,11 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Pause;
-    private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_AimModeStart;
     private readonly InputAction m_Player_AimModeEnd;
+    private readonly InputAction m_Player_DashStart;
+    private readonly InputAction m_Player_DashEnd;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -889,10 +900,11 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
-        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @AimModeStart => m_Wrapper.m_Player_AimModeStart;
         public InputAction @AimModeEnd => m_Wrapper.m_Player_AimModeEnd;
+        public InputAction @DashStart => m_Wrapper.m_Player_DashStart;
+        public InputAction @DashEnd => m_Wrapper.m_Player_DashEnd;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -911,9 +923,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
-                @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
@@ -923,6 +932,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @AimModeEnd.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimModeEnd;
                 @AimModeEnd.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimModeEnd;
                 @AimModeEnd.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAimModeEnd;
+                @DashStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashStart;
+                @DashStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashStart;
+                @DashStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashStart;
+                @DashEnd.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashEnd;
+                @DashEnd.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashEnd;
+                @DashEnd.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashEnd;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -936,9 +951,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
-                @Dash.started += instance.OnDash;
-                @Dash.performed += instance.OnDash;
-                @Dash.canceled += instance.OnDash;
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
@@ -948,6 +960,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @AimModeEnd.started += instance.OnAimModeEnd;
                 @AimModeEnd.performed += instance.OnAimModeEnd;
                 @AimModeEnd.canceled += instance.OnAimModeEnd;
+                @DashStart.started += instance.OnDashStart;
+                @DashStart.performed += instance.OnDashStart;
+                @DashStart.canceled += instance.OnDashStart;
+                @DashEnd.started += instance.OnDashEnd;
+                @DashEnd.performed += instance.OnDashEnd;
+                @DashEnd.canceled += instance.OnDashEnd;
             }
         }
     }
@@ -1107,10 +1125,11 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
-        void OnDash(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnAimModeStart(InputAction.CallbackContext context);
         void OnAimModeEnd(InputAction.CallbackContext context);
+        void OnDashStart(InputAction.CallbackContext context);
+        void OnDashEnd(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

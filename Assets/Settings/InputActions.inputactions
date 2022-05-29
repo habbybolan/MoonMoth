@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "f1e0b966-415a-473f-97d7-732473551600",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Dodge",
                     "type": "Button",
                     "id": "528c4eda-add4-4928-bf74-080761e2052c",
@@ -66,6 +57,24 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DashStart",
+                    "type": "Button",
+                    "id": "f678f9bf-79b6-49b3-b601-daa94d78dd02",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DashEnd",
+                    "type": "Button",
+                    "id": "2faa649d-d858-480b-aa64-7e78c1b9e92d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -127,28 +136,6 @@
                 },
                 {
                     "name": "",
-                    "id": "e8faabda-806d-4599-83c0-fcae613a0012",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "371c8eee-c379-42db-a869-167fd1f6e4be",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "75cbecb2-5cb9-43bf-91d3-6b6baef8e6b6",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -188,6 +175,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "AimModeEnd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5af9ef70-955b-41ad-aac6-8b88de81a502",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "DashStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0a4d7d8c-856c-41c7-9239-868058cafdc2",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "DashEnd",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

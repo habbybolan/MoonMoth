@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraMovement : MonoBehaviour
 {
+    
+
     [Tooltip("PlayerMovement component")]
     [SerializeField] private PlayerMovement player;
 
@@ -13,6 +16,21 @@ public class CameraMovement : MonoBehaviour
     [Tooltip("Percentage the camera zooms in relation to its offset to the parent")]
     [Range(0, 1)]
     [SerializeField] private float m_CameraZoomAmount = 0.8f;
+    [Range(-30, 30)]
+    [SerializeField] private float m_DashFovOffset = 15f;
+
+    [Header("Aim Mode")]
+    [Range (-30, 30)]
+    [SerializeField] private float m_AimModeFovOffset = -15;
+
+    private float m_BaseFov;                    // starting FOV of the camera
+    private CinemachineVirtualCamera m_Camera;
+
+    private void Start()
+    {
+        m_Camera = GetComponent<CinemachineVirtualCamera>();
+        m_BaseFov = m_Camera.m_Lens.FieldOfView;
+    }
 
     public void PerformCameraZoom(float duration)
     {
