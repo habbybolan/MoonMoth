@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyEmissive
-  m_Shader: {fileID: -6465566751694194690, guid: d3448fb6e3c74f44b97e77b297b126fd, type: 3}
+  m_Name: MushroomShader
+  m_Shader: {fileID: -6465566751694194690, guid: ad5340d606ceaa94b88f448e267f4a96, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
