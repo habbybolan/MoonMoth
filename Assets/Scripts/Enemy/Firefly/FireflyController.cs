@@ -29,8 +29,8 @@ public class FireflyController : CharacterController<FireflyHealth>
     {
         Debug.Log("Firely killed");
         FireflyManager.PropertyInstance.OnFireflyDeath(gameObject);
-        //  TODO:
-        //   - Drop light from firefly
+        
+
     }
 
     protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)
