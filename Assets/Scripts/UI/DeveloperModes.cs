@@ -24,12 +24,12 @@ public class DeveloperModes : MonoBehaviour
 
     public void SpawnFirefly()
     {
-        // TODO:
+        FireflyManager.PropertyInstance.SpawnNewFirefly();
     }
 
     public void ResetWorld()
     {
-        // TODO:
+        m_PlayerController.Death();
     }
 
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*
  * Deals with Player's Inputs, States and which methods to call each frame.
@@ -176,7 +177,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public override void Death() 
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("TileMapTest");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void FinishAction()
