@@ -37,12 +37,21 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Fire"",
+                    ""name"": ""FireStart"",
                     ""type"": ""Button"",
                     ""id"": ""0b89d5e3-9829-454b-9d32-e8e4cee8b9f8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FireStop"",
+                    ""type"": ""Button"",
+                    ""id"": ""a95d399d-fe27-4e0a-baa3-e8763e7cbbab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -119,7 +128,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""Fire"",
+                    ""action"": ""FireStart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -130,7 +139,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Fire"",
+                    ""action"": ""FireStart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -219,6 +228,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""DashEnd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb5a05a2-4a4a-4f1b-b93a-fc0e1c13f778"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireStop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -807,7 +827,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_FireStart = m_Player.FindAction("FireStart", throwIfNotFound: true);
+        m_Player_FireStop = m_Player.FindAction("FireStop", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_AimModeStart = m_Player.FindAction("AimModeStart", throwIfNotFound: true);
@@ -886,7 +907,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_FireStart;
+    private readonly InputAction m_Player_FireStop;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_AimModeStart;
@@ -898,7 +920,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         private @InputActions m_Wrapper;
         public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @FireStart => m_Wrapper.m_Player_FireStart;
+        public InputAction @FireStop => m_Wrapper.m_Player_FireStop;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @AimModeStart => m_Wrapper.m_Player_AimModeStart;
@@ -917,9 +940,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
-                @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
-                @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @FireStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStart;
+                @FireStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStart;
+                @FireStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStart;
+                @FireStop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStop;
+                @FireStop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStop;
+                @FireStop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStop;
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
@@ -945,9 +971,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Fire.started += instance.OnFire;
-                @Fire.performed += instance.OnFire;
-                @Fire.canceled += instance.OnFire;
+                @FireStart.started += instance.OnFireStart;
+                @FireStart.performed += instance.OnFireStart;
+                @FireStart.canceled += instance.OnFireStart;
+                @FireStop.started += instance.OnFireStop;
+                @FireStop.performed += instance.OnFireStop;
+                @FireStop.canceled += instance.OnFireStop;
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
@@ -1123,7 +1152,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnFire(InputAction.CallbackContext context);
+        void OnFireStart(InputAction.CallbackContext context);
+        void OnFireStop(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnAimModeStart(InputAction.CallbackContext context);
