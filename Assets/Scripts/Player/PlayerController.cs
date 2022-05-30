@@ -28,6 +28,8 @@ public class PlayerController : CharacterController<PlayerHealth>
     private int m_LostMothCount = 0;
     private Vector2 m_MovementInput;        // Input object for moving player along x-y axis
 
+    public MoonBarAbility MoonBarAbility { get { return m_MoonBarAbility; }}
+
     // Add a new enemy's boost duration to list
     public void OnEnemyKilled()
     {

@@ -16,4 +16,6 @@ public abstract class CharacterController<T> : MonoBehaviour where T : Health
     protected abstract void ApplyEffect(DamageInfo.HIT_EFFECT effect);
 
     public abstract void Death();
+
+    public T Health { get { return m_Health; } }
 }
