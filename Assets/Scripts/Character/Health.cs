@@ -19,6 +19,10 @@ public class Health : MonoBehaviour
 
     public delegate void DeathDelegate();
     public DeathDelegate d_DeathDelegate;
+
+    public delegate void DamageDelegate();
+    public DamageDelegate d_DamageDelegate; 
+
     private GameObject m_LastInstigator;
 
     public float HealthPercentage => (float)m_CurrentHealth / m_MaxHealth;
@@ -41,6 +45,8 @@ public class Health : MonoBehaviour
         {
             return;
         }
+        if (d_DamageDelegate != null) d_DamageDelegate();
+
         m_LastInstigator = damageInfo.m_Instigator;
         RemoveHealth(damageInfo.m_DamageAmount);
     }

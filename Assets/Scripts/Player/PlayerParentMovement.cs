@@ -8,8 +8,6 @@ public class PlayerParentMovement : CatmullWalker
     [Header("Dash")]
     [Tooltip("Speed percentage increase forward")]
     [SerializeField] private float m_SpeedIncreasePercent = 0.5f;
-    [Tooltip("Duration of the dash")]
-    [SerializeField] private float m_DashDuration = 2.5f;
 
     [Header("Movement")]
     [SerializeField] private bool m_IsIndependentMovement = false;
@@ -54,14 +52,11 @@ public class PlayerParentMovement : CatmullWalker
         callback();
     }
 
-    public IEnumerator Dash(System.Action callback)
-    {
+    public void DashStart() {
         m_CurrSpeed += m_CurrSpeed * m_SpeedIncreasePercent;
-        yield return new WaitForSeconds(m_DashDuration);
-
-        m_CurrSpeed = m_Speed;
-        callback();
     }
 
-    public float DashDuration { get { return m_DashDuration; } }
+    public void DashEnd() {
+        m_CurrSpeed = m_Speed;
+    }
 }
