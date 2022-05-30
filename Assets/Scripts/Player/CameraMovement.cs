@@ -8,6 +8,8 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private PlayerMovement player;
     [SerializeField] private float m_CameraFovChangeRate = 2f;
     [SerializeField] private float m_BaseFov = 60f;
+    [SerializeField] private float m_ShakeDuration = 0.4f;
+
     [Header("Dash")]
     [Tooltip("Amount to zoom while dashing, positive for zooming out")]
     [Range(-30, 30)]
@@ -20,15 +22,21 @@ public class CameraMovement : MonoBehaviour
 
     private float m_TargetFov;
     private CinemachineVirtualCamera m_Camera;
+    private CinemachineBasicMultiChannelPerlin m_Noise;
+
+    private Coroutine m_ShakeCoroutine;
 
     private void Start()
     {
         m_Camera = GetComponent<CinemachineVirtualCamera>();
+        m_Noise = m_Camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        m_Noise.m_AmplitudeGain = 0;
         m_TargetFov = m_BaseFov;
     }
 
     private void Update()
     {
+        // change the FOV to match the targetFov if not already matching
         m_Camera.m_Lens.FieldOfView += (m_TargetFov - m_Camera.m_Lens.FieldOfView) * m_CameraFovChangeRate * Time.deltaTime;
     }
 
@@ -42,8 +50,27 @@ public class CameraMovement : MonoBehaviour
         m_TargetFov = m_BaseFov + m_DashFovOffset;
     }
 
+    // Reset zoom back to original
     public void ResetZoom()
     {
         m_TargetFov = m_BaseFov;
+    }
+    
+    public void StartCameraShake()
+    {
+        // if already shaking, kill current coroutine and start another
+        if (m_ShakeCoroutine != null)
+        {
+            StopCoroutine(m_ShakeCoroutine);
+        }
+        m_ShakeCoroutine = StartCoroutine(CameraShakeDuration());
+    }
+
+    // Camera shake for a duration
+    private IEnumerator CameraShakeDuration()
+    {
+        m_Noise.m_AmplitudeGain = 1;
+        yield return new WaitForSeconds(m_ShakeDuration);
+        m_Noise.m_AmplitudeGain = 0;
     }
 }

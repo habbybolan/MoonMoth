@@ -51,6 +51,13 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_MoonBarAbility.d_AimModeEndDelegate = AimModeEnd;
         m_MoonBarAbility.d_DashStartDelegate = DashModeStart;
         m_MoonBarAbility.d_DashEndDelegate = DashModeEnd;
+
+        m_Health.d_DamageDelegate = OnDamageTaken;
+    }
+
+    private void OnDamageTaken()
+    {
+        m_CameraMovement.StartCameraShake();
     }
 
     private void AimModeStart() {

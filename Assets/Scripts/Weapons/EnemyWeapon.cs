@@ -20,6 +20,5 @@ public class EnemyWeapon : WeaponBase
             if (hit.collider.tag == "Player")
                 ShootPosition(playerPosition);
         }
-        
     }
 }
