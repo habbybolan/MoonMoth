@@ -9,7 +9,7 @@ public class CatmullWalker : MonoBehaviour
     [SerializeField] protected float m_Speed = 1;
 
     private float m_Dist = 0;
-    private int m_CurrCurve = -1;
+    protected int m_CurrCurve = -1;
     private float m_CurrCurveLength = 0;
     protected float m_CurrSpeed;
 

@@ -1,83 +1,76 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraMovement : MonoBehaviour
 {
-    [Tooltip("PlayerMovement component")]
     [SerializeField] private PlayerMovement player;
-    [Tooltip("Camera Smooth time when following crosshair. The smalelr the value, the faster the camera moves")]
-    [Range(0, 1)]
-    [SerializeField] private float m_SmoothTime = 0.6f;
+    [SerializeField] private float m_CameraFovChangeRate = 2f;
+    [SerializeField] private float m_BaseFov = 60f;
+    [SerializeField] private float m_ShakeDuration = 0.4f;
 
     [Header("Dash")]
-    [Tooltip("The duration for the camera to zoom in/out")]
-    [SerializeField] private float m_DashZoomTime = 0.35f;
-    [Tooltip("Percentage the camera zooms in relation to its offset to the parent")]
-    [Range(0, 1)]
-    [SerializeField] private float m_CameraZoomAmount = 0.8f;
+    [Tooltip("Amount to zoom while dashing, positive for zooming out")]
+    [Range(-30, 30)]
+    [SerializeField] private float m_DashFovOffset = 20f;
 
-    private Vector3 m_Velocity = Vector3.zero;  // necessary field to have, nothing done with it
-    private bool m_IsCameraFollow = true;       // If the camera should be currently following the crosshair
+    [Header("Aim Mode")]
+    [Tooltip("Amount to zoom while in aim mode, negative for zooming in")]
+    [Range (-30, 30)]
+    [SerializeField] private float m_AimModeFovOffset = -20;
 
-    void Update()
+    private float m_TargetFov;
+    private CinemachineVirtualCamera m_Camera;
+    private CinemachineBasicMultiChannelPerlin m_Noise;
+
+    private Coroutine m_ShakeCoroutine;
+
+    private void Start()
     {
-        if (m_IsCameraFollow)
-            CameraFollow();
+        m_Camera = GetComponent<CinemachineVirtualCamera>();
+        m_Noise = m_Camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        m_Noise.m_AmplitudeGain = 0;
+        m_TargetFov = m_BaseFov;
     }
 
-    private void CameraFollow()
+    private void Update()
     {
-        Vector3 crossHairPoint = player.CrossHairPointLocal;
-
-        transform.localPosition = Vector3.SmoothDamp(
-            transform.localPosition,
-            new Vector3(crossHairPoint.x,
-                        crossHairPoint.y,
-                        transform.localPosition.z),
-            ref m_Velocity,
-            m_SmoothTime);
+        // change the FOV to match the targetFov if not already matching
+        m_Camera.m_Lens.FieldOfView += (m_TargetFov - m_Camera.m_Lens.FieldOfView) * m_CameraFovChangeRate * Time.deltaTime;
     }
 
-    public void PerformCameraZoom(float duration)
+    public void CameraAimModeZoom()
     {
-        StartCoroutine(CameraZoomForDuration(duration));
+        m_TargetFov = m_BaseFov + m_AimModeFovOffset;
     }
 
-    IEnumerator CameraZoomForDuration(float duration)
+    public void CameraDashZoom()
     {
-        float currDuration = 0f;
-        float zStartingLoc = transform.localPosition.z;
+        m_TargetFov = m_BaseFov + m_DashFovOffset;
+    }
 
-        // Length the zoom takes
-        float targetEndZoomTime = m_DashZoomTime;
-
-        while (currDuration < duration)
+    // Reset zoom back to original
+    public void ResetZoom()
+    {
+        m_TargetFov = m_BaseFov;
+    }
+    
+    public void StartCameraShake()
+    {
+        // if already shaking, kill current coroutine and start another
+        if (m_ShakeCoroutine != null)
         {
-            LerpToZoomPosition(zStartingLoc, player.CameraOffset / m_CameraZoomAmount, currDuration / targetEndZoomTime);
-            currDuration += Time.deltaTime;
-            yield return null;
+            StopCoroutine(m_ShakeCoroutine);
         }
-
-        currDuration = 0f;
-        zStartingLoc = transform.localPosition.z;
-        while (currDuration < targetEndZoomTime)
-        {
-            LerpToZoomPosition(zStartingLoc, player.CameraOffset, currDuration / targetEndZoomTime);
-            currDuration += Time.deltaTime;
-            yield return null;
-        }
+        m_ShakeCoroutine = StartCoroutine(CameraShakeDuration());
     }
 
-    private void LerpToZoomPosition(float zStart, float zEnd, float t)
+    // Camera shake for a duration
+    private IEnumerator CameraShakeDuration()
     {
-        float zPos = Mathf.Lerp(zStart, zEnd, t);
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, zPos);
-    }
-
-    public bool IsCameraFollow
-    {
-        get { return m_IsCameraFollow; }
-        set { m_IsCameraFollow = value; }
+        m_Noise.m_AmplitudeGain = 1;
+        yield return new WaitForSeconds(m_ShakeDuration);
+        m_Noise.m_AmplitudeGain = 0;
     }
 }

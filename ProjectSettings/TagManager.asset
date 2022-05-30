@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -17,10 +18,10 @@ TagManager:
   - Character
   - Enemy
   - Obstacle
-  - 
-  - 
-  - 
-  - 
+  - PlayerControl
+  - Terrain
+  - Player
+  - NoClip
   - 
   - 
   - 
