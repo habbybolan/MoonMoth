@@ -55,7 +55,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1382965300}
   m_Lens:
-    FieldOfView: 59.99995
+    FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -87,6 +87,7 @@ MonoBehaviour:
   player: {fileID: 7576343697687589149}
   m_CameraFovChangeRate: 2
   m_BaseFov: 60
+  m_ShakeDuration: 0.4
   m_DashFovOffset: 20
   m_AimModeFovOffset: -20
 --- !u!1 &734772370
@@ -237,6 +238,7 @@ GameObject:
   - component: {fileID: 829801871}
   - component: {fileID: 829801874}
   - component: {fileID: 829801875}
+  - component: {fileID: 829801876}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -297,9 +299,9 @@ MonoBehaviour:
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
-  m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
+  m_UnlimitedSoftZone: 1
+  m_SoftZoneWidth: 0.44
+  m_SoftZoneHeight: 0.44
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
@@ -314,6 +316,23 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
+--- !u!114 &829801876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829801870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1318840744
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,7 +896,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7768779406485532967}
   - component: {fileID: 7576343698478518936}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1002,6 +1021,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConstantParticle
       objectReference: {fileID: 0}
+    - target: {fileID: 1332780609762450022, guid: 1fdecad433f69664091a9a6149d68203, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7395372438169443730, guid: 1fdecad433f69664091a9a6149d68203, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1067,6 +1090,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7975361531800803065}
     m_Modifications:
+    - target: {fileID: -8834473617372246798, guid: ab98f76802972794ba1bfc588295005f, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab98f76802972794ba1bfc588295005f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1127,6 +1154,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9434189d5b756cf408b8b2ec868884cd, type: 2}
+    - target: {fileID: -2439319273827338400, guid: ab98f76802972794ba1bfc588295005f, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -1819674777139028219, guid: ab98f76802972794ba1bfc588295005f, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -372353743746004784, guid: ab98f76802972794ba1bfc588295005f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1138,6 +1173,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ab98f76802972794ba1bfc588295005f, type: 3}
       propertyPath: m_Name
       value: moth_mesh_alpha
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab98f76802972794ba1bfc588295005f, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab98f76802972794ba1bfc588295005f, type: 3}
@@ -1204,9 +1243,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2615453208677245630, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}
       propertyPath: m_Name
       value: moth_body
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}
       propertyPath: m_TagString
@@ -1257,6 +1304,26 @@ CapsuleCollider:
   m_Height: 71.73
   m_Direction: 2
   m_Center: {x: 0, y: -6.2, z: 5.1}
+--- !u!114 &1007931874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342553640948534339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f93357a2fae064cb5f0aaf8593beef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AimModeTimescaleChange: 0.5
+  m_MoonBarPercentLossPerSec: 20
+  m_MoonBarPercentGainedPerSec: 1
+  m_MoonBarCooldown: 3
+  m_EnemyPercentBoost: 10
+  m_MaxNumberOfEnemyBoost: 3
+  m_EnemyBoostDuration: 2
+  m_MoonBarReticle: {fileID: 1284923513141670478}
 --- !u!114 &3324045045170556717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,7 +1357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BaseMothMoveSpeed: 5
-  m_IsShowControlObject: 1
+  m_IsShowControlObject: 0
   m_ControlObject: {fileID: 3977897140022987257}
   m_BaseControlSpeed: 20
   m_AimModeSpeedIncrease: 1.8
@@ -1364,30 +1431,10 @@ MonoBehaviour:
   m_deathParticles: {fileID: 3724928139645373970, guid: 5c9621af3bcb72f4abeaf37c094dcf6f, type: 3}
   m_deathParticlesDuration: 1
   m_HealthPercentLosePerSecond: 1
-  m_IsInvincible: 1
+  m_IsInvincible: 0
   m_InvincibilityDuration: 1
   m_TerrainDamageAmount: 5
   m_HealthText: {fileID: 734772372}
---- !u!114 &1007931874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342553640948534339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0f93357a2fae064cb5f0aaf8593beef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AimModeTimescaleChange: 0.5
-  m_MoonBarPercentLossPerSec: 20
-  m_MoonBarPercentGainedPerSec: 1
-  m_MoonBarCooldown: 3
-  m_EnemyPercentBoost: 10
-  m_MaxNumberOfEnemyBoost: 3
-  m_EnemyBoostDuration: 2
-  m_MoonBarReticle: {fileID: 1284923513141670478}
 --- !u!4 &7975361531800803065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}

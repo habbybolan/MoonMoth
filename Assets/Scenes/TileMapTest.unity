@@ -176,30 +176,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2144779323}
     m_Modifications:
-    - target: {fileID: 375853360, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 375853362, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_Lens.FieldOfView
-      value: 58.8956
-      objectReference: {fileID: 0}
-    - target: {fileID: 829801875, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_SoftZoneWidth
-      value: 0.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 829801875, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_SoftZoneHeight
-      value: 0.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 829801875, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_UnlimitedSoftZone
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 829801875, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_LookaheadSmoothing
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786757, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Name
       value: PlayerParent
@@ -250,10 +226,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786759, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7576343698478518934, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_IsInvincible
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -560,28 +532,6 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
   m_PVRTiledBaking: 0
---- !u!1 &829801870 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 829801870, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-  m_PrefabInstance: {fileID: 153880104}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &829801876
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 829801870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
-  m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 0
-  m_FrequencyGain: 1
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &951211375
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,7 +726,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 58.8956
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
