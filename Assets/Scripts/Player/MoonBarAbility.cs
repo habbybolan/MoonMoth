@@ -37,6 +37,14 @@ public class MoonBarAbility : MonoBehaviour
     public delegate void DashEndDelegate();
     public DashEndDelegate d_DashEndDelegate;
 
+    private bool m_IsUnlimitedMoonBar = false;
+
+    public bool IsUnlimitedMoonBar
+    {
+        get { return m_IsUnlimitedMoonBar; }
+        set { m_IsUnlimitedMoonBar = value; }
+    }
+
     // Aim Mode
     private bool m_IsAimMode = false;
 
@@ -48,17 +56,6 @@ public class MoonBarAbility : MonoBehaviour
     private void Awake()
     {
         m_AimModeEnemyKilledList = new LinkedList<float>();
-    }
-
-    // Update each enemy duration for AimMode boost, removing if it hit 0
-    public void UpdateAimModeEnemyKilledList()
-    {
-        for (LinkedListNode<float> node = m_AimModeEnemyKilledList.First; node != null; node = node.Next)
-        {
-            node.Value -= Time.deltaTime;
-            // remove from list if duraton hit 0
-            if (node.Value <= 0) m_AimModeEnemyKilledList.RemoveFirst();
-        }
     }
 
     public void AddEnemyKilled()
@@ -138,6 +135,23 @@ public class MoonBarAbility : MonoBehaviour
             AimModeEndHelper();
     }
 
+    // Update each enemy duration for AimMode boost, removing if it hit 0
+    public void UpdateAimModeEnemyKilledList()
+    {
+        if (m_IsUnlimitedMoonBar)
+        {
+            m_MoonBarCurrPercent = 100;
+            return;
+        }
+        for (LinkedListNode<float> node = m_AimModeEnemyKilledList.First; node != null; node = node.Next)
+        {
+            node.Value -= Time.deltaTime;
+            // remove from list if duraton hit 0
+            if (node.Value <= 0) m_AimModeEnemyKilledList.RemoveFirst();
+        }
+    }
+
+    // update the fill moon reticle meter
     public void UpdateAimModeReticleBar()
     {
         // gain aimMode percent not in aim mode and not maxed out

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*
  * Deals with Player's Inputs, States and which methods to call each frame.
@@ -23,12 +24,12 @@ public class PlayerController : CharacterController<PlayerHealth>
     [SerializeField] private TextMeshProUGUI m_LostMothUI;
     [SerializeField] private float m_LostMothUIDisplayTime = 1.5f;
 
-    private InputActions playerInput;           // PlayerInput object to enable and create callbacks for inputs performed
-    private InputAction m_MovementInput;        // Input object for moving player along x-y axis
     private PLAYER_ACTION_STATE m_playerState;  // Current player state given the actions performed / effects applied
     Coroutine ShootCoroutine;                   // Coroutine called when performed shooting action to allow cancelling the coroutine
     private int m_LostMothCount = 0;
-   
+    private Vector2 m_MovementInput;        // Input object for moving player along x-y axis
+
+    public MoonBarAbility MoonBarAbility { get { return m_MoonBarAbility; }}
 
     // Add a new enemy's boost duration to list
     public void OnEnemyKilled()
@@ -38,7 +39,6 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     private void Awake()
     {
-        playerInput = new InputActions();
         m_LostMothUI.enabled = false;
     }
 
@@ -77,56 +77,9 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_CameraMovement.ResetZoom();
     }
 
-    private void OnEnable()
+    public void OnMove(InputValue value)
     {
-        // Movement
-        m_MovementInput = playerInput.Player.Move;
-        m_MovementInput.Enable();
-
-        // Shoot
-        playerInput.Player.Fire.performed += DoFire;
-        playerInput.Player.Fire.canceled += StopFire;
-        playerInput.Player.Fire.Enable();
-
-        // Dodge
-        playerInput.Player.Dodge.performed += DoDodge;
-        playerInput.Player.Dodge.Enable();
-
-        // Dash
-        playerInput.Player.DashStart.performed += OnDashStart;
-        playerInput.Player.DashStart.Enable();
-        playerInput.Player.DashEnd.performed += OnDashEnd;
-        playerInput.Player.DashEnd.Enable();
-
-        // AimMode
-        playerInput.Player.AimModeStart.performed += OnAimModeStart;
-        playerInput.Player.AimModeStart.Enable();
-        playerInput.Player.AimModeEnd.performed += OnAimModeEnd;
-        playerInput.Player.AimModeEnd.Enable();
-    }
-
-    private void OnDisable()
-    {
-        // Shoot
-        playerInput.Player.Fire.performed -= DoFire;
-        playerInput.Player.Fire.canceled -= StopFire;
-        playerInput.Player.Fire.Disable();
-
-        // Dodge
-        playerInput.Player.Dodge.performed -= DoDodge;
-        playerInput.Player.Dodge.Disable();
-
-        // Dash
-        playerInput.Player.DashStart.performed -= OnDashStart;
-        playerInput.Player.DashStart.Disable();
-        playerInput.Player.DashEnd.performed -= OnDashEnd;
-        playerInput.Player.DashEnd.Disable();
-
-        // Aim Mode
-        playerInput.Player.AimModeStart.performed -= OnAimModeStart;
-        playerInput.Player.AimModeStart.Disable();
-        playerInput.Player.AimModeEnd.performed -= OnAimModeEnd;
-        playerInput.Player.AimModeEnd.Disable();
+        m_MovementInput = value.Get<Vector2>();
     }
 
     // Main Update controller for all Player components, Dealing with actions/effects that happen each frame
@@ -146,7 +99,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
         if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
-            m_PlayerMovement.HorizontalRotation(m_MovementInput.ReadValue<Vector2>().x);
+            m_PlayerMovement.HorizontalRotation(m_MovementInput.x);
         }
 
         m_PlayerMovement.MothXYMovemnent();
@@ -157,7 +110,7 @@ public class PlayerController : CharacterController<PlayerHealth>
         if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
             // move player body along local x, y plane based on inputs
-            m_PlayerMovement.ControlPointXYMovement(m_MovementInput.ReadValue<Vector2>());
+            m_PlayerMovement.ControlPointXYMovement(m_MovementInput);
         }
         m_PlayerMovement.UpdateCrossHair();
     }
@@ -166,43 +119,44 @@ public class PlayerController : CharacterController<PlayerHealth>
     {
         return Vector3.Distance(pointToCompare, transform.position);
     }
-   
 
-    private void DoFire(InputAction.CallbackContext obj)
+    public void OnFireStart(InputValue value)
     {
+        // TODO: put logic inside Weapon
         ShootCoroutine = StartCoroutine(m_Weapon.Shooting());
-    }
+    } 
 
-    private void StopFire(InputAction.CallbackContext obj)
+    public void OnFireStop(InputValue value)
     {
+        // TODO: put logic inside Weapon
         StopCoroutine(ShootCoroutine);
     }
 
-    private void DoDodge(InputAction.CallbackContext obj)
+    public void OnDodge(InputValue value)
     {
         if (m_playerState == PLAYER_ACTION_STATE.FLYING)
         {
             m_playerState = PLAYER_ACTION_STATE.DODGING;
-            StartCoroutine(m_PlayerMovement.PlayerDodge(FinishAction, m_MovementInput.ReadValue<Vector2>()));
+            StartCoroutine(m_PlayerMovement.PlayerDodge(FinishAction, m_MovementInput));
         }   
     }
 
-    private void OnAimModeStart(InputAction.CallbackContext obj)
+    public void OnAimModeStart(InputValue value)
     {
         m_MoonBarAbility.AimModeStartHelper();
     }
 
-    private void OnAimModeEnd(InputAction.CallbackContext obj)
+    public void OnAimModeEnd(InputValue value)
     {
         m_MoonBarAbility.AimModeEndHelper();
     }
 
-    private void OnDashStart(InputAction.CallbackContext obj)
+    public void OnDashStart(InputValue value)
     {
         m_MoonBarAbility.OnDashStartHelper();
     }
 
-    private void OnDashEnd(InputAction.CallbackContext obj)
+    public void OnDashEnd(InputValue value)
     {
         m_MoonBarAbility.OnDashEndHelper();
     }
@@ -223,8 +177,8 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public override void Death() 
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("TileMapTest");
-    }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    } 
 
     private void FinishAction()
     {

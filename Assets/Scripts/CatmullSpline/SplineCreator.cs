@@ -10,6 +10,8 @@ public abstract class SplineCreator : CatmullRomSpline
     private bool m_IsInitialized = false;
     protected bool m_IsActive = true;
 
+    public LinkedListNode<Tile> CurrTile { get { return m_CurrTile; } }
+
     public virtual void AddNewPoint()
     {
         if (!m_IsInitialized)

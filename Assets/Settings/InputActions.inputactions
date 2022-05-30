@@ -15,12 +15,21 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Fire",
+                    "name": "FireStart",
                     "type": "Button",
                     "id": "0b89d5e3-9829-454b-9d32-e8e4cee8b9f8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FireStop",
+                    "type": "Button",
+                    "id": "a95d399d-fe27-4e0a-baa3-e8763e7cbbab",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
                     "initialStateCheck": false
                 },
                 {
@@ -97,7 +106,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Fire",
+                    "action": "FireStart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -108,7 +117,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Fire",
+                    "action": "FireStart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -197,6 +206,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "DashEnd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb5a05a2-4a4a-4f1b-b93a-fc0e1c13f778",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireStop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

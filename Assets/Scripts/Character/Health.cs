@@ -25,6 +25,11 @@ public class Health : MonoBehaviour
 
     private GameObject m_LastInstigator;
 
+    public bool IsInvincible { 
+        get { return m_IsInvincible; } 
+        set { m_IsInvincible = value; }
+    }
+
     public float HealthPercentage => (float)m_CurrentHealth / m_MaxHealth;
 
     protected virtual void Start()
