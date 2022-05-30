@@ -87,6 +87,8 @@ public class PlayerMovement : MonoBehaviour
     private float m_ControlSpeedMultiplier = 1f;
     private float m_CurrMothMoveSpeed;
 
+    public GameObject ControlObject => m_ControlObject;
+
     void Start()
     {
         m_CurrMothMoveSpeed = m_BaseMothMoveSpeed;

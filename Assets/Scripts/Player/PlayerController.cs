@@ -178,7 +178,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     public override void Death() 
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    } 
 
     private void FinishAction()
     {

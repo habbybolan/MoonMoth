@@ -17,11 +17,6 @@ public class DeveloperModes : MonoBehaviour
         m_PlayerController.MoonBarAbility.IsUnlimitedMoonBar = isUnlimitedMoonBar;
     }
 
-    public void ToggleNoClip(bool isNoClip)
-    { 
-        // TODO:
-    }
-
     public void SpawnFirefly()
     {
         FireflyManager.PropertyInstance.SpawnNewFirefly();
