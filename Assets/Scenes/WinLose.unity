@@ -1297,6 +1297,7 @@ GameObject:
   - component: {fileID: 3037621739091880768}
   - component: {fileID: 3037621739091880769}
   - component: {fileID: 3037621739091880782}
+  - component: {fileID: 3037621739091880784}
   m_Layer: 5
   m_Name: MainMenuCanvas
   m_TagString: Untagged
@@ -1304,6 +1305,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3037621739091880784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3037621739091880783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 807b7bc30bae57b4092883decb520dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoseUI: {fileID: 1145154591}
+  WinUI: {fileID: 189484004}
 --- !u!1 &5941300037141799057
 GameObject:
   m_ObjectHideFlags: 0

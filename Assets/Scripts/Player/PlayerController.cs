@@ -180,11 +180,13 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public override void Death() 
     {
+        GameState.IsGameWon = false;
         SceneManager.LoadScene("WinLose");
     } 
 
     public void CheckWin() 
     {
+        GameState.IsGameWon = true;
         if (m_LostMothCount >= m_LostMothCountWinCondition)
             SceneManager.LoadScene("WinLose");
     }
