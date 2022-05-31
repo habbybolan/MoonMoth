@@ -48,8 +48,7 @@ public class SpiderController : CharacterController<SpiderHealth>
         if (m_State == SpiderState.FALLING)
         {
             // TODO: Change collision check for terrain and obstacles (checking for health)
-            Terrain terrain = collision.gameObject.GetComponent<Terrain>();
-            if (terrain != null)
+            if (collision.gameObject.tag == "Terrain")
             {
                 SpiderManager.PropertyInstance.OnSpiderDeath(gameObject);
             }
