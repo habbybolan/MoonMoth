@@ -15,6 +15,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 {
     [SerializeField] private PlayerMovement m_PlayerMovement;
     [SerializeField] private PlayerParentMovement m_PlayerParentMovement;
+    [SerializeField] private int m_LostMothCountWinCondition = 10;
     [Tooltip("CameraMovement component")]
     [SerializeField] private CameraMovement m_CameraMovement;
     [SerializeField] private PlayerWeapon m_Weapon;
@@ -85,6 +86,8 @@ public class PlayerController : CharacterController<PlayerHealth>
     // Main Update controller for all Player components, Dealing with actions/effects that happen each frame
     void Update()
     {
+        CheckWin();
+
         if (!TileManager.PropertyInstance.IsInitialized)
             return;
 
@@ -180,6 +183,11 @@ public class PlayerController : CharacterController<PlayerHealth>
         SceneManager.LoadScene("WinLose");
     } 
 
+    public void CheckWin() 
+    {
+        if (m_LostMothCount >= m_LostMothCountWinCondition)
+            SceneManager.LoadScene("WinLose");
+    }
 
     private void FinishAction()
     {
