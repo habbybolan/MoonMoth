@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Health: {fileID: 8497452665531714130}
   m_FireflyWalker: {fileID: 2125045404698981339}
   m_Weapon: {fileID: 5009933585970584713}
+  m_HealthOrbPrefab: {fileID: 2852505493795219179, guid: 9a21c8104e6aa84498ee6cfda774019c, type: 3}
 --- !u!1 &4206230537702241072
 GameObject:
   m_ObjectHideFlags: 0

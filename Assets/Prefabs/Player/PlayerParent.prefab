@@ -1180,6 +1180,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab98f76802972794ba1bfc588295005f, type: 3}
+--- !u!1 &7403697258337906522 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1819674777139028219, guid: ab98f76802972794ba1bfc588295005f, type: 3}
+  m_PrefabInstance: {fileID: 1981837407}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7576343697687589138
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1465,6 +1470,7 @@ MonoBehaviour:
   m_InvincibilityDuration: 1
   m_TerrainDamageAmount: 5
   m_HealthText: {fileID: 734772372}
+  m_MothBody: {fileID: 7403697258337906522}
 --- !u!4 &7975361531800803065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}

@@ -37,6 +37,13 @@ public class Health : MonoBehaviour
         m_CurrentHealth = m_MaxHealth;
     }
 
+    public virtual void HealAmount(float healthAmount)
+    {
+        m_CurrentHealth += healthAmount;
+        if (m_CurrentHealth > m_MaxHealth)
+            m_CurrentHealth = m_MaxHealth;
+    }
+
     public void LosePassiveHealth()
     {
         RemoveHealth(m_HealthPercentLosePerSecond * Time.deltaTime);
