@@ -12,12 +12,17 @@ public class PlayerHealth : Health
     [SerializeField] private float m_InvincibilityDuration = 2f;
     [Range(0f, 100f)]
     [SerializeField] private float m_TerrainDamageAmount = 5f;
-    [SerializeField] private TextMeshProUGUI m_HealthText; 
+    [SerializeField] private TextMeshProUGUI m_HealthText;
+    [SerializeField] private GameObject m_MothBody; 
     
     private HEALTH_STATE healthState;       // If the player can be damaged or not by non-terrain damage types
 
-    protected override void Start()
+    private void Awake()
     {
+    }
+
+    protected override void Start()
+    { 
         healthState = HEALTH_STATE.VULNERABLE;
         base.Start();
         SetHealthText();
@@ -32,7 +37,7 @@ public class PlayerHealth : Health
             SetHealthText();
             return;
         }
-
+         
         // Dont take any damage if Invulnerable
         if (healthState == HEALTH_STATE.INVULNERABLE)
             return;
@@ -56,6 +61,12 @@ public class PlayerHealth : Health
         healthState = HEALTH_STATE.INVULNERABLE;
         yield return new WaitForSeconds(m_InvincibilityDuration);
         healthState = HEALTH_STATE.VULNERABLE;
+    }
+
+    public override void HealAmount(float healthAmount)
+    {
+        base.HealAmount(healthAmount);
+        SetHealthText();
     }
 
     public enum HEALTH_STATE
