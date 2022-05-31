@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float m_DamageAmount = 5f;
     [SerializeField] protected Rigidbody m_rigidBody;
     [SerializeField] protected DamageInfo.HIT_EFFECT m_HitEffect = DamageInfo.HIT_EFFECT.NORMAL;
+    [SerializeField] protected float m_Duration = 10f;
 
     protected GameObject m_Owner;
 
@@ -15,6 +16,7 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         m_rigidBody.velocity = m_Speed * transform.forward;
+        StartCoroutine(durationCoroutine());
     }
      
     protected virtual void CollisionPoint(Collider collider)  
@@ -51,6 +53,13 @@ public class Projectile : MonoBehaviour
             CollisionPoint(other);
             Destroy(gameObject);
         }     
+    }
+
+    // destroy projectile after a certain duration of not colliding with anything
+    IEnumerator durationCoroutine()
+    {
+        yield return new WaitForSeconds(m_Duration);
+        Destroy(gameObject);
     }
 
     public GameObject Owner 
