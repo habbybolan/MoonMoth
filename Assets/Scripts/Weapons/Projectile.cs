@@ -38,14 +38,11 @@ public class Projectile : MonoBehaviour
         Health health = other.gameObject.GetComponent<Health>();
         if (health != null)
         {
-            if (health != null)
-            {
-                DamageInfo damageInfo = new DamageInfo(m_DamageAmount, m_Owner, health.gameObject, DamageInfo.DAMAGE_TYPE.PROJECTILE, m_HitEffect);
-                health.Damage(damageInfo);
-                CollisionPoint(other);
-                Destroy(gameObject);
-                return;
-            }
+            DamageInfo damageInfo = new DamageInfo(m_DamageAmount, m_Owner, health.gameObject, DamageInfo.DAMAGE_TYPE.PROJECTILE, m_HitEffect);
+            health.Damage(damageInfo);
+            CollisionPoint(other);
+            Destroy(gameObject);
+            return;
         }
 
         Terrain terrain = other.gameObject.GetComponent<Terrain>();
