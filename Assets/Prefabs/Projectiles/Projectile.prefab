@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6520502550553134575}
   - component: {fileID: 2582062257275592764}
   - component: {fileID: 6535628969521129046}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8771129683057882395}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.83
@@ -130,3 +130,4 @@ MonoBehaviour:
   m_Speed: 100
   m_DamageAmount: 5
   m_rigidBody: {fileID: 6520502550553134575}
+  m_HitEffect: 0
