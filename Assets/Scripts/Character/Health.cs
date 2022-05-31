@@ -70,11 +70,6 @@ public class Health : MonoBehaviour
         {
             m_DamageSound.Play();
         }
-
-        if (m_DeathSound != null)
-        {
-            m_DeathSound.Play();
-        }
     }
 
     private void RemoveHealth(float healthToLose)
