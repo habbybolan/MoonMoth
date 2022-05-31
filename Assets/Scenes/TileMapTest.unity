@@ -212,6 +212,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerUI
       objectReference: {fileID: 0}
+    - target: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_LostMothCountWinCondition
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786757, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Name
       value: PlayerParent
