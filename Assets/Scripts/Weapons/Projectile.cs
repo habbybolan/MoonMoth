@@ -16,28 +16,44 @@ public class Projectile : MonoBehaviour
     {
         m_rigidBody.velocity = m_Speed * transform.forward;
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        CollisionPoint(collision);
-        ApplyHit(collision);
-        Destroy(gameObject);
-    }
-
-    protected virtual void CollisionPoint(Collision collision) 
+     
+    protected virtual void CollisionPoint(Collider collider)  
     {
         // For overriding functionality in children classes
         // - ex) radius explosion
     }
-
-    protected virtual void ApplyHit(Collision collision)
+     
+    protected virtual void ApplyHit(Collider collider)
     {
-        Health health = collision.gameObject.GetComponent<Health>();
+        Health health = collider.gameObject.GetComponent<Health>();
         if (health != null)
         {
             DamageInfo damageInfo = new DamageInfo(m_DamageAmount, m_Owner, health.gameObject, DamageInfo.DAMAGE_TYPE.PROJECTILE, m_HitEffect);
             health.Damage(damageInfo);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Health health = other.gameObject.GetComponent<Health>();
+        if (health != null)
+        {
+            if (health != null)
+            {
+                DamageInfo damageInfo = new DamageInfo(m_DamageAmount, m_Owner, health.gameObject, DamageInfo.DAMAGE_TYPE.PROJECTILE, m_HitEffect);
+                health.Damage(damageInfo);
+                CollisionPoint(other);
+                Destroy(gameObject);
+                return;
+            }
+        }
+
+        Terrain terrain = other.gameObject.GetComponent<Terrain>();
+        if (terrain != null)
+        {
+            CollisionPoint(other);
+            Destroy(gameObject);
+        }     
     }
 
     public GameObject Owner 
