@@ -10,6 +10,7 @@ public class FireflyController : CharacterController<FireflyHealth>
 {
     [SerializeField] private FireflyCatmullWalker m_FireflyWalker;
     [SerializeField] private FireflyGun m_Weapon;
+    [SerializeField] private HealthOrb m_HealthOrbPrefab;
 
     private FIREFLY_STATE m_State;
 
@@ -28,9 +29,8 @@ public class FireflyController : CharacterController<FireflyHealth>
     public override void Death()
     {
         Debug.Log("Firely killed");
+        Instantiate(m_HealthOrbPrefab, m_Health.gameObject.transform.position, Quaternion.identity);
         FireflyManager.PropertyInstance.OnFireflyDeath(gameObject);
-        
-
     }
 
     protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)

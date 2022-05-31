@@ -11,7 +11,8 @@ public class HealthOrb : MonoBehaviour
         PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
-            // TODO:
+            playerHealth.HealAmount(m_healthRecovery);
+            Destroy(gameObject);
         }
     }
 }
