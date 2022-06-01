@@ -23,6 +23,7 @@ public class FireflyController : CharacterController<FireflyHealth>
 
     private void Update()
     {
+        // only shoot at player if passed a certain distance from camera
         if (PlayerManager.PropertyInstance.PlayerController.ZDistanceFromPlayerCamera(transform.position) > m_DistancePastCameraToStartShooting)
         {
             m_Weapon.ShootAtPlayer();

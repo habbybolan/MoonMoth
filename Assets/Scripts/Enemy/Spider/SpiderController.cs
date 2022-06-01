@@ -9,6 +9,7 @@ public class SpiderController : CharacterController<SpiderHealth>
     [SerializeField] private SpiderWeapon m_SpiderWeapon;
     [SerializeField] private SpiderWeb m_SpiderWeb;
     [SerializeField] private float m_ShootDistance = 50f;
+    [SerializeField] private float m_DistancePastCameraToStartShooting = 10f;
 
     private int m_TileID;           // ID of the tile the spider spawned on, used for deleting spiders when tile deleted
     private SpiderState m_State;    // Current state of the spider
@@ -38,7 +39,11 @@ public class SpiderController : CharacterController<SpiderHealth>
         if (PlayerManager.PropertyInstance.PlayerController.DistanceFromPlayer(transform.position) < m_ShootDistance)
         {
             m_SpiderMovement.LookTowardPlayer();
-            m_SpiderWeapon.ShootAtPlayer();
+            // only shoot at player if passed a certain distance from camera
+            if (PlayerManager.PropertyInstance.PlayerController.ZDistanceFromPlayerCamera(transform.position) > m_DistancePastCameraToStartShooting)
+            {
+                m_SpiderWeapon.ShootAtPlayer();
+            }
         }
     }
 
