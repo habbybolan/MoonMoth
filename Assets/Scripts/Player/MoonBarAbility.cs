@@ -82,7 +82,6 @@ public class MoonBarAbility : MonoBehaviour
 
         m_IsAimMode = false;
         StopCoroutine(m_MoonBarCoroutine);
-        m_MoonBarCurrPercent = 0;
         Time.timeScale = 1f;
         d_AimModeEndDelegate();
         StartCoroutine(MoonBarCooldown());
@@ -113,7 +112,6 @@ public class MoonBarAbility : MonoBehaviour
 
         m_IsDashing = false;
         StopCoroutine(m_MoonBarCoroutine);
-        m_MoonBarCurrPercent = 0;
         d_DashEndDelegate();
         StartCoroutine(MoonBarCooldown());
     }
