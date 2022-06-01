@@ -21,6 +21,9 @@ public class PlayerController : CharacterController<PlayerHealth>
     [SerializeField] private PlayerWeapon m_Weapon;
     [SerializeField] private MoonBarAbility m_MoonBarAbility;
 
+    [Header("Effects")]
+    [SerializeField] private float m_SlowEffectDuration = 3f;
+
     [Header("Lost Moth")]
     [SerializeField] private TextMeshProUGUI m_LostMothUI;
     [SerializeField] private float m_LostMothUIDisplayTime = 1.5f;
@@ -32,7 +35,10 @@ public class PlayerController : CharacterController<PlayerHealth>
     private PLAYER_ACTION_STATE m_playerState;  // Current player state given the actions performed / effects applied
     Coroutine ShootCoroutine;                   // Coroutine called when performed shooting action to allow cancelling the coroutine
     private int m_LostMothCount = 0;
-    private Vector2 m_MovementInput;        // Input object for moving player along x-y axis
+    private Vector2 m_MovementInput;            // Input object for moving player along x-y axis
+
+    private DamageInfo.HIT_EFFECT m_CurrEffect;   // Current hit effect applied to player
+    private Coroutine m_SlowEffectCoroutine; 
 
     public MoonBarAbility MoonBarAbility { get { return m_MoonBarAbility; }}
 
@@ -45,6 +51,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     private void Awake()
     {
         m_LostMothUI.enabled = false;
+        m_CurrEffect = DamageInfo.HIT_EFFECT.NORMAL;
     }
 
     protected override void Start()
@@ -60,9 +67,10 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_Health.d_DamageDelegate = OnDamageTaken;
     }
 
-    private void OnDamageTaken()
+    private void OnDamageTaken(DamageInfo damageInfo) 
     {
         m_CameraMovement.StartCameraShake();
+        ApplyEffect(damageInfo.m_HitEffect);
     }
 
     private void AimModeStart() {
@@ -151,6 +159,8 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void OnAimModeStart(InputValue value)
     {
+        if (m_CurrEffect == DamageInfo.HIT_EFFECT.SLOW) return;
+
         m_MoonBarAbility.AimModeStartHelper();
     }
 
@@ -161,6 +171,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void OnDashStart(InputValue value)
     {
+        if (m_CurrEffect == DamageInfo.HIT_EFFECT.SLOW) return;
         m_MoonBarAbility.OnDashStartHelper();
     }
 
@@ -203,7 +214,32 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)
     {
-        // TODO: implement slow
+        if (effect == DamageInfo.HIT_EFFECT.SLOW)
+        {
+            ApplySlow();
+            // Cancel any moon abilities that are currently being used
+            m_MoonBarAbility.OnDashEndHelper();
+            m_MoonBarAbility.AimModeEndHelper();
+        }
+    }
+
+    private void ApplySlow()
+    {
+        // cancel currently running slow effect and reset if one running
+        if (m_SlowEffectCoroutine != null)
+        {
+            StopCoroutine(m_SlowEffectCoroutine);
+        }
+        m_SlowEffectCoroutine = StartCoroutine(SlowEffectCoroutine());
+    }
+
+    IEnumerator SlowEffectCoroutine()
+    {
+        m_CurrEffect = DamageInfo.HIT_EFFECT.SLOW;
+        m_PlayerParentMovement.SLowEffectStart();
+        yield return new WaitForSeconds(m_SlowEffectDuration);
+        m_CurrEffect = DamageInfo.HIT_EFFECT.NORMAL;
+        m_PlayerParentMovement.SlowEffectStop();
     }
 
     public PlayerParentMovement PlayerParent { get { return m_PlayerParentMovement;  } }
