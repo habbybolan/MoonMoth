@@ -25,6 +25,10 @@ public class PlayerController : CharacterController<PlayerHealth>
     [SerializeField] private TextMeshProUGUI m_LostMothUI;
     [SerializeField] private float m_LostMothUIDisplayTime = 1.5f;
 
+    [Header("Sound")]
+    [SerializeField] private AudioSource m_AimModeStartSound;
+    [SerializeField] private AudioSource m_AimModeEndSound; 
+
     private PLAYER_ACTION_STATE m_playerState;  // Current player state given the actions performed / effects applied
     Coroutine ShootCoroutine;                   // Coroutine called when performed shooting action to allow cancelling the coroutine
     private int m_LostMothCount = 0;
@@ -62,10 +66,12 @@ public class PlayerController : CharacterController<PlayerHealth>
     }
 
     private void AimModeStart() {
+        m_AimModeStartSound.Play();
         m_PlayerMovement.AimModeEnter();
         m_CameraMovement.CameraAimModeZoom();
     }
     private void AimModeEnd() {
+        m_AimModeEndSound.Play();
         m_PlayerMovement.AimModeExit();
         m_CameraMovement.ResetZoom();
     }
