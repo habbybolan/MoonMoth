@@ -44,7 +44,7 @@ public class FireflyCatmullWalker : CatmullWalker
 
     private void UpdateSpeed()
     {
-        float zDistanceFromCamera = ZDistanceFromPlayerCamera();
+        float zDistanceFromCamera = PlayerManager.PropertyInstance.PlayerController.ZDistanceFromPlayerCamera(transform.position);
         // Firefly to boost in front of player when behind
         if (zDistanceFromCamera < PlayerManager.PropertyInstance.PlayerController.PlayerMovement.CameraOffset - 5)
         {
@@ -55,13 +55,6 @@ public class FireflyCatmullWalker : CatmullWalker
         // Alter speed of firesly if too far/close to player to keep at contant distance
         float percentToChangeSpeed = (targetDistance - zDistanceFromCamera) * m_SpeedCorrection;
         m_CurrSpeed = m_Speed * percentToChangeSpeed;
-    }
-
-    private float ZDistanceFromPlayerCamera()
-    {
-        // COnvert firefly position to player's parent local space
-        Vector3 localPlayerPos = PlayerManager.PropertyInstance.PlayerController.PlayerParent.transform.InverseTransformPoint(transform.position);
-        return localPlayerPos.z;
     }
 
     private float TargetDistance()

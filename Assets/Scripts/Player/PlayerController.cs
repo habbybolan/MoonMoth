@@ -242,6 +242,15 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_PlayerParentMovement.SlowEffectStop();
     }
 
+    // Converts a world position to local wrt player and returns z distance from the camera
+    // Negative Z-distance means the positions is behind the player camera
+    public float ZDistanceFromPlayerCamera(Vector3 position)
+    {
+        // COnvert firefly position to player's parent local space
+        Vector3 localPlayerPos = PlayerParent.transform.InverseTransformPoint(position);
+        return localPlayerPos.z;
+    }
+
     public PlayerParentMovement PlayerParent { get { return m_PlayerParentMovement;  } }
     public PlayerMovement PlayerMovement { get { return m_PlayerMovement; } }
     public CameraMovement CameraMovement { get { return m_CameraMovement; } }
