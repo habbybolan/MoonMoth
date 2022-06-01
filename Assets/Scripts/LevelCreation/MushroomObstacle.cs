@@ -10,6 +10,8 @@ public class MushroomObstacle : Obstacle
     [SerializeField] private float m_PoisonTickRate = .1f;
     [SerializeField] private float m_ExplosionTimeAfterSensing = 1f;
     [SerializeField] private float m_TickDamageAmount = 1f;
+    [SerializeField] private AudioSource m_ExplosionSound;
+
     public ParticleSystem m_MushroomExplosionParticle;
 
     private LayerMask m_ObstacleLayerMask;
@@ -47,11 +49,9 @@ public class MushroomObstacle : Obstacle
 
     IEnumerator StartExplosion()
     {
-        // TODO: Start poison cloud particles
+        ParticleSystem explosion = Instantiate(m_MushroomExplosionParticle,transform.position,Quaternion.identity);
 
-        Instantiate(m_MushroomExplosionParticle,transform.position,Quaternion.identity);
-        
-        
+        m_ExplosionSound.Play();
 
         m_State = STATE.EXPLODED;
         float currDuration = 0;
@@ -81,7 +81,7 @@ public class MushroomObstacle : Obstacle
             yield return null;
         }
 
-        // TODO: End poison cloud particles
+        Destroy(explosion);
     }
 
     void OnDrawGizmosSelected()

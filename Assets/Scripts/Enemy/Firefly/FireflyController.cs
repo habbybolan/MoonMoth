@@ -28,9 +28,9 @@ public class FireflyController : CharacterController<FireflyHealth>
 
     public override void Death()
     {
-        Debug.Log("Firely killed");
+        
         Instantiate(m_HealthOrbPrefab, m_Health.gameObject.transform.position, Quaternion.identity);
-        FireflyManager.PropertyInstance.OnFireflyDeath(gameObject);
+        FireflyManager.PropertyInstance.OnFireflyDeath(transform.parent.gameObject);
     }
 
     protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)

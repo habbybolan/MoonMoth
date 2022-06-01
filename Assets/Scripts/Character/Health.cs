@@ -15,6 +15,9 @@ public class Health : MonoBehaviour
     [SerializeField] private float m_HealthPercentLosePerSecond = 0f;
     [SerializeField] private bool m_IsInvincible = false;   // for developer use, makes Health script invincible
 
+    [SerializeField] protected AudioSource m_DeathSound;
+    [SerializeField] protected AudioSource m_DamageSound;  
+
     protected float m_CurrentHealth;
 
     public delegate void DeathDelegate();
@@ -61,6 +64,12 @@ public class Health : MonoBehaviour
 
         m_LastInstigator = damageInfo.m_Instigator;
         RemoveHealth(damageInfo.m_DamageAmount);
+
+        // play damage sound 
+        if (m_DamageSound != null && m_CurrentHealth > 0 && damageInfo.m_DamageType != DamageInfo.DAMAGE_TYPE.TICK)
+        {
+            m_DamageSound.Play();
+        }
     }
 
     private void RemoveHealth(float healthToLose)
@@ -78,11 +87,18 @@ public class Health : MonoBehaviour
                 PlayerManager.PropertyInstance.PlayerController.OnEnemyKilled();
             }
             Death();
+            return;
         }
     }
 
     protected virtual void Death()
     {
+        // play death sound
+        if (m_DeathSound != null)
+        {
+            AudioSource.PlayClipAtPoint(m_DeathSound.clip, transform.position);
+        }
+
         if (m_deathParticles != null)
         {
             Transform currentTransform = transform;
