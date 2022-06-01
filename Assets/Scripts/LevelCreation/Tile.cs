@@ -10,11 +10,8 @@ public class Tile : MonoBehaviour
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
-    public List<Vector3> m_SpiderSpawns;
     public List<EnemySetWrapper> m_EnemyPointSet;
-    public List<Stalag> m_Stalags;
     public List<Vector3> m_LostMothPoints;
-    public List<Vector3> m_MushroomPoints;
 
     private Vector3 m_VecStartToCenter;
     private Vector3 m_VecCenterToEnd;
@@ -37,16 +34,10 @@ public class Tile : MonoBehaviour
         m_VecCenterToEnd = transform.TransformPoint(m_EndPoint) - transform.position;
         m_ID = TileManager.GetNewID();
 
-        if (m_Stalags == null)
-            m_Stalags = new List<Stalag>();
-        if (m_SpiderSpawns == null)
-            m_SpiderSpawns = new List<Vector3>();
         if (m_EnemyPointSet == null)
             m_EnemyPointSet = new List<EnemySetWrapper>();
         if (m_LostMothPoints == null)
             m_LostMothPoints = new List<Vector3>();
-        if (m_MushroomPoints == null)
-            m_MushroomPoints = new List<Vector3>();
     }
 
     private void Start()
@@ -55,21 +46,10 @@ public class Tile : MonoBehaviour
 
         // Spawn all stalag prefabs
         m_SpawnedTileObjects = new List<GameObject>();
-        foreach (Stalag stalag in m_Stalags)
-        {
-            // TODO: Use a difficulty coefficient to randomly spawn stalags
-            Obstacle obstacle = Instantiate(m_StalagPrefab.StalagPrefab, transform.TransformPoint(stalag.m_Position), stalag.m_IsPointingUp ? Quaternion.identity : m_StalagPrefab.StalagPrefab.transform.rotation * Quaternion.Euler(Vector3.forward * 180));
-            m_SpawnedTileObjects.Add(obstacle.gameObject);
-        }
         foreach (Vector3 lostMoth in m_LostMothPoints)
         {
             LostMoth lostMothObj = Instantiate(m_LostMothPrefab, transform.TransformPoint(lostMoth), Quaternion.identity);
             m_SpawnedTileObjects.Add(lostMothObj.gameObject);
-        }
-        foreach (Vector3 mushroom in m_MushroomPoints)
-        {
-            MushroomObstacle mushroomObj = Instantiate(m_MushroomPrefab, transform.TransformPoint(mushroom), Quaternion.identity);
-            m_SpawnedTileObjects.Add(mushroomObj.gameObject);
         }
     }
 
@@ -88,10 +68,7 @@ public class Tile : MonoBehaviour
         m_StartPoint = transform.InverseTransformPoint(new Vector3(0, 0, 10));
         m_EndPoint = transform.InverseTransformPoint(new Vector3(0, 0, -10));
         m_EnemyPointSet = new List<EnemySetWrapper> { new EnemySetWrapper(new Vector3(0, 0, 0)) };
-        m_SpiderSpawns = new List<Vector3>();
-        m_Stalags = new List<Stalag>();
         m_LostMothPoints = new List<Vector3>();
-        m_MushroomPoints = new List<Vector3>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -175,22 +152,6 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void AddSpiderPoint(Vector3 spawnPoint)
-    {
-        m_SpiderSpawns.Add(spawnPoint);
-    }
-
-    public void RemoveSpiderPoint()
-    {
-        if (m_SpiderSpawns.Count == 0)
-            throw new System.Exception("Spider list already empty");
-        m_SpiderSpawns.RemoveAt(m_SpiderSpawns.Count - 1);
-    }
-    public int GetSpiderSpawnCount()
-    {
-        return m_SpiderSpawns.Count;
-    }
-
     public int PlayerFollowPointsCount
     {
         get { return m_FollowPoint.Length; }
@@ -246,24 +207,6 @@ public class Tile : MonoBehaviour
         set { m_EndPoint = value; }
     }
 
-    public List<Vector3> SpiderSpawns { get { return m_SpiderSpawns; } }
-    public Vector3 GetSpiderSpawn(int index)
-    {
-        if (index >= m_SpiderSpawns.Count || index < 0)
-            throw new System.Exception("Not a valid index in m_SpiderSpawns");
-        return m_SpiderSpawns[index];
-    }
-    public Vector3 GetSpiderSpawnWorld(int index)
-    {
-        if (index >= m_SpiderSpawns.Count || index < 0)
-            throw new System.Exception("Not a valid index in m_SpiderSpawns");
-        return transform.TransformPoint(m_SpiderSpawns[index]);
-    }
-    public void SetSpiderSpawn(int index, Vector3 point)
-    {
-        m_SpiderSpawns[index] = point;
-    }
-
     public Vector3 StartPointWorld { get { return transform.TransformPoint(StartPoint); } }
     public Vector3 EndPointWorld { get { return transform.TransformPoint(EndPoint); } }
 
@@ -280,44 +223,6 @@ public class Tile : MonoBehaviour
     public bool IsTraversedByPlayer { get { return m_IsTraversedByPlayer; } }
 
     public int ID { get { return m_ID; } }
-
-    // Stalags ***********
-
-    public Stalag GetStalagSpawnPoint(int index)
-    {
-        return m_Stalags[index];
-    }
-    public Stalag GetStalagSpawnPointWorld(int index)
-    {
-        return m_Stalags[index];
-    }
-    public int GetStalagSpawnCount()
-    {
-        return m_Stalags.Count;
-    }
-    public void AddStalagSpawnPoint(Vector3 spawnPoint)
-    {
-        m_Stalags.Add(new Stalag(spawnPoint));
-    }
-    public void RemoveStalagPoint()
-    {
-        if (m_Stalags.Count == 0)
-            throw new System.Exception("List of stalags already empty");
-        m_Stalags.RemoveAt(m_Stalags.Count - 1);
-    }
-    public void UpdateStalgPoint(int index, Vector3 position)
-    {
-        m_Stalags[index].Position = position;
-    }
-    public void ChangeStalagOrientation(int index)
-    {
-        // flip the orientation of the stalag
-        m_Stalags[index].ChangeStalgOrientation();
-    }
-    public bool GetIsStalagPointingUp(int index)
-    {
-        return m_Stalags[index].GetIsPointUp();
-    }
 
     // Lost Moths ************
 
@@ -347,42 +252,12 @@ public class Tile : MonoBehaviour
         m_LostMothPoints.RemoveAt(index);
     }
 
-    // Mushrooms *************
-    public Vector3 GetMushroomPoint(int index)
-    {
-        return m_MushroomPoints[index];
-    }
-    public void UpdateMushroomPoint(int index, Vector3 position)
-    {
-        m_MushroomPoints[index] = position;
-    }
-    public int GetMushroomCount()
-    {
-        return m_MushroomPoints.Count;
-    }
-    public void AddMushroomPoint(Vector3 point)
-    {
-        m_MushroomPoints.Add(point);
-    }
-    public void RemoveMushroomPoint(int index)
-    {
-        if (index >= GetMushroomCount())
-        {
-            Debug.LogWarning("Mushroom index out of range");
-            return;
-        }
-        m_MushroomPoints.RemoveAt(index);
-    }
-
     public enum LOCATION_TYPES
     {
         FOLLOW,
         START, 
         END,
-        SPIDER,
-        STALAG,
         LOST_MOTH,
-        MUSHROOM,
     }
 
     

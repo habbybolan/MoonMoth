@@ -17,12 +17,9 @@ public class TileInspector : Editor
 
     private Tile.LOCATION_TYPES m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
     private int m_PlayerPointSelectedIndex = -1;
-    private int m_SpiderSpawnSelected = -1;
-    private int m_StalagSpawnSelected = -1;
     private int m_FireflyPointSetSelectedIndex = -1;
     private int m_FireflyPointInSetSelected = -1;
     private int m_LostMothPointSelected = -1;
-    private int m_MushroomPointSelected = -1;
    
 
     private void OnSceneGUI()
@@ -48,81 +45,15 @@ public class TileInspector : Editor
         // Create button for end point
         ShowEndPoint(false);
 
-        // Create buttons for all Spider spawn points
-        for (int i = 0; i < tile.GetSpiderSpawnCount(); i++)
-        {
-            ShowSpiderSpawns(i);
-        }
-        for (int i = 0; i < tile.GetStalagSpawnCount(); i++)
-        {
-            ShowStalagSpawnPoint(i);
-        }
         for (int i = 0; i < tile.GetLostMothCount(); i++)
         {
             ShowLostMothPoint(i);
         } 
-        for (int i = 0; i < tile.GetMushroomCount(); i++)
-        {
-            ShowMushroomPoint(i);
-        }
     }
 
     private Vector3 GetLocalPosInEditor()
     {
         return tile.transform.InverseTransformPoint(SceneView.lastActiveSceneView.camera.transform.position);
-    }
-
-    private void InputPressed()
-    {
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            if (m_StalagSpawnSelected != 0)
-            {
-                // TODO:
-
-                //Ray worldRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
-                //RaycastHit hitInfo;
-                //if (Physics.Raycast(worldRay, out hitInfo, Mathf.Infinity))
-                //{
-                //    if (hitInfo.collider.gameObject != null)
-                //    {
-                //        objectTouched = hitInfo.collider.gameObject;
-                //        tile.
-                //        objectPreview.position = hitInfo.point;
-                //        objectPreview.rotation = hitInfo.normal;
-                //    }
-                //}
-            }
-        }
-    }
-
-    private void ShowSpiderSpawns(int index)
-    {
-        Handles.color = new Color(115, 43, 204);
-        Vector3 point = handleTransform.TransformPoint(tile.GetSpiderSpawn(index));
-        float size = HandleUtility.GetHandleSize(point);
-
-        // Display button and allow selection
-        if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
-        {
-            UnselectAll();
-            m_SelectedType = Tile.LOCATION_TYPES.SPIDER;
-            m_SpiderSpawnSelected = index;
-            Repaint();
-        }
-
-        // allow movement if button point selected
-        if (m_SpiderSpawnSelected == index)
-        {
-            EditorGUI.BeginChangeCheck();
-            point = Handles.DoPositionHandle(point, handleRotation);
-            if (EditorGUI.EndChangeCheck())
-            {
-                Undo.RecordObject(tile, "Move Point");
-                EditorUtility.SetDirty(tile);
-                tile.SetSpiderSpawn(index, handleTransform.InverseTransformPoint(point));
-            }
-        }
     }
     
     // Display all follow points in the tile
@@ -183,74 +114,6 @@ public class TileInspector : Editor
                 tile.UpdateLostMothPoint(index, handleTransform.InverseTransformPoint(point));
             }
         }
-    }
-
-    // Display mushroom point
-    private void ShowMushroomPoint(int index)
-    { 
-        Handles.color = new Color(0, .14f, 0);
-        Vector3 point = handleTransform.TransformPoint(tile.GetMushroomPoint(index));
-        float size = HandleUtility.GetHandleSize(point);
-
-        // Display button and allow selection
-        if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
-        {
-            UnselectAll();
-            m_SelectedType = Tile.LOCATION_TYPES.MUSHROOM;
-            m_MushroomPointSelected = index;
-            Repaint();
-        }
-
-        // allow movement if button point selected
-        if (m_MushroomPointSelected == index)
-        {
-            EditorGUI.BeginChangeCheck();
-            point = Handles.DoPositionHandle(point, handleRotation);
-            if (EditorGUI.EndChangeCheck())
-            {
-                Undo.RecordObject(tile, "Move Point");
-                EditorUtility.SetDirty(tile);
-                tile.UpdateMushroomPoint(index, handleTransform.InverseTransformPoint(point));
-            }
-        }
-    }
-
-    // Display all follow points in the tile
-    private void ShowStalagSpawnPoint(int index) 
-    {
-        Handles.color = Color.grey;
-        Vector3 point = handleTransform.TransformPoint(tile.GetStalagSpawnPoint(index).Position);
-        float size = HandleUtility.GetHandleSize(point);
-
-        // Display button and allow selection
-        if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
-        {
-            UnselectAll();
-            m_SelectedType = Tile.LOCATION_TYPES.STALAG;
-            m_StalagSpawnSelected = index;
-            Repaint();
-        }
-
-        // allow movement if button point selected
-        if (m_StalagSpawnSelected == index)
-        {
-            EditorGUI.BeginChangeCheck();
-            point = Handles.DoPositionHandle(point, handleRotation);
-            if (EditorGUI.EndChangeCheck())
-            {
-                Undo.RecordObject(tile, "Move Point");
-                EditorUtility.SetDirty(tile);
-                tile.UpdateStalgPoint(index, handleTransform.InverseTransformPoint(point));
-            }
-        }
-
-        Handles.ArrowHandleCap(
-            0,
-            point,
-            tile.GetIsStalagPointingUp(index) ? Quaternion.LookRotation(Vector3.up) : Quaternion.LookRotation(Vector3.down),
-            size,
-            EventType.Repaint
-        );
     }
 
     // Display the enemy point set and a center point to control them all
@@ -373,10 +236,7 @@ public class TileInspector : Editor
         m_PlayerPointSelectedIndex = -1;
         m_FireflyPointSetSelectedIndex = -1;
         m_FireflyPointInSetSelected = -1;
-        m_SpiderSpawnSelected = -1;
-        m_StalagSpawnSelected = -1;
         m_LostMothPointSelected = -1;
-        m_MushroomPointSelected = -1;
         m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
 }
 
@@ -399,51 +259,6 @@ public class TileInspector : Editor
             Undo.RecordObject(tile, "Remove Follow point");
             tile.RemoveFollowPoint();
             EditorUtility.SetDirty(tile);
-        }
-
-        GUILayout.Label("Spider spawn points");
-        // Button for adding new Spider spawn point
-        if (GUILayout.Button("Add spider spawn"))
-        {
-            Undo.RecordObject(tile, "Add Spider spawn");
-            tile.AddSpiderPoint(GetLocalPosInEditor());
-            EditorUtility.SetDirty(tile);
-        }
-
-        // Button for adding new Spider spawn point
-        if (GUILayout.Button("Remove spider spawn"))
-        {
-            Undo.RecordObject(tile, "Remove Spider spawn");
-            tile.RemoveSpiderPoint();
-            EditorUtility.SetDirty(tile);
-        }
-
-        GUILayout.Label("Stalag Spawn point");
-        // Button for adding new stalag spawn point
-        if (GUILayout.Button("Add stalag spawn"))
-        {
-            Undo.RecordObject(tile, "Add stalag spawn");
-            tile.AddStalagSpawnPoint(GetLocalPosInEditor());
-            EditorUtility.SetDirty(tile);
-        }
-
-        // Button for removing last created stalag point
-        if (GUILayout.Button("Remove stalag spawn"))
-        {
-            Undo.RecordObject(tile, "Remove stalag spawn");
-            tile.RemoveStalagPoint();
-            EditorUtility.SetDirty(tile);
-        }
-
-        if (m_StalagSpawnSelected >= 0)
-        {
-            // Button for changing if the the stalg is point up or down
-            if (GUILayout.Button("Change stalag orientation"))
-            {
-                Undo.RecordObject(tile, "Change stalag orientation");
-                tile.ChangeStalagOrientation(m_StalagSpawnSelected);
-                EditorUtility.SetDirty(tile);
-            }
         }
 
         GUILayout.Label("Enemy point sets");
@@ -501,28 +316,6 @@ public class TileInspector : Editor
                 Undo.RecordObject(tile, "Remove lost moth point");
                 
                 tile.RemoveLostMothPoint(m_LostMothPointSelected);
-                EditorUtility.SetDirty(tile);
-                UnselectAll();
-            }
-        }
-
-        GUILayout.Label("Mushroom Point");
-        // button for adding a new set of enemy follow points
-        if (GUILayout.Button("Add mushroom point"))
-        {
-            Undo.RecordObject(tile, "Add mushroom point");
-            tile.AddMushroomPoint(GetLocalPosInEditor());
-            EditorUtility.SetDirty(tile);
-        }
-
-        if (m_MushroomPointSelected >= 0)
-        {
-            // button for removing last created set of follow points
-            if (GUILayout.Button("Remove mushroom point"))
-            {
-                Undo.RecordObject(tile, "Remove mushroom point");
-
-                tile.RemoveMushroomPoint(m_MushroomPointSelected);
                 EditorUtility.SetDirty(tile);
                 UnselectAll();
             }
