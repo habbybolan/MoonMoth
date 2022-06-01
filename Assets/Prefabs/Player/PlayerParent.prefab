@@ -906,269 +906,6 @@ CapsuleCollider:
   m_Height: 71.73
   m_Direction: 2
   m_Center: {x: 0, y: -6.2, z: 5.1}
---- !u!82 &8728593154423951588
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342553640948534339}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -2716036270455373528, guid: fa982dd7fa015a3498f7eb0e9c70e78b, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 65e979ac61ed0604baf38cf0b5f63e07, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &405943320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342553640948534339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: c2f4dca1ded701444b13ecddee924b7d, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &1007931874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342553640948534339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0f93357a2fae064cb5f0aaf8593beef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AimModeTimescaleChange: 0.5
-  m_MoonBarPercentLossPerSec: 20
-  m_MoonBarPercentGainedPerSec: 1
-  m_MoonBarCooldown: 3
-  m_EnemyPercentBoost: 10
-  m_MaxNumberOfEnemyBoost: 3
-  m_EnemyBoostDuration: 2
-  m_MoonBarReticle: {fileID: 7690210407055213460}
---- !u!114 &3324045045170556717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342553640948534339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98e03b73b2fa69445added13f99edb0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Health: {fileID: 7576343698478518934}
-  m_PlayerMovement: {fileID: 7576343697687589149}
-  m_PlayerParentMovement: {fileID: 3977897141832786758}
-  m_LostMothCountWinCondition: 10
-  m_CameraMovement: {fileID: 375853361}
-  m_Weapon: {fileID: 7576343698478518936}
-  m_MoonBarAbility: {fileID: 1007931874}
-  m_LostMothUI: {fileID: 8894022941869152368}
-  m_LostMothUIDisplayTime: 1.5
-  m_AimModeStartSound: {fileID: 8263238132630632312}
-  m_AimModeEndSound: {fileID: 1827220434261607872}
---- !u!114 &7576343697687589149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342553640948534339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1616b1e3f70b84f4db6c432144dbd350, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BaseMothMoveSpeed: 5
-  m_IsShowControlObject: 0
-  m_ControlObject: {fileID: 3977897140022987257}
-  m_BaseControlSpeed: 20
-  m_AimModeSpeedIncrease: 1.8
-  m_DodgeDuration: 0.5
-  m_AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -0.0028253028
-      value: 1.0004487
-      inSlope: -0.0037796132
-      outSlope: -0.0037796132
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.18954688
-    - serializedVersion: 3
-      time: 0.6935266
-      value: 0.9977232
-      inSlope: -0.014321641
-      outSlope: -0.014321641
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.21221429
-    - serializedVersion: 3
-      time: 1.0000265
-      value: -0.0000017993152
-      inSlope: -1.8292707
-      outSlope: -1.8292707
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.0844483
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_DodgeSpeedX: 30
-  m_DodgeSpeedY: 30
-  m_CameraFollowOnDodge: 1
-  m_ControlPointMultiplier: 1.4
-  m_ControlPointOffsetLimitX: 3
-  m_ControlPointOffsetLimitY: 3
-  m_MaxYDegrees: 17.8
-  m_DodgeSpeedIncrease: 2
-  m_RotateSpeed: 10
-  m_focalPointOffset: 5
-  m_ZRotationSpeed: 0.01
-  m_MaxZRotation: 50
-  m_MinXInputForZRotation: 0.1
-  m_Crosshair: {fileID: 8981334617544836173}
-  m_CrosshairPercentY: 0.05
-  m_CrosshairPercentX: 0.05
-  m_CameraOffsetFromParent: -15
-  m_InitialYCrosshairOffset: 1
-  m_ReticlePoint: {fileID: 1382965300}
-  m_DodgeParticles: {fileID: 3724928139645373970, guid: 5c9621af3bcb72f4abeaf37c094dcf6f, type: 3}
---- !u!114 &7576343698478518934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342553640948534339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3fdf590ea2c8b84fa544ea430c42086, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MaxHealth: 100
-  m_deathParticles: {fileID: 3724928139645373970, guid: 5c9621af3bcb72f4abeaf37c094dcf6f, type: 3}
-  m_deathParticlesDuration: 1
-  m_HealthPercentLosePerSecond: 1
-  m_IsInvincible: 0
-  m_DeathSound: {fileID: 0}
-  m_DamageSound: {fileID: 8728593154423951588}
-  m_InvincibilityDuration: 1
-  m_TerrainDamageAmount: 5
-  m_HealthText: {fileID: 8894022942486777166}
-  m_MothBody: {fileID: 7403697258337906522}
 --- !u!82 &1827220434261607872
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1361,6 +1098,269 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!82 &8728593154423951588
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342553640948534339}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -2716036270455373528, guid: fa982dd7fa015a3498f7eb0e9c70e78b, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 65e979ac61ed0604baf38cf0b5f63e07, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &405943320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342553640948534339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: c2f4dca1ded701444b13ecddee924b7d, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1007931874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342553640948534339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f93357a2fae064cb5f0aaf8593beef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AimModeTimescaleChange: 0.5
+  m_MoonBarPercentLossPerSec: 20
+  m_MoonBarPercentGainedPerSec: 1
+  m_MoonBarCooldown: 3
+  m_EnemyPercentBoost: 10
+  m_MaxNumberOfEnemyBoost: 3
+  m_EnemyBoostDuration: 2
+  m_MoonBarReticle: {fileID: 7690210407055213460}
+--- !u!114 &3324045045170556717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342553640948534339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e03b73b2fa69445added13f99edb0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Health: {fileID: 7576343698478518934}
+  m_PlayerMovement: {fileID: 7576343697687589149}
+  m_PlayerParentMovement: {fileID: 3977897141832786758}
+  m_LostMothCountWinCondition: 8
+  m_CameraMovement: {fileID: 375853361}
+  m_Weapon: {fileID: 7576343698478518936}
+  m_MoonBarAbility: {fileID: 1007931874}
+  m_LostMothUI: {fileID: 8894022941869152368}
+  m_LostMothUIDisplayTime: 1.5
+  m_AimModeStartSound: {fileID: 8263238132630632312}
+  m_AimModeEndSound: {fileID: 1827220434261607872}
+--- !u!114 &7576343697687589149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342553640948534339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1616b1e3f70b84f4db6c432144dbd350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BaseMothMoveSpeed: 5
+  m_IsShowControlObject: 0
+  m_ControlObject: {fileID: 3977897140022987257}
+  m_BaseControlSpeed: 15
+  m_AimModeSpeedIncrease: 1.8
+  m_DodgeDuration: 0.5
+  m_AnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0028253028
+      value: 1.0004487
+      inSlope: -0.0037796132
+      outSlope: -0.0037796132
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.18954688
+    - serializedVersion: 3
+      time: 0.6935266
+      value: 0.9977232
+      inSlope: -0.014321641
+      outSlope: -0.014321641
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.21221429
+    - serializedVersion: 3
+      time: 1.0000265
+      value: -0.0000017993152
+      inSlope: -1.8292707
+      outSlope: -1.8292707
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.0844483
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_DodgeSpeedX: 30
+  m_DodgeSpeedY: 30
+  m_CameraFollowOnDodge: 1
+  m_ControlPointMultiplier: 1.4
+  m_ControlPointOffsetLimitX: 3
+  m_ControlPointOffsetLimitY: 3
+  m_MaxYDegrees: 17.8
+  m_DodgeSpeedIncrease: 2
+  m_RotateSpeed: 10
+  m_focalPointOffset: 5
+  m_ZRotationSpeed: 0.01
+  m_MaxZRotation: 50
+  m_MinXInputForZRotation: 0.1
+  m_Crosshair: {fileID: 8981334617544836173}
+  m_CrosshairPercentY: 0.05
+  m_CrosshairPercentX: 0.05
+  m_CameraOffsetFromParent: -15
+  m_InitialYCrosshairOffset: 1
+  m_ReticlePoint: {fileID: 1382965300}
+  m_DodgeParticles: {fileID: 3724928139645373970, guid: 5c9621af3bcb72f4abeaf37c094dcf6f, type: 3}
+--- !u!114 &7576343698478518934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342553640948534339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3fdf590ea2c8b84fa544ea430c42086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxHealth: 100
+  m_deathParticles: {fileID: 3724928139645373970, guid: 5c9621af3bcb72f4abeaf37c094dcf6f, type: 3}
+  m_deathParticlesDuration: 1
+  m_HealthPercentLosePerSecond: 1
+  m_IsInvincible: 0
+  m_DeathSound: {fileID: 0}
+  m_DamageSound: {fileID: 8728593154423951588}
+  m_InvincibilityDuration: 1
+  m_TerrainDamageAmount: 5
+  m_HealthText: {fileID: 8894022942486777166}
+  m_MothBody: {fileID: 7403697258337906522}
 --- !u!4 &7975361531800803065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 79646b73f6e46244ea3f6a0767a2fc42, type: 3}
