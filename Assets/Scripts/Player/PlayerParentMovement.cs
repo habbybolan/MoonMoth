@@ -11,6 +11,9 @@ public class PlayerParentMovement : CatmullWalker
 
     [Header("Movement")]
     [SerializeField] private bool m_IsIndependentMovement = false;
+
+    [Header("Slow")]
+    [SerializeField] private float m_SlowEffectSpeedDecreasePercent = 0.5f;
     
     public Vector3 GetClosestPointToPlayer()
     {
@@ -57,6 +60,16 @@ public class PlayerParentMovement : CatmullWalker
     }
 
     public void DashEnd() {
+        m_CurrSpeed = m_Speed;
+    }
+
+    public void SLowEffectStart()
+    {
+        m_CurrSpeed = m_Speed * m_SlowEffectSpeedDecreasePercent;
+    }
+
+    public void SlowEffectStop()
+    {
         m_CurrSpeed = m_Speed;
     }
 }

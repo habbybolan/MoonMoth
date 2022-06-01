@@ -50,6 +50,7 @@ public class SpiderWeb : MonoBehaviour
 
         int count = (int)( m_Length / m_partDistance);
 
+        // Create new part of the web and attach it to previous
         for (int i = 0; i < count; i++)
         {
             GameObject tmp;
