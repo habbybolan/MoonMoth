@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 using UnityEditor;
 
-[ExecuteInEditMode]
 public class Tile : MonoBehaviour
 {
     // Manually set points
@@ -109,15 +108,10 @@ public class Tile : MonoBehaviour
         return Vector3.Distance(transform.TransformPoint(m_StartPoint), player.transform.position);
     }
 
-    private Vector3 GetLocalPosInEditor()
-    {
-        return transform.InverseTransformPoint(SceneView.lastActiveSceneView.camera.transform.position);
-    }
-
-    public void AddFollowPoint()
+    public void AddFollowPoint(Vector3 spawnPoint)
     {
         Array.Resize(ref m_FollowPoint, PlayerFollowPointsCount + 1);
-        m_FollowPoint[PlayerFollowPointsCount - 1] = GetLocalPosInEditor();
+        m_FollowPoint[PlayerFollowPointsCount - 1] = spawnPoint;
     }
 
     public void RemoveFollowPoint()
@@ -128,9 +122,9 @@ public class Tile : MonoBehaviour
         Array.Resize(ref m_FollowPoint, PlayerFollowPointsCount - 1);
     }
 
-    public void AddEnemyPointSet()
+    public void AddEnemyPointSet(Vector3 spawnPoint)
     {
-        m_EnemyPointSet.Add(new EnemySetWrapper(GetLocalPosInEditor()));
+        m_EnemyPointSet.Add(new EnemySetWrapper(spawnPoint));
     }
 
     public void RemoveEnemyPointSet()
@@ -169,9 +163,9 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void AddSpiderPoint()
+    public void AddSpiderPoint(Vector3 spawnPoint)
     {
-        m_SpiderSpawns.Add(GetLocalPosInEditor());
+        m_SpiderSpawns.Add(spawnPoint);
     }
 
     public void RemoveSpiderPoint()
@@ -289,9 +283,9 @@ public class Tile : MonoBehaviour
     {
         return m_Stalags.Count;
     }
-    public void AddStalagSpawnPoint()
+    public void AddStalagSpawnPoint(Vector3 spawnPoint)
     {
-        m_Stalags.Add(new Stalag(GetLocalPosInEditor()));
+        m_Stalags.Add(new Stalag(spawnPoint));
     }
     public void RemoveStalagPoint()
     {
@@ -327,9 +321,9 @@ public class Tile : MonoBehaviour
     {
         return m_LostMothPoints.Count;
     } 
-    public void AddLostMothPoint()
+    public void AddLostMothPoint(Vector3 spawnPoint)
     {
-        m_LostMothPoints.Add(GetLocalPosInEditor());
+        m_LostMothPoints.Add(spawnPoint);
     }
     public void RemoveLostMothPoint(int index)
     {

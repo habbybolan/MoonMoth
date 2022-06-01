@@ -64,6 +64,11 @@ public class TileInspector : Editor
 
     Transform objectTouched = null; //the reference of the last object hit
 
+    private Vector3 GetLocalPosInEditor()
+    {
+        return tile.transform.InverseTransformPoint(SceneView.lastActiveSceneView.camera.transform.position);
+    }
+
     private void InputPressed()
     {
         if (Input.GetKeyDown(KeyCode.F1))
@@ -350,7 +355,7 @@ public class TileInspector : Editor
         if (GUILayout.Button("Add Follow point"))
         {
             Undo.RecordObject(tile, "Add Follow point");
-            tile.AddFollowPoint();
+            tile.AddFollowPoint(GetLocalPosInEditor());
             EditorUtility.SetDirty(tile);
         }
 
@@ -367,7 +372,7 @@ public class TileInspector : Editor
         if (GUILayout.Button("Add spider spawn"))
         {
             Undo.RecordObject(tile, "Add Spider spawn");
-            tile.AddSpiderPoint();
+            tile.AddSpiderPoint(GetLocalPosInEditor());
             EditorUtility.SetDirty(tile);
         }
 
@@ -384,7 +389,7 @@ public class TileInspector : Editor
         if (GUILayout.Button("Add stalag spawn"))
         {
             Undo.RecordObject(tile, "Add stalag spawn");
-            tile.AddStalagSpawnPoint();
+            tile.AddStalagSpawnPoint(GetLocalPosInEditor());
             EditorUtility.SetDirty(tile);
         }
 
@@ -412,7 +417,7 @@ public class TileInspector : Editor
         if (GUILayout.Button("Add enemy follow point set"))
         {
             Undo.RecordObject(tile, "Add enemy follow point set");
-            tile.AddEnemyPointSet();
+            tile.AddEnemyPointSet(GetLocalPosInEditor());
             EditorUtility.SetDirty(tile);
         }
 
@@ -450,7 +455,7 @@ public class TileInspector : Editor
         if (GUILayout.Button("Add lost moth point"))
         {
             Undo.RecordObject(tile, "Add lost moth point");
-            tile.AddLostMothPoint(); 
+            tile.AddLostMothPoint(GetLocalPosInEditor()); 
             EditorUtility.SetDirty(tile);
         }
 
