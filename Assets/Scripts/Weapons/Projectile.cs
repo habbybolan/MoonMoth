@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     protected GameObject m_Owner;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         m_rigidBody.velocity = m_Speed * transform.forward;
         StartCoroutine(durationCoroutine());

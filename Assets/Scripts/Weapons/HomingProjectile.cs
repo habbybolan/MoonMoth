@@ -8,6 +8,12 @@ public class HomingProjectile : Projectile
 
     private Health m_Target;
 
+    protected override void Start()
+    {
+        base.Start();
+        m_Target = PlayerManager.PropertyInstance.PlayerController.Health;
+    }
+
     private void Update()
     {
         HomeToTarget();
