@@ -67,8 +67,6 @@ public class TileInspector : Editor
         }
     }
 
-    Transform objectTouched = null; //the reference of the last object hit
-
     private Vector3 GetLocalPosInEditor()
     {
         return tile.transform.InverseTransformPoint(SceneView.lastActiveSceneView.camera.transform.position);

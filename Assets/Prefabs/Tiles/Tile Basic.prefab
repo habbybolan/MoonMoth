@@ -11932,9 +11932,10 @@ MonoBehaviour:
     m_IsPointingUp: 0
   m_LostMothPoints: []
   m_MushroomPoints:
-  - {x: -42.404205, y: -6.622513, z: 122.96492}
+  - {x: -42.404205, y: -14.532562, z: 122.96492}
   m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
-  m_LostMoth: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+  m_LostMothPrefab: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+  m_MushroomPrefab: {fileID: 3071177420972441163, guid: a89325feb13e7f9498b9cdabee35a122, type: 3}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0

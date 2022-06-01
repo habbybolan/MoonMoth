@@ -22,7 +22,8 @@ public class Tile : MonoBehaviour
     
     // prefabs
     public StalagScriptable m_StalagPrefab;
-    public LostMoth m_LostMoth;
+    public LostMoth m_LostMothPrefab;
+    public MushroomObstacle m_MushroomPrefab;
 
     private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
     private int m_ID;
@@ -62,8 +63,13 @@ public class Tile : MonoBehaviour
         }
         foreach (Vector3 lostMoth in m_LostMothPoints)
         {
-            LostMoth lostMothObj = Instantiate(m_LostMoth, transform.TransformPoint(lostMoth), Quaternion.identity);
+            LostMoth lostMothObj = Instantiate(m_LostMothPrefab, transform.TransformPoint(lostMoth), Quaternion.identity);
             m_SpawnedTileObjects.Add(lostMothObj.gameObject);
+        }
+        foreach (Vector3 mushroom in m_MushroomPoints)
+        {
+            MushroomObstacle mushroomObj = Instantiate(m_MushroomPrefab, transform.TransformPoint(mushroom), Quaternion.identity);
+            m_SpawnedTileObjects.Add(mushroomObj.gameObject);
         }
     }
 
