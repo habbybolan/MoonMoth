@@ -97,6 +97,7 @@ public class PlayerController : CharacterController<PlayerHealth>
         if (!TileManager.PropertyInstance.IsInitialized)
             return;
 
+        m_Weapon.TryShoot();
         m_MoonBarAbility.UpdateAimModeEnemyKilledList();
         m_MoonBarAbility.UpdateAimModeReticleBar();
 
@@ -131,14 +132,12 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void OnFireStart(InputValue value)
     {
-        // TODO: put logic inside Weapon
-        ShootCoroutine = StartCoroutine(m_Weapon.Shooting());
+        m_Weapon.IsShooting = true;
     } 
 
     public void OnFireStop(InputValue value)
     {
-        // TODO: put logic inside Weapon
-        StopCoroutine(ShootCoroutine);
+        m_Weapon.IsShooting = false;
     }
 
     public void OnDodge(InputValue value)

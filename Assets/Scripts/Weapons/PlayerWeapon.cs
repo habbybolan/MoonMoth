@@ -8,18 +8,30 @@ public class PlayerWeapon : WeaponBase
     [SerializeField] private float m_ShotMissedOffset = 1000f;
 
     private PlayerController m_Controller;      // Player Controller
+    private bool m_IsShooting = false;
+    private LayerMask m_AvoidLayerMask;
 
     private void Start()
     {
         m_Controller = PlayerManager.PropertyInstance.PlayerController;
+        m_AvoidLayerMask = LayerMask.NameToLayer("PlayerController");
+        m_AvoidLayerMask = m_AvoidLayerMask | LayerMask.NameToLayer("Player");
+        m_AvoidLayerMask = ~m_AvoidLayerMask;
     }
 
-    public IEnumerator Shooting()
+    public void TryShoot()
     {
-        while (true)
+        if (!m_IsShooting) return;
+
+        Ray crosshairRay = m_Controller.PlayerMovement.CrosshairScreenRay;
+        RaycastHit hit;
+        if (Physics.Raycast(crosshairRay, out hit, Mathf.Infinity, m_AvoidLayerMask))
         {
-            ShootDirection(GetDirectionToFireAt());
-            yield return null;
+            ShootPosition(hit.point);
+        }
+        else
+        {
+            ShootDirection(crosshairRay.direction);
         }
     }
 
@@ -27,5 +39,10 @@ public class PlayerWeapon : WeaponBase
     {
         Ray crosshairRay = m_Controller.PlayerMovement.CrosshairScreenRay;
         return crosshairRay.direction;
+    }
+
+    public bool IsShooting { 
+        get { return m_IsShooting; } 
+        set { m_IsShooting = value; }
     }
 }
