@@ -8,7 +8,10 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private PlayerMovement player;
     [SerializeField] private float m_CameraFovChangeRate = 2f;
     [SerializeField] private float m_BaseFov = 60f;
+
+    [Header("Camera Shake")]
     [SerializeField] private float m_ShakeDuration = 0.4f;
+    [SerializeField] private float m_ShakeIntensity = 1f;
 
     [Header("Dash")]
     [Tooltip("Amount to zoom while dashing, positive for zooming out")]
@@ -69,7 +72,7 @@ public class CameraMovement : MonoBehaviour
     // Camera shake for a duration
     private IEnumerator CameraShakeDuration()
     {
-        m_Noise.m_AmplitudeGain = 1;
+        m_Noise.m_AmplitudeGain = m_ShakeIntensity;
         yield return new WaitForSeconds(m_ShakeDuration);
         m_Noise.m_AmplitudeGain = 0;
     }
