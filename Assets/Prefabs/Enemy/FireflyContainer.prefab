@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxHealth: 100
-  m_deathParticles: {fileID: 0}
+  m_deathParticles: {fileID: 3724928139645373970, guid: 06cf6d26e50ae4c40b5f3b0a7037bc1c, type: 3}
   m_deathParticlesDuration: 1
   m_HealthPercentLosePerSecond: 1
   m_IsInvincible: 0
