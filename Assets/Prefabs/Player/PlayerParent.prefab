@@ -392,7 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Duration: 5
   m_Spline: {fileID: 0}
-  m_Speed: 15
+  m_Speed: 17
   m_SpeedIncreasePercent: 1
   m_IsIndependentMovement: 0
 --- !u!1001 &1421261664

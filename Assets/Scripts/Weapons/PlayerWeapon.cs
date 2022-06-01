@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerWeapon : WeaponBase
 {
-    [Tooltip("Offset forwards from the crosshair to shoot projectile towards on a missed shot (No Collider hit)")]
-    [SerializeField] private float m_ShotMissedOffset = 1000f;
-
     private PlayerController m_Controller;      // Player Controller
     private bool m_IsShooting = false;
     private LayerMask m_AvoidLayerMask;
