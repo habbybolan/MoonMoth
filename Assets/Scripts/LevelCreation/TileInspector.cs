@@ -22,6 +22,7 @@ public class TileInspector : Editor
     private int m_FireflyPointSetSelectedIndex = -1;
     private int m_FireflyPointInSetSelected = -1;
     private int m_LostMothPointSelected = -1;
+    private int m_MushroomPointSelected = -1;
    
 
     private void OnSceneGUI()
@@ -59,6 +60,10 @@ public class TileInspector : Editor
         for (int i = 0; i < tile.GetLostMothCount(); i++)
         {
             ShowLostMothPoint(i);
+        } 
+        for (int i = 0; i < tile.GetMushroomCount(); i++)
+        {
+            ShowMushroomPoint(i);
         }
     }
 
@@ -178,6 +183,36 @@ public class TileInspector : Editor
                 Undo.RecordObject(tile, "Move Point");
                 EditorUtility.SetDirty(tile);
                 tile.UpdateLostMothPoint(index, handleTransform.InverseTransformPoint(point));
+            }
+        }
+    }
+
+    // Display mushroom point
+    private void ShowMushroomPoint(int index)
+    { 
+        Handles.color = new Color(0, .14f, 0);
+        Vector3 point = handleTransform.TransformPoint(tile.GetMushroomPoint(index));
+        float size = HandleUtility.GetHandleSize(point);
+
+        // Display button and allow selection
+        if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
+        {
+            UnselectAll();
+            m_SelectedType = Tile.LOCATION_TYPES.MUSHROOM;
+            m_MushroomPointSelected = index;
+            Repaint();
+        }
+
+        // allow movement if button point selected
+        if (m_MushroomPointSelected == index)
+        {
+            EditorGUI.BeginChangeCheck();
+            point = Handles.DoPositionHandle(point, handleRotation);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(tile, "Move Point");
+                EditorUtility.SetDirty(tile);
+                tile.UpdateMushroomPoint(index, handleTransform.InverseTransformPoint(point));
             }
         }
     }
@@ -343,6 +378,7 @@ public class TileInspector : Editor
         m_SpiderSpawnSelected = -1;
         m_StalagSpawnSelected = -1;
         m_LostMothPointSelected = -1;
+        m_MushroomPointSelected = -1;
         m_SelectedType = Tile.LOCATION_TYPES.FOLLOW;
 }
 
@@ -471,8 +507,28 @@ public class TileInspector : Editor
                 UnselectAll();
             }
         }
-    }
 
-    
+        GUILayout.Label("Mushroom Point");
+        // button for adding a new set of enemy follow points
+        if (GUILayout.Button("Add mushroom point"))
+        {
+            Undo.RecordObject(tile, "Add mushroom point");
+            tile.AddMushroomPoint(GetLocalPosInEditor());
+            EditorUtility.SetDirty(tile);
+        }
+
+        if (m_MushroomPointSelected >= 0)
+        {
+            // button for removing last created set of follow points
+            if (GUILayout.Button("Remove mushroom point"))
+            {
+                Undo.RecordObject(tile, "Remove mushroom point");
+
+                tile.RemoveMushroomPoint(m_MushroomPointSelected);
+                EditorUtility.SetDirty(tile);
+                UnselectAll();
+            }
+        }
+    }  
 }
 #endif

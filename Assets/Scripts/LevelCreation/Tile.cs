@@ -14,8 +14,11 @@ public class Tile : MonoBehaviour
     public List<EnemySetWrapper> m_EnemyPointSet;
     public List<Stalag> m_Stalags;
     public List<Vector3> m_LostMothPoints;
+    public List<Vector3> m_MushroomPoints;
+
     private Vector3 m_VecStartToCenter;
     private Vector3 m_VecCenterToEnd;
+    
     
     // prefabs
     public StalagScriptable m_StalagPrefab;
@@ -41,6 +44,8 @@ public class Tile : MonoBehaviour
             m_EnemyPointSet = new List<EnemySetWrapper>();
         if (m_LostMothPoints == null)
             m_LostMothPoints = new List<Vector3>();
+        if (m_MushroomPoints == null)
+            m_MushroomPoints = new List<Vector3>();
     }
 
     private void Start()
@@ -80,6 +85,7 @@ public class Tile : MonoBehaviour
         m_SpiderSpawns = new List<Vector3>();
         m_Stalags = new List<Stalag>();
         m_LostMothPoints = new List<Vector3>();
+        m_MushroomPoints = new List<Vector3>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -335,6 +341,33 @@ public class Tile : MonoBehaviour
         m_LostMothPoints.RemoveAt(index);
     }
 
+    // Mushrooms *************
+    public Vector3 GetMushroomPoint(int index)
+    {
+        return m_MushroomPoints[index];
+    }
+    public void UpdateMushroomPoint(int index, Vector3 position)
+    {
+        m_MushroomPoints[index] = position;
+    }
+    public int GetMushroomCount()
+    {
+        return m_MushroomPoints.Count;
+    }
+    public void AddMushroomPoint(Vector3 point)
+    {
+        m_MushroomPoints.Add(point);
+    }
+    public void RemoveMushroomPoint(int index)
+    {
+        if (index >= GetMushroomCount())
+        {
+            Debug.LogWarning("Mushroom index out of range");
+            return;
+        }
+        m_MushroomPoints.RemoveAt(index);
+    }
+
     public enum LOCATION_TYPES
     {
         FOLLOW,
@@ -343,6 +376,7 @@ public class Tile : MonoBehaviour
         SPIDER,
         STALAG,
         LOST_MOTH,
+        MUSHROOM,
     }
 
     
