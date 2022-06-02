@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWeapon : WeaponBase
+public class PlayerWeapon : WeaponBase<Projectile>
 {
     private PlayerController m_Controller;      // Player Controller
     private bool m_IsShooting = false;

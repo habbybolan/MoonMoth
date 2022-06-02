@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponBase : MonoBehaviour
+public class WeaponBase<T> : MonoBehaviour where T : Projectile
 {
     [SerializeField] protected float m_Cooldown = 0.25f;
-    [SerializeField] protected Projectile m_BulletPrefab;
+    [SerializeField] protected T m_BulletPrefab;
     [SerializeField] private Vector2 m_PitchRange = new Vector2(0.9f, 1.1f); 
 
     private AudioSource m_ProjectileAudio;
