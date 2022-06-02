@@ -20,7 +20,6 @@ public class TileInspector : Editor
     private int m_FireflyPointSetSelectedIndex = -1;
     private int m_FireflyPointInSetSelected = -1;
     private int m_LostMothPointSelected = -1;
-   
 
     private void OnSceneGUI()
     {
@@ -55,7 +54,7 @@ public class TileInspector : Editor
     {
         return tile.transform.InverseTransformPoint(SceneView.lastActiveSceneView.camera.transform.position);
     }
-    
+     
     // Display all follow points in the tile
     private void ShowPlayerFollowPoint(int index) 
     {

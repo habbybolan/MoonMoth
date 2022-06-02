@@ -98,7 +98,8 @@ public class TileManager : MonoBehaviour
         if (visibleCount == 0)
         {
             // notify delegate a tile was created
-            d_TileAddedDelegate(newTile);
+            if (d_TileAddedDelegate != null)
+                d_TileAddedDelegate(newTile);
             return;
         }
 
@@ -108,7 +109,8 @@ public class TileManager : MonoBehaviour
             newTile.transform.position = newPos;
         }
 
-        d_TileAddedDelegate(newTile);
+        if (d_TileAddedDelegate != null)
+            d_TileAddedDelegate(newTile);
     }
 
     private Tile FindAvailableTile()
@@ -133,10 +135,11 @@ public class TileManager : MonoBehaviour
         Tile secondTile = m_VisibleTiles.First.Next.Value;
         if (firstTile.IsTraversedByPlayer && secondTile.IsTraversedByPlayer)
         {
-            d_TileDeletedDelegate(firstTile);
+            if (d_TileDeletedDelegate != null)
+                d_TileDeletedDelegate(firstTile);
             firstTile.DeleteAllSpawned();
             firstTile.SetIsActive(false);
-            m_VisibleTiles.RemoveFirst();  
+            m_VisibleTiles.RemoveFirst();
         }
     }
 
