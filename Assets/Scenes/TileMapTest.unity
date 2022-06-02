@@ -268,6 +268,10 @@ PrefabInstance:
       propertyPath: m_BaseControlSpeed
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 7576343698478518936, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_BulletPrefab
+      value: 
+      objectReference: {fileID: 6272121326647583191, guid: 117e17bac98cb2d4691674ba32cfb26c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
 --- !u!1 &230706513 stripped

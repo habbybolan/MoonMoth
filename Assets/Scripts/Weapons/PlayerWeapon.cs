@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWeapon : WeaponBase<Projectile>
+public class PlayerWeapon : WeaponBase<HomingProjectile>
 {
     private PlayerController m_Controller;      // Player Controller
     private bool m_IsShooting = false;
@@ -22,9 +22,15 @@ public class PlayerWeapon : WeaponBase<Projectile>
 
         Ray crosshairRay = m_Controller.PlayerMovement.CrosshairScreenRay;
         RaycastHit hit;
-        if (Physics.Raycast(crosshairRay, out hit, Mathf.Infinity, m_AvoidLayerMask))
+        if (Physics.SphereCast(crosshairRay, 5f, out hit, Mathf.Infinity, m_AvoidLayerMask))
         {
             ShootPosition(hit.point);
+            // if spherecast hits enemy, apply target to Homing projectile
+            Health health = hit.collider.gameObject.GetComponent<Health>();
+            if (m_LastShotProjectile != null && health != null)
+            {
+                m_LastShotProjectile.SetTarget(health);
+            }
         }
         else
         {

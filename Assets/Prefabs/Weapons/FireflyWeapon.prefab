@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Cooldown: 1
-  m_BulletPrefab: {fileID: 6535628969521129046, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
+  m_BulletPrefab: {fileID: 8160964148307049018, guid: b389ca884d6e2474ba6ac6932db6d292, type: 3}
   m_PitchRange: {x: 0.9, y: 1.1}
   m_WeaponOwner: {fileID: 0}
 --- !u!82 &6781013581318783176
