@@ -7,9 +7,7 @@ public class TileManager : MonoBehaviour
     static TileManager s_PropertyInstance;
 
     [Header("Tiles")]
-    [SerializeField] private Tile[] m_TilePrefabs1;
-    [SerializeField] private Tile[] m_TilePrefabs2; 
-    [SerializeField] private Tile[] m_TilePrefabs3;
+    [SerializeField] private TileListWrapper[] m_TileSets;
     [Tooltip("Empty tile that's used as a transition piece between tile set 1 and 2")]
     [SerializeField] private Tile m_TileTransition1;
     [Tooltip("Empty tile that's used as a transition piece between tile set 2 and 3")]
@@ -61,7 +59,7 @@ public class TileManager : MonoBehaviour
     private void InitializeStartTile() 
     {
         // create uniform distribution of all prefab tiles
-        int numEachTile = m_PoolTiles.Length / m_TilePrefabs1.Length;
+        int numEachTile = m_PoolTiles.Length / m_TileSets[m_CurrentTileSet].tiles.Length;
         int indexPrefab = 0;
         int indexPool = 0;
         int numEachCurrTile = 0;
@@ -70,12 +68,12 @@ public class TileManager : MonoBehaviour
         while (indexPool < m_PoolTiles.Length)
         {
             // Reached max number of current prefab inside pool and not at last prefab
-            if (numEachCurrTile == numEachTile && indexPrefab != m_TilePrefabs1.Length - 1)
+            if (numEachCurrTile == numEachTile && indexPrefab != m_TileSets[m_CurrentTileSet].tiles.Length - 1)
             {
                 indexPrefab++;
                 numEachCurrTile = 0;
             }
-            Tile newTile = Instantiate(m_TilePrefabs1[indexPrefab], Vector3.zero, Quaternion.identity, transform);
+            Tile newTile = Instantiate(m_TileSets[m_CurrentTileSet].tiles[indexPrefab], Vector3.zero, Quaternion.identity, transform);
             m_PoolTiles[indexPool] = newTile;
             newTile.gameObject.SetActive(false);
             indexPool++;
@@ -180,10 +178,21 @@ public class TileManager : MonoBehaviour
 
     private void DeleteSet()
     {
+        StartCoroutine(TransitionToNextSet());
+    }
+
+    // Asynchronously 
+    IEnumerator TransitionToNextSet()
+    {
         foreach (Tile tile in m_PoolTiles)
         {
             Destroy(tile.gameObject);
+            yield return new WaitForSeconds(.02f);
         }
+        m_CurrentTileSet++;
+
+        // TODO: Make asynchronous instead of all in one frame
+        InitializeStartTile();
     }
 
     public bool IsInitialized { get { return m_IsInitialized; } }

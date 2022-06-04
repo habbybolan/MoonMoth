@@ -623,10 +623,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3798b4edb538541bbfa094b7cf4f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TilePrefabs1:
-  - {fileID: 3961284799128567415, guid: 1f1262d9fe599ca42ac9102b002fbe39, type: 3}
-  m_TilePrefabs2: []
-  m_TilePrefabs3: []
+  m_TileSets:
+  - tiles:
+    - {fileID: 3961284799128567415, guid: 1f1262d9fe599ca42ac9102b002fbe39, type: 3}
+  - tiles:
+    - {fileID: 3961284799128567415, guid: 1c445344d9ce7164d9e558fcd418520f, type: 3}
   m_TileTransition1: {fileID: 0}
   m_TileTransition2: {fileID: 0}
   m_DistanceToPlaceTile: 800
