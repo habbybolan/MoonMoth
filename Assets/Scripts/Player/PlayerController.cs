@@ -23,6 +23,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     [Header("Effects")]
     [SerializeField] private float m_SlowEffectDuration = 3f;
+    [SerializeField] private float m_FogTransitionDuration = 1f;
 
     [Header("Lost Moth")]
     [SerializeField] private TextMeshProUGUI m_LostMothUI;
@@ -38,7 +39,8 @@ public class PlayerController : CharacterController<PlayerHealth>
     private Vector2 m_MovementInput;            // Input object for moving player along x-y axis
 
     private DamageInfo.HIT_EFFECT m_CurrEffect;   // Current hit effect applied to player
-    private Coroutine m_SlowEffectCoroutine; 
+    private Coroutine m_SlowEffectCoroutine;
+    private Coroutine m_TransitionCoroutine;
 
     public MoonBarAbility MoonBarAbility { get { return m_MoonBarAbility; }}
 
@@ -201,12 +203,49 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void CheckWin() 
     {
-        if (m_LostMothCount >= m_LostMothCountWinCondition)
+        // if not currently transitioning and met the lost moth win threshold for the tile set
+        if (m_TransitionCoroutine == null && m_LostMothCount >= m_LostMothCountWinCondition)
         {
-            m_PlayerParentMovement.DisconnectFromSpline();
-            GameManager.PropertyInstance.OnAllLostMothsCollected();
+            m_TransitionCoroutine = StartCoroutine(TransitionPhase());
+        }        
+    }
+
+    // Fogs up player's screen, and calls next logic for the transition
+    private IEnumerator TransitionPhase()
+    {
+        Debug.Log("Start fog screen");
+
+        // start fog transition
+        float currDuration = 0;
+        while (currDuration < m_FogTransitionDuration)
+        {
+            if (GameState.m_GameState == GameStateEnum.RUNNING) break;
+            yield return null;
         }
-            
+        Debug.Log("Screen fogged");
+
+        // Call rest of transition logic
+        m_LostMothCount = 0;
+        m_PlayerParentMovement.DisconnectFromSpline();
+        GameManager.PropertyInstance.OnAllLostMothsCollected();
+        
+        // wait for transition state to be over
+        while (GameState.m_GameState != GameStateEnum.RUNNING)
+        {
+            yield return null;
+        }
+
+        m_PlayerParentMovement.ConnectBackToSpline();
+
+        // start defog transition
+        currDuration = 0;
+        Debug.Log("Start defog screen");
+        while (currDuration < m_FogTransitionDuration)
+        {
+            if (GameState.m_GameState == GameStateEnum.RUNNING) break;
+            yield return null;
+        }
+        Debug.Log("Screen defogged");
     }
 
     private void FinishAction()
