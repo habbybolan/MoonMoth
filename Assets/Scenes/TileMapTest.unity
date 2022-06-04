@@ -209,6 +209,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2144779323}
     m_Modifications:
     - target: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_FogTransitionDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_LostMothCountWinCondition
       value: 1
       objectReference: {fileID: 0}
@@ -625,7 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TileSets:
   - tiles:
-    - {fileID: 3961284799128567415, guid: 1f1262d9fe599ca42ac9102b002fbe39, type: 3}
+    - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
   - tiles:
     - {fileID: 3961284799128567415, guid: 1c445344d9ce7164d9e558fcd418520f, type: 3}
   - tiles:
@@ -635,6 +639,10 @@ MonoBehaviour:
   - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
   m_DistanceToPlaceTile: 800
   m_TilePoolSize: 20
+  m_PercentDifficultyIncreasePerSecond: 1
+  m_StalagMaxSpawnPercent: 50
+  m_SpiderMaxSpawnPercent: 50
+  m_MushroomMaxSpawnPercent: 50
 --- !u!4 &951211377
 Transform:
   m_ObjectHideFlags: 0

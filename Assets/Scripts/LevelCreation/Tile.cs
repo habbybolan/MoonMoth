@@ -28,6 +28,8 @@ public class Tile : MonoBehaviour
 
     private List<GameObject> m_SpawnedTileObjects;  // list of objects connected to tile for deletion
 
+    private List<GameObject>[] m_DynamicallySpawned;
+
     private void Awake()
     {
         m_VecStartToCenter = transform.position - transform.TransformPoint(m_StartPoint);
@@ -38,6 +40,25 @@ public class Tile : MonoBehaviour
             m_EnemyPointSet = new List<EnemySetWrapper>();
         if (m_LostMothPoints == null)
             m_LostMothPoints = new List<Vector3>();
+        
+        // Store each dynamically spawned object into a list 
+        m_DynamicallySpawned = new List<GameObject>[TileManager.PropertyInstance.NumSpawnTypes];
+        foreach (Transform child in transform)
+        {
+            GameObject childObj = child.gameObject;
+            switch(childObj.tag) {
+                case "Stalag":
+                    m_DynamicallySpawned[0].Add(childObj);
+                    break;
+                case "Spider":
+                    m_DynamicallySpawned[1].Add(childObj);
+                    break;
+                case "Mushroom":
+                    m_DynamicallySpawned[2].Add(childObj);
+                    break;
+                
+            }
+        }
     }
 
     private void Start()

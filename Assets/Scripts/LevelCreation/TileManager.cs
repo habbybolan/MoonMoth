@@ -15,24 +15,40 @@ public class TileManager : MonoBehaviour
     [SerializeField] private float m_DistanceToPlaceTile = 200f;
     [SerializeField] private int m_TilePoolSize = 40;
 
+    [Header("Difficulty")]
+    [Tooltip("The percent the difficulty increases each second player is in a set that spawns that specific obstacle/enemy, with a max of 100% difficulty where everything is spawning." +
+        "The highest percent is limited by the max spawn percent set for each obstacle/enemy")]
+    [Range(0, 100)]
+    [SerializeField] private float m_PercentDifficultyIncreasePerSecond = 1f;
+    [Tooltip("Max spawn percent of stalags in a level. Represents the max difficulty of stalags")]
+    [Range(0, 100)]
+    [SerializeField] private float m_StalagMaxSpawnPercent = 50f;
+    [Tooltip("Max spawn percent of spiders in a level. Represents the max difficulty of spiders")]
+    [Range(0, 100)]
+    [SerializeField] private float m_SpiderMaxSpawnPercent = 50f;
+    [Tooltip("Max spawn percent of mushrooms in a level. Represents the max difficulty of mushrooms")]
+    [Range(0, 100)]
+    [SerializeField] private float m_MushroomMaxSpawnPercent = 50f;
+
     private int m_CurrentTileSet = 0;
 
     // Delegate for every time a new tile is added
-    public delegate void TileAddedDelegate(Tile addedTile); 
+    public delegate void TileAddedDelegate(Tile addedTile);
     public TileAddedDelegate d_TileAddedDelegate;
 
     // Delegate for every time the oldest visible tile is deleted
-    public delegate void TileDeletedDelegate(Tile deletedTile); 
-    public TileDeletedDelegate d_TileDeletedDelegate; 
+    public delegate void TileDeletedDelegate(Tile deletedTile);
+    public TileDeletedDelegate d_TileDeletedDelegate;
 
     private Tile[] m_PoolTiles;
     private LinkedList<Tile> m_VisibleTiles = new LinkedList<Tile>();
 
     private static int m_IDCount = 0;
     private bool m_IsInitialized = false;   // If all starting tiles have been initialize
+    private float m_currDifficultyPercent = 0;
 
     public static TileManager PropertyInstance
-    { 
+    {
         get { return s_PropertyInstance; }
     }
 
@@ -57,7 +73,7 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    private void InitializeStartTile() 
+    private void InitializeStartTile()
     {
         // create uniform distribution of all prefab tiles
         int numEachTile = m_PoolTiles.Length / m_TileSets[m_CurrentTileSet].tiles.Length;
@@ -103,7 +119,7 @@ public class TileManager : MonoBehaviour
             // Find and add new tile to end of path
             newTile = FindAvailableTile();
         }
-        
+
         Tile lastCreated = null;
         if (m_VisibleTiles.Count > 0)
             lastCreated = m_VisibleTiles.Last.Value;
@@ -206,7 +222,7 @@ public class TileManager : MonoBehaviour
         }
         m_PoolTiles = new Tile[m_TilePoolSize];
         m_VisibleTiles.Clear();
-        
+
 
         // TODO: Make asynchronous instead of all in one frame
         InitializeStartTile();
@@ -219,6 +235,10 @@ public class TileManager : MonoBehaviour
     {
         return m_VisibleTiles.First;
     }
+
+    // [stalags, spiders, mushrooms]
+    public float[] SpawnRates => new float[] { m_StalagMaxSpawnPercent, m_SpiderMaxSpawnPercent, m_MushroomMaxSpawnPercent };
+    public int NumSpawnTypes => 3;
 
     // Update is called once per frame
     void Update()
