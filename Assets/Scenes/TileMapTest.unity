@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.000018713308, g: 0.00000003495534, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.000018713301, g: 0.00000003495534, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -213,6 +213,10 @@ PrefabInstance:
       value: PlayerParent
       objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_Speed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Spline
       value: 
       objectReference: {fileID: 92830010}
@@ -260,6 +264,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_BaseControlSpeed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576343698478518936, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_BulletPrefab
+      value: 
+      objectReference: {fileID: 6272121326647583191, guid: 117e17bac98cb2d4691674ba32cfb26c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
 --- !u!1 &230706513 stripped
@@ -605,6 +617,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TilePrefabs:
   - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
+  - {fileID: 3961284799128567415, guid: 1c445344d9ce7164d9e558fcd418520f, type: 3}
+  - {fileID: 3961284799128567415, guid: 0972ed06aabd4194dbbe28c2cf3c2687, type: 3}
   m_DistanceToPlaceTile: 800
   m_TilePoolSize: 20
 --- !u!4 &951211377

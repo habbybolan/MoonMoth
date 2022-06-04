@@ -215,6 +215,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stalagmite_short
       objectReference: {fileID: 0}
+    - target: {fileID: 5062545693439606254, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
 --- !u!4 &3041050930764484753 stripped

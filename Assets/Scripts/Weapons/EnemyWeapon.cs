@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyWeapon : WeaponBase
+public class EnemyWeapon<T> : WeaponBase<T> where T : Projectile
 {
     protected PlayerController playerController;
     protected LayerMask m_PlayerMask; 

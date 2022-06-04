@@ -11,7 +11,11 @@ public class HomingProjectile : Projectile
     protected override void Start()
     {
         base.Start();
-        m_Target = PlayerManager.PropertyInstance.PlayerController.Health;
+    }
+
+    public void SetTarget(Health health)
+    {
+        m_Target = health;
     }
 
     private void Update()
