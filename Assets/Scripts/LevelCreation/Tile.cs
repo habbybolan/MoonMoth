@@ -43,6 +43,10 @@ public class Tile : MonoBehaviour
         
         // Store each dynamically spawned object into a list 
         m_DynamicallySpawned = new List<GameObject>[TileManager.PropertyInstance.NumSpawnTypes];
+        for (int i = 0; i < m_DynamicallySpawned.Length; i++)
+        {
+            m_DynamicallySpawned[i] = new List<GameObject>();
+        }
         foreach (Transform child in transform)
         {
             GameObject childObj = child.gameObject;
@@ -56,7 +60,6 @@ public class Tile : MonoBehaviour
                 case "Mushroom":
                     m_DynamicallySpawned[2].Add(childObj);
                     break;
-                
             }
         }
     }
