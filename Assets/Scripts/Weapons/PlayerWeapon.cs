@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PlayerWeapon : WeaponBase<HomingProjectile>
 {
+    [SerializeField] private float m_ShootCastRadius = 10f;
     private PlayerController m_Controller;      // Player Controller
     private bool m_IsShooting = false;
-    private LayerMask m_AvoidLayerMask;
+    private int m_AvoidLayerMask;
 
     private void Start()
     {
         m_Controller = PlayerManager.PropertyInstance.PlayerController;
-        m_AvoidLayerMask = LayerMask.NameToLayer("PlayerController");
-        m_AvoidLayerMask = m_AvoidLayerMask | LayerMask.NameToLayer("Player");
+        m_AvoidLayerMask = 1 << LayerMask.NameToLayer("PlayerControl");
+        m_AvoidLayerMask = m_AvoidLayerMask | 1 << LayerMask.NameToLayer("Player");
+        m_AvoidLayerMask = m_AvoidLayerMask | 1 << LayerMask.NameToLayer("Projectile");
+        m_AvoidLayerMask = m_AvoidLayerMask | 1 << LayerMask.NameToLayer("Obstacle");
+        m_AvoidLayerMask = m_AvoidLayerMask | 1 << LayerMask.NameToLayer("Terrain");
+        m_AvoidLayerMask = m_AvoidLayerMask | 1 << LayerMask.NameToLayer("Default");
         m_AvoidLayerMask = ~m_AvoidLayerMask;
     }
 
@@ -22,9 +27,9 @@ public class PlayerWeapon : WeaponBase<HomingProjectile>
 
         Ray crosshairRay = m_Controller.PlayerMovement.CrosshairScreenRay;
         RaycastHit hit;
-        if (Physics.SphereCast(crosshairRay, 5f, out hit, Mathf.Infinity, m_AvoidLayerMask))
+        if (Physics.SphereCast(crosshairRay, m_ShootCastRadius, out hit, Mathf.Infinity, m_AvoidLayerMask))
         {
-            ShootPosition(hit.point);
+            ShootPosition(hit.collider.gameObject.transform.position);
             // if spherecast hits enemy, apply target to Homing projectile
             Health health = hit.collider.gameObject.GetComponent<Health>();
             if (m_LastShotProjectile != null && health != null)

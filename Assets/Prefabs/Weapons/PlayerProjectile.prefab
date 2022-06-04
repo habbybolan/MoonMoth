@@ -112,4 +112,4 @@ MonoBehaviour:
   m_rigidBody: {fileID: 2115601040100902840}
   m_HitEffect: 0
   m_Duration: 10
-  m_MaxHomingAngle: 1
+  m_MaxHomingAngle: 5
