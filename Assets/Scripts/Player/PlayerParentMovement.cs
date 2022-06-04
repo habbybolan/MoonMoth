@@ -78,7 +78,8 @@ public class PlayerParentMovement : CatmullWalker
     {
         m_IsIndependentMovement = true;
         m_Spline.UninitializeSpline();
-    }
+        ResetValues();
+}
 
     public void ConnectBackToSpline()
     {

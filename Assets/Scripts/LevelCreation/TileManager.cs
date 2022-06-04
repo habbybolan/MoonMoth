@@ -189,10 +189,13 @@ public class TileManager : MonoBehaviour
             Destroy(tile.gameObject);
             yield return new WaitForSeconds(.02f);
         }
+        m_PoolTiles = new Tile[m_TilePoolSize];
+        m_VisibleTiles.Clear();
         m_CurrentTileSet++;
 
         // TODO: Make asynchronous instead of all in one frame
         InitializeStartTile();
+        GameState.m_GameState = GameStateEnum.RUNNING;
     }
 
     public bool IsInitialized { get { return m_IsInitialized; } }

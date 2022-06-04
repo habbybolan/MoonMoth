@@ -68,6 +68,14 @@ public class CatmullWalker : MonoBehaviour
         m_CurrCurveLength = m_Spline.GetCurveLength(m_CurrCurve);
     }
 
+    protected void ResetValues()
+    {
+        m_Dist = 0;
+        m_CurrCurve = -1;
+        m_CurrCurveLength = 0;
+        m_CurrSpeed = m_Speed;
+    }
+
     public SplineCreator spline
     {
         get { return m_Spline; }
