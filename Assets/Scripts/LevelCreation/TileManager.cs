@@ -7,11 +7,10 @@ public class TileManager : MonoBehaviour
     static TileManager s_PropertyInstance;
 
     [Header("Tiles")]
+    [Header("List of all the sets of tiles. Each set corresponds to a level that starts at the first and ends at the last set")]
     [SerializeField] private TileListWrapper[] m_TileSets;
-    [Tooltip("Empty tile that's used as a transition piece between tile set 1 and 2")]
-    [SerializeField] private Tile m_TileTransition1;
-    [Tooltip("Empty tile that's used as a transition piece between tile set 2 and 3")]
-    [SerializeField] private Tile m_TileTransition2;
+    [Tooltip("Empty tile that's used as a transition piece between set at index i and i+1. Size should be length of m_TileSets - 1")]
+    [SerializeField] private Tile[] m_TileTransitions;
 
     [SerializeField] private float m_DistanceToPlaceTile = 200f;
     [SerializeField] private int m_TilePoolSize = 40;
@@ -52,6 +51,10 @@ public class TileManager : MonoBehaviour
     {
         InitializeStartTile();
         m_IsInitialized = true;
+        if (m_TileTransitions.Length < m_TileSets.Length - 1)
+        {
+            Debug.LogWarning("There should be a transition tile m_TileTransitions for each tile transition between sets m_TileSets in TileManager");
+        }
     }
 
     private void InitializeStartTile() 
@@ -90,9 +93,17 @@ public class TileManager : MonoBehaviour
 
     private void InstantiateTile()
     {
-        // Find and add new tile to end of path
-        var newTile = FindAvailableTile();
-
+        Tile newTile;
+        // if adding the first tile on transitions to new tileset, start with designated tile transition
+        if (m_CurrentTileSet > 0 && m_VisibleTiles.Count == 0 && m_TileTransitions.Length > m_CurrentTileSet - 1)
+        {
+            newTile = Instantiate(m_TileTransitions[m_CurrentTileSet - 1], Vector3.zero, Quaternion.identity, transform);
+        } else
+        {
+            // Find and add new tile to end of path
+            newTile = FindAvailableTile();
+        }
+        
         Tile lastCreated = null;
         if (m_VisibleTiles.Count > 0)
             lastCreated = m_VisibleTiles.Last.Value;
@@ -163,7 +174,6 @@ public class TileManager : MonoBehaviour
     }
 
     // On conditions of tile set being fulfilled, goto next set or player won the game
-    // returns true if the game was won
     public void TileSetFinished()
     {
         // only delete set if game was running so there's a set to delete
