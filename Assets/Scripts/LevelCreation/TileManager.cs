@@ -155,7 +155,6 @@ public class TileManager : MonoBehaviour
         }
     }
 
-
     private void CheckAddTile()
     {
         // TODO: Make reliant on distance rather then z-position
@@ -168,14 +167,20 @@ public class TileManager : MonoBehaviour
     }
 
     // On conditions of tile set being fulfilled, goto next set or player won the game
-    public void TileSetFinished()
+    // returns true if the game was won
+    public bool TileSetFinished()
     {
-        // TODO:
+        // only delete set if game was running so there's a set to delete
+        if (GameState.m_GameState == GameStateEnum.RUNNING)
+        {
+            DeleteSet();
+        }
+        return false;
     }
 
-    private void DeleteSet(Tile[] tilesToDelete)
+    private void DeleteSet()
     {
-        foreach (Tile tile in tilesToDelete)
+        foreach (Tile tile in m_PoolTiles)
         {
             Destroy(tile.gameObject);
         }
@@ -191,6 +196,9 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // only update if game is in normal running state
+        if (GameState.m_GameState != GameStateEnum.RUNNING) return;
+
         CheckRemoveTile();
         CheckAddTile();
     }

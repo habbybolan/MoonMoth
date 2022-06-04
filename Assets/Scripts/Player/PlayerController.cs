@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 
 /*
  * Deals with Player's Inputs, States and which methods to call each frame.
@@ -196,19 +196,15 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public override void Death() 
     {
-        GameState.IsGameWon = false;
-        SceneManager.LoadScene("WinLose");
+        GameManager.PropertyInstance.OnGameOver();
     } 
 
     public void CheckWin() 
     {
         if (m_LostMothCount >= m_LostMothCountWinCondition)
         {
-            // TODO: Send to Tile manager if there is the next set of tiles to enter or game won
             m_PlayerParentMovement.DisconnectFromSpline();
-
-            //GameState.IsGameWon = true;
-            //SceneManager.LoadScene("WinLose");
+            GameManager.PropertyInstance.OnAllLostMothsCollected();
         }
             
     }
