@@ -204,7 +204,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     public void CheckWin() 
     {
         // if not currently transitioning and met the lost moth win threshold for the tile set
-        if (m_TransitionCoroutine == null && m_LostMothCount >= m_LostMothCountWinCondition)
+        if (m_LostMothCount >= m_LostMothCountWinCondition)
         {
             m_TransitionCoroutine = StartCoroutine(TransitionPhase());
         }        
@@ -213,6 +213,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     // Fogs up player's screen, and calls next logic for the transition
     private IEnumerator TransitionPhase()
     {
+        m_LostMothCount = 0;
         Debug.Log("Start fog screen");
 
         // start fog transition
@@ -225,7 +226,6 @@ public class PlayerController : CharacterController<PlayerHealth>
         Debug.Log("Screen fogged");
 
         // Call rest of transition logic
-        m_LostMothCount = 0;
         m_PlayerParentMovement.DisconnectFromSpline();
         GameManager.PropertyInstance.OnAllLostMothsCollected();
         

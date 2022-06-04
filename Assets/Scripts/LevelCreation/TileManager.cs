@@ -32,8 +32,6 @@ public class TileManager : MonoBehaviour
     private static int m_IDCount = 0;
     private bool m_IsInitialized = false;   // If all starting tiles have been initialize
 
-    private float m_TileLevel = 0;  // tile levels are from 0-2
-
     public static TileManager PropertyInstance
     { 
         get { return s_PropertyInstance; }
@@ -166,14 +164,13 @@ public class TileManager : MonoBehaviour
 
     // On conditions of tile set being fulfilled, goto next set or player won the game
     // returns true if the game was won
-    public bool TileSetFinished()
+    public void TileSetFinished()
     {
         // only delete set if game was running so there's a set to delete
         if (GameState.m_GameState == GameStateEnum.RUNNING)
         {
             DeleteSet();
         }
-        return false;
     }
 
     private void DeleteSet()
@@ -184,6 +181,14 @@ public class TileManager : MonoBehaviour
     // Asynchronously 
     IEnumerator TransitionToNextSet()
     {
+        // if reached all levels added, then player wins
+        if (m_CurrentTileSet == m_TileSets.Length - 1)
+        {
+            GameManager.PropertyInstance.OnGameWon();
+            yield break;
+        }
+        m_CurrentTileSet++;
+
         foreach (Tile tile in m_PoolTiles)
         {
             Destroy(tile.gameObject);
@@ -191,7 +196,7 @@ public class TileManager : MonoBehaviour
         }
         m_PoolTiles = new Tile[m_TilePoolSize];
         m_VisibleTiles.Clear();
-        m_CurrentTileSet++;
+        
 
         // TODO: Make asynchronous instead of all in one frame
         InitializeStartTile();

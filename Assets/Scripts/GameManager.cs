@@ -40,12 +40,11 @@ public class GameManager : MonoBehaviour
     public void OnAllLostMothsCollected()
     {
         // if last tile set finished, then game won
-        if (TileManager.PropertyInstance.TileSetFinished())
+        TileManager.PropertyInstance.TileSetFinished(); 
+        if (GameState.m_GameState != GameStateEnum.WON && GameState.m_GameState != GameStateEnum.LOST)
         {
-            OnGameWon();
-            return;
+            GameState.m_GameState = GameStateEnum.TRANSITIONING;
+            FireflyManager.PropertyInstance.TileSetFinished();
         }
-        GameState.m_GameState = GameStateEnum.TRANSITIONING;
-        FireflyManager.PropertyInstance.TileSetFinished();
     }
 }
