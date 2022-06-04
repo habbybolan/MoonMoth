@@ -49,7 +49,7 @@ MonoBehaviour:
   m_BulletPrefab: {fileID: 2130856289903436801, guid: 117e17bac98cb2d4691674ba32cfb26c, type: 3}
   m_PitchRange: {x: 0.9, y: 1.1}
   m_WeaponOwner: {fileID: 0}
-  m_ShotMissedOffset: 1000
+  m_ShootCastRadius: 2
 --- !u!82 &1714714638527290424
 AudioSource:
   m_ObjectHideFlags: 0

@@ -53,7 +53,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8771129683057882395, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
       propertyPath: m_Name
-      value: Projectile
+      value: FireflyProjectile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
+--- !u!1 &5293763568378556789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8771129683057882395, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
+  m_PrefabInstance: {fileID: 3516878184468907118}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8160964148307049018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5293763568378556789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fd3bd627e5de04188d36334a134147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Speed: 50
+  m_DamageAmount: 5
+  m_rigidBody: {fileID: 7688502829872873857}
+  m_HitEffect: 0
+  m_Duration: 10
+--- !u!54 &7688502829872873857 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 6520502550553134575, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
+  m_PrefabInstance: {fileID: 3516878184468907118}
+  m_PrefabAsset: {fileID: 0}
