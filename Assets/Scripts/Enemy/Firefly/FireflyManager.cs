@@ -93,7 +93,7 @@ public class FireflyManager : MonoBehaviour
 
     public void TileSetFinished() 
     {
-        for (int i = 0; i < m_FireflyList.Count; i++)
+        for (int i = m_FireflyList.Count-1; i >= 0; i--)
         {
             Destroy(m_FireflyList[i].gameObject);
             m_FireflyList.RemoveAt(i);
