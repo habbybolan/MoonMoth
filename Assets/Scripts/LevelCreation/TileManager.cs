@@ -6,7 +6,15 @@ public class TileManager : MonoBehaviour
 {
     static TileManager s_PropertyInstance;
 
-    [SerializeField] private Tile[] m_TilePrefabs;
+    [Header("Tiles")]
+    [SerializeField] private Tile[] m_TilePrefabs1;
+    [SerializeField] private Tile[] m_TilePrefabs2; 
+    [SerializeField] private Tile[] m_TilePrefabs3;
+    [Tooltip("Empty tile that's used as a transition piece between tile set 1 and 2")]
+    [SerializeField] private Tile m_TileTransition1;
+    [Tooltip("Empty tile that's used as a transition piece between tile set 2 and 3")]
+    [SerializeField] private Tile m_TileTransition2;
+
     [SerializeField] private float m_DistanceToPlaceTile = 200f;
     [SerializeField] private int m_TilePoolSize = 40;
 
@@ -23,6 +31,8 @@ public class TileManager : MonoBehaviour
 
     private static int m_IDCount = 0;
     private bool m_IsInitialized = false;   // If all starting tiles have been initialize
+
+    private float m_TileLevel = 0;  // tile levels are from 0-2
 
     public static TileManager PropertyInstance
     { 
@@ -49,7 +59,7 @@ public class TileManager : MonoBehaviour
     private void InitializeStartTile() 
     {
         // create uniform distribution of all prefab tiles
-        int numEachTile = m_PoolTiles.Length / m_TilePrefabs.Length;
+        int numEachTile = m_PoolTiles.Length / m_TilePrefabs1.Length;
         int indexPrefab = 0;
         int indexPool = 0;
         int numEachCurrTile = 0;
@@ -58,12 +68,12 @@ public class TileManager : MonoBehaviour
         while (indexPool < m_PoolTiles.Length)
         {
             // Reached max number of current prefab inside pool and not at last prefab
-            if (numEachCurrTile == numEachTile && indexPrefab != m_TilePrefabs.Length - 1)
+            if (numEachCurrTile == numEachTile && indexPrefab != m_TilePrefabs1.Length - 1)
             {
                 indexPrefab++;
                 numEachCurrTile = 0;
             }
-            Tile newTile = Instantiate(m_TilePrefabs[indexPrefab], Vector3.zero, Quaternion.identity, transform);
+            Tile newTile = Instantiate(m_TilePrefabs1[indexPrefab], Vector3.zero, Quaternion.identity, transform);
             m_PoolTiles[indexPool] = newTile;
             newTile.gameObject.SetActive(false);
             indexPool++;
