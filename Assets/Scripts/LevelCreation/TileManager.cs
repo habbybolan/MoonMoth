@@ -18,6 +18,8 @@ public class TileManager : MonoBehaviour
     [SerializeField] private float m_DistanceToPlaceTile = 200f;
     [SerializeField] private int m_TilePoolSize = 40;
 
+    private int m_CurrentTileSet = 0;
+
     // Delegate for every time a new tile is added
     public delegate void TileAddedDelegate(Tile addedTile); 
     public TileAddedDelegate d_TileAddedDelegate;
@@ -162,6 +164,20 @@ public class TileManager : MonoBehaviour
         if (lastTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerController.PlayerParent) < m_DistanceToPlaceTile)
         {
             InstantiateTile();
+        }
+    }
+
+    // On conditions of tile set being fulfilled, goto next set or player won the game
+    public void TileSetFinished()
+    {
+        // TODO:
+    }
+
+    private void DeleteSet(Tile[] tilesToDelete)
+    {
+        foreach (Tile tile in tilesToDelete)
+        {
+            Destroy(tile.gameObject);
         }
     }
 

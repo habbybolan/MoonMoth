@@ -202,9 +202,15 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void CheckWin() 
     {
-        GameState.IsGameWon = true;
         if (m_LostMothCount >= m_LostMothCountWinCondition)
-            SceneManager.LoadScene("WinLose");
+        {
+            // TODO: Send to Tile manager if there is the next set of tiles to enter or game won
+            m_PlayerParentMovement.DisconnectFromSpline();
+
+            //GameState.IsGameWon = true;
+            //SceneManager.LoadScene("WinLose");
+        }
+            
     }
 
     private void FinishAction()

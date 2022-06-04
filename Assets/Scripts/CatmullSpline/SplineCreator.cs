@@ -49,6 +49,15 @@ public abstract class SplineCreator : CatmullRomSpline
         InitializeStartingPoints();
     }
 
+    // uninitialize the spline
+    public void UninitializeSpline()
+    {
+        m_IsInitialized = false;
+        m_Points = null;
+        m_CurrTile = null;
+        m_CurrFollowPointInTile = 0;
+    }
+
     // Initialize the spline at the tile tileStart
     public void InitializeSplineAtTile(LinkedListNode<Tile> tileStart)
     {

@@ -72,4 +72,11 @@ public class PlayerParentMovement : CatmullWalker
     {
         m_CurrSpeed = m_Speed;
     }
+
+    // Disconnect movement from the spline and uninitialize the spline
+    public void DisconnectFromSpline()
+    {
+        m_IsIndependentMovement = true;
+        m_Spline.UninitializeSpline();
+    }
 }
