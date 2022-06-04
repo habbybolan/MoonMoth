@@ -23,12 +23,21 @@ public class TileManager : MonoBehaviour
     [Tooltip("Max spawn percent of stalags in a level. Represents the max difficulty of stalags")]
     [Range(0, 100)]
     [SerializeField] private float m_StalagMaxSpawnPercent = 50f;
+    [Tooltip("Starting spawn percent of stalags")]
+    [Range(0, 100)]
+    [SerializeField] private float m_StalagStartingSpawnPercent = 10; 
     [Tooltip("Max spawn percent of spiders in a level. Represents the max difficulty of spiders")]
     [Range(0, 100)]
     [SerializeField] private float m_SpiderMaxSpawnPercent = 50f;
+    [Tooltip("Starting spawn percent of Spiders")]
+    [Range(0, 100)]
+    [SerializeField] private float m_SpiderStartingSpawnPercent = 10;
     [Tooltip("Max spawn percent of mushrooms in a level. Represents the max difficulty of mushrooms")]
     [Range(0, 100)]
     [SerializeField] private float m_MushroomMaxSpawnPercent = 50f;
+    [Tooltip("Starting spawn percent of mushrooms")]
+    [Range(0, 100)]
+    [SerializeField] private float m_MushroomStartingSpawnPercent = 10;
 
     private int m_CurrentTileSet = 0;
 
@@ -47,6 +56,10 @@ public class TileManager : MonoBehaviour
     private bool m_IsInitialized = false;   // If all starting tiles have been initialize
     private float m_currDifficultyPercent = 0;
 
+    private float m_StalagCurrentSpawnPercent;
+    private float m_SpiderCurrentSpawnPercent;
+    private float m_MushroomCurrentSpawnPercent;  
+
     public static TileManager PropertyInstance
     {
         get { return s_PropertyInstance; }
@@ -60,7 +73,11 @@ public class TileManager : MonoBehaviour
             Destroy(this);
         else
             s_PropertyInstance = this;
-    }
+
+        m_StalagCurrentSpawnPercent = m_StalagStartingSpawnPercent;
+        m_SpiderCurrentSpawnPercent = m_SpiderStartingSpawnPercent;
+        m_MushroomCurrentSpawnPercent = m_MushroomStartingSpawnPercent;
+}
 
     // Start is called before the first frame update
     void Start()
@@ -70,6 +87,19 @@ public class TileManager : MonoBehaviour
         if (m_TileTransitions.Length < m_TileSets.Length - 1)
         {
             Debug.LogWarning("There should be a transition tile m_TileTransitions for each tile transition between sets m_TileSets in TileManager");
+        }
+        StartCoroutine(SpawnPercentagesPrint());
+    }
+
+    IEnumerator SpawnPercentagesPrint()
+    {
+        while (true)
+        {
+            Debug.Log("------------------------------------------");
+            Debug.Log("Stalag: " + m_StalagCurrentSpawnPercent.ToString());
+            Debug.Log("Spiders: " + m_SpiderCurrentSpawnPercent.ToString());
+            Debug.Log("Mushrooms: " + m_MushroomCurrentSpawnPercent.ToString());
+            yield return new WaitForSeconds(1);
         }
     }
 
@@ -190,6 +220,28 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    private void IncrementSpawnPercents()
+    {
+        switch(m_CurrentTileSet)
+        {
+            case 0:
+                m_StalagCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
+                break;
+            case 1:
+                m_StalagCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
+                m_SpiderCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
+                break;
+            case 2:
+                m_StalagCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
+                m_SpiderCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
+                m_MushroomCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
+                break;
+        }
+        if (m_StalagCurrentSpawnPercent > m_StalagMaxSpawnPercent) m_StalagCurrentSpawnPercent = m_StalagMaxSpawnPercent;
+        if (m_SpiderCurrentSpawnPercent > m_SpiderMaxSpawnPercent) m_SpiderCurrentSpawnPercent = m_SpiderMaxSpawnPercent;
+        if (m_MushroomCurrentSpawnPercent > m_MushroomMaxSpawnPercent) m_MushroomCurrentSpawnPercent = m_MushroomMaxSpawnPercent;
+    }
+
     // On conditions of tile set being fulfilled, goto next set or player won the game
     public void TileSetFinished()
     {
@@ -238,8 +290,8 @@ public class TileManager : MonoBehaviour
     }
 
     // [stalags, spiders, mushrooms]
-    public float[] SpawnRates => new float[] { m_StalagMaxSpawnPercent, m_SpiderMaxSpawnPercent, m_MushroomMaxSpawnPercent };
-    public int NumSpawnTypes => 3;
+    public float[] SpawnRates => new float[] { m_StalagCurrentSpawnPercent, m_SpiderCurrentSpawnPercent, m_MushroomCurrentSpawnPercent };
+    public int NumSpawnTypes => 3; 
 
     // Update is called once per frame
     void Update()
@@ -249,5 +301,6 @@ public class TileManager : MonoBehaviour
 
         CheckRemoveTile();
         CheckAddTile();
+        IncrementSpawnPercents();
     }
 }

@@ -11926,7 +11926,8 @@ MonoBehaviour:
   - EnemyPointSet:
     - {x: -21.460573, y: -5.583397, z: 97.717224}
     - {x: -37.41342, y: -0.5470581, z: 92.78386}
-  m_LostMothPoints: []
+  m_LostMothPoints:
+  - {x: -38.559814, y: -0.108818054, z: 47.492126}
   m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
   m_LostMothPrefab: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
   m_MushroomPrefab: {fileID: 3071177420972441163, guid: a89325feb13e7f9498b9cdabee35a122, type: 3}

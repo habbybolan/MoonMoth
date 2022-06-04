@@ -28,6 +28,8 @@ public class Tile : MonoBehaviour
 
     private List<GameObject> m_SpawnedTileObjects;  // list of objects connected to tile for deletion
 
+    // List of obstacles/enemies set in the tile
+    // [Stalags, Spiders, Mushrooms]
     private List<GameObject>[] m_SetObjectSpawns;
 
     private void Awake()
@@ -47,6 +49,7 @@ public class Tile : MonoBehaviour
         {
             m_SetObjectSpawns[i] = new List<GameObject>();
         }
+        // Add each type to its respective list
         foreach (Transform child in transform)
         {
             GameObject childObj = child.gameObject;
@@ -69,13 +72,14 @@ public class Tile : MonoBehaviour
         m_EndCollider = GetComponent<BoxCollider>();
     }
 
+    // Initialize the dynamically spawned items and (de)-activate any obstacle/enemy in the tile
     public void InitializeTile()
     {
         // Spawn all stalag prefabs
         m_SpawnedTileObjects = new List<GameObject>();
         foreach (Vector3 lostMoth in m_LostMothPoints)
         {
-            LostMoth lostMothObj = Instantiate(m_LostMothPrefab, transform.TransformPoint(lostMoth), Quaternion.identity);
+            LostMoth lostMothObj = Instantiate(m_LostMothPrefab, transform.TransformPoint(lostMoth), Quaternion.identity, transform);
             m_SpawnedTileObjects.Add(lostMothObj.gameObject);
         }
 
