@@ -28,7 +28,7 @@ public class Tile : MonoBehaviour
 
     private List<GameObject> m_SpawnedTileObjects;  // list of objects connected to tile for deletion
 
-    private List<GameObject>[] m_DynamicallySpawned;
+    private List<GameObject>[] m_SetObjectSpawns;
 
     private void Awake()
     {
@@ -42,23 +42,23 @@ public class Tile : MonoBehaviour
             m_LostMothPoints = new List<Vector3>();
         
         // Store each dynamically spawned object into a list 
-        m_DynamicallySpawned = new List<GameObject>[TileManager.PropertyInstance.NumSpawnTypes];
-        for (int i = 0; i < m_DynamicallySpawned.Length; i++)
+        m_SetObjectSpawns = new List<GameObject>[TileManager.PropertyInstance.NumSpawnTypes];
+        for (int i = 0; i < m_SetObjectSpawns.Length; i++)
         {
-            m_DynamicallySpawned[i] = new List<GameObject>();
+            m_SetObjectSpawns[i] = new List<GameObject>();
         }
         foreach (Transform child in transform)
         {
             GameObject childObj = child.gameObject;
             switch(childObj.tag) {
                 case "Stalag":
-                    m_DynamicallySpawned[0].Add(childObj);
+                    m_SetObjectSpawns[0].Add(childObj);
                     break;
                 case "Spider":
-                    m_DynamicallySpawned[1].Add(childObj);
+                    m_SetObjectSpawns[1].Add(childObj);
                     break;
                 case "Mushroom":
-                    m_DynamicallySpawned[2].Add(childObj);
+                    m_SetObjectSpawns[2].Add(childObj);
                     break;
             }
         }
@@ -67,13 +67,29 @@ public class Tile : MonoBehaviour
     private void Start()
     {
         m_EndCollider = GetComponent<BoxCollider>();
+    }
 
+    public void InitializeTile()
+    {
         // Spawn all stalag prefabs
         m_SpawnedTileObjects = new List<GameObject>();
         foreach (Vector3 lostMoth in m_LostMothPoints)
         {
             LostMoth lostMothObj = Instantiate(m_LostMothPrefab, transform.TransformPoint(lostMoth), Quaternion.identity);
             m_SpawnedTileObjects.Add(lostMothObj.gameObject);
+        }
+
+        // Set as active/inactive based on the spawn percent of each objects defined in TileManager
+        for (int i = 0; i < TileManager.PropertyInstance.NumSpawnTypes; i++)
+        {
+            List<GameObject> spawnsOfType = m_SetObjectSpawns[i];
+            float spawnPercent = TileManager.PropertyInstance.SpawnRates[i];
+            // Set as inactive/active
+            foreach (GameObject spawnObject in spawnsOfType)
+            {
+                bool isSpawn = UnityEngine.Random.Range(0, 100) <= spawnPercent;
+                spawnObject.SetActive(isSpawn);
+            }
         }
     }
 

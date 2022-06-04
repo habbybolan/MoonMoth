@@ -128,6 +128,7 @@ public class TileManager : MonoBehaviour
 
         m_VisibleTiles.AddLast(newTile);
         newTile.SetIsActive(true);
+        newTile.InitializeTile();
 
         // First tile being created
         if (visibleCount == 0)
