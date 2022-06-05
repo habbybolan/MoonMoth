@@ -63,6 +63,7 @@ public class SpiderController : CharacterController<SpiderHealth>
     public override void Death()
     {
         // let tile destroy object
+        m_SpiderWeb.RemoveSpiderFromWeb();
         transform.position = Vector3.zero;
         GetComponent<Rigidbody>().useGravity = false;
     }

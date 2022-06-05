@@ -99,10 +99,14 @@ public class SpiderWeb : MonoBehaviour
 
     public void SpiderWebBroke()
     {
-        m_SpiderWebParts[0].GetComponent<CharacterJoint>().connectedBody = null;
+        RemoveSpiderFromWeb();
         d_WebDestroyedDelegate();
     }
 
+    public void RemoveSpiderFromWeb()
+    {
+        m_SpiderWebParts[0].GetComponent<CharacterJoint>().connectedBody = null;
+    }
     public void DestroyWeb()
     {
         // destroy each spider web that was created
