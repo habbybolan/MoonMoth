@@ -21,8 +21,11 @@ public class SpiderWebHealth : Health
 
     protected override void Death()
     {
-        // manually call Controller script since attaching delegate to every web piece seems too much
+        // manually call Controller
+        Rigidbody rbFalling = m_CharacterJoint.connectedBody;
         m_CharacterJoint.connectedBody = null;
+        Destroy(rbFalling.GetComponent<CharacterJoint>());
+
         m_SpiderWeb.SpiderWebBroke();
     }
 }
