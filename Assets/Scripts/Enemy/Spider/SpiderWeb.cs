@@ -83,7 +83,8 @@ public class SpiderWeb : MonoBehaviour
 
         if (snapLast)
         {
-            transform.Find((transform.childCount).ToString()).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+            Rigidbody topRigidBody = transform.Find((transform.childCount).ToString()).GetComponent<Rigidbody>();
+            topRigidBody.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 
