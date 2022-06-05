@@ -237,6 +237,8 @@ public class PlayerController : CharacterController<PlayerHealth>
 
         m_PlayerParentMovement.ConnectBackToSpline();
 
+        m_PlayerMovement.ResetPosition();
+
         // start defog transition
         currDuration = 0;
         Debug.Log("Start defog screen");
