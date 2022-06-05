@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         else
             s_PropertyInstance = this;
+        GameState.m_GameState = GameStateEnum.RUNNING;
     }
 
     // On player dying, lose
