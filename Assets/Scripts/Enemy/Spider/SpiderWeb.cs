@@ -19,10 +19,13 @@ public class SpiderWeb : MonoBehaviour
     public delegate void WebDestroyedDelegate();
     public WebDestroyedDelegate d_WebDestroyedDelegate;
 
+    private List<GameObject> m_SpiderWebParts;
+
     private void Start()
     {
         m_LayerMask = 1 << 9;
         m_StartingPoint.transform.parent = null;
+        m_SpiderWebParts = new List<GameObject>();
     }
 
     private void Update()
@@ -56,6 +59,7 @@ public class SpiderWeb : MonoBehaviour
             GameObject tmp;
 
             tmp = Instantiate(m_PartPrefab, new Vector3 (transform.position.x, transform.position.y + m_partDistance * (i + 1), transform.position.z), Quaternion.identity, m_StartingPoint.transform);
+            m_SpiderWebParts.Add(tmp);
             tmp.transform.eulerAngles = new Vector3(180, 0, 0);
 
             tmp.name = transform.childCount.ToString();
@@ -95,6 +99,16 @@ public class SpiderWeb : MonoBehaviour
 
     public void SpiderWebBroke()
     {
+        m_SpiderWebParts[0].GetComponent<CharacterJoint>().connectedBody = null;
         d_WebDestroyedDelegate();
+    }
+
+    public void DestroyWeb()
+    {
+        // destroy each spider web that was created
+        foreach (GameObject webPart in m_SpiderWebParts)
+        {
+            Destroy(webPart);
+        }
     }
 }
