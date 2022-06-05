@@ -10,11 +10,9 @@ public class Tile : MonoBehaviour
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
+    public Quaternion m_EndPointRotation;
     public List<EnemySetWrapper> m_EnemyPointSet;
     public List<Vector3> m_LostMothPoints;
-
-    private Vector3 m_VecStartToCenter;
-    private Vector3 m_VecCenterToEnd;
     
     
     // prefabs
@@ -34,8 +32,6 @@ public class Tile : MonoBehaviour
 
     private void Awake()
     {
-        m_VecStartToCenter = transform.position - transform.TransformPoint(m_StartPoint);
-        m_VecCenterToEnd = transform.TransformPoint(m_EndPoint) - transform.position;
         m_ID = TileManager.GetNewID();
 
         if (m_EnemyPointSet == null)
@@ -111,6 +107,7 @@ public class Tile : MonoBehaviour
         m_FollowPoint = new Vector3[] { transform.InverseTransformPoint(Vector3.zero) };
         m_StartPoint = transform.InverseTransformPoint(new Vector3(0, 0, 10));
         m_EndPoint = transform.InverseTransformPoint(new Vector3(0, 0, -10));
+        m_EndPointRotation = Quaternion.identity;
         m_EnemyPointSet = new List<EnemySetWrapper> { new EnemySetWrapper(new Vector3(0, 0, 0)) };
         m_LostMothPoints = new List<Vector3>();
     }
@@ -261,8 +258,8 @@ public class Tile : MonoBehaviour
         m_FollowPoint[index] = position;
     }
 
-    public Vector3 VecStartToCenter { get { return m_VecStartToCenter; } }
-    public Vector3 VecCenterToEnd { get { return m_VecCenterToEnd; } }
+    public Vector3 VecStartToCenter { get { return transform.position - transform.TransformPoint(m_StartPoint); } }
+    public Vector3 VecCenterToEnd { get { return transform.TransformPoint(m_EndPoint) - transform.position; } }
 
     public bool IsTraversedByPlayer { get { return m_IsTraversedByPlayer; } }
 
@@ -295,6 +292,14 @@ public class Tile : MonoBehaviour
         }
         m_LostMothPoints.RemoveAt(index);
     }
+
+    // End Point ************
+    public Quaternion EndPointRotation
+    {
+        get { return m_EndPointRotation; }
+        set { m_EndPointRotation = value; }
+    }
+
 
     public enum LOCATION_TYPES
     {

@@ -171,8 +171,9 @@ public class TileManager : MonoBehaviour
 
         if (lastCreated != null)
         {
+            newTile.transform.rotation = lastCreated.transform.rotation * lastCreated.EndPointRotation;
             Vector3 newPos = lastCreated.EndPointWorld + newTile.VecStartToCenter;
-            newTile.transform.position = newPos;
+            newTile.transform.position = newPos; 
         }
 
         if (d_TileAddedDelegate != null)

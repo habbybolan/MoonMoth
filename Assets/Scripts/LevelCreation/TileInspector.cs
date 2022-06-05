@@ -201,8 +201,35 @@ public class TileInspector : Editor
         Vector3 point = handleTransform.TransformPoint(isStartPoint ? tile.StartPoint : tile.EndPoint);
         float size = HandleUtility.GetHandleSize(point);
 
+        // Display rotation Handle
+        if (!isStartPoint)
+        {
+            EditorGUI.BeginChangeCheck();
+            Quaternion rot = Handles.RotationHandle(tile.EndPointRotation, point);
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(target, "Rotated RotateAt Point");
+                tile.EndPointRotation = rot;
+                Repaint();
+            }
+        }
+        if (isStartPoint)
+            Handles.DrawWireDisc(point, Vector3.forward, 10);
+        else
+        {
+            Handles.DrawWireDisc(point, tile.EndPointRotation * Vector3.forward, 10);
+            Handles.ArrowHandleCap(
+                0,
+                point,
+                tile.EndPointRotation,
+                size,
+                EventType.Repaint
+            );
+        }
+            
+
+
         // Display button and allow selection
-        Handles.DrawWireDisc(point, Vector3.forward, 10);
         if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap))
         {
             UnselectAll();
