@@ -13,9 +13,6 @@ public class Tile : MonoBehaviour
     public Quaternion m_EndPointRotation;
     public List<EnemySetWrapper> m_EnemyPointSet;
     public List<Vector3> m_LostMothPoints;
-
-    private Vector3 m_VecStartToCenter;
-    private Vector3 m_VecCenterToEnd;
     
     
     // prefabs
@@ -35,8 +32,6 @@ public class Tile : MonoBehaviour
 
     private void Awake()
     {
-        m_VecStartToCenter = transform.position - transform.TransformPoint(m_StartPoint);
-        m_VecCenterToEnd = transform.TransformPoint(m_EndPoint) - transform.position;
         m_ID = TileManager.GetNewID();
 
         if (m_EnemyPointSet == null)
@@ -263,8 +258,8 @@ public class Tile : MonoBehaviour
         m_FollowPoint[index] = position;
     }
 
-    public Vector3 VecStartToCenter { get { return m_VecStartToCenter; } }
-    public Vector3 VecCenterToEnd { get { return m_VecCenterToEnd; } }
+    public Vector3 VecStartToCenter { get { return transform.position - transform.TransformPoint(m_StartPoint); } }
+    public Vector3 VecCenterToEnd { get { return transform.TransformPoint(m_EndPoint) - transform.position; } }
 
     public bool IsTraversedByPlayer { get { return m_IsTraversedByPlayer; } }
 
