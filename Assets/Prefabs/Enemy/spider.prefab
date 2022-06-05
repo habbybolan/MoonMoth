@@ -801,7 +801,7 @@ MonoBehaviour:
   m_Spider: {fileID: 4211784419857639163}
   m_Length: 1
   m_AutoLength: 1
-  m_partDistance: 0.21
+  m_partDistance: 0.45
   spawn: 1
   snapLast: 1
 --- !u!1001 &1560520602848269516
