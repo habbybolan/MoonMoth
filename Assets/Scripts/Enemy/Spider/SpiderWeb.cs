@@ -69,15 +69,15 @@ public class SpiderWeb : MonoBehaviour
                 // attach first to spider
                 if (m_Spider != null)
                 {
-                    tmp.GetComponent<CharacterJoint>().connectedBody = m_Spider.GetComponent<Rigidbody>();
+                    tmp.GetComponent<Joint>().connectedBody = m_Spider.GetComponent<Rigidbody>();
                 } else
                 {
-                    Destroy(tmp.GetComponent<CharacterJoint>());
+                    Destroy(tmp.GetComponent<Joint>());
                 }
             }
             else
             {
-                tmp.GetComponent<CharacterJoint>().connectedBody = transform.Find((transform.childCount - 1).ToString()).GetComponent<Rigidbody>();
+                tmp.GetComponent<Joint>().connectedBody = transform.Find((transform.childCount - 1).ToString()).GetComponent<Rigidbody>();
             }
         }
 

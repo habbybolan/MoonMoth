@@ -24,7 +24,7 @@ public class SpiderWebHealth : Health
         // manually call Controller
         Rigidbody rbFalling = m_CharacterJoint.connectedBody;
         m_CharacterJoint.connectedBody = null;
-        Destroy(rbFalling.GetComponent<CharacterJoint>());
+        Destroy(rbFalling.GetComponent<Joint>());
 
         m_SpiderWeb.SpiderWebBroke();
     }
