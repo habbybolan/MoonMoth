@@ -10,6 +10,7 @@ public class Tile : MonoBehaviour
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
+    public Quaternion m_EndPointRotation;
     public List<EnemySetWrapper> m_EnemyPointSet;
     public List<Vector3> m_LostMothPoints;
 
@@ -111,6 +112,7 @@ public class Tile : MonoBehaviour
         m_FollowPoint = new Vector3[] { transform.InverseTransformPoint(Vector3.zero) };
         m_StartPoint = transform.InverseTransformPoint(new Vector3(0, 0, 10));
         m_EndPoint = transform.InverseTransformPoint(new Vector3(0, 0, -10));
+        m_EndPointRotation = Quaternion.identity;
         m_EnemyPointSet = new List<EnemySetWrapper> { new EnemySetWrapper(new Vector3(0, 0, 0)) };
         m_LostMothPoints = new List<Vector3>();
     }
@@ -295,6 +297,14 @@ public class Tile : MonoBehaviour
         }
         m_LostMothPoints.RemoveAt(index);
     }
+
+    // End Point ************
+    public Quaternion EndPointRotation
+    {
+        get { return m_EndPointRotation; }
+        set { m_EndPointRotation = value; }
+    }
+
 
     public enum LOCATION_TYPES
     {

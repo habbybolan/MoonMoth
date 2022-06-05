@@ -12025,7 +12025,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 25608
+  m_VersionIndex: 25611
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -12325,7 +12325,7 @@ MonoBehaviour:
   - {x: -36.665707, y: 0.8920975, z: 94.328354}
   m_StartPoint: {x: -30.48426, y: 0.37075806, z: -45.530853}
   m_EndPoint: {x: -30.48426, y: 0.3707581, z: 132}
-  m_SpiderSpawns: []
+  m_EndPointRotation: {x: 0, y: 0, z: 0, w: 1}
   m_EnemyPointSet:
   - EnemyPointSet:
     - {x: -25.589441, y: -3.5984879, z: -24.78778}
@@ -12341,12 +12341,8 @@ MonoBehaviour:
   - EnemyPointSet:
     - {x: -20.136442, y: 6.9224167, z: 82.46895}
     - {x: -44.093964, y: 6.3604813, z: 82.66496}
-  m_Stalags:
-  - m_Position: {x: -28.98415, y: 16.523254, z: -15.465027}
-    m_IsPointingUp: 0
   m_LostMothPoints:
   - {x: -32.965206, y: 8.001549, z: 85.57216}
-  m_MushroomPoints: []
   m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
   m_LostMothPrefab: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
   m_MushroomPrefab: {fileID: 3071177420972441163, guid: a89325feb13e7f9498b9cdabee35a122, type: 3}
