@@ -17,8 +17,6 @@ public class SpiderMovement : MonoBehaviour
     public void LookTowardPlayer()
     {
         Vector3 DirectionToLook = m_PlayerController.transform.position - transform.position;
-        Quaternion rot = Quaternion.LookRotation(new Vector3(DirectionToLook.x, 0, DirectionToLook.z));
-        Quaternion rotTo = Quaternion.RotateTowards(transform.rotation, rot, m_RotationAmount);
-        transform.rotation = rotTo;
+        m_Rigidbody.angularVelocity = Vector3.Cross(transform.forward, DirectionToLook).normalized * m_RotationAmount;
     }
 }
