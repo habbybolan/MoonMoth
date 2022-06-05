@@ -105,7 +105,13 @@ public class SpiderWeb : MonoBehaviour
 
     public void RemoveSpiderFromWeb()
     {
-        m_SpiderWebParts[0].GetComponent<CharacterJoint>().connectedBody = null;
+        Joint joint = m_SpiderWebParts[0].GetComponent<Joint>();
+        if (joint != null)
+        {
+            joint.connectedBody = null;
+            Destroy(m_SpiderWebParts[0].GetComponent<Joint>());
+        }
+        
     }
     public void DestroyWeb()
     {
