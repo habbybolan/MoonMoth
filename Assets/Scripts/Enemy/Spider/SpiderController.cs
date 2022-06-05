@@ -55,15 +55,15 @@ public class SpiderController : CharacterController<SpiderHealth>
             // TODO: Change collision check for terrain and obstacles (checking for health)
             if (collision.gameObject.tag == "Terrain")
             {
-                SpiderManager.PropertyInstance.OnSpiderDeath(gameObject);
+                Death();
             }
         }
-        
     }
 
     public override void Death()
     {
-        SpiderManager.PropertyInstance.OnSpiderDeath(gameObject);
+        // let tile destroy object
+        gameObject.SetActive(false);
     }
 
     protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)

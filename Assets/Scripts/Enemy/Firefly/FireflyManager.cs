@@ -55,6 +55,12 @@ public class FireflyManager : MonoBehaviour
         // TODO: Only start counting again when able to spawn another
         while (true)
         {
+            // prevent spawning more fireflies if game not running
+            if (GameState.m_GameState != GameStateEnum.RUNNING)
+            {
+                currDuration = 0;
+                yield return null;
+            }
             currDuration += Time.deltaTime;
             if (currDuration >= m_DelayToSpawn)
             {
@@ -83,6 +89,15 @@ public class FireflyManager : MonoBehaviour
         }
         // TODO:
         //  Update offset positions of all alive fireflies in list
+    }
+
+    public void TileSetFinished() 
+    {
+        for (int i = m_FireflyList.Count-1; i >= 0; i--)
+        {
+            Destroy(m_FireflyList[i].gameObject);
+            m_FireflyList.RemoveAt(i);
+        }
     }
 
     public int FireflyCount { get { return m_FireflyList.Count; } }

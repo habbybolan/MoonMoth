@@ -10,16 +10,17 @@ public class Tile : MonoBehaviour
     public Vector3[] m_FollowPoint;
     public Vector3 m_StartPoint;
     public Vector3 m_EndPoint;
-    public List<Vector3> m_SpiderSpawns;
     public List<EnemySetWrapper> m_EnemyPointSet;
-    public List<Stalag> m_Stalags;
     public List<Vector3> m_LostMothPoints;
+
     private Vector3 m_VecStartToCenter;
     private Vector3 m_VecCenterToEnd;
     
+    
     // prefabs
     public StalagScriptable m_StalagPrefab;
-    public LostMoth m_LostMoth;
+    public LostMoth m_LostMothPrefab;
+    public MushroomObstacle m_MushroomPrefab;
 
     private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
     private int m_ID;
@@ -27,38 +28,72 @@ public class Tile : MonoBehaviour
 
     private List<GameObject> m_SpawnedTileObjects;  // list of objects connected to tile for deletion
 
+    // List of obstacles/enemies set in the tile
+    // [Stalags, Spiders, Mushrooms]
+    private List<GameObject>[] m_SetObjectSpawns;
+
     private void Awake()
     {
         m_VecStartToCenter = transform.position - transform.TransformPoint(m_StartPoint);
         m_VecCenterToEnd = transform.TransformPoint(m_EndPoint) - transform.position;
         m_ID = TileManager.GetNewID();
 
-        if (m_Stalags == null)
-            m_Stalags = new List<Stalag>();
-        if (m_SpiderSpawns == null)
-            m_SpiderSpawns = new List<Vector3>();
         if (m_EnemyPointSet == null)
             m_EnemyPointSet = new List<EnemySetWrapper>();
         if (m_LostMothPoints == null)
             m_LostMothPoints = new List<Vector3>();
+        
+        // Store each dynamically spawned object into a list 
+        m_SetObjectSpawns = new List<GameObject>[TileManager.PropertyInstance.NumSpawnTypes];
+        for (int i = 0; i < m_SetObjectSpawns.Length; i++)
+        {
+            m_SetObjectSpawns[i] = new List<GameObject>();
+        }
+        // Add each type to its respective list
+        foreach (Transform child in transform)
+        {
+            GameObject childObj = child.gameObject;
+            switch(childObj.tag) {
+                case "Stalag":
+                    m_SetObjectSpawns[0].Add(childObj);
+                    break;
+                case "Spider":
+                    m_SetObjectSpawns[1].Add(childObj);
+                    break;
+                case "Mushroom":
+                    m_SetObjectSpawns[2].Add(childObj);
+                    break;
+            }
+        }
     }
 
     private void Start()
     {
         m_EndCollider = GetComponent<BoxCollider>();
+    }
 
+    // Initialize the dynamically spawned items and (de)-activate any obstacle/enemy in the tile
+    public void InitializeTile()
+    {
         // Spawn all stalag prefabs
         m_SpawnedTileObjects = new List<GameObject>();
-        foreach (Stalag stalag in m_Stalags)
-        {
-            // TODO: Use a difficulty coefficient to randomly spawn stalags
-            Obstacle obstacle = Instantiate(m_StalagPrefab.StalagPrefab, transform.TransformPoint(stalag.m_Position), stalag.m_IsPointingUp ? Quaternion.identity : m_StalagPrefab.StalagPrefab.transform.rotation * Quaternion.Euler(Vector3.forward * 180));
-            m_SpawnedTileObjects.Add(obstacle.gameObject);
-        }
         foreach (Vector3 lostMoth in m_LostMothPoints)
         {
-            LostMoth lostMothObj = Instantiate(m_LostMoth, transform.TransformPoint(lostMoth), Quaternion.identity);
+            LostMoth lostMothObj = Instantiate(m_LostMothPrefab, transform.TransformPoint(lostMoth), Quaternion.identity, transform);
             m_SpawnedTileObjects.Add(lostMothObj.gameObject);
+        }
+
+        // Set as active/inactive based on the spawn percent of each objects defined in TileManager
+        for (int i = 0; i < TileManager.PropertyInstance.NumSpawnTypes; i++)
+        {
+            List<GameObject> spawnsOfType = m_SetObjectSpawns[i];
+            float spawnPercent = TileManager.PropertyInstance.SpawnRates[i];
+            // Set as inactive/active
+            foreach (GameObject spawnObject in spawnsOfType)
+            {
+                bool isSpawn = UnityEngine.Random.Range(0, 100) <= spawnPercent;
+                spawnObject.SetActive(isSpawn);
+            }
         }
     }
 
@@ -77,8 +112,6 @@ public class Tile : MonoBehaviour
         m_StartPoint = transform.InverseTransformPoint(new Vector3(0, 0, 10));
         m_EndPoint = transform.InverseTransformPoint(new Vector3(0, 0, -10));
         m_EnemyPointSet = new List<EnemySetWrapper> { new EnemySetWrapper(new Vector3(0, 0, 0)) };
-        m_SpiderSpawns = new List<Vector3>();
-        m_Stalags = new List<Stalag>();
         m_LostMothPoints = new List<Vector3>();
     }
 
@@ -163,22 +196,6 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void AddSpiderPoint(Vector3 spawnPoint)
-    {
-        m_SpiderSpawns.Add(spawnPoint);
-    }
-
-    public void RemoveSpiderPoint()
-    {
-        if (m_SpiderSpawns.Count == 0)
-            throw new System.Exception("Spider list already empty");
-        m_SpiderSpawns.RemoveAt(m_SpiderSpawns.Count - 1);
-    }
-    public int GetSpiderSpawnCount()
-    {
-        return m_SpiderSpawns.Count;
-    }
-
     public int PlayerFollowPointsCount
     {
         get { return m_FollowPoint.Length; }
@@ -234,24 +251,6 @@ public class Tile : MonoBehaviour
         set { m_EndPoint = value; }
     }
 
-    public List<Vector3> SpiderSpawns { get { return m_SpiderSpawns; } }
-    public Vector3 GetSpiderSpawn(int index)
-    {
-        if (index >= m_SpiderSpawns.Count || index < 0)
-            throw new System.Exception("Not a valid index in m_SpiderSpawns");
-        return m_SpiderSpawns[index];
-    }
-    public Vector3 GetSpiderSpawnWorld(int index)
-    {
-        if (index >= m_SpiderSpawns.Count || index < 0)
-            throw new System.Exception("Not a valid index in m_SpiderSpawns");
-        return transform.TransformPoint(m_SpiderSpawns[index]);
-    }
-    public void SetSpiderSpawn(int index, Vector3 point)
-    {
-        m_SpiderSpawns[index] = point;
-    }
-
     public Vector3 StartPointWorld { get { return transform.TransformPoint(StartPoint); } }
     public Vector3 EndPointWorld { get { return transform.TransformPoint(EndPoint); } }
 
@@ -268,44 +267,6 @@ public class Tile : MonoBehaviour
     public bool IsTraversedByPlayer { get { return m_IsTraversedByPlayer; } }
 
     public int ID { get { return m_ID; } }
-
-    // Stalags ***********
-
-    public Stalag GetStalagSpawnPoint(int index)
-    {
-        return m_Stalags[index];
-    }
-    public Stalag GetStalagSpawnPointWorld(int index)
-    {
-        return m_Stalags[index];
-    }
-    public int GetStalagSpawnCount()
-    {
-        return m_Stalags.Count;
-    }
-    public void AddStalagSpawnPoint(Vector3 spawnPoint)
-    {
-        m_Stalags.Add(new Stalag(spawnPoint));
-    }
-    public void RemoveStalagPoint()
-    {
-        if (m_Stalags.Count == 0)
-            throw new System.Exception("List of stalags already empty");
-        m_Stalags.RemoveAt(m_Stalags.Count - 1);
-    }
-    public void UpdateStalgPoint(int index, Vector3 position)
-    {
-        m_Stalags[index].Position = position;
-    }
-    public void ChangeStalagOrientation(int index)
-    {
-        // flip the orientation of the stalag
-        m_Stalags[index].ChangeStalgOrientation();
-    }
-    public bool GetIsStalagPointingUp(int index)
-    {
-        return m_Stalags[index].GetIsPointUp();
-    }
 
     // Lost Moths ************
 
@@ -340,8 +301,6 @@ public class Tile : MonoBehaviour
         FOLLOW,
         START, 
         END,
-        SPIDER,
-        STALAG,
         LOST_MOTH,
     }
 

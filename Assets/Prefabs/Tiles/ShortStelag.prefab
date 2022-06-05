@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7016706639441440722}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -0.16110754, z: -0.135}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 7452162210851016394}
   m_Layer: 0
   m_Name: ShortStelag
-  m_TagString: Untagged
+  m_TagString: Stalag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 7437543222522856882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.270834, y: -5.3088293, z: 7.1898956}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3041050930764484753}
@@ -161,15 +161,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
       propertyPath: m_LocalScale.x
-      value: -0.013138001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
       propertyPath: m_LocalScale.y
-      value: -0.013138001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
       propertyPath: m_LocalScale.z
-      value: -0.013138001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -211,9 +211,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2696692449318303674, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
+      propertyPath: m_TagString
+      value: Stalag
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
       propertyPath: m_Name
       value: stalagmite_short
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
+      propertyPath: m_TagString
+      value: Stalag
       objectReference: {fileID: 0}
     - target: {fileID: 5062545693439606254, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
       propertyPath: m_Layer
@@ -226,35 +234,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
   m_PrefabInstance: {fileID: 3294738033029150586}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7780114267898727060 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5062545693439606254, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
-  m_PrefabInstance: {fileID: 3294738033029150586}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &7215371515868440652
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7780114267898727060}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3667933055433842021, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
---- !u!114 &6587478802537157401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7780114267898727060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DamageAmount: 10

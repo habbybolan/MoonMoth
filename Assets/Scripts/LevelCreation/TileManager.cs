@@ -6,26 +6,62 @@ public class TileManager : MonoBehaviour
 {
     static TileManager s_PropertyInstance;
 
-    [SerializeField] private Tile[] m_TilePrefabs;
+    [Header("Tiles")]
+    [Header("List of all the sets of tiles. Each set corresponds to a level that starts at the first and ends at the last set")]
+    [SerializeField] private TileListWrapper[] m_TileSets;
+    [Tooltip("Empty tile that's used as a transition piece between set at index i and i+1. Size should be length of m_TileSets - 1")]
+    [SerializeField] private Tile[] m_TileTransitions;
+
     [SerializeField] private float m_DistanceToPlaceTile = 200f;
     [SerializeField] private int m_TilePoolSize = 40;
 
+    [Header("Difficulty")]
+    [Tooltip("The percent the difficulty increases each second player is in a set that spawns that specific obstacle/enemy, with a max of 100% difficulty where everything is spawning." +
+        "The highest percent is limited by the max spawn percent set for each obstacle/enemy")]
+    [Range(0, 100)]
+    [SerializeField] private float m_PercentDifficultyIncreasePerSecond = 1f;
+    [Tooltip("Max spawn percent of stalags in a level. Represents the max difficulty of stalags")]
+    [Range(0, 100)]
+    [SerializeField] private float m_StalagMaxSpawnPercent = 50f;
+    [Tooltip("Starting spawn percent of stalags")]
+    [Range(0, 100)]
+    [SerializeField] private float m_StalagStartingSpawnPercent = 10; 
+    [Tooltip("Max spawn percent of spiders in a level. Represents the max difficulty of spiders")]
+    [Range(0, 100)]
+    [SerializeField] private float m_SpiderMaxSpawnPercent = 50f;
+    [Tooltip("Starting spawn percent of Spiders")]
+    [Range(0, 100)]
+    [SerializeField] private float m_SpiderStartingSpawnPercent = 10;
+    [Tooltip("Max spawn percent of mushrooms in a level. Represents the max difficulty of mushrooms")]
+    [Range(0, 100)]
+    [SerializeField] private float m_MushroomMaxSpawnPercent = 50f;
+    [Tooltip("Starting spawn percent of mushrooms")]
+    [Range(0, 100)]
+    [SerializeField] private float m_MushroomStartingSpawnPercent = 10;
+
+    private int m_CurrentTileSet = 0;
+
     // Delegate for every time a new tile is added
-    public delegate void TileAddedDelegate(Tile addedTile); 
+    public delegate void TileAddedDelegate(Tile addedTile);
     public TileAddedDelegate d_TileAddedDelegate;
 
     // Delegate for every time the oldest visible tile is deleted
-    public delegate void TileDeletedDelegate(Tile deletedTile); 
-    public TileDeletedDelegate d_TileDeletedDelegate; 
+    public delegate void TileDeletedDelegate(Tile deletedTile);
+    public TileDeletedDelegate d_TileDeletedDelegate;
 
     private Tile[] m_PoolTiles;
     private LinkedList<Tile> m_VisibleTiles = new LinkedList<Tile>();
 
     private static int m_IDCount = 0;
     private bool m_IsInitialized = false;   // If all starting tiles have been initialize
+    private float m_currDifficultyPercent = 0;
+
+    private float m_StalagCurrentSpawnPercent;
+    private float m_SpiderCurrentSpawnPercent;
+    private float m_MushroomCurrentSpawnPercent;  
 
     public static TileManager PropertyInstance
-    { 
+    {
         get { return s_PropertyInstance; }
     }
 
@@ -37,19 +73,40 @@ public class TileManager : MonoBehaviour
             Destroy(this);
         else
             s_PropertyInstance = this;
-    }
+
+        m_StalagCurrentSpawnPercent = m_StalagStartingSpawnPercent;
+        m_SpiderCurrentSpawnPercent = m_SpiderStartingSpawnPercent;
+        m_MushroomCurrentSpawnPercent = m_MushroomStartingSpawnPercent;
+}
 
     // Start is called before the first frame update
     void Start()
     {
         InitializeStartTile();
         m_IsInitialized = true;
+        if (m_TileTransitions.Length < m_TileSets.Length - 1)
+        {
+            Debug.LogWarning("There should be a transition tile m_TileTransitions for each tile transition between sets m_TileSets in TileManager");
+        }
+        StartCoroutine(SpawnPercentagesPrint());
     }
 
-    private void InitializeStartTile() 
+    IEnumerator SpawnPercentagesPrint()
+    {
+        while (true)
+        {
+            Debug.Log("------------------------------------------");
+            Debug.Log("Stalag: " + m_StalagCurrentSpawnPercent.ToString());
+            Debug.Log("Spiders: " + m_SpiderCurrentSpawnPercent.ToString());
+            Debug.Log("Mushrooms: " + m_MushroomCurrentSpawnPercent.ToString());
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    private void InitializeStartTile()
     {
         // create uniform distribution of all prefab tiles
-        int numEachTile = m_PoolTiles.Length / m_TilePrefabs.Length;
+        int numEachTile = m_PoolTiles.Length / m_TileSets[m_CurrentTileSet].tiles.Length;
         int indexPrefab = 0;
         int indexPool = 0;
         int numEachCurrTile = 0;
@@ -58,12 +115,12 @@ public class TileManager : MonoBehaviour
         while (indexPool < m_PoolTiles.Length)
         {
             // Reached max number of current prefab inside pool and not at last prefab
-            if (numEachCurrTile == numEachTile && indexPrefab != m_TilePrefabs.Length - 1)
+            if (numEachCurrTile == numEachTile && indexPrefab != m_TileSets[m_CurrentTileSet].tiles.Length - 1)
             {
                 indexPrefab++;
                 numEachCurrTile = 0;
             }
-            Tile newTile = Instantiate(m_TilePrefabs[indexPrefab], Vector3.zero, Quaternion.identity, transform);
+            Tile newTile = Instantiate(m_TileSets[m_CurrentTileSet].tiles[indexPrefab], Vector3.zero, Quaternion.identity, transform);
             m_PoolTiles[indexPool] = newTile;
             newTile.gameObject.SetActive(false);
             indexPool++;
@@ -82,8 +139,16 @@ public class TileManager : MonoBehaviour
 
     private void InstantiateTile()
     {
-        // Find and add new tile to end of path
-        var newTile = FindAvailableTile();
+        Tile newTile;
+        // if adding the first tile on transitions to new tileset, start with designated tile transition
+        if (m_CurrentTileSet > 0 && m_VisibleTiles.Count == 0 && m_TileTransitions.Length > m_CurrentTileSet - 1)
+        {
+            newTile = Instantiate(m_TileTransitions[m_CurrentTileSet - 1], Vector3.zero, Quaternion.identity, transform);
+        } else
+        {
+            // Find and add new tile to end of path
+            newTile = FindAvailableTile();
+        }
 
         Tile lastCreated = null;
         if (m_VisibleTiles.Count > 0)
@@ -93,12 +158,14 @@ public class TileManager : MonoBehaviour
 
         m_VisibleTiles.AddLast(newTile);
         newTile.SetIsActive(true);
+        newTile.InitializeTile();
 
         // First tile being created
         if (visibleCount == 0)
         {
             // notify delegate a tile was created
-            d_TileAddedDelegate(newTile);
+            if (d_TileAddedDelegate != null)
+                d_TileAddedDelegate(newTile);
             return;
         }
 
@@ -108,7 +175,8 @@ public class TileManager : MonoBehaviour
             newTile.transform.position = newPos;
         }
 
-        d_TileAddedDelegate(newTile);
+        if (d_TileAddedDelegate != null)
+            d_TileAddedDelegate(newTile);
     }
 
     private Tile FindAvailableTile()
@@ -133,13 +201,13 @@ public class TileManager : MonoBehaviour
         Tile secondTile = m_VisibleTiles.First.Next.Value;
         if (firstTile.IsTraversedByPlayer && secondTile.IsTraversedByPlayer)
         {
-            d_TileDeletedDelegate(firstTile);
+            if (d_TileDeletedDelegate != null)
+                d_TileDeletedDelegate(firstTile);
             firstTile.DeleteAllSpawned();
             firstTile.SetIsActive(false);
-            m_VisibleTiles.RemoveFirst();  
+            m_VisibleTiles.RemoveFirst();
         }
     }
-
 
     private void CheckAddTile()
     {
@@ -152,6 +220,68 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    private void IncrementSpawnPercents()
+    {
+        switch(m_CurrentTileSet)
+        {
+            case 0:
+                m_StalagCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
+                break;
+            case 1:
+                m_StalagCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
+                m_SpiderCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
+                break;
+            case 2:
+                m_StalagCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
+                m_SpiderCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
+                m_MushroomCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
+                break;
+        }
+        if (m_StalagCurrentSpawnPercent > m_StalagMaxSpawnPercent) m_StalagCurrentSpawnPercent = m_StalagMaxSpawnPercent;
+        if (m_SpiderCurrentSpawnPercent > m_SpiderMaxSpawnPercent) m_SpiderCurrentSpawnPercent = m_SpiderMaxSpawnPercent;
+        if (m_MushroomCurrentSpawnPercent > m_MushroomMaxSpawnPercent) m_MushroomCurrentSpawnPercent = m_MushroomMaxSpawnPercent;
+    }
+
+    // On conditions of tile set being fulfilled, goto next set or player won the game
+    public void TileSetFinished()
+    {
+        // only delete set if game was running so there's a set to delete
+        if (GameState.m_GameState == GameStateEnum.RUNNING)
+        {
+            DeleteSet();
+        }
+    }
+
+    private void DeleteSet()
+    {
+        StartCoroutine(TransitionToNextSet());
+    }
+
+    // Asynchronously 
+    IEnumerator TransitionToNextSet()
+    {
+        // if reached all levels added, then player wins
+        if (m_CurrentTileSet == m_TileSets.Length - 1)
+        {
+            GameManager.PropertyInstance.OnGameWon();
+            yield break;
+        }
+        m_CurrentTileSet++;
+
+        foreach (Tile tile in m_PoolTiles)
+        {
+            Destroy(tile.gameObject);
+            yield return new WaitForSeconds(.02f);
+        }
+        m_PoolTiles = new Tile[m_TilePoolSize];
+        m_VisibleTiles.Clear();
+
+
+        // TODO: Make asynchronous instead of all in one frame
+        InitializeStartTile();
+        GameState.m_GameState = GameStateEnum.RUNNING;
+    }
+
     public bool IsInitialized { get { return m_IsInitialized; } }
 
     public LinkedListNode<Tile> GetHead()
@@ -159,10 +289,18 @@ public class TileManager : MonoBehaviour
         return m_VisibleTiles.First;
     }
 
+    // [stalags, spiders, mushrooms]
+    public float[] SpawnRates => new float[] { m_StalagCurrentSpawnPercent, m_SpiderCurrentSpawnPercent, m_MushroomCurrentSpawnPercent };
+    public int NumSpawnTypes => 3; 
+
     // Update is called once per frame
     void Update()
     {
+        // only update if game is in normal running state
+        if (GameState.m_GameState != GameStateEnum.RUNNING) return;
+
         CheckRemoveTile();
         CheckAddTile();
+        IncrementSpawnPercents();
     }
 }

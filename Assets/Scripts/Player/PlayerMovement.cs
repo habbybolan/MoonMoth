@@ -159,6 +159,12 @@ public class PlayerMovement : MonoBehaviour
         m_ReticlePoint.position = CrossHairPoint;
     }
 
+    public void ResetPosition()
+    {
+        transform.localPosition = new Vector3(0, 0, 0);
+        m_ControlObject.transform.localPosition = new Vector3(0, 0, 0);
+    }
+
     public IEnumerator PlayerDodge(System.Action callback, Vector2 vec2Move)
     {
         // Play dodge particles

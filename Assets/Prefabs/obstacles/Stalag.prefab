@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2263011110352395446}
   m_Layer: 0
   m_Name: stalagmite
-  m_TagString: Untagged
+  m_TagString: Stalag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8046770995568307375}
   m_Layer: 0
   m_Name: Stalag
-  m_TagString: Untagged
+  m_TagString: Stalag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

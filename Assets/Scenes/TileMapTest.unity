@@ -208,6 +208,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2144779323}
     m_Modifications:
+    - target: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_FogTransitionDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_LostMothCountWinCondition
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786757, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Name
       value: PlayerParent
@@ -220,6 +228,10 @@ PrefabInstance:
       propertyPath: m_Spline
       value: 
       objectReference: {fileID: 92830010}
+    - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_IsIndependentMovement
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786759, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -593,9 +605,9 @@ GameObject:
   - component: {fileID: 951211376}
   - component: {fileID: 951211378}
   - component: {fileID: 951211379}
-  - component: {fileID: 951211380}
   - component: {fileID: 951211381}
   - component: {fileID: 951211382}
+  - component: {fileID: 951211383}
   m_Layer: 0
   m_Name: = Manager
   m_TagString: Untagged
@@ -615,12 +627,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3798b4edb538541bbfa094b7cf4f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TilePrefabs:
+  m_TileSets:
+  - tiles:
+    - {fileID: 3961284799128567415, guid: 1f1262d9fe599ca42ac9102b002fbe39, type: 3}
+  - tiles:
+    - {fileID: 3961284799128567415, guid: 1c445344d9ce7164d9e558fcd418520f, type: 3}
+  - tiles:
+    - {fileID: 3961284799128567415, guid: 0972ed06aabd4194dbbe28c2cf3c2687, type: 3}
+  m_TileTransitions:
   - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
-  - {fileID: 3961284799128567415, guid: 1c445344d9ce7164d9e558fcd418520f, type: 3}
-  - {fileID: 3961284799128567415, guid: 0972ed06aabd4194dbbe28c2cf3c2687, type: 3}
+  - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
   m_DistanceToPlaceTile: 800
   m_TilePoolSize: 20
+  m_PercentDifficultyIncreasePerSecond: 1
+  m_StalagMaxSpawnPercent: 50
+  m_StalagStartingSpawnPercent: 10
+  m_SpiderMaxSpawnPercent: 50
+  m_SpiderStartingSpawnPercent: 10
+  m_MushroomMaxSpawnPercent: 50
+  m_MushroomStartingSpawnPercent: 10
 --- !u!4 &951211377
 Transform:
   m_ObjectHideFlags: 0
@@ -664,19 +689,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerController: {fileID: 405943313}
---- !u!114 &951211380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 951211375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba38030926a47841ae78c2e83a630a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SpiderPrefab: {fileID: 4211784419857639165, guid: 614c253834c29d24595c1a26d9802af3, type: 3}
 --- !u!114 &951211381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,6 +798,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &951211383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951211375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27cd63b34075cbb44b02055b1f565230, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1213463291
 GameObject:
   m_ObjectHideFlags: 0
