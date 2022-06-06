@@ -14,7 +14,6 @@ public class Tile : MonoBehaviour
     public List<EnemySetWrapper> m_EnemyPointSet;
     public List<Vector3> m_LostMothPoints;
     
-    
     // prefabs
     public StalagScriptable m_StalagPrefab;
     public LostMoth m_LostMothPrefab;
@@ -22,9 +21,10 @@ public class Tile : MonoBehaviour
 
     private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
     private int m_ID;
-    private BoxCollider m_EndCollider;
 
     private List<GameObject> m_SpawnedTileObjects;  // list of objects connected to tile for deletion
+
+    private bool m_HasBeenReset = false;
 
     // List of obstacles/enemies set in the tile
     // [Stalags, Spiders, Mushrooms]
@@ -61,11 +61,6 @@ public class Tile : MonoBehaviour
                     break;
             }
         }
-    }
-
-    private void Start()
-    {
-        m_EndCollider = GetComponent<BoxCollider>();
     }
 
     // Initialize the dynamically spawned items and (de)-activate any obstacle/enemy in the tile
@@ -123,10 +118,21 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void SetIsActive(bool IsActive)
+    private void OnDisable()
     {
-        gameObject.SetActive(IsActive);
-        if (IsActive) m_IsTraversedByPlayer = false;
+        m_IsTraversedByPlayer = false;
+        if (!m_HasBeenReset)
+        {
+            m_HasBeenReset = true;
+            return;
+        }
+        ResetTile();
+    }
+
+    // Resets all obstacles and enemies to the tile's original state
+    private void ResetTile()
+    {
+        // TODO:  
     }
 
     public float TileEndDistanceFromPlayer(CatmullWalker player)
