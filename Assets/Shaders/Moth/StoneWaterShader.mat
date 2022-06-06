@@ -43,7 +43,7 @@ Material:
     - _Foam_Colour: 0
     - _Foam_Width: 1.54
     - _Height: 0.07
-    - _Noise_Scale: 1.7
+    - _Noise_Scale: 4
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -51,7 +51,7 @@ Material:
     - _Smoothness: 0.26
     - _SrcBlend: 5
     - _Surface: 1
-    - _Water_Scroll_Speed: 0.1
+    - _Water_Scroll_Speed: 0.05
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
