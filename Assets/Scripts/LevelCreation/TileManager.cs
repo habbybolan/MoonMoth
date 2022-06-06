@@ -204,7 +204,6 @@ public class TileManager : MonoBehaviour
         {
             if (d_TileDeletedDelegate != null)
                 d_TileDeletedDelegate(firstTile);
-            firstTile.DeleteAllSpawned();
             firstTile.gameObject.SetActive(false);
             m_VisibleTiles.RemoveFirst();
         }

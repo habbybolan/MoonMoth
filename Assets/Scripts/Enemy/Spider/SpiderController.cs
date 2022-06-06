@@ -73,6 +73,11 @@ public class SpiderController : CharacterController<SpiderHealth>
         m_SpiderWeb.DestroyWeb();
     }
 
+    private void OnEnable()
+    {
+        m_State = SpiderState.HANGING;
+    }
+
     protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)
     {
         // TODO:
