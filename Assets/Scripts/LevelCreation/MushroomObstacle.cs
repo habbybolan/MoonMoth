@@ -17,7 +17,7 @@ public class MushroomObstacle : Obstacle
     private LayerMask m_ObstacleLayerMask;
     private STATE m_State = STATE.WAITING;
 
-    Coroutine m_SensingPlayer;
+    private float m_CurrPoisonTime;
 
     private void Start()
     {
@@ -35,9 +35,14 @@ public class MushroomObstacle : Obstacle
         {
             if (PlayerManager.PropertyInstance.PlayerController.DistanceFromPlayer(transform.position) <= m_SensingRadiusRange)
             {
-                m_SensingPlayer = StartCoroutine(SensingPlayer());
+                StartCoroutine(SensingPlayer());
             }
         } 
+    }
+
+    protected void OnEnable()
+    {
+        m_State = STATE.WAITING;
     }
 
     IEnumerator SensingPlayer()
@@ -50,13 +55,13 @@ public class MushroomObstacle : Obstacle
     IEnumerator StartExplosion()
     {
         ParticleSystem explosion = Instantiate(m_MushroomExplosionParticle,transform.position,Quaternion.identity);
-
         m_ExplosionSound.Play();
+        m_CurrPoisonTime = m_PoisonTime;
 
         m_State = STATE.EXPLODED;
         float currDuration = 0;
         // Keep poison cloud open for a certain duration
-        while (currDuration < m_PoisonTime)
+        while (currDuration < m_CurrPoisonTime)
         {
             currDuration += Time.deltaTime;
 
@@ -64,7 +69,7 @@ public class MushroomObstacle : Obstacle
             if (currDuration >= m_PoisonTickRate)
             {
                 currDuration -= m_PoisonTickRate;
-                m_PoisonTime -= m_PoisonTickRate;
+                m_CurrPoisonTime -= m_PoisonTickRate;
 
                 // Sphere cast and tick damage everything inside range of mushroom poison cloud
                 Collider[] hits = Physics.OverlapSphere(transform.position, m_PoisonRadiusRange);
