@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
@@ -611,13 +611,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3798b4edb538541bbfa094b7cf4f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TilePrefabs:
-  - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
-  - {fileID: 3961284799128567415, guid: 1c445344d9ce7164d9e558fcd418520f, type: 3}
-  - {fileID: 3961284799128567415, guid: 0972ed06aabd4194dbbe28c2cf3c2687, type: 3}
-  - {fileID: 3961284799128567415, guid: 1f1262d9fe599ca42ac9102b002fbe39, type: 3}
+  m_TileSets:
+  - tiles:
+    - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
+    - {fileID: 3961284799128567415, guid: 1c445344d9ce7164d9e558fcd418520f, type: 3}
+    - {fileID: 3961284799128567415, guid: d7b851c55a0727d4cb63e38797d65026, type: 3}
+  m_TileTransitions: []
   m_DistanceToPlaceTile: 800
   m_TilePoolSize: 20
+  m_PercentDifficultyIncreasePerSecond: 1
+  m_StalagMaxSpawnPercent: 50
+  m_StalagStartingSpawnPercent: 10
+  m_SpiderMaxSpawnPercent: 50
+  m_SpiderStartingSpawnPercent: 10
+  m_MushroomMaxSpawnPercent: 50
+  m_MushroomStartingSpawnPercent: 10
 --- !u!4 &951211377
 Transform:
   m_ObjectHideFlags: 0
@@ -673,7 +681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba38030926a47841ae78c2e83a630a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SpiderPrefab: {fileID: 4211784419857639165, guid: 614c253834c29d24595c1a26d9802af3, type: 3}
 --- !u!114 &951211381
 MonoBehaviour:
   m_ObjectHideFlags: 0
