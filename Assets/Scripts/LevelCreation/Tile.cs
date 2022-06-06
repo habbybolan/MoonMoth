@@ -34,11 +34,8 @@ public class Tile : MonoBehaviour
     {
         m_ID = TileManager.GetNewID();
 
-        if (m_EnemyPointSet == null)
-            m_EnemyPointSet = new List<EnemySetWrapper>();
-        if (m_LostMothPoints == null)
-            m_LostMothPoints = new List<Vector3>();
-        
+        TileInspectorInitialize();
+
         // Store each dynamically spawned object into a list 
         m_SetObjectSpawns = new List<GameObject>[TileManager.PropertyInstance.NumSpawnTypes];
         for (int i = 0; i < m_SetObjectSpawns.Length; i++)
@@ -61,6 +58,17 @@ public class Tile : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void TileInspectorInitialize()
+    {
+        if (m_EnemyPointSet == null)
+            m_EnemyPointSet = new List<EnemySetWrapper>();
+        if (m_LostMothPoints == null)
+            m_LostMothPoints = new List<Vector3>();
+        // if invalid quaternion rotation
+        if (m_EndPointRotation.x == 0 && m_EndPointRotation.y == 0 && m_EndPointRotation.z == 0 && m_EndPointRotation.w == 0)
+            m_EndPointRotation = Quaternion.identity;
     }
 
     private void Start()

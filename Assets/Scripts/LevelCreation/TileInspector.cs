@@ -24,6 +24,7 @@ public class TileInspector : Editor
     private void OnSceneGUI()
     {
         tile = target as Tile;
+        tile.TileInspectorInitialize();
         handleTransform = tile.transform;
         handleRotation = Tools.pivotRotation == PivotRotation.Local ?
             handleTransform.rotation : Quaternion.identity;
