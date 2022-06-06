@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8210785492205932074, guid: 7c3e2a37b0e686149b30c510667c999f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fb28bcfdc04262448928b5fcbcd74f64, type: 2}
     - target: {fileID: 919132149155446097, guid: 7c3e2a37b0e686149b30c510667c999f, type: 3}
       propertyPath: m_Name
       value: stalagmite_tall
