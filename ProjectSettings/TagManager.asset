@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Terrain
+  - Spider
+  - Mushroom
+  - Stalag
   layers:
   - Default
   - TransparentFX

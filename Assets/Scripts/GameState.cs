@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class GameState 
 {
-    public static bool IsGameWon = false;
+    public static GameStateEnum m_GameState = GameStateEnum.RUNNING; 
+}
+
+public enum GameStateEnum
+{
+    WON,
+    LOST,
+    TRANSITIONING,
+    RUNNING
 }

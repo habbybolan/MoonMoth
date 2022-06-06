@@ -47,8 +47,7 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        Terrain terrain = other.gameObject.GetComponent<Terrain>();
-        if (terrain != null)
+        if (other.gameObject.tag == "Terrain")
         {
             CollisionPoint(other);
             Destroy(gameObject);

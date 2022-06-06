@@ -475,10 +475,10 @@ GameObject:
   - component: {fileID: 297115701366016002}
   - component: {fileID: 8497452665531714130}
   - component: {fileID: 2125045404698981339}
-  - component: {fileID: 6508454397746641626}
   - component: {fileID: 4826371176101236819}
+  - component: {fileID: 6508454397746641626}
   - component: {fileID: 6100998506568984994}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: firefly
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -583,6 +583,23 @@ MonoBehaviour:
   m_BoostSpeed: 1.15
   m_SpeedCorrection: 0.1
   m_IsIndependent: 0
+--- !u!114 &4826371176101236819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185757372758606171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf6a278b34587549a562aebb7d2cd05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Health: {fileID: 8497452665531714130}
+  m_FireflyWalker: {fileID: 2125045404698981339}
+  m_Weapon: {fileID: 5009933585970584713}
+  m_HealthOrbPrefab: {fileID: 2852505493795219179, guid: 9a21c8104e6aa84498ee6cfda774019c, type: 3}
+  m_DistancePastCameraToStartShooting: 10
 --- !u!82 &6508454397746641626
 AudioSource:
   m_ObjectHideFlags: 0
@@ -679,22 +696,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4826371176101236819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7185757372758606171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cf6a278b34587549a562aebb7d2cd05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Health: {fileID: 8497452665531714130}
-  m_FireflyWalker: {fileID: 2125045404698981339}
-  m_Weapon: {fileID: 5009933585970584713}
-  m_HealthOrbPrefab: {fileID: 2852505493795219179, guid: 9a21c8104e6aa84498ee6cfda774019c, type: 3}
 --- !u!82 &6100998506568984994
 AudioSource:
   m_ObjectHideFlags: 0

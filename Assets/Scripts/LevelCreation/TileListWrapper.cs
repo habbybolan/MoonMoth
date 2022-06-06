@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireflyGun : EnemyWeapon<Projectile>
+[System.Serializable]
+public class TileListWrapper
 {
-       
+    public Tile[] tiles;
 }

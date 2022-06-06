@@ -11,6 +11,7 @@ public class FireflyController : CharacterController<FireflyHealth>
     [SerializeField] private FireflyCatmullWalker m_FireflyWalker;
     [SerializeField] private FireflyGun m_Weapon;
     [SerializeField] private HealthOrb m_HealthOrbPrefab;
+    [SerializeField] private float m_DistancePastCameraToStartShooting = 10f;
 
     private FIREFLY_STATE m_State;
 
@@ -22,7 +23,12 @@ public class FireflyController : CharacterController<FireflyHealth>
 
     private void Update()
     {
-        m_Weapon.ShootAtPlayer();
+        // only shoot at player if passed a certain distance from camera
+        if (PlayerManager.PropertyInstance.PlayerController.ZDistanceFromPlayerCamera(transform.position) > m_DistancePastCameraToStartShooting)
+        {
+            m_Weapon.ShootAtPlayer();
+        }
+        
         m_FireflyWalker.TryMove();
     }
 
