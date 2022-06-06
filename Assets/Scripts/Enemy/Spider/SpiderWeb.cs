@@ -116,6 +116,7 @@ public class SpiderWeb : MonoBehaviour
     }
     public void DestroyWeb()
     {
+        if (m_SpiderWebParts == null) return;
         // destroy each spider web that was created
         foreach (GameObject webPart in m_SpiderWebParts)
         {
