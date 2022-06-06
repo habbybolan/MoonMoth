@@ -63,7 +63,14 @@ public class SpiderController : CharacterController<SpiderHealth>
     public override void Death()
     {
         // let tile destroy object
-        gameObject.SetActive(false);
+        m_SpiderWeb.RemoveSpiderFromWeb();
+        transform.position = Vector3.zero;
+        GetComponent<Rigidbody>().useGravity = false;
+    }
+
+    private void OnDisable()
+    {
+        m_SpiderWeb.DestroyWeb();
     }
 
     protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)

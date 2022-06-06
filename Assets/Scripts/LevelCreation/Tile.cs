@@ -97,6 +97,7 @@ public class Tile : MonoBehaviour
     {
         foreach (GameObject obj in m_SpawnedTileObjects)
         {
+            obj.SetActive(false);
             Destroy(obj);
         }
         m_SpawnedTileObjects = new List<GameObject>();
