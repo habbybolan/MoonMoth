@@ -61,14 +61,19 @@ public class PlayerHealth : Health
         foreach (Renderer renderer in m_EmissionRenderer)
         {
             Color currColor = renderer.material.GetColor("_EmissionColor");
-            float LerpValueOfMaxRGB = Mathf.Lerp(1, m_MaxEmissionRGB, HealthPercentage);
+            float LerpValueOfMaxRGB = Mathf.Lerp(0, m_MaxEmissionRGB, HealthPercentage);
             float differenceFromMax = m_MaxEmissionRGB - LerpValueOfMaxRGB;
-            Color newColor = new Color(m_StartingEmissionColor.r - differenceFromMax,
-                                        m_StartingEmissionColor.g - differenceFromMax,
-                                        m_StartingEmissionColor.b - differenceFromMax,
+            Color newColor = new Color(GetValidColor(m_StartingEmissionColor.r - differenceFromMax),
+                                        GetValidColor(m_StartingEmissionColor.g - differenceFromMax),
+                                        GetValidColor(m_StartingEmissionColor.b - differenceFromMax),
                                         currColor.a);
             renderer.material.SetColor("_EmissionColor", newColor);
         }
+    }
+
+    private float GetValidColor(float value) 
+    {
+        return value < 0 ? 0 : value;
     }
 
     private void SetHealthText()
