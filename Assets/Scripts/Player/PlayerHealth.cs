@@ -21,7 +21,9 @@ public class PlayerHealth : Health
     private float m_MaxEmissionRGB;
     private float m_RGBDifference;
     private Color m_StartingEmissionColor;
-
+    private Coroutine m_HealEmissionCoroutine;
+    private Coroutine m_CancelHealEmissionCoroutine;
+     
     protected override void Start()
     { 
         healthState = HEALTH_STATE.VULNERABLE;
@@ -58,6 +60,19 @@ public class PlayerHealth : Health
     // Scale the emission amount of moth with their health percentage
     private void UpdateEmission()
     {
+        // if health animation occuring, call coroutine to animate out of it
+        if (m_HealEmissionCoroutine != null)
+        {
+            //StopCoroutine(m_HealEmissionCoroutine);
+            //m_CancelHealEmissionCoroutine = StartCoroutine(CancelHealEmission());
+        }
+
+        // If currently cancelling heal, break out of it
+        if (m_CancelHealEmissionCoroutine != null)
+        {
+            return;
+        }
+
         foreach (Renderer renderer in m_EmissionRenderer)
         {
             Color currColor = renderer.material.GetColor("_EmissionColor");
@@ -93,6 +108,40 @@ public class PlayerHealth : Health
     {
         base.HealAmount(healthAmount);
         SetHealthText();
+        m_HealEmissionCoroutine = StartCoroutine(HealEmission());
+    }
+
+    private IEnumerator HealEmission()
+    {
+        float timeEmission = 1.5f;
+        float emitAmountIncr = 5f; 
+
+        float currDuration = 0;
+
+        // use first material as others should be the same
+        Color ColorBeforeHeal = m_EmissionRenderer[0].material.GetColor("_EmissionColor");
+
+        while (currDuration < timeEmission)
+        {
+            foreach (Renderer renderer in m_EmissionRenderer)
+            {
+                Color currColor = renderer.material.GetColor("_EmissionColor");
+                float LerpEmitIncr = Mathf.Lerp(0, emitAmountIncr, currDuration / timeEmission);
+                Color newColor = new Color(GetValidColor(ColorBeforeHeal.r + LerpEmitIncr),
+                                            GetValidColor(ColorBeforeHeal.g + LerpEmitIncr),
+                                            GetValidColor(ColorBeforeHeal.b + LerpEmitIncr),
+                                            currColor.a);
+                renderer.material.SetColor("_EmissionColor", newColor);
+            }
+            currDuration += Time.deltaTime;
+            yield return null;
+        }
+        //m_CancelHealEmissionCoroutine = StartCoroutine(CancelHealEmission());
+    }
+     
+    private IEnumerator CancelHealEmission()
+    {
+        yield return null;
     }
 
     public enum HEALTH_STATE
