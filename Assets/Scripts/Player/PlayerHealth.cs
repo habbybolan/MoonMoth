@@ -14,15 +14,24 @@ public class PlayerHealth : Health
     [Range(0f, 100f)]
     [SerializeField] private float m_TerrainDamageAmount = 5f;
     [SerializeField] private TextMeshProUGUI m_HealthText;
-    [SerializeField] private Renderer[] m_EmissionRenderer;
-    [SerializeField] private float m_EmissionIntensity = 3.5f;
     
+
+    [Header("Emission")]
+    [Tooltip("Moth renderers that contain the Moth emission shader")]
+    [SerializeField] private Renderer[] m_EmissionRenderer;
+    [Tooltip("Duration that the heal emission burst lasts for")]
+    [SerializeField] private float m_HealEmissionBurstDuration = 1.5f;
+    [Tooltip("Amount of intensity is temporarily increased during the heal emission burst")]
+    [SerializeField] private float m_HealEmissionBurstAmount = 10f;
+    [Tooltip("The speed the emission returns back to normal after the heal emission burst")]
+    [SerializeField] private float m_ReturnFromHealEmissionBurstSpeed = 10f;
+
     private HEALTH_STATE healthState;       // If the player can be damaged or not by non-terrain damage types
     private float m_MaxEmissionRGB;
     private float m_RGBDifference;
     private Color m_StartingEmissionColor;
-    private Coroutine m_HealEmissionCoroutine;
-    private Coroutine m_CancelHealEmissionCoroutine;
+    private Coroutine m_HealEmissionBurst;
+    private Coroutine m_ReturnFromHealEmissionBurst;
      
     protected override void Start()
     { 
@@ -61,14 +70,14 @@ public class PlayerHealth : Health
     // Scale the emission amount of moth with their health percentage
     private void UpdateEmission()
     {
-        // heal animation
-        if (m_HealEmissionCoroutine != null)
+        // heal burst of emission
+        if (m_HealEmissionBurst != null)
         {
             return;
         }
 
-        // reverse heal emission animation, back to proper emission value
-        if (m_CancelHealEmissionCoroutine != null)
+        // reverse heal burst of emission, back to proper emission value
+        if (m_ReturnFromHealEmissionBurst != null)
         {
             return;
         }
@@ -108,26 +117,26 @@ public class PlayerHealth : Health
     {
         base.HealAmount(healthAmount);
         SetHealthText();
-        m_HealEmissionCoroutine = StartCoroutine(HealEmission());
+        m_HealEmissionBurst = StartCoroutine(HealEmissionBurst());
     }
 
     // Moth gains a burst of emission for a duration
-    private IEnumerator HealEmission()
+    private IEnumerator HealEmissionBurst()
     {
-        float timeEmission = 1.5f;
-        float emitAmountIncr = 10f; 
+        float m_HealEmissionBurstDuration = 1.5f;
+        float m_HealEmissionBurstAmount = 10f;  
 
         float currDuration = 0;
 
         // use first material as others should be the same
         Color ColorBeforeHeal = m_EmissionRenderer[0].material.GetColor("_EmissionColor");
 
-        while (currDuration < timeEmission)
+        while (currDuration < m_HealEmissionBurstDuration)
         {
             foreach (Renderer renderer in m_EmissionRenderer)
             {
                 Color currColor = renderer.material.GetColor("_EmissionColor");
-                float LerpEmitIncr = Mathf.Lerp(0, emitAmountIncr, currDuration / timeEmission);
+                float LerpEmitIncr = Mathf.Lerp(0, m_HealEmissionBurstAmount, currDuration / m_HealEmissionBurstDuration);
                 Color newColor = new Color(GetValidColor(ColorBeforeHeal.r + LerpEmitIncr),
                                             GetValidColor(ColorBeforeHeal.g + LerpEmitIncr),
                                             GetValidColor(ColorBeforeHeal.b + LerpEmitIncr),
@@ -137,13 +146,12 @@ public class PlayerHealth : Health
             currDuration += Time.deltaTime;
             yield return null;
         }
-        m_CancelHealEmissionCoroutine = StartCoroutine(CancelHealEmission());
+        m_ReturnFromHealEmissionBurst = StartCoroutine(ReturnFromHealEmissionBurst());
     }
      
     // Moth loses the temporary burst of emission, returning back to normal emission after the heal
-    private IEnumerator CancelHealEmission()
+    private IEnumerator ReturnFromHealEmissionBurst()
     { 
-        float emitLoseSpeed = 20f;
         bool isNotReachedCorrectEmission = true; 
 
         while (isNotReachedCorrectEmission)
@@ -151,9 +159,9 @@ public class PlayerHealth : Health
             foreach (Renderer renderer in m_EmissionRenderer)
             {
                 Color currColor = renderer.material.GetColor("_EmissionColor");
-                Color newColor = new Color(GetValidColor(currColor.r - emitLoseSpeed * Time.deltaTime),
-                                            GetValidColor(currColor.g - emitLoseSpeed * Time.deltaTime),
-                                            GetValidColor(currColor.b - emitLoseSpeed * Time.deltaTime),
+                Color newColor = new Color(GetValidColor(currColor.r - m_ReturnFromHealEmissionBurstSpeed * Time.deltaTime),
+                                            GetValidColor(currColor.g - m_ReturnFromHealEmissionBurstSpeed * Time.deltaTime),
+                                            GetValidColor(currColor.b - m_ReturnFromHealEmissionBurstSpeed * Time.deltaTime),
                                             currColor.a);
                 renderer.material.SetColor("_EmissionColor", newColor);
 
