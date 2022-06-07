@@ -55,19 +55,19 @@ public class PlayerHealth : Health
             StartCoroutine(InvulnerabilityFrames());
         }
         SetHealthText();
+        UpdateEmission();
     }
 
     // Scale the emission amount of moth with their health percentage
     private void UpdateEmission()
     {
-        // if health animation occuring, call coroutine to animate out of it
+        // heal animation
         if (m_HealEmissionCoroutine != null)
         {
-            //StopCoroutine(m_HealEmissionCoroutine);
-            //m_CancelHealEmissionCoroutine = StartCoroutine(CancelHealEmission());
+            return;
         }
 
-        // If currently cancelling heal, break out of it
+        // reverse heal emission animation, back to proper emission value
         if (m_CancelHealEmissionCoroutine != null)
         {
             return;
@@ -111,10 +111,11 @@ public class PlayerHealth : Health
         m_HealEmissionCoroutine = StartCoroutine(HealEmission());
     }
 
+    // Moth gains a burst of emission for a duration
     private IEnumerator HealEmission()
     {
         float timeEmission = 1.5f;
-        float emitAmountIncr = 5f; 
+        float emitAmountIncr = 10f; 
 
         float currDuration = 0;
 
@@ -136,12 +137,34 @@ public class PlayerHealth : Health
             currDuration += Time.deltaTime;
             yield return null;
         }
-        //m_CancelHealEmissionCoroutine = StartCoroutine(CancelHealEmission());
+        m_CancelHealEmissionCoroutine = StartCoroutine(CancelHealEmission());
     }
      
+    // Moth loses the temporary burst of emission, returning back to normal emission after the heal
     private IEnumerator CancelHealEmission()
-    {
-        yield return null;
+    { 
+        float emitLoseSpeed = 20f;
+        bool isNotReachedCorrectEmission = true; 
+
+        while (isNotReachedCorrectEmission)
+        {
+            foreach (Renderer renderer in m_EmissionRenderer)
+            {
+                Color currColor = renderer.material.GetColor("_EmissionColor");
+                Color newColor = new Color(GetValidColor(currColor.r - emitLoseSpeed * Time.deltaTime),
+                                            GetValidColor(currColor.g - emitLoseSpeed * Time.deltaTime),
+                                            GetValidColor(currColor.b - emitLoseSpeed * Time.deltaTime),
+                                            currColor.a);
+                renderer.material.SetColor("_EmissionColor", newColor);
+
+                float correctEmission = Mathf.Lerp(0, m_MaxEmissionRGB, HealthPercentage);
+                float currMaxRGB = Mathf.Max(newColor.r, newColor.g, newColor.b);
+
+                // notify the proper emission was reached, leave coroutine after updating all materials
+                if (correctEmission > currMaxRGB) isNotReachedCorrectEmission = false;
+            }
+            yield return null;
+        }
     }
 
     public enum HEALTH_STATE
