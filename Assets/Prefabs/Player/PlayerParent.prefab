@@ -631,6 +631,10 @@ PrefabInstance:
       propertyPath: m_WeaponOwner
       value: 
       objectReference: {fileID: 7576343698478518934}
+    - target: {fileID: 8918889820237711923, guid: 70357dd3d6d860a41b801c6ad53339b6, type: 3}
+      propertyPath: m_BulletPrefab
+      value: 
+      objectReference: {fileID: 6272121326647583191, guid: 117e17bac98cb2d4691674ba32cfb26c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70357dd3d6d860a41b801c6ad53339b6, type: 3}
 --- !u!114 &7576343698478518936 stripped
@@ -1261,7 +1265,7 @@ MonoBehaviour:
   m_Health: {fileID: 7576343698478518934}
   m_PlayerMovement: {fileID: 7576343697687589149}
   m_PlayerParentMovement: {fileID: 3977897141832786758}
-  m_LostMothCountWinCondition: 3
+  m_LostMothCountWinCondition: 8
   m_CameraMovement: {fileID: 375853361}
   m_Weapon: {fileID: 7576343698478518936}
   m_MoonBarAbility: {fileID: 1007931874}
