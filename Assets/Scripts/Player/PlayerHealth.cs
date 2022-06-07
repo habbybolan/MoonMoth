@@ -30,8 +30,8 @@ public class PlayerHealth : Health
     private float m_MaxEmissionRGB;
     private float m_RGBDifference;
     private Color m_StartingEmissionColor;
-    private Coroutine m_HealEmissionBurst;
-    private Coroutine m_ReturnFromHealEmissionBurst;
+
+    private bool m_isHealBurst = false;
      
     protected override void Start()
     { 
@@ -70,14 +70,8 @@ public class PlayerHealth : Health
     // Scale the emission amount of moth with their health percentage
     private void UpdateEmission()
     {
-        // heal burst of emission
-        if (m_HealEmissionBurst != null)
-        {
-            return;
-        }
-
-        // reverse heal burst of emission, back to proper emission value
-        if (m_ReturnFromHealEmissionBurst != null)
+        // prevent updating emission if heal burst animation playing
+        if (m_isHealBurst)
         {
             return;
         }
@@ -117,12 +111,13 @@ public class PlayerHealth : Health
     {
         base.HealAmount(healthAmount);
         SetHealthText();
-        m_HealEmissionBurst = StartCoroutine(HealEmissionBurst());
+        StartCoroutine(HealEmissionBurst());
     }
 
     // Moth gains a burst of emission for a duration
     private IEnumerator HealEmissionBurst()
     {
+        m_isHealBurst = true;
         float m_HealEmissionBurstDuration = 1.5f;
         float m_HealEmissionBurstAmount = 10f;  
 
@@ -146,7 +141,7 @@ public class PlayerHealth : Health
             currDuration += Time.deltaTime;
             yield return null;
         }
-        m_ReturnFromHealEmissionBurst = StartCoroutine(ReturnFromHealEmissionBurst());
+        StartCoroutine(ReturnFromHealEmissionBurst());
     }
      
     // Moth loses the temporary burst of emission, returning back to normal emission after the heal
@@ -173,6 +168,7 @@ public class PlayerHealth : Health
             }
             yield return null;
         }
+        m_isHealBurst = false;
     }
 
     public enum HEALTH_STATE
