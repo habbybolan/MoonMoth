@@ -157,7 +157,7 @@ public class TileManager : MonoBehaviour
         int visibleCount = m_VisibleTiles.Count;
 
         m_VisibleTiles.AddLast(newTile);
-        newTile.SetIsActive(true);
+        newTile.gameObject.SetActive(true);
         newTile.InitializeTile();
 
         // First tile being created
@@ -204,8 +204,7 @@ public class TileManager : MonoBehaviour
         {
             if (d_TileDeletedDelegate != null)
                 d_TileDeletedDelegate(firstTile);
-            firstTile.DeleteAllSpawned();
-            firstTile.SetIsActive(false);
+            firstTile.gameObject.SetActive(false);
             m_VisibleTiles.RemoveFirst();
         }
     }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpiderWeb : MonoBehaviour
 {
     [SerializeField] GameObject m_PartPrefab;
-    [SerializeField] GameObject m_StartingPoint;
     [SerializeField] GameObject m_Spider;
 
     [Range(1f, 1000f)]
@@ -20,21 +19,28 @@ public class SpiderWeb : MonoBehaviour
     public WebDestroyedDelegate d_WebDestroyedDelegate;
 
     private List<GameObject> m_SpiderWebParts;
+    private GameObject m_SpawnPointCopy;
 
     private void Start()
     {
         m_LayerMask = 1 << 9;
-        m_StartingPoint.transform.parent = null;
-        m_SpiderWebParts = new List<GameObject>();
     }
 
     private void Update()
     {
         if (spawn)
         {
+            m_SpawnPointCopy = new GameObject();
+            m_SpawnPointCopy.transform.position = transform.position;
+            m_SpiderWebParts = new List<GameObject>();
             Spawn();
             spawn = false;
         }
+    }
+
+    private void OnEnable()
+    {
+        spawn = true;
     }
 
     public void Spawn()
@@ -42,7 +48,7 @@ public class SpiderWeb : MonoBehaviour
         if (m_AutoLength)
         {
             RaycastHit hit;
-            if (Physics.Raycast(m_StartingPoint.transform.position, Vector3.up, out hit, m_LayerMask))
+            if (Physics.Raycast(transform.position, Vector3.up, out hit, m_LayerMask))
             {
                 m_Length = hit.distance;
             } else
@@ -58,11 +64,11 @@ public class SpiderWeb : MonoBehaviour
         {
             GameObject tmp;
 
-            tmp = Instantiate(m_PartPrefab, new Vector3 (transform.position.x, transform.position.y + m_partDistance * (i + 1), transform.position.z), Quaternion.identity, m_StartingPoint.transform);
+            tmp = Instantiate(m_PartPrefab, new Vector3 (transform.position.x, transform.position.y + m_partDistance * (i + 1), transform.position.z), Quaternion.identity, m_SpawnPointCopy.transform);
             m_SpiderWebParts.Add(tmp);
             tmp.transform.eulerAngles = new Vector3(180, 0, 0);
 
-            tmp.name = transform.childCount.ToString();
+            tmp.name = m_SpawnPointCopy.transform.childCount.ToString();
 
             if (i == 0)
             {
@@ -77,13 +83,15 @@ public class SpiderWeb : MonoBehaviour
             }
             else
             {
-                tmp.GetComponent<Joint>().connectedBody = transform.Find((transform.childCount - 1).ToString()).GetComponent<Rigidbody>();
+                Joint joint = tmp.GetComponent<Joint>();
+                Transform webPieceTransform = m_SpawnPointCopy.transform.Find((m_SpawnPointCopy.transform.childCount - 1).ToString());
+                joint.connectedBody = webPieceTransform.GetComponent<Rigidbody>();
             }
         }
 
         if (snapLast)
         {
-            Rigidbody topRigidBody = transform.Find((transform.childCount).ToString()).GetComponent<Rigidbody>();
+            Rigidbody topRigidBody = m_SpawnPointCopy.transform.Find((m_SpawnPointCopy.transform.childCount).ToString()).GetComponent<Rigidbody>();
             topRigidBody.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
@@ -93,9 +101,10 @@ public class SpiderWeb : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             Transform child = transform.GetChild(i);
+            if (child.gameObject == gameObject) return;
             Destroy(child.gameObject);
         }
-        Destroy(gameObject);
+        Destroy(m_SpawnPointCopy);
     }
 
     public void SpiderWebBroke()
@@ -116,6 +125,7 @@ public class SpiderWeb : MonoBehaviour
     }
     public void DestroyWeb()
     {
+        if (m_SpiderWebParts == null) return;
         // destroy each spider web that was created
         foreach (GameObject webPart in m_SpiderWebParts)
         {

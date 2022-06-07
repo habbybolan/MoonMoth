@@ -88,6 +88,7 @@ MonoBehaviour:
   m_CameraFovChangeRate: 2
   m_BaseFov: 60
   m_ShakeDuration: 0.4
+  m_ShakeIntensity: 1
   m_DashFovOffset: 20
   m_AimModeFovOffset: -20
 --- !u!1 &829801870
@@ -395,6 +396,7 @@ MonoBehaviour:
   m_Speed: 17
   m_SpeedIncreasePercent: 1
   m_IsIndependentMovement: 0
+  m_SlowEffectSpeedDecreasePercent: 0.5
 --- !u!1001 &1421261664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -629,6 +631,10 @@ PrefabInstance:
       propertyPath: m_WeaponOwner
       value: 
       objectReference: {fileID: 7576343698478518934}
+    - target: {fileID: 8918889820237711923, guid: 70357dd3d6d860a41b801c6ad53339b6, type: 3}
+      propertyPath: m_BulletPrefab
+      value: 
+      objectReference: {fileID: 6272121326647583191, guid: 117e17bac98cb2d4691674ba32cfb26c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70357dd3d6d860a41b801c6ad53339b6, type: 3}
 --- !u!114 &7576343698478518936 stripped
@@ -1263,6 +1269,8 @@ MonoBehaviour:
   m_CameraMovement: {fileID: 375853361}
   m_Weapon: {fileID: 7576343698478518936}
   m_MoonBarAbility: {fileID: 1007931874}
+  m_SlowEffectDuration: 3
+  m_FogTransitionDuration: 1
   m_LostMothUI: {fileID: 8894022941869152368}
   m_LostMothUIDisplayTime: 1.5
   m_AimModeStartSound: {fileID: 8263238132630632312}
@@ -1282,7 +1290,7 @@ MonoBehaviour:
   m_BaseMothMoveSpeed: 5
   m_IsShowControlObject: 0
   m_ControlObject: {fileID: 3977897140022987257}
-  m_BaseControlSpeed: 15
+  m_BaseControlSpeed: 17
   m_AimModeSpeedIncrease: 1.8
   m_DodgeDuration: 0.5
   m_AnimationCurve:
