@@ -124,9 +124,6 @@ public class PlayerHealth : Health
     private IEnumerator HealEmissionBurst()
     {
         m_isHealBurst = true;
-        float m_HealEmissionBurstDuration = 1.5f;
-        float m_HealEmissionBurstAmount = 10f;  
-
         float currDuration = 0;
 
         // use first material as others should be the same
