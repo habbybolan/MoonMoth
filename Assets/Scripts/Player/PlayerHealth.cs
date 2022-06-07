@@ -24,7 +24,7 @@ public class PlayerHealth : Health
     [Tooltip("Amount of intensity is temporarily increased during the heal emission burst")]
     [SerializeField] private float m_HealEmissionBurstAmount = 10f;
     [Tooltip("The speed the emission returns back to normal after the heal emission burst")]
-    [SerializeField] private float m_ReturnFromHealEmissionBurstSpeed = 10f;
+    [SerializeField] private float m_EmissionLossSpeed = 10f; 
 
     private HEALTH_STATE healthState;       // If the player can be damaged or not by non-terrain damage types
     private float m_MaxEmissionRGB;
@@ -76,14 +76,20 @@ public class PlayerHealth : Health
             return;
         }
 
+        // loop over all renderers and update the emission
         foreach (Renderer renderer in m_EmissionRenderer)
         {
             Color currColor = renderer.material.GetColor("_EmissionColor");
-            float LerpValueOfMaxRGB = Mathf.Lerp(0, m_MaxEmissionRGB, HealthPercentage);
-            float differenceFromMax = m_MaxEmissionRGB - LerpValueOfMaxRGB;
-            Color newColor = new Color(GetValidColor(m_StartingEmissionColor.r - differenceFromMax),
-                                        GetValidColor(m_StartingEmissionColor.g - differenceFromMax),
-                                        GetValidColor(m_StartingEmissionColor.b - differenceFromMax),
+            float correctEmission = Mathf.Lerp(0, m_MaxEmissionRGB, HealthPercentage);
+            float currMaxRGB = Mathf.Max(currColor.r, currColor.g, currColor.b);
+
+            // if reached the correct emission amount, dont lose any more emission 
+            if (correctEmission > currMaxRGB) return; 
+                
+            // update emission after health loss
+            Color newColor = new Color(GetValidColor(currColor.r - m_EmissionLossSpeed * Time.deltaTime),
+                                        GetValidColor(currColor.g - m_EmissionLossSpeed * Time.deltaTime),
+                                        GetValidColor(currColor.b - m_EmissionLossSpeed * Time.deltaTime),
                                         currColor.a);
             renderer.material.SetColor("_EmissionColor", newColor);
         }
@@ -139,33 +145,6 @@ public class PlayerHealth : Health
                 renderer.material.SetColor("_EmissionColor", newColor);
             }
             currDuration += Time.deltaTime;
-            yield return null;
-        }
-        StartCoroutine(ReturnFromHealEmissionBurst());
-    }
-     
-    // Moth loses the temporary burst of emission, returning back to normal emission after the heal
-    private IEnumerator ReturnFromHealEmissionBurst()
-    { 
-        bool isNotReachedCorrectEmission = true; 
-
-        while (isNotReachedCorrectEmission)
-        {
-            foreach (Renderer renderer in m_EmissionRenderer)
-            {
-                Color currColor = renderer.material.GetColor("_EmissionColor");
-                Color newColor = new Color(GetValidColor(currColor.r - m_ReturnFromHealEmissionBurstSpeed * Time.deltaTime),
-                                            GetValidColor(currColor.g - m_ReturnFromHealEmissionBurstSpeed * Time.deltaTime),
-                                            GetValidColor(currColor.b - m_ReturnFromHealEmissionBurstSpeed * Time.deltaTime),
-                                            currColor.a);
-                renderer.material.SetColor("_EmissionColor", newColor);
-
-                float correctEmission = Mathf.Lerp(0, m_MaxEmissionRGB, HealthPercentage);
-                float currMaxRGB = Mathf.Max(newColor.r, newColor.g, newColor.b);
-
-                // notify the proper emission was reached, leave coroutine after updating all materials
-                if (correctEmission > currMaxRGB) isNotReachedCorrectEmission = false;
-            }
             yield return null;
         }
         m_isHealBurst = false;
