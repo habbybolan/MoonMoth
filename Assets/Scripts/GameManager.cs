@@ -58,4 +58,6 @@ public class GameManager : MonoBehaviour
                 d_NextLevelDelegate();
         }
     }
+
+    public int CurrLevel { get { return m_CurrLevel; }}
 }
