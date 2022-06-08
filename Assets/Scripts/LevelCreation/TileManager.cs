@@ -257,6 +257,12 @@ public class TileManager : MonoBehaviour
         StartCoroutine(TransitionToNextSet());
     }
 
+    // Checks if it is valid to spawn a firefly by checking if a tile exists before the player's current tile
+    public bool IsValidToSpawnFirefly()
+    {
+        return GetHead() != null && GetHead().Value.IsTraversedByPlayer;
+    }
+
     // Asynchronously 
     IEnumerator TransitionToNextSet()
     {
