@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 /*
  * Deals with any object that can interact and damage the player.
@@ -15,8 +16,14 @@ public class PlayerHealth : Health
     [Range(0f, 100f)]
     [SerializeField] private float m_TerrainDamageAmount = 5f;
     [SerializeField] private TextMeshProUGUI m_HealthText;
+
+    [Header("Vignette")]
     [SerializeField] private Volume m_PostProcessVolume;
-    
+    [Range (0,1)]
+    [SerializeField] private float m_BaseVignette = 0.25f;
+    [Range(0, 1)]
+    [SerializeField] private float m_MaxVignette = .8f;
+    [SerializeField] private float m_vignetteSpeed = .1f;
 
     [Header("Emission")]
     [Tooltip("Moth renderers that contain the Moth emission shader")]
@@ -48,6 +55,7 @@ public class PlayerHealth : Health
     private void Update()
     {
         UpdateEmission();
+        UpdateVignette();
     }
 
     public override void Damage(DamageInfo damageInfo)
@@ -97,6 +105,20 @@ public class PlayerHealth : Health
                                         GetValidColor(currColor.b - m_EmissionLossSpeed * Time.deltaTime),
                                         currColor.a);
             renderer.material.SetColor("_EmissionColor", newColor);
+        }
+    }
+
+    private void UpdateVignette()
+    {
+        if (m_PostProcessVolume.profile.TryGet<Vignette>(out var vignette))
+        {
+            float correctVignette = Mathf.Lerp(m_BaseVignette, m_MaxVignette, 1 - HealthPercentage);
+
+            float vignetteChange = m_vignetteSpeed;
+            if (correctVignette < vignette.intensity.value)
+                vignetteChange *= -1;
+
+            vignette.intensity.value = vignette.intensity.value + vignetteChange * Time.deltaTime;
         }
     }
 

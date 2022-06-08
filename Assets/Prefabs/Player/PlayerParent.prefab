@@ -63,7 +63,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.778169, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5605,7 +5605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Duration: 5
   m_Spline: {fileID: 0}
-  m_Speed: 18
+  m_Speed: 17
   m_SpeedIncreasePercent: 1
   m_IsIndependentMovement: 0
   m_SlowEffectSpeedDecreasePercent: 0.5
@@ -6460,7 +6460,7 @@ MonoBehaviour:
   m_Health: {fileID: 7166930477189024826}
   m_PlayerMovement: {fileID: 7166930479057285041}
   m_PlayerParentMovement: {fileID: 3977897141832786758}
-  m_LostMothCountWinCondition: 8
+  m_LostMothCountWinCondition: 1
   m_CameraMovement: {fileID: 375853361}
   m_Weapon: {fileID: 7166930477189024820}
   m_MoonBarAbility: {fileID: 743825388203069262}
@@ -6563,6 +6563,10 @@ MonoBehaviour:
   m_InvincibilityDuration: 1
   m_TerrainDamageAmount: 5
   m_HealthText: {fileID: 8894022942486777166}
+  m_PostProcessVolume: {fileID: 0}
+  m_BaseVignette: 0.25
+  m_MaxVignette: 0.8
+  m_vignetteSpeed: 0.1
   m_EmissionRenderer:
   - {fileID: 3421514730109628488}
   - {fileID: 1738208892201274476}
