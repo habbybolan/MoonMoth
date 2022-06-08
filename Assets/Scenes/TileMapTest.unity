@@ -208,6 +208,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2144779323}
     m_Modifications:
+    - target: {fileID: 375853362, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_Lens.m_SensorSize.x
+      value: 1.7783784
+      objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786757, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Name
       value: PlayerParent
@@ -613,8 +617,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TileSets:
   - tiles:
-    - {fileID: 3961284799128567415, guid: 0972ed06aabd4194dbbe28c2cf3c2687, type: 3}
-    - {fileID: 3961284799128567415, guid: 1f1262d9fe599ca42ac9102b002fbe39, type: 3}
+    - {fileID: 3961284799128567415, guid: d7b851c55a0727d4cb63e38797d65026, type: 3}
+    - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
+    - {fileID: 3961284799128567415, guid: 1c445344d9ce7164d9e558fcd418520f, type: 3}
+    - {fileID: 3961284799128567415, guid: 90ab47f1fa28c874cb2bedb0d152262c, type: 3}
   m_TileTransitions: []
   m_DistanceToPlaceTile: 800
   m_TilePoolSize: 20
