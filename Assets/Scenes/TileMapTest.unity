@@ -208,21 +208,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2144779323}
     m_Modifications:
-    - target: {fileID: 375853362, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_Lens.m_SensorSize.x
-      value: 1.7783784
-      objectReference: {fileID: 0}
-    - target: {fileID: 2626716119223292289, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_LostMothCountWinCondition
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786757, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Name
       value: PlayerParent
-      objectReference: {fileID: 0}
-    - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_Speed
-      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786758, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Spline
@@ -272,14 +260,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7166930477189024820, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_BulletPrefab
+    - target: {fileID: 7166930477189024826, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_PostProcessVolume
       value: 
-      objectReference: {fileID: 7431150947094452623, guid: cc2d378b2b804074598966a97414137d, type: 3}
-    - target: {fileID: 7576343697687589149, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_BaseControlSpeed
-      value: 17
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 728148997}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
 --- !u!1 &331443370
