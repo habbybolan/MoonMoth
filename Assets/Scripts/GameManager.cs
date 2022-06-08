@@ -6,7 +6,13 @@ using UnityEngine.SceneManagement;
 // Manages the main game state
 //  Includes transitions between levels, player death
 public class GameManager : MonoBehaviour
-{ 
+{
+
+    public delegate void NextLevelDelegate();
+    public NextLevelDelegate d_NextLevelDelegate; 
+
+    private int m_CurrLevel = 0;
+
     static GameManager s_PropertyInstance;
     public static GameManager PropertyInstance
     {
@@ -28,6 +34,7 @@ public class GameManager : MonoBehaviour
     {
         GameState.m_GameState = GameStateEnum.LOST;
         SceneManager.LoadScene("WinLose");
+        m_CurrLevel = 0;
     }
 
     // On player winning the game
@@ -35,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         GameState.m_GameState = GameStateEnum.WON;
         SceneManager.LoadScene("WinLose");
+        m_CurrLevel = 0; 
     }
 
     // Enough lost moths collected to either goto next level or game finished
@@ -44,8 +52,10 @@ public class GameManager : MonoBehaviour
         TileManager.PropertyInstance.TileSetFinished(); 
         if (GameState.m_GameState != GameStateEnum.WON && GameState.m_GameState != GameStateEnum.LOST)
         {
+            m_CurrLevel++;
             GameState.m_GameState = GameStateEnum.TRANSITIONING;
-            FireflyManager.PropertyInstance.TileSetFinished();
+            if (d_NextLevelDelegate != null)
+                d_NextLevelDelegate();
         }
     }
 }

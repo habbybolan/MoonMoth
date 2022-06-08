@@ -82,6 +82,7 @@ public class TileManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.PropertyInstance.d_NextLevelDelegate += TileSetFinished;
         InitializeStartTile();
         m_IsInitialized = true;
         if (m_TileTransitions.Length < m_TileSets.Length - 1)
