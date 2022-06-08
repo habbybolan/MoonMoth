@@ -3,7 +3,16 @@ guid: 98e03b73b2fa69445added13f99edb0a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_Health: {instanceID: 0}
+  - m_PlayerMovement: {instanceID: 0}
+  - m_PlayerParentMovement: {instanceID: 0}
+  - m_CameraMovement: {instanceID: 0}
+  - m_Weapon: {instanceID: 0}
+  - m_MoonBarAbility: {instanceID: 0}
+  - m_LostMothUI: {instanceID: 0}
+  - m_AimModeStartSound: {instanceID: 0}
+  - m_AimModeEndSound: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

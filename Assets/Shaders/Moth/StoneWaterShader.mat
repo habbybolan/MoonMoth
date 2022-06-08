@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterShader
+  m_Name: StoneWaterShader
   m_Shader: {fileID: -6465566751694194690, guid: 94dd1e63bcaafed46a7d18942d83a125, type: 3}
   m_ShaderKeywords: _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 0
@@ -41,9 +41,9 @@ Material:
     - _Depth_Fade: 6.84
     - _DstBlend: 10
     - _Foam_Colour: 0
-    - _Foam_Width: 2.17
+    - _Foam_Width: 1.54
     - _Height: 0.07
-    - _Noise_Scale: 2
+    - _Noise_Scale: 4
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -51,15 +51,15 @@ Material:
     - _Smoothness: 0.26
     - _SrcBlend: 5
     - _Surface: 1
-    - _Water_Scroll_Speed: 0.02
+    - _Water_Scroll_Speed: 0.05
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Deep_Colour: {r: 0.36267355, g: 0.4716981, b: 0.38144004, a: 0}
-    - _Foam_Colour: {r: 1, g: 1, b: 1, a: 0}
-    - _Shallow_Colour: {r: 0.8821639, g: 0.12549019, b: 0.972549, a: 0}
+    - _Deep_Colour: {r: 0.3432193, g: 0.33388218, b: 0.38679248, a: 0}
+    - _Foam_Colour: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 0}
+    - _Shallow_Colour: {r: 0.0495283, g: 0.1981132, b: 0.05929427, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6767421092211195493
 MonoBehaviour:

@@ -14,6 +14,7 @@ public class Tile : MonoBehaviour
     public List<EnemySetWrapper> m_EnemyPointSet;
     public List<Vector3> m_LostMothPoints;
     
+    
     // prefabs
     public StalagScriptable m_StalagPrefab;
     public LostMoth m_LostMothPrefab;
@@ -21,11 +22,9 @@ public class Tile : MonoBehaviour
 
     private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
     private int m_ID;
+    private BoxCollider m_EndCollider;
 
-    private List<TransformCache> m_CachedGameObjects;   // Caches all game objects to reset them on disable
     private List<GameObject> m_SpawnedTileObjects;  // list of objects connected to tile for deletion
-
-    private bool m_HasBeenReset = false;
 
     // List of obstacles/enemies set in the tile
     // [Stalags, Spiders, Mushrooms]
@@ -35,12 +34,8 @@ public class Tile : MonoBehaviour
     {
         m_ID = TileManager.GetNewID();
 
-        if (m_EnemyPointSet == null)
-            m_EnemyPointSet = new List<EnemySetWrapper>();
-        if (m_LostMothPoints == null)
-            m_LostMothPoints = new List<Vector3>();
+        TileInspectorInitialize();
 
-        m_CachedGameObjects = new List<TransformCache>();
         // Store each dynamically spawned object into a list 
         m_SetObjectSpawns = new List<GameObject>[TileManager.PropertyInstance.NumSpawnTypes];
         for (int i = 0; i < m_SetObjectSpawns.Length; i++)
@@ -54,18 +49,31 @@ public class Tile : MonoBehaviour
             switch(childObj.tag) {
                 case "Stalag":
                     m_SetObjectSpawns[0].Add(childObj);
-                    m_CachedGameObjects.Add(new TransformCache(child.localPosition, child.localRotation));
                     break;
                 case "Spider":
                     m_SetObjectSpawns[1].Add(childObj);
-                    m_CachedGameObjects.Add(new TransformCache(child.localPosition, child.localRotation));
                     break;
                 case "Mushroom":
                     m_SetObjectSpawns[2].Add(childObj);
-                    m_CachedGameObjects.Add(new TransformCache(child.localPosition, child.localRotation));
                     break;
             }
         }
+    }
+
+    public void TileInspectorInitialize()
+    {
+        if (m_EnemyPointSet == null)
+            m_EnemyPointSet = new List<EnemySetWrapper>();
+        if (m_LostMothPoints == null)
+            m_LostMothPoints = new List<Vector3>();
+        // if invalid quaternion rotation
+        if (m_EndPointRotation.x == 0 && m_EndPointRotation.y == 0 && m_EndPointRotation.z == 0 && m_EndPointRotation.w == 0)
+            m_EndPointRotation = Quaternion.identity;
+    }
+
+    private void Start()
+    {
+        m_EndCollider = GetComponent<BoxCollider>();
     }
 
     // Initialize the dynamically spawned items and (de)-activate any obstacle/enemy in the tile
@@ -93,13 +101,11 @@ public class Tile : MonoBehaviour
         }
     }
 
-    private void DeleteAllSpawned()
+    public void DeleteAllSpawned()
     {
-        if (m_SpawnedTileObjects == null) return;
-
         foreach (GameObject obj in m_SpawnedTileObjects)
         {
-            obj.SetActive(false);
+            Destroy(obj);
         }
         m_SpawnedTileObjects = new List<GameObject>();
     }
@@ -124,36 +130,10 @@ public class Tile : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    public void SetIsActive(bool IsActive)
     {
-        m_IsTraversedByPlayer = false;
-        DeleteAllSpawned();
-    }
-
-    private void OnEnable()
-    {
-        if (!m_HasBeenReset)
-        {
-            m_HasBeenReset = true;
-            return;
-        }
-        ResetTile();
-    }
-
-    // Resets all obstacles and enemies to their original states
-    private void ResetTile()
-    {
-        int index = 0;
-        // update transform of each obstacle and enemy
-        foreach (List<GameObject> objs in m_SetObjectSpawns)
-        {
-            foreach (GameObject obj in objs)
-            {
-                obj.transform.localPosition = m_CachedGameObjects[index].LocalPosition;
-                obj.transform.rotation = m_CachedGameObjects[index].LocalRotation;
-                index++;
-            }
-        }
+        gameObject.SetActive(IsActive);
+        if (IsActive) m_IsTraversedByPlayer = false;
     }
 
     public float TileEndDistanceFromPlayer(CatmullWalker player)
@@ -335,17 +315,6 @@ public class Tile : MonoBehaviour
         START, 
         END,
         LOST_MOTH,
-    }
-
-    private struct TransformCache
-    {
-        public TransformCache(Vector3 localPosition, Quaternion localRotation)
-        {
-            LocalPosition = localPosition;
-            LocalRotation = localRotation;
-        }
-        public Vector3 LocalPosition;
-        public Quaternion LocalRotation;
     }
 
     
