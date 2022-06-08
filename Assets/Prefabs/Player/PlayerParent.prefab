@@ -63,7 +63,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 2.3810527, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5849,8 +5849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbefd6927709fb24986c25f8b89457be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Cooldown: 0.1
-  m_BulletPrefab: {fileID: -396677877489407609, guid: 117e17bac98cb2d4691674ba32cfb26c, type: 3}
+  m_Cooldown: 0.4
+  m_BulletPrefab: {fileID: 7431150947094452623, guid: cc2d378b2b804074598966a97414137d, type: 3}
   m_PitchRange: {x: 0.9, y: 1.1}
   m_WeaponOwner: {fileID: 7166930477189024826}
   m_ShootCastRadius: 2
