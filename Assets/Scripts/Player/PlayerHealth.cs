@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.Rendering;
 
 /*
  * Deals with any object that can interact and damage the player.
@@ -14,6 +15,7 @@ public class PlayerHealth : Health
     [Range(0f, 100f)]
     [SerializeField] private float m_TerrainDamageAmount = 5f;
     [SerializeField] private TextMeshProUGUI m_HealthText;
+    [SerializeField] private Volume m_PostProcessVolume;
     
 
     [Header("Emission")]
@@ -43,6 +45,11 @@ public class PlayerHealth : Health
         m_MaxEmissionRGB = Mathf.Max(m_StartingEmissionColor.r, m_StartingEmissionColor.g, m_StartingEmissionColor.b); 
     }
 
+    private void Update()
+    {
+        UpdateEmission();
+    }
+
     public override void Damage(DamageInfo damageInfo)
     {
         // Tick damage cannot be blocked
@@ -50,7 +57,6 @@ public class PlayerHealth : Health
         {
             base.Damage(damageInfo);
             SetHealthText();
-            UpdateEmission();
             return;
         }
          
@@ -64,7 +70,6 @@ public class PlayerHealth : Health
             StartCoroutine(InvulnerabilityFrames());
         }
         SetHealthText();
-        UpdateEmission();
     }
 
     // Scale the emission amount of moth with their health percentage
