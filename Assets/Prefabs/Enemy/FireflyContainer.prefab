@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e28f026c7469346b5edb230898ae3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Cooldown: 0.25
+  m_Cooldown: 1.25
   m_BulletPrefab: {fileID: 1837633034811288898, guid: 03f402cf49c62a445b0fed794c8ed401, type: 3}
   m_PitchRange: {x: 0.9, y: 1.1}
   m_WeaponOwner: {fileID: 8497452665531714130}
@@ -724,7 +724,7 @@ MonoBehaviour:
   m_Spline: {fileID: 4206230537702241074}
   m_Speed: 5
   m_DistanceOffsetFromPrev: 10
-  m_DistanceFromCamera: 15
+  m_DistanceFromCamera: 25
   m_BoostSpeed: 1.15
   m_SpeedCorrection: 0.1
   m_IsIndependent: 0

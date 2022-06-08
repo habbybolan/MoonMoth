@@ -124,6 +124,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7452162210851016394}
+  - component: {fileID: -7761560041855529281}
+  - component: {fileID: 7677804869680016415}
   m_Layer: 0
   m_Name: ShortStelag
   m_TagString: Stalag
@@ -148,6 +150,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7761560041855529281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7437543222522856882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DamageAmount: 10
+--- !u!64 &7677804869680016415
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7437543222522856882}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4233009878210327397, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
 --- !u!1001 &3294738033029150586
 PrefabInstance:
   m_ObjectHideFlags: 0

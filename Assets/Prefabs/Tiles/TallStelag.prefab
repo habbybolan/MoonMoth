@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1869176343872962968}
+  - component: {fileID: -9162744592729688068}
+  - component: {fileID: 5709767920369802546}
   m_Layer: 0
   m_Name: TallStelag
   m_TagString: Stalag
@@ -33,6 +35,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-9162744592729688068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850053454607092448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DamageAmount: 10
+--- !u!64 &5709767920369802546
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850053454607092448}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4233009878210327397, guid: 7c3e2a37b0e686149b30c510667c999f, type: 3}
 --- !u!1 &7451594729380819042
 GameObject:
   m_ObjectHideFlags: 0
