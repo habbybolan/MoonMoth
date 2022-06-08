@@ -260,10 +260,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7166930477189024826, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_HealEmissionBurstAmount
-      value: 20
+    - target: {fileID: 7166930477189024820, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_Cooldown
+      value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 7166930477189024820, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_BulletPrefab
+      value: 
+      objectReference: {fileID: 7431150947094452623, guid: cc2d378b2b804074598966a97414137d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
 --- !u!4 &153880105 stripped
@@ -982,6 +986,14 @@ PrefabInstance:
       propertyPath: m_PlayerController
       value: 
       objectReference: {fileID: 1694013292}
+    - target: {fileID: 4672193146274197254, guid: 7ff5e9eedd8caea408ac9a7dd7f861cf, type: 3}
+      propertyPath: m_SpiderMaxSpawnPercent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672193146274197254, guid: 7ff5e9eedd8caea408ac9a7dd7f861cf, type: 3}
+      propertyPath: m_SpiderStartingSpawnPercent
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4672193146274197255, guid: 7ff5e9eedd8caea408ac9a7dd7f861cf, type: 3}
       propertyPath: m_RootOrder
       value: 0

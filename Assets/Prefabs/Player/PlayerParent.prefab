@@ -5849,8 +5849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbefd6927709fb24986c25f8b89457be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Cooldown: 0.5
-  m_BulletPrefab: {fileID: 6272121326647583191, guid: 117e17bac98cb2d4691674ba32cfb26c, type: 3}
+  m_Cooldown: 0.1
+  m_BulletPrefab: {fileID: -396677877489407609, guid: 117e17bac98cb2d4691674ba32cfb26c, type: 3}
   m_PitchRange: {x: 0.9, y: 1.1}
   m_WeaponOwner: {fileID: 7166930477189024826}
   m_ShootCastRadius: 2
@@ -6570,7 +6570,7 @@ MonoBehaviour:
   - {fileID: 1888966626340272967}
   - {fileID: 5324422108587088433}
   m_HealEmissionBurstDuration: 0.55
-  m_HealEmissionBurstAmount: 10
+  m_HealEmissionBurstAmount: 20
   m_EmissionLossSpeed: 10
 --- !u!1 &8894022941072290907
 GameObject:
