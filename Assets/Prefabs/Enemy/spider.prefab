@@ -307,7 +307,7 @@ MonoBehaviour:
   m_SpiderWeapon: {fileID: 8785051892151628039}
   m_SpiderWeb: {fileID: 6788250443946503172}
   m_ShootDistance: 50
-  m_DistancePastCameraToStartShooting: 10
+  m_DistancePastCameraToStartShooting: 5
 --- !u!114 &4211784419857639162
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -744,7 +744,7 @@ MonoBehaviour:
   m_FireflyWalker: {fileID: 2125045404698981339}
   m_Weapon: {fileID: 6146993046470650634}
   m_HealthOrbPrefab: {fileID: 2852505493795219179, guid: 9a21c8104e6aa84498ee6cfda774019c, type: 3}
-  m_DistancePastCameraToStartShooting: 10
+  m_DistancePastCameraToStartShooting: 5
 --- !u!82 &6508454397746641626
 AudioSource:
   m_ObjectHideFlags: 0
