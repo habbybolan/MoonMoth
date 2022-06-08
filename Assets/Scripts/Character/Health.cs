@@ -49,11 +49,18 @@ public class Health : MonoBehaviour
 
     public void LosePassiveHealth()
     {
-        RemoveHealth(m_HealthPercentLosePerSecond * Time.deltaTime);
+        Damage(new DamageInfo(m_HealthPercentLosePerSecond * Time.deltaTime, null, null, DamageInfo.DAMAGE_TYPE.TICK));
     }
 
     public virtual void Damage(DamageInfo damageInfo) 
     {
+        // apply damage from no direct source
+        if (damageInfo.m_Instigator == null)
+        {
+            RemoveHealth(damageInfo.m_DamageAmount);
+            return;
+        }
+
         // prevent all things from hitting themselves
         if (damageInfo.m_Instigator == damageInfo.m_Victim || 
             damageInfo.m_Instigator.tag == damageInfo.m_Victim.tag)
