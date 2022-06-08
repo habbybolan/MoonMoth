@@ -40,7 +40,6 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     private DamageInfo.HIT_EFFECT m_CurrEffect;   // Current hit effect applied to player
     private Coroutine m_SlowEffectCoroutine;
-    private Coroutine m_TransitionCoroutine;
 
     public MoonBarAbility MoonBarAbility { get { return m_MoonBarAbility; }}
 
@@ -206,8 +205,14 @@ public class PlayerController : CharacterController<PlayerHealth>
         // if not currently transitioning and met the lost moth win threshold for the tile set
         if (m_LostMothCount >= m_LostMothCountWinCondition)
         {
-            m_TransitionCoroutine = StartCoroutine(TransitionPhase());
+            WinLevel();
         }        
+    }
+
+    // Set current level as won, goto next or win game
+    public void WinLevel()
+    {
+        StartCoroutine(TransitionPhase());
     }
 
     // Fogs up player's screen, and calls next logic for the transition

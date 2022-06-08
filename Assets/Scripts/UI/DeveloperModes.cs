@@ -27,4 +27,9 @@ public class DeveloperModes : MonoBehaviour
         m_PlayerController.Death();
     }
 
+    public void WinLevel()
+    {
+        m_PlayerController.WinLevel();
+    }
+
 }
