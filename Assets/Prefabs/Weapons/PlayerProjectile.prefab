@@ -1,35 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5125489357588185687
+--- !u!1001 &1471476387369551510
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1600103327854012841, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
-      propertyPath: m_Speed
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 2582062257275592764, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
-      propertyPath: m_Radius
-      value: 0.79
-      objectReference: {fileID: 0}
     - target: {fileID: 5339650802219469232, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5339650802219469232, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.53342146
-      objectReference: {fileID: 0}
-    - target: {fileID: 5339650802219469232, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.53342146
-      objectReference: {fileID: 0}
-    - target: {fileID: 5339650802219469232, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.53342146
       objectReference: {fileID: 0}
     - target: {fileID: 5339650802219469232, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -37,11 +17,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5339650802219469232, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.15095
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5339650802219469232, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.82
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5339650802219469232, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -71,45 +51,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6734666718891834207, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
-      propertyPath: m_Speed
-      value: 500
-      objectReference: {fileID: 0}
     - target: {fileID: 8771129683057882395, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
       propertyPath: m_Name
       value: PlayerProjectile
       objectReference: {fileID: 0}
-    - target: {fileID: 8771129683057882395, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
---- !u!54 &2115601040100902840 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 6520502550553134575, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
-  m_PrefabInstance: {fileID: 5125489357588185687}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4510401839918380876 stripped
+--- !u!1 &7913655792338023309 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8771129683057882395, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
-  m_PrefabInstance: {fileID: 5125489357588185687}
+  m_PrefabInstance: {fileID: 1471476387369551510}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6272121326647583191
+--- !u!114 &7431150947094452623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4510401839918380876}
+  m_GameObject: {fileID: 7913655792338023309}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87ba746512e4d1a40ac6aa824f42e1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 500
+  m_Speed: 150
   m_DamageAmount: 100
-  m_rigidBody: {fileID: 2115601040100902840}
   m_HitEffect: 0
   m_Duration: 10
-  m_MaxHomingAngle: 5
+  m_MaxHomingAngle: 3

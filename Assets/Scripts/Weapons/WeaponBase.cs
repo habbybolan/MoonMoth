@@ -45,8 +45,11 @@ public class WeaponBase<T> : MonoBehaviour where T : Projectile
     {
         m_LastShotProjectile.Owner = m_WeaponOwner.gameObject;
 
-        m_ProjectileAudio.pitch = Random.Range(m_PitchRange.x, m_PitchRange.y);
-        m_ProjectileAudio.Play();
+        if (m_ProjectileAudio != null)
+        {
+            m_ProjectileAudio.pitch = Random.Range(m_PitchRange.x, m_PitchRange.y);
+            m_ProjectileAudio.Play();
+        }
 
         StartCoroutine(WeaponCooldown());
     }

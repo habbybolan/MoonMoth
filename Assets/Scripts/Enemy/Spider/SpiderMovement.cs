@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SpiderMovement : MonoBehaviour
 {
-    [SerializeField] private float m_RotateSpeed = 50f;
-    private PlayerController m_PlayerController;
+    [SerializeField] private float m_RotationAmount = 2f;
+    private PlayerController m_PlayerController; 
     private Rigidbody m_Rigidbody;
 
     private void Start()
@@ -16,7 +16,7 @@ public class SpiderMovement : MonoBehaviour
 
     public void LookTowardPlayer()
     {
-        Quaternion rot = Quaternion.LookRotation(m_PlayerController.transform.position - transform.position, Vector3.up);
-        m_Rigidbody.MoveRotation(rot);
+        Vector3 DirectionToLook = m_PlayerController.transform.position - transform.position;
+        m_Rigidbody.angularVelocity = Vector3.Cross(transform.forward, DirectionToLook).normalized * m_RotationAmount;
     }
 }

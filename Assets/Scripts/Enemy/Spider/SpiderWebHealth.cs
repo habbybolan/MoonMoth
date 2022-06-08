@@ -5,11 +5,12 @@ using UnityEngine;
 // Health for the spider's web. Once broken, spider falls
 public class SpiderWebHealth : Health
 {
-    [SerializeField] private CharacterJoint m_CharacterJoint;
+    private Joint m_Joint;
     private SpiderWeb m_SpiderWeb;
 
     protected override void Start()
     {
+        m_Joint = GetComponent<Joint>();
         m_SpiderWeb = transform.parent.gameObject.GetComponent<SpiderWeb>();
     }
     
@@ -21,8 +22,11 @@ public class SpiderWebHealth : Health
 
     protected override void Death()
     {
-        // manually call Controller script since attaching delegate to every web piece seems too much
-        m_CharacterJoint.connectedBody = null;
+        // manually call Controller
+        Rigidbody rbFalling = m_Joint.connectedBody;
+        m_Joint.connectedBody = null;
+        Destroy(rbFalling.GetComponent<Joint>());
+
         m_SpiderWeb.SpiderWebBroke();
     }
 }

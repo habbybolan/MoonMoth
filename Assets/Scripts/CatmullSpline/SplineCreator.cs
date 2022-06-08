@@ -97,6 +97,7 @@ public abstract class SplineCreator : CatmullRomSpline
         return curr;
     }
 
+    // Initialize first point at the last point on the oldest spawned tile
     public void IntializeAtEndOfHead()
     {
         m_CurrTile = TileManager.PropertyInstance.GetHead();

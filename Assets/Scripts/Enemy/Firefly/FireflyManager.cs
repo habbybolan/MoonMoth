@@ -33,17 +33,19 @@ public class FireflyManager : MonoBehaviour
         StartCoroutine(SpawnFireflyDelay());
     }
 
-    public void SpawnNewFirefly()
+    public bool SpawnNewFirefly()
     {
         // prevent spawning new fireflies if firefly limit reached
-        if (m_FireflyLimit == m_FireflyList.Count)
-            return;
+        if (m_FireflyLimit == m_FireflyList.Count) return false;
+
+        // prevent spawning if player not passed first tile
+        if (!TileManager.PropertyInstance.IsValidToSpawnFirefly()) return false;
 
         // Spawn new firefly
-
         FireflyContainer fireflyContainer = Instantiate(m_FireflyPrefab);
         fireflyContainer.FireflyWalker.Offset = m_FireflyList.Count;
         m_FireflyList.Add(fireflyContainer);
+        return true;
     }
 
     // Coroutine to spawn a firefly after certain amount of time
@@ -52,7 +54,6 @@ public class FireflyManager : MonoBehaviour
         float currDuration = 0f;
 
         // Loop infinitely, spawning firefly after amount of time passed
-        // TODO: Only start counting again when able to spawn another
         while (true)
         {
             // prevent spawning more fireflies if game not running
@@ -64,8 +65,8 @@ public class FireflyManager : MonoBehaviour
             currDuration += Time.deltaTime;
             if (currDuration >= m_DelayToSpawn)
             {
-                currDuration = 0f;
                 SpawnNewFirefly();
+                currDuration = 0f;
             }
             yield return null;
         }
