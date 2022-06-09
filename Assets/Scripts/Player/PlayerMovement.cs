@@ -15,7 +15,8 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Prefab representing the visuals of the control point")]
     [SerializeField] private GameObject m_ControlObject;
     [Tooltip("Base speed of the control point")]
-    [SerializeField] private float m_BaseControlSpeed = 2000f;
+    [SerializeField] private float m_BaseControlSpeed = 20f;
+    [SerializeField] private float m_ControlPointAcceleration = 10f;
 
     [Header("Aim Mode")]
     [Tooltip("The speed increase on player movement while in aim mode to move faster in relation to everything else")]
@@ -45,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("The moth's speed increase while dodging")]
     [Range(1, 10)]
     [SerializeField] private float m_DodgeSpeedIncrease = 2f;
+    
 
     [Header("Rotation")]
     [Tooltip("How quickly the player rotates along x-z axis")]
@@ -113,15 +115,19 @@ public class PlayerMovement : MonoBehaviour
         float inputX = Vec2Movement.x;
         float inputY = Vec2Movement.y;
 
-        m_ControlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 10);
-        m_ControlRigidBody.velocity = new Vector3(inputX, inputY, 0) * m_CurrControlSpeed + Vector3.forward * m_ControlSpeedMultiplier;
+        // calculate velocity differential
+        Vector3 currentVelocity = m_ControlRigidBody.velocity;
+        Vector3 targetVelocity = new Vector3(inputX, inputY, 0) * m_CurrControlSpeed;
+        Vector3 velocityDifferential = targetVelocity - currentVelocity;
+
+        m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration);
     }
 
     public void MothXYMovemnent()
     {
         // Move towards control points 
         Vector3 distanceFromControl = (new Vector3(ControlPosition.x, ControlPosition.y, transform.localPosition.z) - transform.localPosition);
-        transform.localPosition += distanceFromControl * Time.deltaTime * m_CurrMothMoveSpeed;
+        transform.localPosition += distanceFromControl * m_CurrMothMoveSpeed * .03f;
     }
 
     public void RotationLook()

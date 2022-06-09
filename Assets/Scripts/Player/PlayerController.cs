@@ -113,25 +113,24 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_Health.LosePassiveHealth();
         m_PlayerMovement.RotationLook();
 
-        // move parent along spline
-        m_PlayerParentMovement.TryMove();
-
         if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
             m_PlayerMovement.HorizontalRotation(m_MovementInput.x);
         }
-
-        m_PlayerMovement.MothXYMovemnent();
     }
 
     private void FixedUpdate()
     {
+        // move parent along spline
+        m_PlayerParentMovement.TryMove();
+
         if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
             // move player body along local x, y plane based on inputs
             m_PlayerMovement.ControlPointXYMovement(m_MovementInput);
         }
         m_PlayerMovement.UpdateCrossHair();
+        m_PlayerMovement.MothXYMovemnent();
     }
 
     public float DistanceFromPlayer(Vector3 pointToCompare)

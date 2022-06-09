@@ -6090,7 +6090,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 2
 --- !u!136 &743825387888041060
@@ -6483,9 +6483,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BaseMothMoveSpeed: 5
-  m_IsShowControlObject: 0
+  m_IsShowControlObject: 1
   m_ControlObject: {fileID: 3977897140022987257}
   m_BaseControlSpeed: 17
+  m_ControlPointAcceleration: 10
   m_AimModeSpeedIncrease: 1.8
   m_DodgeDuration: 0.5
   m_AnimationCurve:

@@ -29,7 +29,7 @@ public class PlayerParentMovement : CatmullWalker
     {
         if (m_IsIndependentMovement)
         {
-            transform.transform.Translate(Vector3.forward * m_Speed * Time.deltaTime);
+            transform.transform.Translate(Vector3.forward * m_Speed);
             return;
         }
         base.TryMove();
