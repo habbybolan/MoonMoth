@@ -118,10 +118,13 @@ public class PlayerController : CharacterController<PlayerHealth>
 
         if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
+            
             m_PlayerMovement.HorizontalRotation(m_MovementInput.x);
         }
 
         m_PlayerMovement.MothXYMovemnent();
+        
+       
     }
 
     private void FixedUpdate()
@@ -131,7 +134,8 @@ public class PlayerController : CharacterController<PlayerHealth>
             // move player body along local x, y plane based on inputs
             m_PlayerMovement.ControlPointXYMovement(m_MovementInput);
         }
-        m_PlayerMovement.UpdateCrossHair();
+         m_PlayerMovement.UpdateCrossHair();
+        
     }
 
     public float DistanceFromPlayer(Vector3 pointToCompare)

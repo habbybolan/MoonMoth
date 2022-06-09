@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject m_ControlObject;
     [Tooltip("Base speed of the control point")]
     [SerializeField] private float m_BaseControlSpeed = 2000f;
+    [SerializeField] private float m_MaxSpeed = 10f;
 
     [Header("Aim Mode")]
     [Tooltip("The speed increase on player movement while in aim mode to move faster in relation to everything else")]
@@ -113,15 +114,18 @@ public class PlayerMovement : MonoBehaviour
         float inputX = Vec2Movement.x;
         float inputY = Vec2Movement.y;
 
+        // push control point forward/back if moving away from z=0
         m_ControlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 10);
-        m_ControlRigidBody.velocity = new Vector3(inputX, inputY, 0) * m_CurrControlSpeed + Vector3.forward * m_ControlSpeedMultiplier;
+        m_ControlRigidBody.AddForce(new Vector3(inputX, inputY, 0) * m_CurrControlSpeed + Vector3.forward * m_ControlSpeedMultiplier);
+        if (m_ControlRigidBody.velocity.magnitude > m_MaxSpeed)
+            m_ControlRigidBody.velocity = m_ControlRigidBody.velocity.normalized * m_MaxSpeed;
     }
 
     public void MothXYMovemnent()
     {
         // Move towards control points 
         Vector3 distanceFromControl = (new Vector3(ControlPosition.x, ControlPosition.y, transform.localPosition.z) - transform.localPosition);
-        transform.localPosition += distanceFromControl * Time.deltaTime * m_CurrMothMoveSpeed;
+        transform.localPosition += distanceFromControl * m_CurrMothMoveSpeed * Time.deltaTime;
     }
 
     public void RotationLook()
