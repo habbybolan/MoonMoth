@@ -30,6 +30,7 @@ public class FireflyManager : MonoBehaviour
     private void Start()
     {
         m_FireflyList = new List<FireflyContainer> ();
+        GameManager.PropertyInstance.d_NextLevelDelegate += TileSetFinished;
         StartCoroutine(SpawnFireflyDelay());
     }
 
