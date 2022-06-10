@@ -44,7 +44,7 @@ public class PlayerHealth : Health
      
     protected override void Start()
     { 
-        healthState = HEALTH_STATE.VULNERABLE;
+        m_HealthState = HEALTH_STATE.VULNERABLE;
         base.Start();
         SetHealthText();
 
@@ -69,13 +69,13 @@ public class PlayerHealth : Health
         }
          
         // Dont take any damage if Invulnerable
-        if (healthState == HEALTH_STATE.INVULNERABLE)
+        if (m_HealthState == HEALTH_STATE.INVULNERABLE)
             return;
 
         base.Damage(damageInfo);
         if (damageInfo.m_DamageType != DamageInfo.DAMAGE_TYPE.TERRAIN)
         {
-            StartCoroutine(SetInvulnerabilityForDuration(m_InvincibilityDuration));
+            SetInvulnFrames(m_InvincibilityDuration);
         }
         SetHealthText();
     }

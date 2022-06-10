@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
     [SerializeField] protected AudioSource m_DamageSound;  
 
     protected float m_CurrentHealth;
-    protected HEALTH_STATE healthState;       // If the player can be damaged or not by non-terrain damage types
+    protected HEALTH_STATE m_HealthState;       // If the player can be damaged or not by non-terrain damage types
 
     public delegate void DeathDelegate();
     public DeathDelegate d_DeathDelegate;
@@ -28,6 +28,7 @@ public class Health : MonoBehaviour
     public DamageDelegate d_DamageDelegate; 
 
     private GameObject m_LastInstigator;
+    private Coroutine m_InvulnFramesCoroutine;
 
     public bool IsInvincible { 
         get { return m_IsInvincible; } 
@@ -115,11 +116,17 @@ public class Health : MonoBehaviour
         d_DeathDelegate();
     }
 
-    protected IEnumerator SetInvulnerabilityForDuration(float invulnDuration)
+    public void SetInvulnFrames(float invulnDuration)
     {
-        healthState = HEALTH_STATE.INVULNERABLE;
+        if (m_HealthState == HEALTH_STATE.INVULNERABLE) StopCoroutine(m_InvulnFramesCoroutine);
+        m_InvulnFramesCoroutine = StartCoroutine(SetInvulnerabilityForDuration(invulnDuration));
+    }
+
+    private IEnumerator SetInvulnerabilityForDuration(float invulnDuration)
+    {
+        m_HealthState = HEALTH_STATE.INVULNERABLE;
         yield return new WaitForSeconds(invulnDuration);
-        healthState = HEALTH_STATE.VULNERABLE;
+        m_HealthState = HEALTH_STATE.VULNERABLE;
     }
 
     public enum HEALTH_STATE
