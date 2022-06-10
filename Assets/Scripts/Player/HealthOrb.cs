@@ -16,7 +16,6 @@ public class HealthOrb : HomingProjectile
         
         // start with no velocity
         m_rigidBody.velocity = Vector3.up * m_FlyUpSpeed;
-        
     }
 
     protected override void OnTriggerEnter(Collider other)
