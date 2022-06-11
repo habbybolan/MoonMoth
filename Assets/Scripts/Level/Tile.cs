@@ -79,6 +79,7 @@ public class Tile : MonoBehaviour
     // Initialize the dynamically spawned items and (de)-activate any obstacle/enemy in the tile
     public void InitializeTile()
     {
+        m_IsTraversedByPlayer = false;
         // Spawn all stalag prefabs
         m_SpawnedTileObjects = new List<GameObject>();
         foreach (Vector3 lostMoth in m_LostMothPoints)
@@ -101,15 +102,6 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void DeleteAllSpawned()
-    {
-        foreach (GameObject obj in m_SpawnedTileObjects)
-        {
-            Destroy(obj);
-        }
-        m_SpawnedTileObjects = new List<GameObject>();
-    }
-
     public void Reset()
     {
         m_FollowPoint = new Vector3[] { transform.InverseTransformPoint(Vector3.zero) };
@@ -128,12 +120,6 @@ public class Tile : MonoBehaviour
         {
             m_IsTraversedByPlayer = true;
         }
-    }
-
-    public void SetIsActive(bool IsActive)
-    {
-        gameObject.SetActive(IsActive);
-        if (IsActive) m_IsTraversedByPlayer = false;
     }
 
     public float TileEndDistanceFromPlayer(CatmullWalker player)
