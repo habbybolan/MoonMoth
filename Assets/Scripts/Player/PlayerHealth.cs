@@ -35,7 +35,7 @@ public class PlayerHealth : Health
     [Tooltip("The speed the emission returns back to normal after the heal emission burst")]
     [SerializeField] private float m_EmissionLossSpeed = 10f; 
 
-    private HEALTH_STATE healthState;       // If the player can be damaged or not by non-terrain damage types
+    
     private float m_MaxEmissionRGB;
     private float m_RGBDifference;
     private Color m_StartingEmissionColor;
@@ -44,7 +44,6 @@ public class PlayerHealth : Health
      
     protected override void Start()
     { 
-        healthState = HEALTH_STATE.VULNERABLE;
         base.Start();
         SetHealthText();
 
@@ -60,22 +59,10 @@ public class PlayerHealth : Health
 
     public override void Damage(DamageInfo damageInfo)
     {
-        // Tick damage cannot be blocked
-        if (damageInfo.m_DamageType == DamageInfo.DAMAGE_TYPE.TICK)
-        {
-            base.Damage(damageInfo);
-            SetHealthText();
-            return;
-        }
-         
-        // Dont take any damage if Invulnerable
-        if (healthState == HEALTH_STATE.INVULNERABLE)
-            return;
-
         base.Damage(damageInfo);
-        if (damageInfo.m_DamageType != DamageInfo.DAMAGE_TYPE.TERRAIN)
+        if (damageInfo.m_DamageType != DamageInfo.DAMAGE_TYPE.TICK && !m_IsAllInvul)
         {
-            StartCoroutine(InvulnerabilityFrames());
+            SetAllInvulnFrames(m_InvincibilityDuration);
         }
         SetHealthText();
     }
@@ -132,14 +119,6 @@ public class PlayerHealth : Health
         m_HealthText.text = Mathf.Floor(m_CurrentHealth).ToString();
     }
 
-    // Deals with invincibility frames after colliding with an obstacle
-    public IEnumerator InvulnerabilityFrames()
-    {
-        healthState = HEALTH_STATE.INVULNERABLE;
-        yield return new WaitForSeconds(m_InvincibilityDuration);
-        healthState = HEALTH_STATE.VULNERABLE;
-    }
-
     public override void HealAmount(float healthAmount)
     {
         base.HealAmount(healthAmount);
@@ -174,9 +153,5 @@ public class PlayerHealth : Health
         m_isHealBurst = false;
     }
 
-    public enum HEALTH_STATE
-    {
-        VULNERABLE,
-        INVULNERABLE // invincibility frames after getting damaged by certain things
-    }
+    
 }

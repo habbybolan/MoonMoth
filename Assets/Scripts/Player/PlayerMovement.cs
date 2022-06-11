@@ -294,4 +294,9 @@ public class PlayerMovement : MonoBehaviour
     {
         get { return m_CameraOffsetFromParent; }
     }
+
+    public float GetDodgeDuration()
+    {
+        return m_DodgeDuration;
+    }
 }
