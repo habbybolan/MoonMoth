@@ -18,8 +18,10 @@ public class Health : MonoBehaviour
     [SerializeField] protected AudioSource m_DeathSound;
     [SerializeField] protected AudioSource m_DamageSound;  
 
-    protected float m_CurrentHealth;
-    protected HEALTH_STATE m_HealthState;       // If the player can be damaged or not by non-terrain damage types
+    protected float m_CurrentHealth; 
+
+    protected bool m_IsAllInvul;            // If in invulnerabiltiy state to everything but tick damage
+    protected bool m_IsProjectileInvuln;    // If in invulnerability state to projectiles only
 
     public delegate void DeathDelegate();
     public DeathDelegate d_DeathDelegate;
@@ -28,7 +30,8 @@ public class Health : MonoBehaviour
     public DamageDelegate d_DamageDelegate; 
 
     private GameObject m_LastInstigator;
-    private Coroutine m_InvulnFramesCoroutine;
+    private Coroutine m_AllInvulnFramesCoroutine;
+    private Coroutine m_ProjectileInulnFramesCoroutine;
 
     public bool IsInvincible { 
         get { return m_IsInvincible; } 
@@ -56,12 +59,29 @@ public class Health : MonoBehaviour
 
     public virtual void Damage(DamageInfo damageInfo) 
     {
+        // Tick damage cannot be blocked
+        if (damageInfo.m_DamageType == DamageInfo.DAMAGE_TYPE.TICK)
+        {
+            RemoveHealth(damageInfo.m_DamageAmount);
+            return;
+        }
+
+        // Dont take any damage if Invulnerable
+        if (m_IsAllInvul)
+            return;
+
+        // Dont take projectile damage if invulnerable to it
+        if (m_IsProjectileInvuln && damageInfo.m_DamageType == DamageInfo.DAMAGE_TYPE.PROJECTILE)
+            return;
+
         // apply damage from no direct source
         if (damageInfo.m_Instigator == null)
         {
             RemoveHealth(damageInfo.m_DamageAmount);
             return;
         }
+
+        
 
         // prevent all things from hitting themselves
         if (damageInfo.m_Instigator == damageInfo.m_Victim || 
@@ -116,22 +136,29 @@ public class Health : MonoBehaviour
         d_DeathDelegate();
     }
 
-    public void SetInvulnFrames(float invulnDuration)
+    public void SetAllInvulnFrames(float invulnDuration)
     {
-        if (m_HealthState == HEALTH_STATE.INVULNERABLE) StopCoroutine(m_InvulnFramesCoroutine);
-        m_InvulnFramesCoroutine = StartCoroutine(SetInvulnerabilityForDuration(invulnDuration));
+        if (m_IsAllInvul) StopCoroutine(m_AllInvulnFramesCoroutine);
+        m_AllInvulnFramesCoroutine = StartCoroutine(SetAllInvulnerabilityForDuration(invulnDuration));
     }
 
-    private IEnumerator SetInvulnerabilityForDuration(float invulnDuration)
+    private IEnumerator SetAllInvulnerabilityForDuration(float invulnDuration)
     {
-        m_HealthState = HEALTH_STATE.INVULNERABLE;
+        m_IsAllInvul = true;
         yield return new WaitForSeconds(invulnDuration);
-        m_HealthState = HEALTH_STATE.VULNERABLE;
+        m_IsAllInvul = false;
+    }
+    
+    public void SetProjectileInvulnFrames(float invulnDuration)
+    {
+        if (m_IsProjectileInvuln) StopCoroutine(m_ProjectileInulnFramesCoroutine);
+        m_ProjectileInulnFramesCoroutine = StartCoroutine(SetProjectileInvulnerabilityForDuration(invulnDuration));
     }
 
-    public enum HEALTH_STATE
+    private IEnumerator SetProjectileInvulnerabilityForDuration(float invulnDuration)
     {
-        VULNERABLE,
-        INVULNERABLE // invincibility frames after getting damaged by certain things
+        m_IsProjectileInvuln = true;
+        yield return new WaitForSeconds(invulnDuration);
+        m_IsProjectileInvuln = false;
     }
 }

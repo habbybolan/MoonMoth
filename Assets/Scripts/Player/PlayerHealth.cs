@@ -44,7 +44,6 @@ public class PlayerHealth : Health
      
     protected override void Start()
     { 
-        m_HealthState = HEALTH_STATE.VULNERABLE;
         base.Start();
         SetHealthText();
 
@@ -60,22 +59,10 @@ public class PlayerHealth : Health
 
     public override void Damage(DamageInfo damageInfo)
     {
-        // Tick damage cannot be blocked
-        if (damageInfo.m_DamageType == DamageInfo.DAMAGE_TYPE.TICK)
-        {
-            base.Damage(damageInfo);
-            SetHealthText();
-            return;
-        }
-         
-        // Dont take any damage if Invulnerable
-        if (m_HealthState == HEALTH_STATE.INVULNERABLE)
-            return;
-
         base.Damage(damageInfo);
-        if (damageInfo.m_DamageType != DamageInfo.DAMAGE_TYPE.TERRAIN)
+        if (damageInfo.m_DamageType != DamageInfo.DAMAGE_TYPE.TERRAIN && !m_IsAllInvul)
         {
-            SetInvulnFrames(m_InvincibilityDuration);
+            SetAllInvulnFrames(m_InvincibilityDuration);
         }
         SetHealthText();
     }
