@@ -60,7 +60,7 @@ public class PlayerHealth : Health
     public override void Damage(DamageInfo damageInfo)
     {
         base.Damage(damageInfo);
-        if (damageInfo.m_DamageType != DamageInfo.DAMAGE_TYPE.TERRAIN && !m_IsAllInvul)
+        if (damageInfo.m_DamageType != DamageInfo.DAMAGE_TYPE.TICK && !m_IsAllInvul)
         {
             SetAllInvulnFrames(m_InvincibilityDuration);
         }
