@@ -6,7 +6,7 @@ public class HomingProjectile : Projectile
 {
     [SerializeField] private float m_MaxHomingAngle = 1f;
 
-    private Health m_Target;
+    protected Health m_Target;
 
     protected override void Start()
     {
