@@ -29,11 +29,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2443207065546177733}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.67, y: 0.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5428601072213369883}
+  - {fileID: 4981095058228638191}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52,7 +52,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2443207065546177733}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -133,10 +133,10 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!1001 &2995750439128147798
+--- !u!1001 &2874756025390133922
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -145,7 +145,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4860987048393004935, guid: 97003555c653d2247b2551ce54b46849, type: 3}
       propertyPath: m_Name
-      value: ParticleTest1
+      value: HealthOrbTrailParticle
       objectReference: {fileID: 0}
     - target: {fileID: 7117174841087689549, guid: 97003555c653d2247b2551ce54b46849, type: 3}
       propertyPath: m_RootOrder
@@ -193,8 +193,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97003555c653d2247b2551ce54b46849, type: 3}
---- !u!4 &5428601072213369883 stripped
+--- !u!4 &4981095058228638191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7117174841087689549, guid: 97003555c653d2247b2551ce54b46849, type: 3}
-  m_PrefabInstance: {fileID: 2995750439128147798}
+  m_PrefabInstance: {fileID: 2874756025390133922}
   m_PrefabAsset: {fileID: 0}
