@@ -13,7 +13,16 @@ public class SpiderController : CharacterController<SpiderHealth>
 
     private int m_TileID;           // ID of the tile the spider spawned on, used for deleting spiders when tile deleted
     private SpiderState m_State;    // Current state of the spider
-    
+
+    private Vector3 m_OriginalLocalPosition;
+    private Quaternion m_OriginalRotation;
+
+    private void Awake()
+    {
+        m_OriginalLocalPosition = transform.localPosition;
+        m_OriginalRotation = transform.localRotation;
+    }
+
     protected override void Start()
     {
         m_State = SpiderState.HANGING;
@@ -68,14 +77,17 @@ public class SpiderController : CharacterController<SpiderHealth>
         GetComponent<Rigidbody>().useGravity = false;
     }
 
+    private void OnEnable()
+    {
+        transform.localRotation = m_OriginalRotation;
+        transform.localPosition = m_OriginalLocalPosition;
+        m_State = SpiderState.HANGING;
+        m_SpiderWeb.spawn = true;
+    }
+
     private void OnDisable()
     {
         m_SpiderWeb.DestroyWeb();
-    }
-
-    private void OnEnable()
-    {
-        m_State = SpiderState.HANGING;
     }
 
     protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)

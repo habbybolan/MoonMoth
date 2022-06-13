@@ -11,7 +11,7 @@ public class SpiderWeb : MonoBehaviour
     [SerializeField] private float m_Length = 1;
     [SerializeField] private bool m_AutoLength = true;
     [SerializeField] private float m_partDistance = 0.21f;
-    [SerializeField] bool spawn = true, snapLast = true;
+    [SerializeField] public bool spawn = false, snapLast = true;
 
     private LayerMask m_LayerMask;
 
@@ -27,7 +27,7 @@ public class SpiderWeb : MonoBehaviour
     }
 
     private void Update()
-    {
+    { 
         if (spawn)
         {
             m_SpawnPointCopy = new GameObject();
@@ -36,11 +36,6 @@ public class SpiderWeb : MonoBehaviour
             Spawn();
             spawn = false;
         }
-    }
-
-    private void OnEnable()
-    {
-        spawn = true;
     }
 
     public void Spawn()
