@@ -142,9 +142,9 @@ public class TileManager : MonoBehaviour
     {
         Tile newTile;
         // if adding the first tile on transitions to new tileset, start with designated tile transition
-        if (m_CurrentTileSet > 0 && m_VisibleTiles.Count == 0 && m_TileTransitions.Length > m_CurrentTileSet - 1)
+        if (m_VisibleTiles.Count == 0 && m_TileTransitions.Length > m_CurrentTileSet - 1)
         {
-            newTile = Instantiate(m_TileTransitions[m_CurrentTileSet - 1], Vector3.zero, Quaternion.identity, transform);
+            newTile = Instantiate(m_TileTransitions[m_CurrentTileSet], Vector3.zero, Quaternion.identity, transform);
         } else
         {
             // Find and add new tile to end of path
