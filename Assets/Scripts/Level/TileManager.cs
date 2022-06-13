@@ -211,17 +211,6 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    //private void CheckAddTile()
-    //{
-    //    // TODO: Make reliant on distance rather then z-position
-    //    Tile lastTile = m_VisibleTiles.Last.Value;
-    //    // add tile if player is within a certain distance from last tile
-    //    if (lastTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerController.PlayerParent) < m_DistanceToPlaceTile)
-    //    {
-    //        InstantiateTile();
-    //    }
-    //}
-
     private void IncrementSpawnPercents()
     {
         switch(m_CurrentTileSet)
