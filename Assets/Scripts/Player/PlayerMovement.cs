@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 targetVelocity = (transform.parent.transform.right * inputX + transform.parent.transform.up * inputY) * m_CurrControlSpeed; 
         Vector3 velocityDifferential = (targetVelocity - currentVelocity);
 
-        float controlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 10);
+        float controlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 100);
         m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration + transform.forward * controlSpeedMultiplier);
     }
 
