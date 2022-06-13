@@ -243,8 +243,8 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // Update control point
-            m_ControlRigidBody.velocity =   Vector3.right * inputXDirection * controlPointMultiplierX * m_BaseControlSpeed +
-                                            Vector3.up * inputY * controlPointMultiplierY * m_BaseControlSpeed;
+            m_ControlRigidBody.velocity =   transform.parent.transform.right * inputXDirection * controlPointMultiplierX * m_BaseControlSpeed +
+                                            transform.parent.transform.up * inputY * controlPointMultiplierY * m_BaseControlSpeed;
 
             currDuration += Time.deltaTime;
             yield return null;
@@ -268,9 +268,9 @@ public class PlayerMovement : MonoBehaviour
     {
         get
         {
-            float yOffset = (transform.parent.position.y - m_ControlObject.transform.position.y) * m_CrosshairPercentY;
-            float xOffset = (transform.parent.position.x - m_ControlObject.transform.position.x) * m_CrosshairPercentX;
-            return new Vector3(m_ControlObject.transform.position.x + xOffset, m_ControlObject.transform.position.y + yOffset + m_InitialYCrosshairOffset, transform.position.z);
+            float yOffset = m_ControlObject.transform.localPosition.y * m_CrosshairPercentY;
+            float xOffset = m_ControlObject.transform.localPosition.x * m_CrosshairPercentX;
+            return m_ControlObject.transform.position + transform.parent.transform.right * xOffset + transform.parent.transform.up * (yOffset + m_InitialYCrosshairOffset);
         }
     }
 
