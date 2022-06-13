@@ -86,6 +86,7 @@ public class FireflyManager : MonoBehaviour
             {
                 Destroy(fireflyGameObject);
                 m_FireflyList.RemoveAt(i);
+                i--;
                 isDeleted = true;
             }
         }
