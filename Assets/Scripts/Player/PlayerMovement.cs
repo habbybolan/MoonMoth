@@ -86,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
     private float m_MaxYValue;              // Max input Y value for dodge, clamped by m_MaxYDegrees
     private Rigidbody m_ControlRigidBody;
 
-    private float m_ControlSpeedMultiplier = 1f;
     private float m_CurrMothMoveSpeed;
 
     public GameObject ControlObject => m_ControlObject;
@@ -105,7 +104,6 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        //m_ControlPoint = transform.parent.InverseTransformPoint(Camera.main.ViewportToWorldPoint(new Vector3(.5f, .5f, -m_CameraOffsetFromParent)));
         m_ControlObject.transform.localPosition = transform.parent.InverseTransformPoint(Camera.main.ViewportToWorldPoint(new Vector3(.5f, .5f, -m_CameraOffsetFromParent)));
         m_CurrentAngle = Vector3.zero;
     }
@@ -117,10 +115,11 @@ public class PlayerMovement : MonoBehaviour
 
         // calculate velocity differential
         Vector3 currentVelocity = m_ControlRigidBody.velocity;
-        Vector3 targetVelocity = new Vector3(inputX, inputY, 0) * m_CurrControlSpeed;
-        Vector3 velocityDifferential = targetVelocity - currentVelocity;
+        Vector3 targetVelocity = (transform.parent.transform.right * inputX + transform.parent.transform.up * inputY) * m_CurrControlSpeed; 
+        Vector3 velocityDifferential = (targetVelocity - currentVelocity);
 
-        m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration);
+        float controlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 10);
+        m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration + transform.forward * controlSpeedMultiplier);
     }
 
     public void MothXYMovemnent()
