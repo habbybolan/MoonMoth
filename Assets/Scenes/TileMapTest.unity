@@ -599,6 +599,7 @@ MonoBehaviour:
   - tiles:
     - {fileID: 3961284799128567415, guid: 90ab47f1fa28c874cb2bedb0d152262c, type: 3}
   m_TileTransitions:
+  - {fileID: 3961284799128567415, guid: cc41f8b48a772194b81cabcc8eafe82d, type: 3}
   - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
   - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
   m_NumTilesToSpawn: 8
