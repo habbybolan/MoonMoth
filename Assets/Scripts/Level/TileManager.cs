@@ -12,7 +12,7 @@ public class TileManager : MonoBehaviour
     [Tooltip("Empty tile that's used as a transition piece between set at index i and i+1. Size should be length of m_TileSets - 1")]
     [SerializeField] private Tile[] m_TileTransitions;
 
-    [SerializeField] private float m_DistanceToPlaceTile = 200f;
+    [SerializeField] private float m_NumTilesToSpawn = 8f;  
     [SerializeField] private int m_TilePoolSize = 40;
 
     [Header("Difficulty")]
@@ -129,7 +129,7 @@ public class TileManager : MonoBehaviour
         }
 
         // Initialize level with some tiles
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < m_NumTilesToSpawn; i++)
             InstantiateTile();
     }
 
@@ -207,19 +207,20 @@ public class TileManager : MonoBehaviour
                 d_TileDeletedDelegate(firstTile);
             firstTile.gameObject.SetActive(false);
             m_VisibleTiles.RemoveFirst();
-        }
-    }
-
-    private void CheckAddTile()
-    {
-        // TODO: Make reliant on distance rather then z-position
-        Tile lastTile = m_VisibleTiles.Last.Value;
-        // add tile if player is within a certain distance from last tile
-        if (lastTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerController.PlayerParent) < m_DistanceToPlaceTile)
-        {
             InstantiateTile();
         }
     }
+
+    //private void CheckAddTile()
+    //{
+    //    // TODO: Make reliant on distance rather then z-position
+    //    Tile lastTile = m_VisibleTiles.Last.Value;
+    //    // add tile if player is within a certain distance from last tile
+    //    if (lastTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerController.PlayerParent) < m_DistanceToPlaceTile)
+    //    {
+    //        InstantiateTile();
+    //    }
+    //}
 
     private void IncrementSpawnPercents()
     {
@@ -307,7 +308,6 @@ public class TileManager : MonoBehaviour
         if (GameState.m_GameState != GameStateEnum.RUNNING) return;
 
         CheckRemoveTile();
-        CheckAddTile();
         IncrementSpawnPercents();
     }
 }
