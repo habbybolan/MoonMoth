@@ -9,7 +9,7 @@ public class FireflyCatmullWalker : CatmullWalker
     [Tooltip("The base distance the firefly is from the player and the distance from the player the firefly will start moving along spline")]
     [SerializeField] private float m_DistanceFromCamera = 15f; 
     [Tooltip("Speed relative to player for catching up when spawned behind")]
-    [Range(1f, 2f)]
+    [Range(1f, 10f)]
     [SerializeField] private float m_BoostSpeed = 1.15f;
     [Tooltip("The speed multiplier to correct the firefly being too far/close to player")]
     [Range(0f, 1f)] 
