@@ -420,6 +420,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3546746549286730817}
     m_Modifications:
+    - target: {fileID: -9022685961703195627, guid: e3106e7d838685743a7c69f7486c2d9c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bd6ff8f9231f48a45972a59b5506ade8, type: 2}
     - target: {fileID: -8679921383154817045, guid: e3106e7d838685743a7c69f7486c2d9c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -476,10 +480,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8410622323749973829, guid: e3106e7d838685743a7c69f7486c2d9c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bd6ff8f9231f48a45972a59b5506ade8, type: 2}
     - target: {fileID: 919132149155446097, guid: e3106e7d838685743a7c69f7486c2d9c, type: 3}
       propertyPath: m_Name
       value: SpiderBody
       objectReference: {fileID: 0}
+    - target: {fileID: 8908779215727015526, guid: e3106e7d838685743a7c69f7486c2d9c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bd6ff8f9231f48a45972a59b5506ade8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3106e7d838685743a7c69f7486c2d9c, type: 3}
 --- !u!1 &1318949545877515612 stripped
