@@ -84,5 +84,6 @@ public class PlayerParentMovement : CatmullWalker
     public void ConnectBackToSpline()
     {
         m_IsIndependentMovement = false;
+        TryMove();
     }
 }
