@@ -16,9 +16,7 @@ public class Tile : MonoBehaviour
     
     
     // prefabs
-    public StalagScriptable m_StalagPrefab;
     public LostMoth m_LostMothPrefab;
-    public MushroomObstacle m_MushroomPrefab;
 
     private bool m_IsTraversedByPlayer = false;   // If the tile has been traversed fully by the player
     private int m_ID;

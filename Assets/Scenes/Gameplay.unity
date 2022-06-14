@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00001750258, g: 0.000000028657325, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.000017502598, g: 0.000000028657325, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -596,8 +596,20 @@ MonoBehaviour:
   - tiles:
     - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
     - {fileID: 3961284799128567415, guid: 1c445344d9ce7164d9e558fcd418520f, type: 3}
-  - tiles:
+    - {fileID: 3961284799128567415, guid: d7b851c55a0727d4cb63e38797d65026, type: 3}
+    - {fileID: 3961284799128567415, guid: ea09c0cc48e20d042ab5ed5f25f4eb97, type: 3}
     - {fileID: 3961284799128567415, guid: 90ab47f1fa28c874cb2bedb0d152262c, type: 3}
+  - tiles:
+    - {fileID: 3961284799128567415, guid: 7178fc627e51ae0439bd79b231160efb, type: 3}
+    - {fileID: 3961284799128567415, guid: 7145cdfcdc291ab48b7de1125c76b55a, type: 3}
+    - {fileID: 3961284799128567415, guid: 0972ed06aabd4194dbbe28c2cf3c2687, type: 3}
+    - {fileID: 3961284799128567415, guid: 01092a12a70b5d14a8a82ec3bd8d7e75, type: 3}
+    - {fileID: 3961284799128567415, guid: 1f1262d9fe599ca42ac9102b002fbe39, type: 3}
+  - tiles:
+    - {fileID: 3961284799128567415, guid: 0cab70fedb4a98943a036f7c2af0864d, type: 3}
+    - {fileID: 3961284799128567415, guid: 0044b1e9d4592fd4f98ad9377bf672a9, type: 3}
+    - {fileID: 3961284799128567415, guid: 3c3950be95269a5469933857045708fd, type: 3}
+    - {fileID: 3961284799128567415, guid: aaf8365b8c79fef479fbde39d70d02d0, type: 3}
   m_TileTransitions:
   - {fileID: 3961284799128567415, guid: cc41f8b48a772194b81cabcc8eafe82d, type: 3}
   - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
@@ -789,7 +801,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FogLevelColors:
   - {r: 0.745283, g: 0.6714578, b: 0.6714578, a: 0}
-  - {r: 0.9056604, g: 0.029903898, b: 0.8053879, a: 0}
+  - {r: 0.5377358, g: 0.23589353, b: 0.50254345, a: 0}
+  - {r: 0.7264151, g: 0.5769713, b: 0.10622107, a: 0}
   m_DefaultFogColor: {r: 185, g: 181, b: 171, a: 255}
 --- !u!1 &1213463291
 GameObject:

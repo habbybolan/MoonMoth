@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5064408468269078333, guid: 6317c1a8d7c76eb449e25fa45881c673, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dc919edfae42a834493007673eaa57ff, type: 2}
     - target: {fileID: 919132149155446097, guid: 6317c1a8d7c76eb449e25fa45881c673, type: 3}
       propertyPath: m_Name
       value: mushroom_short (1)
@@ -217,6 +221,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -681454837006058229, guid: 9f32faf5f518f6247af482ab4c088611, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f23fda65320da64d97877c882f30a1d, type: 2}
     - target: {fileID: 919132149155446097, guid: 9f32faf5f518f6247af482ab4c088611, type: 3}
       propertyPath: m_Name
       value: mushroom_tall (2)
@@ -299,6 +307,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5064408468269078333, guid: 6317c1a8d7c76eb449e25fa45881c673, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dc919edfae42a834493007673eaa57ff, type: 2}
     - target: {fileID: 919132149155446097, guid: 6317c1a8d7c76eb449e25fa45881c673, type: 3}
       propertyPath: m_Name
       value: mushroom_short
@@ -377,6 +389,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 4.759
       objectReference: {fileID: 0}
+    - target: {fileID: -681454837006058229, guid: 9f32faf5f518f6247af482ab4c088611, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f23fda65320da64d97877c882f30a1d, type: 2}
     - target: {fileID: 919132149155446097, guid: 9f32faf5f518f6247af482ab4c088611, type: 3}
       propertyPath: m_Name
       value: mushroom_tall (3)
@@ -455,6 +471,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 4.759
       objectReference: {fileID: 0}
+    - target: {fileID: -681454837006058229, guid: 9f32faf5f518f6247af482ab4c088611, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f23fda65320da64d97877c882f30a1d, type: 2}
     - target: {fileID: 919132149155446097, guid: 9f32faf5f518f6247af482ab4c088611, type: 3}
       propertyPath: m_Name
       value: mushroom_tall (4)
@@ -521,6 +541,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -681454837006058229, guid: 9f32faf5f518f6247af482ab4c088611, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f23fda65320da64d97877c882f30a1d, type: 2}
     - target: {fileID: 919132149155446097, guid: 9f32faf5f518f6247af482ab4c088611, type: 3}
       propertyPath: m_Name
       value: mushroom_tall
@@ -599,6 +623,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -681454837006058229, guid: 9f32faf5f518f6247af482ab4c088611, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f23fda65320da64d97877c882f30a1d, type: 2}
     - target: {fileID: 919132149155446097, guid: 9f32faf5f518f6247af482ab4c088611, type: 3}
       propertyPath: m_Name
       value: mushroom_tall (1)
@@ -665,6 +693,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -681454837006058229, guid: 9f32faf5f518f6247af482ab4c088611, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f23fda65320da64d97877c882f30a1d, type: 2}
     - target: {fileID: 919132149155446097, guid: 9f32faf5f518f6247af482ab4c088611, type: 3}
       propertyPath: m_Name
       value: mushroom_tall
@@ -747,6 +779,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5064408468269078333, guid: 6317c1a8d7c76eb449e25fa45881c673, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dc919edfae42a834493007673eaa57ff, type: 2}
     - target: {fileID: 919132149155446097, guid: 6317c1a8d7c76eb449e25fa45881c673, type: 3}
       propertyPath: m_Name
       value: mushroom_short (2)

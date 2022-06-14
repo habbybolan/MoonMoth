@@ -13157,7 +13157,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb28bcfdc04262448928b5fcbcd74f64, type: 2}
+  - {fileID: 2100000, guid: 1d6bad821f687854e934b7e8353be74e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13297,6 +13297,7 @@ Transform:
   - {fileID: 5930895515730025457}
   - {fileID: 3995994033392526229}
   - {fileID: 4456004891582160781}
+  - {fileID: 4619943758156546163}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13324,7 +13325,7 @@ MonoBehaviour:
   - EnemyPointSet:
     - {x: -25.589441, y: -3.5984879, z: -24.78778}
     - {x: -32.16127, y: 6.414406, z: -20.08319}
-    - {x: -41.99101, y: -3.5984879, z: -25.283539}
+    - {x: -41.021362, y: 2.0820847, z: -25.283539}
   - EnemyPointSet:
     - {x: -39.398834, y: -6.4855804, z: 7.2540894}
     - {x: -49.95761, y: -1.4452057, z: 6.1455383}
@@ -13336,9 +13337,7 @@ MonoBehaviour:
     - {x: -31.624622, y: -5.583397, z: 97.717224}
     - {x: -47.195225, y: -0.5470581, z: 92.78386}
   m_LostMothPoints: []
-  m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
-  m_LostMothPrefab: {fileID: 0}
-  m_MushroomPrefab: {fileID: 0}
+  m_LostMothPrefab: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14675,6 +14674,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2616834611435900964, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
   m_PrefabInstance: {fileID: 3630387187415474676}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3828368025243650221
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6978630799004381547}
+    m_Modifications:
+    - target: {fileID: 8447712976305703134, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+      propertyPath: m_RootOrder
+      value: 66
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447712976305703134, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -42.070988
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447712976305703134, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447712976305703134, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 45.882156
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447712976305703134, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447712976305703134, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447712976305703134, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447712976305703134, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447712976305703134, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447712976305703134, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447712976305703134, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8487723897604068535, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+      propertyPath: m_Name
+      value: LostMoth
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+--- !u!4 &4619943758156546163 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8447712976305703134, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
+  m_PrefabInstance: {fileID: 3828368025243650221}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4023883697790083784
 PrefabInstance:

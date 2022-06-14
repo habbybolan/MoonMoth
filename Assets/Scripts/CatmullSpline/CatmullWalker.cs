@@ -40,7 +40,7 @@ public class CatmullWalker : MonoBehaviour
         }
 
         // convert distance travelled to percent curve has been walked along
-        m_Dist += m_CurrSpeed * Time.deltaTime;
+        m_Dist += m_CurrSpeed * .03f;  // multiplies by small number to make inspector value easier to use
         float t = (m_Dist) / m_CurrCurveLength;
 
         Vector3 position = m_Spline.GetPointLocal(t, m_CurrCurve);

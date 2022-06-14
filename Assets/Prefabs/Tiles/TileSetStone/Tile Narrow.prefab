@@ -13031,7 +13031,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -13188,7 +13188,7 @@ MonoBehaviour:
   - EnemyPointSet:
     - {x: -23.834236, y: 1.4231949, z: -16.991974}
     - {x: -25.874565, y: 3.8796387, z: -20.247131}
-    - {x: -34.80298, y: 2.2255478, z: -14.991486}
+    - {x: -27.53914, y: 2.2255478, z: -14.991486}
   - EnemyPointSet:
     - {x: -17, y: 1, z: 11.923889}
     - {x: -48, y: 1, z: 11}
@@ -13198,13 +13198,11 @@ MonoBehaviour:
     - {x: -48.72519, y: 0.51875305, z: 66.35257}
   - EnemyPointSet:
     - {x: -26.168913, y: -5.583397, z: 102.17784}
-    - {x: -47.35588, y: -6.405609, z: 102.17784}
+    - {x: -40.213627, y: -4.3915935, z: 95.35553}
   m_LostMothPoints:
-  - {x: -28.513796, y: 0.9390259, z: -14.62207}
   - {x: -46, y: 3, z: 4}
-  m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
+  - {x: -39.273632, y: -8.128685, z: 67.45399}
   m_LostMothPrefab: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
-  m_MushroomPrefab: {fileID: 3071177420972441163, guid: a89325feb13e7f9498b9cdabee35a122, type: 3}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0
