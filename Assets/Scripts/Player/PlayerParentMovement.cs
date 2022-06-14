@@ -35,26 +35,6 @@ public class PlayerParentMovement : CatmullWalker
         base.TryMove();
     }
 
-    public IEnumerator TerrainCollision(System.Action callback, ContactPoint contact)
-    {
-        Vector3 forward = -transform.forward;
-        // Angle between parent's forward movement and normal of contact
-        float degrees = Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(forward, contact.normal) / (Vector3.Magnitude(forward) * Vector3.Magnitude(contact.normal)));
-
-        float currDuration = 0f;
-        float duration = 2f;
-
-        m_CurrSpeed = 0;
-        while (currDuration < duration)
-        {
-            m_CurrSpeed = Mathf.Lerp(0, m_Speed, currDuration / duration);
-            currDuration += Time.deltaTime;
-            yield return null;
-        }
-        m_CurrSpeed = m_Speed;
-        callback();
-    }
-
     public void DashStart() {
         m_CurrSpeed += m_CurrSpeed * m_SpeedIncreasePercent;
     }
@@ -79,7 +59,7 @@ public class PlayerParentMovement : CatmullWalker
         m_IsIndependentMovement = true;
         m_Spline.UninitializeSpline();
         ResetValues();
-}
+    }
 
     public void ConnectBackToSpline()
     {
