@@ -19533,7 +19533,7 @@ MonoBehaviour:
     - {x: -37.493053, y: 38.75621, z: 82.822464}
   m_LostMothPoints:
   - {x: -39.478127, y: 38.42137, z: 78.34721}
-  m_LostMothPrefab: {fileID: 0}
+  m_LostMothPrefab: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0
