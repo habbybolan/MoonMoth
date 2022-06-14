@@ -58,7 +58,9 @@ public class TileManager : MonoBehaviour
 
     private float m_StalagCurrentSpawnPercent;
     private float m_SpiderCurrentSpawnPercent;
-    private float m_MushroomCurrentSpawnPercent;  
+    private float m_MushroomCurrentSpawnPercent;
+
+    private Tile m_transitionTile;
 
     public static TileManager PropertyInstance
     {
@@ -145,6 +147,7 @@ public class TileManager : MonoBehaviour
         if (m_VisibleTiles.Count == 0 && m_TileTransitions.Length > m_CurrentTileSet - 1)
         {
             newTile = Instantiate(m_TileTransitions[m_CurrentTileSet], Vector3.zero, Quaternion.identity, transform);
+            m_transitionTile = newTile;
         } else
         {
             // Find and add new tile to end of path
@@ -263,6 +266,7 @@ public class TileManager : MonoBehaviour
             GameManager.PropertyInstance.OnGameWon();
             yield break;
         }
+        Destroy(m_transitionTile.gameObject);
         m_CurrentTileSet++;
 
         foreach (Tile tile in m_PoolTiles)
