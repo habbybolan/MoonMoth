@@ -33,7 +33,7 @@ public class FireflyCatmullWalker : CatmullWalker
     {
         if (m_IsIndependent)
         {
-            transform.Translate(Vector3.forward * -15 * Time.deltaTime);
+            transform.Translate(Vector3.forward * -15);
             return;
         }
 

@@ -28,7 +28,10 @@ public class FireflyController : CharacterController<FireflyHealth>
         {
             m_Weapon.ShootAtPlayer();
         }
-        
+    }
+
+    private void FixedUpdate()
+    {
         m_FireflyWalker.TryMove();
     }
 
