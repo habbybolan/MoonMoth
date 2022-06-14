@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 845efb974a677a5469d40ae22c2af6ac
   - enabled: 1
-    path: Assets/Scenes/TileMapTest.unity
+    path: Assets/Scenes/Gameplay.unity
     guid: ac10136696ece154489593f76f11e632
   - enabled: 1
     path: Assets/Scenes/WinLose.unity
