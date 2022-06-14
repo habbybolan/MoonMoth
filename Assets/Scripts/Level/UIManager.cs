@@ -78,8 +78,8 @@ public class UIManager : MonoBehaviour
         Color startColor = m_FadeScreen.color;
         while (elapsedTime < fadeInDuration)
         {
-            m_FadeScreen.color = Color.Lerp(startColor,Color.black, (elapsedTime / fadeInDuration));
             elapsedTime += Time.deltaTime;
+            m_FadeScreen.color = Color.Lerp(startColor,Color.black, (elapsedTime / fadeInDuration));        
             yield return null;
         }
         m_IsFadeIn = false;
@@ -107,8 +107,8 @@ public class UIManager : MonoBehaviour
         Color startColor = Color.black;
         while (elapsedTime < fadeOutDuration)
         {
-            m_FadeScreen.color = Color.Lerp(startColor, Color.clear, (elapsedTime / fadeOutDuration));
             elapsedTime += Time.deltaTime;
+            m_FadeScreen.color = Color.Lerp(startColor, Color.clear, (elapsedTime / fadeOutDuration));
             yield return null;
         }
         m_IsFadeOut = false;
