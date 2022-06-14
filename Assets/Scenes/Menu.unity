@@ -210,9 +210,9 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 704347780218056843, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 824393058285000442, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1053715372120615911, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
       propertyPath: m_AnchorMax.x
@@ -409,10 +409,6 @@ PrefabInstance:
     - target: {fileID: 3037621738646926884, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3037621738646926887, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3037621738646926888, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
       propertyPath: m_Name
