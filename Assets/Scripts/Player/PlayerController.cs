@@ -71,6 +71,7 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_MoonBarAbility.d_DashEndDelegate = DashModeEnd;
 
         m_Health.d_DamageDelegate = OnDamageTaken;
+        UIManager.PropertyInstance.FadeOut(2f);
     }
 
     private void OnDamageTaken(DamageInfo damageInfo) 

@@ -104,7 +104,7 @@ public class UIManager : MonoBehaviour
     {
         m_IsFadeOut = true;
         float elapsedTime = 0.0f;
-        Color startColor = m_FadeScreen.color;
+        Color startColor = Color.black;
         while (elapsedTime < fadeOutDuration)
         {
             m_FadeScreen.color = Color.Lerp(startColor, Color.clear, (elapsedTime / fadeOutDuration));
