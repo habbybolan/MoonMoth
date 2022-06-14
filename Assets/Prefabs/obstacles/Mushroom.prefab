@@ -214,6 +214,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8095850112033255604, guid: 6317c1a8d7c76eb449e25fa45881c673, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 40.18581
+      objectReference: {fileID: 0}
+    - target: {fileID: -8095850112033255604, guid: 6317c1a8d7c76eb449e25fa45881c673, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 40.18581
+      objectReference: {fileID: 0}
+    - target: {fileID: -8095850112033255604, guid: 6317c1a8d7c76eb449e25fa45881c673, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 40.18581
+      objectReference: {fileID: 0}
     - target: {fileID: -5066368973109066051, guid: 6317c1a8d7c76eb449e25fa45881c673, type: 3}
       propertyPath: m_TagString
       value: Mushroom
