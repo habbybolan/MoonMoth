@@ -16206,12 +16206,10 @@ MonoBehaviour:
     - {x: -48.72519, y: 0.51875305, z: 66.35257}
   - EnemyPointSet:
     - {x: -26.168913, y: -5.583397, z: 102.17784}
-    - {x: -47.35588, y: -6.405609, z: 102.17784}
+    - {x: -39.27008, y: -6.405609, z: 102.17784}
   m_LostMothPoints:
   - {x: -40.127003, y: -17.856026, z: 70.3391}
-  m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
   m_LostMothPrefab: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
-  m_MushroomPrefab: {fileID: 3071177420972441163, guid: a89325feb13e7f9498b9cdabee35a122, type: 3}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0
