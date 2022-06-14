@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Singleton fog manager for changes the fog color based on the current level
-public class FogManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
+    [Header("Atmospheric fog")]
     [SerializeField] private Color[] m_FogLevelColors;
     [SerializeField] private Color m_DefaultFogColor = new Color(185, 181, 171, 255);
 
-    static FogManager s_PropertyInstance;
-    public static FogManager PropertyInstance
+    static UIManager s_PropertyInstance;
+    public static UIManager PropertyInstance
     {
         get { return s_PropertyInstance; }
     }
