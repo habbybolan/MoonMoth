@@ -31,15 +31,20 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     [Header("Sound")]
     [SerializeField] private AudioSource m_AimModeStartSound;
-    [SerializeField] private AudioSource m_AimModeEndSound; 
+    [SerializeField] private AudioSource m_AimModeEndSound;
+
+    [Header("Dodge")]
+    [SerializeField] private float m_DodgeCooldown = 1;
 
     private PLAYER_ACTION_STATE m_playerState;  // Current player state given the actions performed / effects applied
-    Coroutine ShootCoroutine;                   // Coroutine called when performed shooting action to allow cancelling the coroutine
+
     private int m_LostMothCount = 0;
     private Vector2 m_MovementInput;            // Input object for moving player along x-y axis
 
     private DamageInfo.HIT_EFFECT m_CurrEffect;   // Current hit effect applied to player
     private Coroutine m_SlowEffectCoroutine;
+
+    private bool m_IsDodgeCooldown;
 
     public MoonBarAbility MoonBarAbility { get { return m_MoonBarAbility; }}
 
@@ -113,25 +118,24 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_Health.LosePassiveHealth();
         m_PlayerMovement.RotationLook();
 
-        // move parent along spline
-        m_PlayerParentMovement.TryMove();
-
         if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
             m_PlayerMovement.HorizontalRotation(m_MovementInput.x);
         }
-
-        m_PlayerMovement.MothXYMovemnent();
     }
 
     private void FixedUpdate()
     {
+        // move parent along spline
+        m_PlayerParentMovement.TryMove();
+
         if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
             // move player body along local x, y plane based on inputs
             m_PlayerMovement.ControlPointXYMovement(m_MovementInput);
         }
         m_PlayerMovement.UpdateCrossHair();
+        m_PlayerMovement.MothXYMovemnent();
     }
 
     public float DistanceFromPlayer(Vector3 pointToCompare)
@@ -151,9 +155,10 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void OnDodge(InputValue value)
     {
-        if (m_playerState == PLAYER_ACTION_STATE.FLYING)
+        if (m_playerState == PLAYER_ACTION_STATE.FLYING && !m_IsDodgeCooldown)
         {
             m_playerState = PLAYER_ACTION_STATE.DODGING;
+            m_Health.SetProjectileInvulnFrames(m_PlayerMovement.GetDodgeDuration());
             StartCoroutine(m_PlayerMovement.PlayerDodge(FinishAction, m_MovementInput));
         }   
     }
@@ -257,7 +262,20 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     private void FinishAction()
     {
+        // if player was dodging, start dodge cooldown
+        if (m_playerState == PLAYER_ACTION_STATE.DODGING)
+        {
+            StartCoroutine(DodgeCooldown());
+        }
+
         m_playerState = PLAYER_ACTION_STATE.FLYING;
+    }
+
+    IEnumerator DodgeCooldown()
+    {
+        m_IsDodgeCooldown = true;
+        yield return new WaitForSeconds(m_DodgeCooldown);
+        m_IsDodgeCooldown = false;
     }
 
     protected override void ApplyEffect(DamageInfo.HIT_EFFECT effect)

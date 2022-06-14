@@ -21,6 +21,11 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        
+    }
+
+    public void Shoot()
+    {
         m_rigidBody.velocity = m_Speed * transform.forward;
         StartCoroutine(durationCoroutine());
     }
@@ -41,7 +46,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
        
         Health health = other.gameObject.GetComponent<Health>();

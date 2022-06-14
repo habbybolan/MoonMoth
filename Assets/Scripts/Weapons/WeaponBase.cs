@@ -44,6 +44,7 @@ public class WeaponBase<T> : MonoBehaviour where T : Projectile
     protected virtual void Shoot()
     {
         m_LastShotProjectile.Owner = m_WeaponOwner.gameObject;
+        m_LastShotProjectile.Shoot();
 
         if (m_ProjectileAudio != null)
         {

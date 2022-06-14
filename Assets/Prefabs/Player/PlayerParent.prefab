@@ -63,7 +63,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.778169, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5348,6 +5348,7 @@ RectTransform:
   m_Children:
   - {fileID: 2817298102396697675}
   - {fileID: 3265537511303475358}
+  - {fileID: 4778360372265042968}
   m_Father: {fileID: 8894022941072290911}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5605,7 +5606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Duration: 5
   m_Spline: {fileID: 0}
-  m_Speed: 18
+  m_Speed: 17
   m_SpeedIncreasePercent: 1
   m_IsIndependentMovement: 0
   m_SlowEffectSpeedDecreasePercent: 0.5
@@ -5802,6 +5803,82 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 2
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6593672127249403670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4778360372265042968}
+  - component: {fileID: 5014244667669785518}
+  - component: {fileID: 3090155825997834393}
+  m_Layer: 5
+  m_Name: MoonReticleBorder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4778360372265042968
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593672127249403670}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.72594, y: 0.72594, z: 0.72594}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8981334617544836173}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5014244667669785518
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593672127249403670}
+  m_CullTransparentMesh: 1
+--- !u!114 &3090155825997834393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593672127249403670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 0be3ba8722d17324182b24209c23a58a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6623360980783109155
@@ -6090,7 +6167,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 2
 --- !u!136 &743825387888041060
@@ -6460,7 +6537,7 @@ MonoBehaviour:
   m_Health: {fileID: 7166930477189024826}
   m_PlayerMovement: {fileID: 7166930479057285041}
   m_PlayerParentMovement: {fileID: 3977897141832786758}
-  m_LostMothCountWinCondition: 8
+  m_LostMothCountWinCondition: 1
   m_CameraMovement: {fileID: 375853361}
   m_Weapon: {fileID: 7166930477189024820}
   m_MoonBarAbility: {fileID: 743825388203069262}
@@ -6486,6 +6563,7 @@ MonoBehaviour:
   m_IsShowControlObject: 0
   m_ControlObject: {fileID: 3977897140022987257}
   m_BaseControlSpeed: 17
+  m_ControlPointAcceleration: 10
   m_AimModeSpeedIncrease: 1.8
   m_DodgeDuration: 0.5
   m_AnimationCurve:
@@ -6563,6 +6641,10 @@ MonoBehaviour:
   m_InvincibilityDuration: 1
   m_TerrainDamageAmount: 5
   m_HealthText: {fileID: 8894022942486777166}
+  m_PostProcessVolume: {fileID: 0}
+  m_BaseVignette: 0.25
+  m_MaxVignette: 0.8
+  m_vignetteSpeed: 0.1
   m_EmissionRenderer:
   - {fileID: 3421514730109628488}
   - {fileID: 1738208892201274476}

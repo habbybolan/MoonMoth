@@ -12,7 +12,7 @@ public class TileManager : MonoBehaviour
     [Tooltip("Empty tile that's used as a transition piece between set at index i and i+1. Size should be length of m_TileSets - 1")]
     [SerializeField] private Tile[] m_TileTransitions;
 
-    [SerializeField] private float m_DistanceToPlaceTile = 200f;
+    [SerializeField] private float m_NumTilesToSpawn = 8f;  
     [SerializeField] private int m_TilePoolSize = 40;
 
     [Header("Difficulty")]
@@ -129,7 +129,7 @@ public class TileManager : MonoBehaviour
         }
 
         // Initialize level with some tiles
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < m_NumTilesToSpawn; i++)
             InstantiateTile();
     }
 
@@ -142,9 +142,9 @@ public class TileManager : MonoBehaviour
     {
         Tile newTile;
         // if adding the first tile on transitions to new tileset, start with designated tile transition
-        if (m_CurrentTileSet > 0 && m_VisibleTiles.Count == 0 && m_TileTransitions.Length > m_CurrentTileSet - 1)
+        if (m_VisibleTiles.Count == 0 && m_TileTransitions.Length > m_CurrentTileSet - 1)
         {
-            newTile = Instantiate(m_TileTransitions[m_CurrentTileSet - 1], Vector3.zero, Quaternion.identity, transform);
+            newTile = Instantiate(m_TileTransitions[m_CurrentTileSet], Vector3.zero, Quaternion.identity, transform);
         } else
         {
             // Find and add new tile to end of path
@@ -207,16 +207,6 @@ public class TileManager : MonoBehaviour
                 d_TileDeletedDelegate(firstTile);
             firstTile.gameObject.SetActive(false);
             m_VisibleTiles.RemoveFirst();
-        }
-    }
-
-    private void CheckAddTile()
-    {
-        // TODO: Make reliant on distance rather then z-position
-        Tile lastTile = m_VisibleTiles.Last.Value;
-        // add tile if player is within a certain distance from last tile
-        if (lastTile.TileEndDistanceFromPlayer(PlayerManager.PropertyInstance.PlayerController.PlayerParent) < m_DistanceToPlaceTile)
-        {
             InstantiateTile();
         }
     }
@@ -307,7 +297,6 @@ public class TileManager : MonoBehaviour
         if (GameState.m_GameState != GameStateEnum.RUNNING) return;
 
         CheckRemoveTile();
-        CheckAddTile();
         IncrementSpawnPercents();
     }
 }
