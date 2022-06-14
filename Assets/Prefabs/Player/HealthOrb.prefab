@@ -116,7 +116,7 @@ MonoBehaviour:
   m_DamageAmount: 5
   m_HitEffect: 0
   m_Duration: 10
-  m_MaxHomingAngle: 5
+  m_MaxHomingAngle: 50
   m_healthRecovery: 10
   m_FlyUpDuration: 1
   m_FlyUpSpeed: 3
