@@ -87,6 +87,6 @@ public class CameraMovement : MonoBehaviour
     private IEnumerator ResetPositionCoroutine()
     {
         yield return null;
-        CinemachineCore.Instance.OnTargetObjectWarped(m_Camera.Follow, transform.parent.position - transform.position);
+        CinemachineCore.Instance.OnTargetObjectWarped(m_Camera.Follow, (transform.parent.position + transform.parent.forward * m_StartingZ) - transform.position);
     }
 }
