@@ -240,6 +240,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3931400103784134946, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fb28bcfdc04262448928b5fcbcd74f64, type: 2}
     - target: {fileID: -2696692449318303674, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
       propertyPath: m_TagString
       value: Stalag
