@@ -224,40 +224,26 @@ public class PlayerController : CharacterController<PlayerHealth>
     private IEnumerator TransitionPhase()
     {
         m_LostMothCount = 0;
-        Debug.Log("Start fog screen");
+        UIManager.PropertyInstance.FadeIn(m_FogTransitionDuration);
 
-        // start fog transition
-        float currDuration = 0;
-        while (currDuration < m_FogTransitionDuration)
-        {
-            if (GameState.m_GameState == GameStateEnum.RUNNING) break;
-            yield return null;
-        }
-        Debug.Log("Screen fogged");
+        yield return new WaitForSeconds(m_FogTransitionDuration);
 
         // Call rest of transition logic
         m_PlayerParentMovement.DisconnectFromSpline();
         GameManager.PropertyInstance.OnAllLostMothsCollected();
         
-        // wait for transition state to be over
+        // wait for transition state to be over to reconnect to spline
         while (GameState.m_GameState != GameStateEnum.RUNNING)
         {
             yield return null;
         }
 
         m_PlayerParentMovement.ConnectBackToSpline();
-
+        m_CameraMovement.ResetPosition();
         m_PlayerMovement.ResetPosition();
+       
 
-        // start defog transition
-        currDuration = 0;
-        Debug.Log("Start defog screen");
-        while (currDuration < m_FogTransitionDuration)
-        {
-            if (GameState.m_GameState == GameStateEnum.RUNNING) break;
-            yield return null;
-        }
-        Debug.Log("Screen defogged");
+        UIManager.PropertyInstance.FadeOut(m_FogTransitionDuration);
     }
 
     private void FinishAction()
