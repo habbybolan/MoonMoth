@@ -162,14 +162,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1995082019}
     m_Modifications:
-    - target: {fileID: 511482550167780850, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 511482550167780850, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 704347781530637217, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -274,10 +266,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenuCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 3541187534012155130, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4122890047085129635, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -297,12 +285,6 @@ PrefabInstance:
     - target: {fileID: 4122890047085129635, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4857646392381750962, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
-      propertyPath: m_text
-      value: 'START
-
-'
       objectReference: {fileID: 0}
     - target: {fileID: 4857646393388544282, guid: 9b7fb7ea4833b154b90ec4d1ad3cf3d3, type: 3}
       propertyPath: m_AnchorMax.y
