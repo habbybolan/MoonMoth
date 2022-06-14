@@ -30,12 +30,12 @@ public class ButtonMouseoverSelect : Button, IPointerEnterHandler, IPointerExitH
 
     private void Update()
     {
-#if UNITY_EDITOR
-
-#else
-        if (gameObject == EventSystem.current.currentSelectedGameObject) ButtonSelected();
-        else ButtonUnselected();
-#endif
+        if (Application.isPlaying)
+        {
+            if (gameObject == EventSystem.current.currentSelectedGameObject) ButtonSelected();
+            else ButtonUnselected();
+        }
+        
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
