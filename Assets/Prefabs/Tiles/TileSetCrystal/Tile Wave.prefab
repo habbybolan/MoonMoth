@@ -12357,7 +12357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FollowPoint:
-  - {x: -32.84128, y: -8.584145, z: -33.292145}
+  - {x: -32.84128, y: -8.154045, z: -27.471466}
   - {x: -38.69303, y: -20.023666, z: 7.360779}
   - {x: -35.213753, y: -2.1926117, z: 58.681778}
   - {x: -36.665707, y: 0.8920975, z: 94.328354}
@@ -12381,9 +12381,7 @@ MonoBehaviour:
     - {x: -44.093964, y: 6.3604813, z: 82.66496}
   m_LostMothPoints:
   - {x: -32.965206, y: 8.001549, z: 85.57216}
-  m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
   m_LostMothPrefab: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
-  m_MushroomPrefab: {fileID: 3071177420972441163, guid: a89325feb13e7f9498b9cdabee35a122, type: 3}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0
