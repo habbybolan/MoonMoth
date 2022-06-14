@@ -80,6 +80,13 @@ public class CameraMovement : MonoBehaviour
 
     public void ResetPosition()
     {
-        CinemachineCore.Instance.OnTargetObjectWarped(m_Camera.Follow, new Vector3(0,0,0) - transform.position);
+        // wait for the next frame to update position on parent, otherwise parent wont be updated
+        StartCoroutine(ResetPositionCoroutine());
+    }
+
+    private IEnumerator ResetPositionCoroutine()
+    {
+        yield return null;
+        CinemachineCore.Instance.OnTargetObjectWarped(m_Camera.Follow, transform.parent.position - transform.position);
     }
 }

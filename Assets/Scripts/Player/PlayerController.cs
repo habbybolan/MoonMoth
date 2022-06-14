@@ -239,8 +239,8 @@ public class PlayerController : CharacterController<PlayerHealth>
         }
 
         m_PlayerParentMovement.ConnectBackToSpline();
-        m_CameraMovement.ResetPosition();
         m_PlayerMovement.ResetPosition();
+        m_CameraMovement.ResetPosition();
        
 
         UIManager.PropertyInstance.FadeOut(m_FogTransitionDuration);
