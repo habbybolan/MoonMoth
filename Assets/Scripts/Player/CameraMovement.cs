@@ -5,7 +5,6 @@ using Cinemachine;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement player;
     [SerializeField] private float m_CameraFovChangeRate = 2f;
     [SerializeField] private float m_BaseFov = 60f;
 
@@ -24,6 +23,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float m_AimModeFovOffset = -20;
 
     private float m_TargetFov;
+    private float m_StartingZ;
     private CinemachineVirtualCamera m_Camera;
     private CinemachineBasicMultiChannelPerlin m_Noise;
 
@@ -31,6 +31,7 @@ public class CameraMovement : MonoBehaviour
 
     private void Start()
     {
+        m_StartingZ = transform.localPosition.z;
         m_Camera = GetComponent<CinemachineVirtualCamera>();
         m_Noise = m_Camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         m_Noise.m_AmplitudeGain = 0;
@@ -75,5 +76,10 @@ public class CameraMovement : MonoBehaviour
         m_Noise.m_AmplitudeGain = m_ShakeIntensity;
         yield return new WaitForSeconds(m_ShakeDuration);
         m_Noise.m_AmplitudeGain = 0;
+    }
+
+    public void ResetPosition()
+    {
+        CinemachineCore.Instance.OnTargetObjectWarped(m_Camera.Follow, new Vector3(0,0,0) - transform.position);
     }
 }
