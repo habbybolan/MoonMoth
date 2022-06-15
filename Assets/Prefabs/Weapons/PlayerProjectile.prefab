@@ -51,6 +51,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5939358012764546976, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7b00af34c3ac7e44293f2451e1656d29, type: 2}
     - target: {fileID: 8771129683057882395, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
       propertyPath: m_Name
       value: PlayerProjectile
