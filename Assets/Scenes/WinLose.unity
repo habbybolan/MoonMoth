@@ -514,6 +514,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1995082019}
     m_Modifications:
+    - target: {fileID: 1773662145379363144, guid: 99c805219b49e0046b9d747a5fd34cb7, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 93b5e1a150115f84eabddbfdcfd2e19f, type: 3}
     - target: {fileID: 1773662145379363158, guid: 99c805219b49e0046b9d747a5fd34cb7, type: 3}
       propertyPath: m_Name
       value: WinLoseCanvas
@@ -618,5 +622,13 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5323227664493872122, guid: 99c805219b49e0046b9d747a5fd34cb7, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 93b5e1a150115f84eabddbfdcfd2e19f, type: 3}
+    - target: {fileID: 8180678461458404645, guid: 99c805219b49e0046b9d747a5fd34cb7, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 93b5e1a150115f84eabddbfdcfd2e19f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99c805219b49e0046b9d747a5fd34cb7, type: 3}
