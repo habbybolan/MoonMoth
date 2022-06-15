@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.000017502598, g: 0.000000028657325, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.00001750258, g: 0.000000028657325, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!137 &2783380 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7054828596683034123, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+  m_PrefabInstance: {fileID: 153880104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &92830007
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,8 +274,33 @@ PrefabInstance:
       propertyPath: m_PostProcessVolume
       value: 
       objectReference: {fileID: 728148997}
+    - target: {fileID: 7166930477189024826, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_EmissionRenderer.Array.data[0]
+      value: 
+      objectReference: {fileID: 2783380}
+    - target: {fileID: 7166930477189024826, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_EmissionRenderer.Array.data[1]
+      value: 
+      objectReference: {fileID: 371117262}
+    - target: {fileID: 7166930477189024826, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_EmissionRenderer.Array.data[2]
+      value: 
+      objectReference: {fileID: 180763759}
+    - target: {fileID: 7166930477189024826, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_EmissionRenderer.Array.data[3]
+      value: 
+      objectReference: {fileID: 1720868326}
+    - target: {fileID: 7166930477189024826, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_EmissionRenderer.Array.data[4]
+      value: 
+      objectReference: {fileID: 1980288551}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+--- !u!137 &180763759 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8096542470487425755, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+  m_PrefabInstance: {fileID: 153880104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &266740769
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +410,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &371117262 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6002273397587627266, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+  m_PrefabInstance: {fileID: 153880104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &486707482
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,6 +1810,16 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1099418567748886598, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
   m_PrefabInstance: {fileID: 1398422060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1720868326 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7393435864752951320, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+  m_PrefabInstance: {fileID: 153880104}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1980288551 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 491891196742384213, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+  m_PrefabInstance: {fileID: 153880104}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2046763687 stripped
 Transform:
