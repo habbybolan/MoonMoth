@@ -700,6 +700,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WinLoseCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1773662145379363161, guid: 99c805219b49e0046b9d747a5fd34cb7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1773662145379363162, guid: 99c805219b49e0046b9d747a5fd34cb7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
