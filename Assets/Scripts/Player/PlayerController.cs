@@ -190,7 +190,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     public void LostMothCollected()
     {
         m_LostMothCount++;
-        m_LostMothUI.text = m_LostMothCount.ToString();
+        m_LostMothUI.text = m_LostMothCount.ToString() + "/" + m_LostMothCountWinCondition;
         StartCoroutine(LostMothDisplay());
     }
 
