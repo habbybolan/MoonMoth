@@ -16272,7 +16272,8 @@ MonoBehaviour:
   - EnemyPointSet:
     - {x: -24.248575, y: -5.583397, z: 97.35974}
     - {x: -43.10437, y: -0.5470581, z: 87.518524}
-  m_LostMothPoints: []
+  m_LostMothPoints:
+  - {x: -51.846714, y: -6.9173126, z: -2.2060242}
   m_LostMothPrefab: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
 --- !u!65 &6108735066170562764
 BoxCollider:
