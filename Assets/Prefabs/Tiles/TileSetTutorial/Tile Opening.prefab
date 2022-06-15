@@ -15019,7 +15019,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 29223
+  m_VersionIndex: 29226
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -15168,7 +15168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FollowPoint:
   - {x: -32.84128, y: 0.539711, z: -33.292145}
-  - {x: -38.69303, y: 0.17481232, z: 37.676605}
+  - {x: -36.73433, y: 0.17481232, z: 37.676605}
   - {x: -35.213753, y: -1.493866, z: 79.9704}
   m_StartPoint: {x: -30.48426, y: 0.37075806, z: -45.530853}
   m_EndPoint: {x: -30.48426, y: 0.3707581, z: 132}
@@ -15189,9 +15189,7 @@ MonoBehaviour:
     - {x: -21.460573, y: -5.583397, z: 97.717224}
     - {x: -37.41342, y: -0.5470581, z: 92.78386}
   m_LostMothPoints: []
-  m_StalagPrefab: {fileID: 11400000, guid: 6a0d3de13a0ced4439fc4a1886b4eb6a, type: 2}
   m_LostMothPrefab: {fileID: 0}
-  m_MushroomPrefab: {fileID: 0}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0

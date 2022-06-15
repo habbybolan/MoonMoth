@@ -13180,7 +13180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FollowPoint:
   - {x: -28.095186, y: 2.251521, z: 19}
-  - {x: -33.43802, y: -1.2037483, z: 80.63368}
+  - {x: -32.331364, y: -1.2037483, z: 80.63368}
   m_StartPoint: {x: -30.48426, y: 0.37075806, z: -42.253326}
   m_EndPoint: {x: -30.499264, y: 0.3283081, z: 131.26689}
   m_EndPointRotation: {x: 0, y: 0, z: 0, w: 1}
