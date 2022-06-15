@@ -1096,6 +1096,10 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 951211381}
+    - target: {fileID: 869204509, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 2846423534741201122, guid: fa982dd7fa015a3498f7eb0e9c70e78b, type: 2}
     - target: {fileID: 688025219142232047, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
