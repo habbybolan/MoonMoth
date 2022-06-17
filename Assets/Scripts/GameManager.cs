@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 //  Includes transitions between levels, player death
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private List<int> m_LostMothCountWinConditions = new List<int> { 3, 5, 7 };
 
     public delegate void NextLevelDelegate();
     public NextLevelDelegate d_NextLevelDelegate; 
@@ -57,6 +58,12 @@ public class GameManager : MonoBehaviour
             if (d_NextLevelDelegate != null)
                 d_NextLevelDelegate();
         }
+    }
+
+    // Gets the moth with condition count based on the curr set level
+    public int CurrLostMothWinCondition()
+    {
+        return m_LostMothCountWinConditions[m_CurrLevel];
     }
 
     public int CurrLevel { get { return m_CurrLevel; }}

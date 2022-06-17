@@ -15,7 +15,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 {
     [SerializeField] private PlayerMovement m_PlayerMovement;
     [SerializeField] private PlayerParentMovement m_PlayerParentMovement;
-    [SerializeField] private int m_LostMothCountWinCondition = 10;
+
     [Tooltip("CameraMovement component")]
     [SerializeField] private CameraMovement m_CameraMovement;
     [SerializeField] private PlayerWeapon m_Weapon;
@@ -190,7 +190,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     public void LostMothCollected()
     {
         m_LostMothCount++;
-        m_LostMothUI.text = m_LostMothCount.ToString() + "/" + m_LostMothCountWinCondition;
+        m_LostMothUI.text = m_LostMothCount.ToString() + "/" + GameManager.PropertyInstance.CurrLostMothWinCondition();
         StartCoroutine(LostMothDisplay());
     }
 
@@ -209,7 +209,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     public void CheckWin() 
     {
         // if not currently transitioning and met the lost moth win threshold for the tile set
-        if (m_LostMothCount >= m_LostMothCountWinCondition)
+        if (m_LostMothCount >= GameManager.PropertyInstance.CurrLostMothWinCondition())
         {
             WinLevel();
         }        
