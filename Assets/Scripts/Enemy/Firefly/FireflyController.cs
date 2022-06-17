@@ -11,9 +11,11 @@ public class FireflyController : CharacterController<FireflyHealth>
     [SerializeField] private FireflyCatmullWalker m_FireflyWalker;
     [SerializeField] private FireflyGun m_Weapon;
     [SerializeField] private HealthOrb m_HealthOrbPrefab;
-    [SerializeField] private float m_DistancePastCameraToStartShooting = 10f;
+    [SerializeField] private float m_FirstShotDelay = 1f;
 
     private FIREFLY_STATE m_State;
+    private bool m_IsFirstShotDelay = true;     // Delay flag before firefly can perform their first shot
+    private bool m_IsInFirstShotDelay = false;  // If first shot being delayed, prevent first shot delay coroutine from calling multiple times
 
     protected override void Start()
     {
@@ -24,10 +26,21 @@ public class FireflyController : CharacterController<FireflyHealth>
     private void Update()
     {
         // only shoot at player if passed a certain distance from camera
-        if (PlayerManager.PropertyInstance.PlayerController.ZDistanceFromPlayerCamera(transform.position) > m_DistancePastCameraToStartShooting)
+        if (PlayerManager.PropertyInstance.PlayerController.ZDistanceFromPlayerCamera(transform.position) > 0)
         {
-            m_Weapon.ShootAtPlayer();
+            if (!m_IsFirstShotDelay)
+                m_Weapon.ShootAtPlayer();
+            else if (!m_IsInFirstShotDelay)
+                StartCoroutine(FirstShotDelay());
+
         }
+    }
+
+    private IEnumerator FirstShotDelay()
+    {
+        m_IsInFirstShotDelay = true; 
+        yield return new WaitForSeconds(m_FirstShotDelay);
+        m_IsFirstShotDelay = false;
     }
 
     private void FixedUpdate()
