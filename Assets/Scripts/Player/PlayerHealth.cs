@@ -15,7 +15,6 @@ public class PlayerHealth : Health
     [SerializeField] private float m_InvincibilityDuration = 2f;
     [Range(0f, 100f)]
     [SerializeField] private float m_TerrainDamageAmount = 5f;
-    [SerializeField] private TextMeshProUGUI m_HealthText;
 
     [Header("Vignette")]
     [SerializeField] private Volume m_PostProcessVolume;
@@ -45,7 +44,6 @@ public class PlayerHealth : Health
     protected override void Start()
     { 
         base.Start();
-        SetHealthText();
 
         m_StartingEmissionColor = m_EmissionRenderer[0].material.GetColor("_EmissionColor");
         m_MaxEmissionRGB = Mathf.Max(m_StartingEmissionColor.r, m_StartingEmissionColor.g, m_StartingEmissionColor.b); 
@@ -64,7 +62,6 @@ public class PlayerHealth : Health
         {
             SetAllInvulnFrames(m_InvincibilityDuration);
         }
-        SetHealthText();
     }
 
     // Scale the emission amount of moth with their health percentage
@@ -114,15 +111,9 @@ public class PlayerHealth : Health
         return value < 0 ? 0 : value;
     }
 
-    private void SetHealthText()
-    {
-        m_HealthText.text = Mathf.Floor(m_CurrentHealth).ToString();
-    }
-
     public override void HealAmount(float healthAmount)
     {
         base.HealAmount(healthAmount);
-        SetHealthText();
         StartCoroutine(HealEmissionBurst());
     }
 
