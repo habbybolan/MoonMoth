@@ -6420,13 +6420,17 @@ MonoBehaviour:
   m_PostProcessVolume: {fileID: 0}
   m_BaseVignette: 0.25
   m_MaxVignette: 0.8
-  m_vignetteSpeed: 0.1
+  m_vignetteSpeedChange: 0.1
+  m_Lights:
+  - {fileID: 7587239167377112344}
+  - {fileID: 5249149871877482489}
+  m_LightSpeedChange: 10
   m_EmissionRenderer:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7054828596683034123}
+  - {fileID: 6002273397587627266}
+  - {fileID: 8096542470487425755}
+  - {fileID: 7393435864752951320}
+  - {fileID: 491891196742384213}
   m_HealEmissionBurstDuration: 0.55
   m_HealEmissionBurstAmount: 20
   m_EmissionLossSpeed: 10
@@ -6762,9 +6766,29 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9434189d5b756cf408b8b2ec868884cd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a98851b0e8bb56c4fb803e203a1b00a8, type: 3}
+--- !u!137 &491891196742384213 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1989870980090258941, guid: a98851b0e8bb56c4fb803e203a1b00a8, type: 3}
+  m_PrefabInstance: {fileID: 7111468091663720534}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6002273397587627266 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3602133509593427284, guid: a98851b0e8bb56c4fb803e203a1b00a8, type: 3}
+  m_PrefabInstance: {fileID: 7111468091663720534}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7054828596683034123 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 240603612985388637, guid: a98851b0e8bb56c4fb803e203a1b00a8, type: 3}
+  m_PrefabInstance: {fileID: 7111468091663720534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7294630662627739581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a98851b0e8bb56c4fb803e203a1b00a8, type: 3}
+  m_PrefabInstance: {fileID: 7111468091663720534}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7393435864752951320 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 300545121921773646, guid: a98851b0e8bb56c4fb803e203a1b00a8, type: 3}
   m_PrefabInstance: {fileID: 7111468091663720534}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7957978588725714183 stripped
@@ -6792,3 +6816,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!137 &8096542470487425755 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1363940840780620429, guid: a98851b0e8bb56c4fb803e203a1b00a8, type: 3}
+  m_PrefabInstance: {fileID: 7111468091663720534}
+  m_PrefabAsset: {fileID: 0}

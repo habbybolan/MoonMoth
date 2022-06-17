@@ -22,7 +22,11 @@ public class PlayerHealth : Health
     [SerializeField] private float m_BaseVignette = 0.25f;
     [Range(0, 1)]
     [SerializeField] private float m_MaxVignette = .8f;
-    [SerializeField] private float m_vignetteSpeed = .1f;
+    [SerializeField] private float m_vignetteSpeedChange = .1f;
+
+    [Header("Light")]
+    [SerializeField] private List<Light> m_Lights;
+    [SerializeField] private float m_LightSpeedChange = .1f;
 
     [Header("Emission")]
     [Tooltip("Moth renderers that contain the Moth emission shader")]
@@ -40,11 +44,17 @@ public class PlayerHealth : Health
     private Color m_StartingEmissionColor;
 
     private bool m_isHealBurst = false;
+
+    private List<float> m_StartingLightIntensity = new List<float>();
      
     protected override void Start()
     { 
         base.Start();
 
+        foreach (Light light in m_Lights)
+        {
+            m_StartingLightIntensity.Add(light.intensity);
+        }
         m_StartingEmissionColor = m_EmissionRenderer[0].material.GetColor("_EmissionColor");
         m_MaxEmissionRGB = Mathf.Max(m_StartingEmissionColor.r, m_StartingEmissionColor.g, m_StartingEmissionColor.b); 
     }
@@ -53,6 +63,22 @@ public class PlayerHealth : Health
     {
         UpdateEmission();
         UpdateVignette();
+        UpdatePointLights();
+    }
+
+    // Update all point light based on health percent
+    private void UpdatePointLights()
+    {
+        for (int i = 0; i < m_Lights.Count; i++)
+        {
+            float correctLightIntensity = Mathf.Lerp(0, m_StartingLightIntensity[i], HealthPercentage);
+
+            float lightChange = m_LightSpeedChange;
+            if (correctLightIntensity < m_Lights[i].intensity)
+                lightChange *= -1;
+
+            m_Lights[i].intensity += lightChange * Time.deltaTime;
+        }
     }
 
     public override void Damage(DamageInfo damageInfo)
@@ -92,13 +118,14 @@ public class PlayerHealth : Health
         }
     }
 
+    // Update vignette based on health percent
     private void UpdateVignette()
     {
         if (m_PostProcessVolume.profile.TryGet<Vignette>(out var vignette))
         {
             float correctVignette = Mathf.Lerp(m_BaseVignette, m_MaxVignette, 1 - HealthPercentage);
 
-            float vignetteChange = m_vignetteSpeed;
+            float vignetteChange = m_vignetteSpeedChange;
             if (correctVignette < vignette.intensity.value)
                 vignetteChange *= -1;
 
