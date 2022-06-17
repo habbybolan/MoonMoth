@@ -8,8 +8,11 @@ public class HealthOrb : HomingProjectile
     [SerializeField] private float m_healthRecovery = 10f;
     [SerializeField] private float m_FlyUpDuration = 1f;
     [SerializeField] private float m_FlyUpSpeed = 3f;
+    [SerializeField] private float m_SpeedIncreaseEachSecond = 2f;
 
     private ParticleSystem m_TrailParticles;
+    private float m_SpeedMultiplier = 1;
+    private bool m_IsGoingUp = true;
 
     protected override void Start()
     {
@@ -32,15 +35,25 @@ public class HealthOrb : HomingProjectile
         }
     }
 
+    protected override void Update() 
+    {
+        base.Update();
+        Debug.Log(m_rigidBody.velocity.magnitude);
+    }
+
+    private void FixedUpdate()
+    {
+        if (m_IsGoingUp) return;
+
+        m_SpeedMultiplier += m_SpeedIncreaseEachSecond * Time.fixedDeltaTime;
+        m_rigidBody.velocity = m_Speed * m_SpeedMultiplier * transform.forward;
+    }
+
     private void DetachParticles()
     {
         m_TrailParticles.transform.parent = null;
 
         m_TrailParticles.Stop();
-
-        // This finds the particleAnimator associated with the emitter and then
-        // sets it to automatically delete itself when it runs out of particles
-        //m_TrailParticles.GetComponent<ParticleAnimator>().autoDestruct = true;
     }
 
     // Sends the object up for a time
@@ -57,5 +70,6 @@ public class HealthOrb : HomingProjectile
         // look at the player
         transform.rotation = Quaternion.LookRotation(PlayerManager.PropertyInstance.PlayerController.transform.position - transform.position);
         Shoot();
+        m_IsGoingUp = false;
     }
 }
