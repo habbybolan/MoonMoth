@@ -27,7 +27,6 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     [Header("Lost Moth")]
     [SerializeField] private TextMeshProUGUI m_LostMothUI;
-    [SerializeField] private float m_LostMothUIDisplayTime = 1.5f;
 
     [Header("Sound")]
     [SerializeField] private AudioSource m_AimModeStartSound;
@@ -56,7 +55,6 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     private void Awake()
     {
-        m_LostMothUI.enabled = false;
         m_CurrEffect = DamageInfo.HIT_EFFECT.NORMAL;
     }
 
@@ -72,6 +70,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
         m_Health.d_DamageDelegate = OnDamageTaken;
         UIManager.PropertyInstance.FadeOut(2f);
+        UpdateLostMothText();
     }
 
     private void OnDamageTaken(DamageInfo damageInfo) 
@@ -190,15 +189,12 @@ public class PlayerController : CharacterController<PlayerHealth>
     public void LostMothCollected()
     {
         m_LostMothCount++;
-        m_LostMothUI.text = m_LostMothCount.ToString() + "/" + GameManager.PropertyInstance.CurrLostMothWinCondition();
-        StartCoroutine(LostMothDisplay());
+        UpdateLostMothText();
     }
 
-    IEnumerator LostMothDisplay()
+    private void UpdateLostMothText()
     {
-        m_LostMothUI.enabled = true;
-        yield return new WaitForSeconds(m_LostMothUIDisplayTime);
-        m_LostMothUI.enabled = false;
+        m_LostMothUI.text = m_LostMothCount.ToString() + "/" + GameManager.PropertyInstance.CurrLostMothWinCondition();
     }
 
     public override void Death() 
