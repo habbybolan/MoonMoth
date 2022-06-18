@@ -209,6 +209,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2144779323}
     m_Modifications:
+    - target: {fileID: 546655778, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786757, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Name
       value: PlayerParent
@@ -1018,8 +1022,8 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 1
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
+  m_UpdateMethod: 1
+  m_BlendUpdateMethod: 0
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2
