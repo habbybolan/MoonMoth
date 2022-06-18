@@ -209,10 +209,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2144779323}
     m_Modifications:
-    - target: {fileID: 546655778, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786757, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Name
       value: PlayerParent

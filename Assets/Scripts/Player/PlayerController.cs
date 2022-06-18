@@ -35,6 +35,10 @@ public class PlayerController : CharacterController<PlayerHealth>
     [Header("Dodge")]
     [SerializeField] private float m_DodgeCooldown = 1;
 
+    [Header("Animation")]
+    [SerializeField] private float m_GlideFlapDelayMin = .2f;
+    [SerializeField] private float m_GlideFlapDelayMax = .5f;
+
     private PLAYER_ACTION_STATE m_playerState;  // Current player state given the actions performed / effects applied
 
     private int m_LostMothCount = 0;
@@ -44,6 +48,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     private Coroutine m_SlowEffectCoroutine;
 
     private bool m_IsDodgeCooldown;
+    private Animator m_Animator;
 
     public MoonBarAbility MoonBarAbility { get { return m_MoonBarAbility; }}
 
@@ -55,6 +60,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     private void Awake()
     {
+        m_Animator = GetComponent<Animator>();
         m_CurrEffect = DamageInfo.HIT_EFFECT.NORMAL;
     }
 
@@ -298,6 +304,19 @@ public class PlayerController : CharacterController<PlayerHealth>
         // COnvert firefly position to player's parent local space
         Vector3 localPlayerPos = PlayerParent.transform.InverseTransformPoint(position);
         return localPlayerPos.z;
+    }
+
+    public void OnGlideFlapAnimationPerformed() 
+    {
+        StartCoroutine(GlideDelay());
+    }
+
+    IEnumerator GlideDelay()
+    {
+        m_Animator.SetBool("isGlideDelay", true);
+        float rand = UnityEngine.Random.Range(m_GlideFlapDelayMin, m_GlideFlapDelayMax);
+        yield return new WaitForSeconds(rand);
+        m_Animator.SetBool("isGlideDelay", false);
     }
 
     public PlayerParentMovement PlayerParent { get { return m_PlayerParentMovement;  } }
