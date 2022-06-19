@@ -150,7 +150,7 @@ MonoBehaviour:
   m_ExplosionTimeAfterSensing: 1
   m_TickDamageAmount: 1
   m_ExplosionSound: {fileID: 6465246674351405269}
-  m_MushroomExplosionParticle: {fileID: 1338685332006623429, guid: 44722895049660142b7052ea8010d2f8, type: 3}
+  m_MushroomExplosionParticle: {fileID: 2321228357407699314, guid: e2a4e1d49b22fea4bb32afc5eb849c8a, type: 3}
 --- !u!1001 &6017759592654580463
 PrefabInstance:
   m_ObjectHideFlags: 0
