@@ -247,6 +247,7 @@ public class PlayerController : CharacterController<PlayerHealth>
        
 
         UIManager.PropertyInstance.FadeOut(m_FogTransitionDuration);
+        UpdateLostMothText();
     }
 
     private void FinishAction()
