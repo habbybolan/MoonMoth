@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpiderWeb : MonoBehaviour
 {
-    [SerializeField] GameObject m_PartPrefab;
+    [SerializeField] SpiderWebHealth m_PartPrefab;
     [SerializeField] GameObject m_Spider;
 
     [Range(1f, 1000f)]
@@ -18,7 +18,7 @@ public class SpiderWeb : MonoBehaviour
     public delegate void WebDestroyedDelegate();
     public WebDestroyedDelegate d_WebDestroyedDelegate;
 
-    private List<GameObject> m_SpiderWebParts;
+    private List<SpiderWebHealth> m_SpiderWebParts;
     private GameObject m_SpawnPointCopy;
 
     private void Start()
@@ -32,7 +32,7 @@ public class SpiderWeb : MonoBehaviour
         {
             m_SpawnPointCopy = new GameObject();
             m_SpawnPointCopy.transform.position = transform.position;
-            m_SpiderWebParts = new List<GameObject>();
+            m_SpiderWebParts = new List<SpiderWebHealth>();
             Spawn();
             spawn = false;
         }
@@ -57,9 +57,10 @@ public class SpiderWeb : MonoBehaviour
         // Create new part of the web and attach it to previous
         for (int i = 0; i < count; i++)
         {
-            GameObject tmp;
+            SpiderWebHealth tmp;
 
             tmp = Instantiate(m_PartPrefab, new Vector3 (transform.position.x, transform.position.y + m_partDistance * (i + 1), transform.position.z), Quaternion.identity, m_SpawnPointCopy.transform);
+            tmp.d_DeathDelegate += SpiderWebBroke;
             m_SpiderWebParts.Add(tmp);
             tmp.transform.eulerAngles = new Vector3(180, 0, 0);
 
@@ -114,7 +115,6 @@ public class SpiderWeb : MonoBehaviour
         if (joint != null)
         {
             joint.connectedBody = null;
-            Destroy(m_SpiderWebParts[0].GetComponent<Joint>());
         }
         
     }
@@ -122,9 +122,9 @@ public class SpiderWeb : MonoBehaviour
     {
         if (m_SpiderWebParts == null) return;
         // destroy each spider web that was created
-        foreach (GameObject webPart in m_SpiderWebParts)
+        foreach (SpiderWebHealth webPart in m_SpiderWebParts)
         {
-            Destroy(webPart);
+            Destroy(webPart.gameObject);
         }
     }
 }
