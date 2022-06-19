@@ -124,7 +124,8 @@ public class SpiderWeb : MonoBehaviour
         // destroy each spider web that was created
         foreach (SpiderWebHealth webPart in m_SpiderWebParts)
         {
-            Destroy(webPart.gameObject);
+            if (webPart != null)
+                Destroy(webPart.gameObject);
         }
     }
 }
