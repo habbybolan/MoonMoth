@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SpiderController : CharacterController<SpiderHealth>
 {
-    [SerializeField] private SpiderWebHealth m_SpiderWebHealth;
     [SerializeField] private SpiderMovement m_SpiderMovement;
     [SerializeField] private SpiderWeapon m_SpiderWeapon;
     [SerializeField] private SpiderWeb m_SpiderWeb;
@@ -73,8 +72,8 @@ public class SpiderController : CharacterController<SpiderHealth>
     {
         // let tile destroy object
         m_SpiderWeb.RemoveSpiderFromWeb();
-        transform.position = Vector3.zero;
         GetComponent<Rigidbody>().useGravity = false;
+        transform.position = Vector3.zero;
     }
 
     private void OnEnable()
