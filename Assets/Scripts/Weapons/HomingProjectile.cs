@@ -18,7 +18,7 @@ public class HomingProjectile : Projectile
         m_Target = health;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         HomeToTarget();
     }

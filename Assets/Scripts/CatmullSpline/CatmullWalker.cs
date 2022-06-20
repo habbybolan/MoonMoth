@@ -7,6 +7,7 @@ public class CatmullWalker : MonoBehaviour
     [SerializeField] protected float m_Duration = 5f;
     [SerializeField] protected SplineCreator m_Spline;
     [SerializeField] protected float m_Speed = 1;
+    [SerializeField] protected float m_MaxTurnAngle = 40f;
 
     private float m_Dist = 0;
     protected int m_CurrCurve = -1;
@@ -40,12 +41,13 @@ public class CatmullWalker : MonoBehaviour
         }
 
         // convert distance travelled to percent curve has been walked along
-        m_Dist += m_CurrSpeed * .03f;  // multiplies by small number to make inspector value easier to use
+        m_Dist += m_CurrSpeed * Time.fixedDeltaTime;  
         float t = (m_Dist) / m_CurrCurveLength;
 
         Vector3 position = m_Spline.GetPointLocal(t, m_CurrCurve);
         transform.position = position;
-        transform.LookAt(position + m_Spline.GetDirectionLocal(t, m_CurrCurve));
+        Vector3 newRotation = m_Spline.GetDirectionLocal(t, m_CurrCurve);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newRotation), m_MaxTurnAngle);
 
         // Move to next curve
         if (m_Dist >= m_CurrCurveLength)

@@ -18,6 +18,9 @@ public class MoonBarAbility : MonoBehaviour
     [SerializeField] private int m_MaxNumberOfEnemyBoost = 3;
     [SerializeField] private float m_EnemyBoostDuration = 2f;
     [SerializeField] private Image m_MoonBarReticle;
+    [SerializeField] private Image m_MoonBarBorder;
+    [Tooltip("How fast the moon bar will flicker when on cooldown")]
+    [SerializeField] private float m_BarCooldownFlickerTime = 1f;
 
     // Moon bar reticle
     private bool m_IsMoonBarCooldown = false;
@@ -90,7 +93,41 @@ public class MoonBarAbility : MonoBehaviour
     IEnumerator MoonBarCooldown()
     {
         m_IsMoonBarCooldown = true;
-        yield return new WaitForSeconds(m_MoonBarCooldown);
+
+        float currDuration = 0;
+        Color barColor = m_MoonBarReticle.color;
+        Color barColorClear = new Color(barColor.r, barColor.g, barColor.b, 0);
+        bool isToClear = true;
+        float currFlickerDuration = m_BarCooldownFlickerTime;
+
+        // flicker between clear and base moonbar color
+        while (currDuration < m_MoonBarCooldown)
+        {
+            Color newColor;
+            // Check if the moon bar should be flickering to base color or clear
+            if (isToClear)
+                newColor = Color.Lerp(barColorClear, barColor, currFlickerDuration / m_BarCooldownFlickerTime);
+            else
+                newColor = Color.Lerp(barColor, barColorClear, currFlickerDuration / m_BarCooldownFlickerTime);
+
+            // Update color of moon bar
+            m_MoonBarReticle.color = newColor;
+            m_MoonBarBorder.color = newColor;
+
+            currFlickerDuration -= Time.deltaTime;
+            // change flicker state if curr state finished
+            if (currFlickerDuration < 0)
+            {
+                currFlickerDuration = m_BarCooldownFlickerTime;
+                isToClear = !isToClear;
+            }
+            currDuration += Time.deltaTime;
+            yield return null;
+        }
+
+        m_MoonBarReticle.color = barColor;
+        m_MoonBarBorder.color = barColor;
+
         m_IsMoonBarCooldown = false;
     }
 

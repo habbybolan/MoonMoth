@@ -126,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Move towards control points 
         Vector3 distanceFromControl = (new Vector3(ControlPosition.x, ControlPosition.y, transform.localPosition.z) - transform.localPosition);
-        transform.localPosition += distanceFromControl * m_CurrMothMoveSpeed * .03f;
+        transform.localPosition += distanceFromControl * m_CurrMothMoveSpeed * Time.fixedDeltaTime;
     }
 
     public void RotationLook()

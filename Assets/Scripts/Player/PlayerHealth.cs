@@ -15,7 +15,6 @@ public class PlayerHealth : Health
     [SerializeField] private float m_InvincibilityDuration = 2f;
     [Range(0f, 100f)]
     [SerializeField] private float m_TerrainDamageAmount = 5f;
-    [SerializeField] private TextMeshProUGUI m_HealthText;
 
     [Header("Vignette")]
     [SerializeField] private Volume m_PostProcessVolume;
@@ -23,7 +22,11 @@ public class PlayerHealth : Health
     [SerializeField] private float m_BaseVignette = 0.25f;
     [Range(0, 1)]
     [SerializeField] private float m_MaxVignette = .8f;
-    [SerializeField] private float m_vignetteSpeed = .1f;
+    [SerializeField] private float m_vignetteSpeedChange = .1f;
+
+    [Header("Light")]
+    [SerializeField] private List<Light> m_Lights;
+    [SerializeField] private float m_LightSpeedChange = .1f;
 
     [Header("Emission")]
     [Tooltip("Moth renderers that contain the Moth emission shader")]
@@ -41,12 +44,17 @@ public class PlayerHealth : Health
     private Color m_StartingEmissionColor;
 
     private bool m_isHealBurst = false;
+
+    private List<float> m_StartingLightIntensity = new List<float>();
      
     protected override void Start()
     { 
         base.Start();
-        SetHealthText();
 
+        foreach (Light light in m_Lights)
+        {
+            m_StartingLightIntensity.Add(light.intensity);
+        }
         m_StartingEmissionColor = m_EmissionRenderer[0].material.GetColor("_EmissionColor");
         m_MaxEmissionRGB = Mathf.Max(m_StartingEmissionColor.r, m_StartingEmissionColor.g, m_StartingEmissionColor.b); 
     }
@@ -55,6 +63,22 @@ public class PlayerHealth : Health
     {
         UpdateEmission();
         UpdateVignette();
+        UpdatePointLights();
+    }
+
+    // Update all point light based on health percent
+    private void UpdatePointLights()
+    {
+        for (int i = 0; i < m_Lights.Count; i++)
+        {
+            float correctLightIntensity = Mathf.Lerp(0, m_StartingLightIntensity[i], HealthPercentage);
+
+            float lightChange = m_LightSpeedChange;
+            if (correctLightIntensity < m_Lights[i].intensity)
+                lightChange *= -1;
+
+            m_Lights[i].intensity += lightChange * Time.deltaTime;
+        }
     }
 
     public override void Damage(DamageInfo damageInfo)
@@ -64,7 +88,6 @@ public class PlayerHealth : Health
         {
             SetAllInvulnFrames(m_InvincibilityDuration);
         }
-        SetHealthText();
     }
 
     // Scale the emission amount of moth with their health percentage
@@ -95,13 +118,14 @@ public class PlayerHealth : Health
         }
     }
 
+    // Update vignette based on health percent
     private void UpdateVignette()
     {
         if (m_PostProcessVolume.profile.TryGet<Vignette>(out var vignette))
         {
             float correctVignette = Mathf.Lerp(m_BaseVignette, m_MaxVignette, 1 - HealthPercentage);
 
-            float vignetteChange = m_vignetteSpeed;
+            float vignetteChange = m_vignetteSpeedChange;
             if (correctVignette < vignette.intensity.value)
                 vignetteChange *= -1;
 
@@ -114,15 +138,9 @@ public class PlayerHealth : Health
         return value < 0 ? 0 : value;
     }
 
-    private void SetHealthText()
-    {
-        m_HealthText.text = Mathf.Floor(m_CurrentHealth).ToString();
-    }
-
     public override void HealAmount(float healthAmount)
     {
         base.HealAmount(healthAmount);
-        SetHealthText();
         StartCoroutine(HealEmissionBurst());
     }
 
