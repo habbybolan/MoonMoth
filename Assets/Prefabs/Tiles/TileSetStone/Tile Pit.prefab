@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 1392908935971096692}
   - component: {fileID: 7135178561651428896}
   - component: {fileID: 3390709767032045804}
-  m_Layer: 12
+  - component: {fileID: 4688565535479383524}
+  m_Layer: 0
   m_Name: Obstacle 2
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -431,7 +432,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb28bcfdc04262448928b5fcbcd74f64, type: 2}
+  - {fileID: 2100000, guid: d12079d8334e08d4e90220bb11e53b95, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -475,6 +476,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &4688565535479383524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652503456881971311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &982867975314769914
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +503,8 @@ GameObject:
   - component: {fileID: 4300480594815739339}
   - component: {fileID: 4611487602850080757}
   - component: {fileID: 944476068657529391}
-  m_Layer: 12
+  - component: {fileID: 4841132174918475010}
+  m_Layer: 0
   m_Name: Obstacle
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -906,7 +921,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb28bcfdc04262448928b5fcbcd74f64, type: 2}
+  - {fileID: 2100000, guid: d12079d8334e08d4e90220bb11e53b95, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -950,6 +965,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &4841132174918475010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982867975314769914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &3730443649621488946
 GameObject:
   m_ObjectHideFlags: 0
@@ -16682,7 +16710,8 @@ GameObject:
   - component: {fileID: 8625199860032324472}
   - component: {fileID: 1455430590591102362}
   - component: {fileID: 5968518693510286080}
-  m_Layer: 12
+  - component: {fileID: 5640788417784629844}
+  m_Layer: 0
   m_Name: Obstacle 3
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -17099,7 +17128,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb28bcfdc04262448928b5fcbcd74f64, type: 2}
+  - {fileID: 2100000, guid: d12079d8334e08d4e90220bb11e53b95, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -17143,6 +17172,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &5640788417784629844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7515861696480610883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &7720927904755875503
 GameObject:
   m_ObjectHideFlags: 0

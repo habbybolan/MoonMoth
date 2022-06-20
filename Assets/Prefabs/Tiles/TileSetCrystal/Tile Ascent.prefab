@@ -17695,7 +17695,8 @@ GameObject:
   - component: {fileID: 336452793056513796}
   - component: {fileID: 3202197320422462861}
   - component: {fileID: 7392724313054241312}
-  m_Layer: 12
+  - component: {fileID: 6694237526901731547}
+  m_Layer: 0
   m_Name: Obstacle 2
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -19229,7 +19230,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1d6bad821f687854e934b7e8353be74e, type: 2}
+  - {fileID: 2100000, guid: 229270b3c8366a74ea66a5a4a2255ea8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19273,6 +19274,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &6694237526901731547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6541479711095498203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &6998918010398985074
 GameObject:
   m_ObjectHideFlags: 0
@@ -19287,7 +19301,8 @@ GameObject:
   - component: {fileID: 9137863105876581945}
   - component: {fileID: 7174223715340866012}
   - component: {fileID: 2525583556013958290}
-  m_Layer: 12
+  - component: {fileID: 1277988907671600414}
+  m_Layer: 0
   m_Name: Obstacle
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -20006,7 +20021,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1d6bad821f687854e934b7e8353be74e, type: 2}
+  - {fileID: 2100000, guid: 229270b3c8366a74ea66a5a4a2255ea8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20050,6 +20065,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &1277988907671600414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998918010398985074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2d8ebf63b3a54428625e07e29836e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DamageAmount: 10
 --- !u!1 &9210696399416239337
 GameObject:
   m_ObjectHideFlags: 0
