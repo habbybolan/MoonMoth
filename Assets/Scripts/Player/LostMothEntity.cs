@@ -7,37 +7,19 @@ public class LostMothEntity : MonoBehaviour
     [SerializeField] private float m_DurationInDirection = .4f;
     [SerializeField] private float m_Speed = .4f;
 
-    private bool m_IsGoingUp = true;
+    private bool m_IsGoingUp = false;
 
-    private void Start()
+    private void Update()
     {
-        StartCoroutine(TempFlapCoroutine());
-    }
-
-    // TODO: Delete after implementing with animation
-    private IEnumerator TempFlapCoroutine()
-    {
-        float currDuration = 0;
-        while (true)
+        // fly up
+        if (m_IsGoingUp)
         {
-            currDuration += Time.deltaTime;
-            if (currDuration > m_DurationInDirection)
-            {
-                m_IsGoingUp = !m_IsGoingUp;
-                currDuration = 0;
-            }
-
-            // fly up
-            if (m_IsGoingUp)
-            {
-                transform.Translate(Vector3.up * m_Speed * Time.deltaTime);
-            }
-            // fly down
-            else
-            {
-                transform.Translate(Vector3.down * m_Speed * Time.deltaTime);
-            }
-            yield return null;
+            transform.Translate(Vector3.up * m_Speed * Time.deltaTime);
+        }
+        // fly down
+        else
+        {
+            transform.Translate(Vector3.down * m_Speed * Time.deltaTime);
         }
     }
 
