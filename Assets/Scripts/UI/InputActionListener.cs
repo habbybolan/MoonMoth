@@ -28,4 +28,10 @@ public class InputActionListener : MonoBehaviour
         OnPerformed.Invoke();
         _activateButton?.onClick.Invoke();
     }
+
+    // force execution of OnPerformed without input from user
+    public void ForcePerform()
+    {
+        OnPerformed.Invoke();
+    }
 }
