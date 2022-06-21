@@ -90,6 +90,8 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject ControlObject => m_ControlObject;
 
+    private Vector3 m_PrevCrosshairPoint;
+
     void Start()
     {
         m_CurrMothMoveSpeed = m_BaseMothMoveSpeed;
@@ -160,7 +162,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpdateCrossHair()
     {
+        Vector3 newCrosshairPoint = (CrossHairPoint - m_Crosshair.position) * 0.5f;
         m_Crosshair.position = Camera.main.WorldToScreenPoint(CrossHairPoint);
+        
         m_ReticlePoint.position = CrossHairPoint;
     }
 
