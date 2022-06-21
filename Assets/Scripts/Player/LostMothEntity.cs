@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class LostMoth : MonoBehaviour
+ 
+public class LostMothEntity : MonoBehaviour
 {
-    [SerializeField] private float m_DurationInDirection = 1f;
-    [SerializeField] private float m_Speed = 1f;
+    [SerializeField] private float m_DurationInDirection = .4f;
+    [SerializeField] private float m_Speed = .4f;
 
     private bool m_IsGoingUp = true;
 
     private void Start()
     {
-        StartCoroutine(UpDownCoroutine());
+        StartCoroutine(TempFlapCoroutine());
     }
 
-    private IEnumerator UpDownCoroutine()
+    // TODO: Delete after implementing with animation
+    private IEnumerator TempFlapCoroutine()
     {
         float currDuration = 0;
         while (true)
@@ -40,13 +41,8 @@ public class LostMoth : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void EndOfFlap()
     {
-        PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
-        if (playerMovement != null)
-        {
-            PlayerManager.PropertyInstance.PlayerController.LostMothCollected();
-            transform.parent.gameObject.SetActive(false);
-        }
+        m_IsGoingUp = !m_IsGoingUp;
     }
 }
