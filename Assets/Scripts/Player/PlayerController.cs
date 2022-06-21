@@ -317,6 +317,11 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_Animator.SetBool("isGlideDelay", true);
         float rand = UnityEngine.Random.Range(m_GlideFlapDelayMin, m_GlideFlapDelayMax);
         yield return new WaitForSeconds(rand);
+        int randAnim = UnityEngine.Random.Range(0, 2);
+        if (randAnim == 0)
+            m_Animator.SetBool("isLargeFlap", true);
+        else
+            m_Animator.SetBool("isLargeFlap", false);
         m_Animator.SetBool("isGlideDelay", false);
     }
 
