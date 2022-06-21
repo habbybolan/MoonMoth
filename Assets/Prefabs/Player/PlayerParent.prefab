@@ -7300,7 +7300,7 @@ MonoBehaviour:
   - {fileID: 8164007696304725484}
   - {fileID: 1226438625102624673}
   m_HealEmissionBurstDuration: 0.55
-  m_HealEmissionBurstAmount: 20
+  m_HealEmissionBurstAmount: 10
   m_EmissionLossSpeed: 10
 --- !u!95 &1380375373
 Animator:
