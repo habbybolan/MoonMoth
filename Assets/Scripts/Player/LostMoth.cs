@@ -46,7 +46,7 @@ public class LostMoth : MonoBehaviour
         if (playerMovement != null)
         {
             PlayerManager.PropertyInstance.PlayerController.LostMothCollected();
-            transform.parent.gameObject.SetActive(false);
+            transform.gameObject.SetActive(false);
         }
     }
 }
