@@ -73,10 +73,15 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_MoonBarAbility.d_AimModeEndDelegate = AimModeEnd;
         m_MoonBarAbility.d_DashStartDelegate = DashModeStart;
         m_MoonBarAbility.d_DashEndDelegate = DashModeEnd;
+        UIManager.PropertyInstance.FadeOut(m_FogTransitionDuration);
 
         m_Health.d_DamageDelegate = OnDamageTaken;
-        UIManager.PropertyInstance.FadeOut(2f);
         UpdateLostMothText();
+
+        m_PlayerParentMovement.TryMove();
+        m_PlayerMovement.ResetPosition();
+        m_CameraMovement.ResetPosition();
+        
     }
 
     private void OnDamageTaken(DamageInfo damageInfo) 

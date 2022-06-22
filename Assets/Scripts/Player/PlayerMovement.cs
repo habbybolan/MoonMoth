@@ -92,14 +92,19 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 m_PrevCrosshairPoint;
 
+    private void Awake()
+    {
+        m_ControlRigidBody = m_ControlObject.GetComponent<Rigidbody>();
+        m_ControlObject.GetComponent<MeshRenderer>().enabled = m_IsShowControlObject;
+    }
+
     void Start()
     {
         m_CurrMothMoveSpeed = m_BaseMothMoveSpeed;
-        m_ControlRigidBody = m_ControlObject.GetComponent<Rigidbody>();
+        
         // Get the max input y value during a dodge based on degree limit set, with x dodge input -1/1
         m_MaxYValue = Mathf.Tan(Mathf.Deg2Rad * m_MaxYDegrees);
 
-        m_ControlObject.GetComponent<MeshRenderer>().enabled = m_IsShowControlObject;
         m_CurrControlSpeed = m_BaseControlSpeed;
         Camera.main.transform.localPosition = Vector3.forward * m_CameraOffsetFromParent;
 
