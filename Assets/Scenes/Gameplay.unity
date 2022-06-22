@@ -197,8 +197,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2059251132}
   - {fileID: 1398422061}
+  - {fileID: 2059251132}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -284,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &266740770
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1076,7 +1076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1099418567748886598, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1099418567748886598, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1154,10 +1154,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenuCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 2090674184064102526, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Target
-      value: 
-      objectReference: {fileID: 951211382}
     - target: {fileID: 2340729513051122933, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1167,13 +1163,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 951211381}
     - target: {fileID: 8657425138570730159, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 951211381}
-    - target: {fileID: 8657425138570730159, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Target
-      value: 
-      objectReference: {fileID: 951211382}
+      objectReference: {fileID: 1380375362}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
 --- !u!224 &1398422061 stripped
@@ -1219,7 +1211,7 @@ RectTransform:
   m_Children:
   - {fileID: 266740770}
   m_Father: {fileID: 139862025}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

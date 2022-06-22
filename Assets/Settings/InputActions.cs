@@ -212,7 +212,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5af9ef70-955b-41ad-aac6-8b88de81a502"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -223,7 +223,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0a4d7d8c-856c-41c7-9239-868058cafdc2"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -336,6 +336,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Quaternion"",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d6a38e8-2ab9-46e4-a584-045a8496e4ef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -757,6 +766,28 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""TrackedDeviceOrientation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1992a9ae-5926-4323-b606-4d2bac1863ec"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43c91782-3c2c-410b-8f31-eb56559b4d02"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -847,6 +878,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        m_UI_Back = m_UI.FindAction("Back", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1013,6 +1045,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_RightClick;
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
+    private readonly InputAction m_UI_Back;
     public struct UIActions
     {
         private @InputActions m_Wrapper;
@@ -1027,6 +1060,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+        public InputAction @Back => m_Wrapper.m_UI_Back;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1066,6 +1100,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @TrackedDeviceOrientation.started -= m_Wrapper.m_UIActionsCallbackInterface.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnTrackedDeviceOrientation;
+                @Back.started -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -1100,6 +1137,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
             }
         }
     }
@@ -1173,5 +1213,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
     }
 }

@@ -62,6 +62,7 @@ public class UIManager : MonoBehaviour
         // prevent double fading in
         if (m_IsFadeIn) return;
 
+        m_FadeScreen.gameObject.SetActive(true);
         // if currently fading out, cancel and start fading in
         if (m_IsFadeOut)
         {
@@ -112,5 +113,6 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
         m_IsFadeOut = false;
+        m_FadeScreen.gameObject.SetActive(false);
     }
 }

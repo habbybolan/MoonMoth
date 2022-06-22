@@ -190,7 +190,7 @@
                 {
                     "name": "",
                     "id": "5af9ef70-955b-41ad-aac6-8b88de81a502",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -201,7 +201,7 @@
                 {
                     "name": "",
                     "id": "0a4d7d8c-856c-41c7-9239-868058cafdc2",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "Gamepad",
@@ -314,6 +314,15 @@
                     "expectedControlType": "Quaternion",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Back",
+                    "type": "Button",
+                    "id": "1d6a38e8-2ab9-46e4-a584-045a8496e4ef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -733,6 +742,28 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1992a9ae-5926-4323-b606-4d2bac1863ec",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43c91782-3c2c-410b-8f31-eb56559b4d02",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Back",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
