@@ -693,8 +693,8 @@ MonoBehaviour:
     - {fileID: 3961284799128567415, guid: aaf8365b8c79fef479fbde39d70d02d0, type: 3}
   m_TileTransitions:
   - {fileID: 3961284799128567415, guid: 6b7c51d524946454481ef492bf5f961c, type: 3}
-  - {fileID: 3961284799128567415, guid: 522ed23a4723b76489d8f68d56b6568b, type: 3}
-  - {fileID: 3961284799128567415, guid: 0972ed06aabd4194dbbe28c2cf3c2687, type: 3}
+  - {fileID: 3961284799128567415, guid: 6b7c51d524946454481ef492bf5f961c, type: 3}
+  - {fileID: 3961284799128567415, guid: 7178fc627e51ae0439bd79b231160efb, type: 3}
   m_NumTilesToSpawn: 8
   m_TilePoolSize: 20
   m_PercentDifficultyIncreasePerSecond: 1
