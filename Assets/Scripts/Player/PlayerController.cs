@@ -23,7 +23,8 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     [Header("Effects")]
     [SerializeField] private float m_SlowEffectDuration = 3f;
-    [SerializeField] private float m_FogTransitionDuration = 1f;
+    [SerializeField] private float m_FogInTransitionDuration = 1f;
+    [SerializeField] private float m_FogOutTransitionDuration = 3f;
 
     [Header("Lost Moth")]
     [SerializeField] private TextMeshProUGUI m_LostMothUI;
@@ -49,6 +50,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     private bool m_IsDodgeCooldown;
     private Animator m_Animator;
+    private bool m_IsFirstUpdate = true;
 
     public MoonBarAbility MoonBarAbility { get { return m_MoonBarAbility; }}
 
@@ -73,14 +75,9 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_MoonBarAbility.d_AimModeEndDelegate = AimModeEnd;
         m_MoonBarAbility.d_DashStartDelegate = DashModeStart;
         m_MoonBarAbility.d_DashEndDelegate = DashModeEnd;
-        UIManager.PropertyInstance.FadeOut(m_FogTransitionDuration);
 
         m_Health.d_DamageDelegate = OnDamageTaken;
         UpdateLostMothText();
-
-        m_PlayerParentMovement.TryMove();
-        m_PlayerMovement.ResetPosition();
-        m_CameraMovement.ResetPosition();
         
     }
 
@@ -132,6 +129,13 @@ public class PlayerController : CharacterController<PlayerHealth>
         if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
             m_PlayerMovement.HorizontalRotation(m_MovementInput.x);
+        }
+
+        if (m_IsFirstUpdate)
+        {
+            UIManager.PropertyInstance.FadeOut(m_FogOutTransitionDuration);
+            m_CameraMovement.ResetPosition();
+            m_IsFirstUpdate = !m_IsFirstUpdate;
         }
     }
 
@@ -232,9 +236,9 @@ public class PlayerController : CharacterController<PlayerHealth>
     private IEnumerator TransitionPhase()
     {
         m_LostMothCount = 0;
-        UIManager.PropertyInstance.FadeIn(m_FogTransitionDuration);
+        UIManager.PropertyInstance.FadeIn(m_FogInTransitionDuration);
 
-        yield return new WaitForSeconds(m_FogTransitionDuration);
+        yield return new WaitForSeconds(m_FogInTransitionDuration);
 
         // Call rest of transition logic
         m_PlayerParentMovement.DisconnectFromSpline();
@@ -251,7 +255,7 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_CameraMovement.ResetPosition();
        
 
-        UIManager.PropertyInstance.FadeOut(m_FogTransitionDuration);
+        UIManager.PropertyInstance.FadeOut(m_FogOutTransitionDuration);
         UpdateLostMothText();
     }
 
