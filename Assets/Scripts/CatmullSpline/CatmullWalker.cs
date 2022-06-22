@@ -17,7 +17,6 @@ public class CatmullWalker : MonoBehaviour
     protected virtual void Start()
     {
         m_CurrSpeed = m_Speed;
-        transform.position = m_Spline.GetPoint(0);
     }
 
     // Called in controllers update method

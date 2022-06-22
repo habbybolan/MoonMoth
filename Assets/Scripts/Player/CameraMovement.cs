@@ -80,8 +80,8 @@ public class CameraMovement : MonoBehaviour
 
     public void ResetPosition()
     {
-        // wait for the next frame to update position on parent, otherwise parent wont be updated
-        StartCoroutine(ResetPositionCoroutine());
+        CinemachineCore.Instance.GetVirtualCamera(0).PreviousStateIsValid = false;
+        CinemachineCore.Instance.GetVirtualCamera(0).gameObject.transform.position = transform.parent.position + transform.parent.forward * m_StartingZ;
     }
 
     private IEnumerator ResetPositionCoroutine()

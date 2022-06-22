@@ -283,7 +283,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health: {fileID: 4211784419857639162}
-  m_SpiderWebHealth: {fileID: 0}
   m_SpiderMovement: {fileID: 3434131013435923559}
   m_SpiderWeapon: {fileID: 8785051892151628039}
   m_SpiderWeb: {fileID: 6788250443946503172}
@@ -302,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxHealth: 100
-  m_deathParticles: {fileID: 0}
+  m_deathParticles: {fileID: 3724928139645373970, guid: 06cf6d26e50ae4c40b5f3b0a7037bc1c, type: 3}
   m_deathParticlesDuration: 1
   m_HealthPercentLosePerSecond: 1
   m_IsInvincible: 0
