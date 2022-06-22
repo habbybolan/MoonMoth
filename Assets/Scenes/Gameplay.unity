@@ -265,6 +265,10 @@ PrefabInstance:
       propertyPath: m_PostProcessVolume
       value: 
       objectReference: {fileID: 728148997}
+    - target: {fileID: 7166930479057285041, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_IsShowControlObject
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
 --- !u!1 &266740769
@@ -1018,7 +1022,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 1
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 1
+  m_UpdateMethod: 0
   m_BlendUpdateMethod: 0
   m_DefaultBlend:
     m_Style: 1
