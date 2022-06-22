@@ -40,7 +40,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     [SerializeField] private float m_GlideFlapDelayMin = .2f;
     [SerializeField] private float m_GlideFlapDelayMax = .5f;
 
-    [SerializeField] private InputActionAsset m_PlayerInput; 
+    private PlayerInput m_PlayerInput; 
 
     private PLAYER_ACTION_STATE m_playerState;  // Current player state given the actions performed / effects applied
 
@@ -66,6 +66,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     {
         m_Animator = GetComponent<Animator>();
         m_CurrEffect = DamageInfo.HIT_EFFECT.NORMAL;
+        m_PlayerInput = FindObjectOfType<PlayerInput>();
     }
 
     protected override void Start()
@@ -237,12 +238,14 @@ public class PlayerController : CharacterController<PlayerHealth>
     // Fogs up player's screen, and calls next logic for the transition
     private IEnumerator TransitionPhase()
     {
-        m_PlayerInput.Disable();
+        // invincible during transition
+        m_Health.SetAllInvulnFrames(3f);
         m_LostMothCount = 0;
         UIManager.PropertyInstance.FadeIn(m_FogInTransitionDuration);
 
         yield return new WaitForSeconds(m_FogInTransitionDuration);
 
+        m_PlayerInput.enabled = false;
         // Call rest of transition logic
         m_PlayerParentMovement.DisconnectFromSpline();
         GameManager.PropertyInstance.OnAllLostMothsCollected();
@@ -260,7 +263,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
         UIManager.PropertyInstance.FadeOut(m_FogOutTransitionDuration);
         UpdateLostMothText();
-        m_PlayerInput.Enable();
+        m_PlayerInput.enabled = true;
     }
 
     private void FinishAction()
