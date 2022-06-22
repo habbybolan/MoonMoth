@@ -40,6 +40,8 @@ public class PlayerController : CharacterController<PlayerHealth>
     [SerializeField] private float m_GlideFlapDelayMin = .2f;
     [SerializeField] private float m_GlideFlapDelayMax = .5f;
 
+    [SerializeField] private InputActionAsset m_PlayerInput; 
+
     private PLAYER_ACTION_STATE m_playerState;  // Current player state given the actions performed / effects applied
 
     private int m_LostMothCount = 0;
@@ -235,6 +237,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     // Fogs up player's screen, and calls next logic for the transition
     private IEnumerator TransitionPhase()
     {
+        m_PlayerInput.Disable();
         m_LostMothCount = 0;
         UIManager.PropertyInstance.FadeIn(m_FogInTransitionDuration);
 
@@ -257,6 +260,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
         UIManager.PropertyInstance.FadeOut(m_FogOutTransitionDuration);
         UpdateLostMothText();
+        m_PlayerInput.Enable();
     }
 
     private void FinishAction()
