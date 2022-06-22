@@ -63,7 +63,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7190,8 +7190,8 @@ MonoBehaviour:
   m_AimModeStartSound: {fileID: 8718531766064261588}
   m_AimModeEndSound: {fileID: 1371643444647074668}
   m_DodgeCooldown: 1
-  m_GlideFlapDelayMin: 0.3
-  m_GlideFlapDelayMax: 0.8
+  m_GlideFlapDelayMin: 0
+  m_GlideFlapDelayMax: 0.3
 --- !u!114 &7166930479057285041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7204,7 +7204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1616b1e3f70b84f4db6c432144dbd350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BaseMothMoveSpeed: 5
+  m_BaseMothMoveSpeed: 6
   m_IsShowControlObject: 0
   m_ControlObject: {fileID: 3977897140022987257}
   m_BaseControlSpeed: 17
