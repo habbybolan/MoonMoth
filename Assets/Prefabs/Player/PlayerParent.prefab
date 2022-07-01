@@ -6065,7 +6065,7 @@ MonoBehaviour:
   m_Duration: 5
   m_Spline: {fileID: 0}
   m_Speed: 17
-  m_MaxTurnAngle: 20
+  m_MaxTurnAngle: 10
   m_SpeedIncreasePercent: 1
   m_IsIndependentMovement: 0
   m_SlowEffectSpeedDecreasePercent: 0.5
@@ -7261,7 +7261,8 @@ MonoBehaviour:
   m_Weapon: {fileID: 7166930477189024820}
   m_MoonBarAbility: {fileID: 743825388203069262}
   m_SlowEffectDuration: 3
-  m_FogTransitionDuration: 3
+  m_FogInTransitionDuration: 1
+  m_FogOutTransitionDuration: 3
   m_LostMothUI: {fileID: 8894022941869152368}
   m_AimModeStartSound: {fileID: 8718531766064261588}
   m_AimModeEndSound: {fileID: 1371643444647074668}
