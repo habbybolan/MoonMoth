@@ -15368,7 +15368,7 @@ MonoBehaviour:
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
-  m_SelectedVertices: f6030000
+  m_SelectedVertices: 
 --- !u!114 &3830436333368515054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15434,7 +15434,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -15534,7 +15534,7 @@ MonoBehaviour:
     - {x: -21.460573, y: -5.583397, z: 97.717224}
     - {x: -37.41342, y: -0.5470581, z: 92.78386}
   m_LostMothPoints: []
-  m_LostMothPrefab: {fileID: 0}
+  m_LostMothPrefab: {fileID: 7059916612857397021, guid: 86bfae8b7e5fc98428be5b8e1cb6481c, type: 3}
 --- !u!65 &6108735066170562764
 BoxCollider:
   m_ObjectHideFlags: 0
