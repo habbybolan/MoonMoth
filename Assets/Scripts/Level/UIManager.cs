@@ -54,6 +54,7 @@ public class UIManager : MonoBehaviour
     private void UpdateFog(Color color)
     {
         RenderSettings.fogColor = color;
+        RenderSettings.skybox.SetColor("_Color", color);
     }
 
     // Fade screen into black
