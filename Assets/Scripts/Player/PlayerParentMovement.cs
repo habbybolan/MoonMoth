@@ -22,7 +22,9 @@ public class PlayerParentMovement : CatmullWalker
 
     override protected void Start()
     {
-        base.Start(); 
+        base.Start();
+
+        m_RigidBody = GetComponent<Rigidbody>();
     }
 
     public override void TryMove()
@@ -32,7 +34,15 @@ public class PlayerParentMovement : CatmullWalker
             transform.transform.Translate(Vector3.forward * m_Speed);
             return;
         }
+        
+        bool bSplineInitialized = IsSplineInitialized();
         base.TryMove();
+
+        // If spline was not initialzied before moving, then update control point location
+        if (!bSplineInitialized)
+        {
+            PlayerManager.PropertyInstance.PlayerController.PlayerMovement.ManuallySetControlPointLocation();
+        }
     }
 
     public void DashStart() {

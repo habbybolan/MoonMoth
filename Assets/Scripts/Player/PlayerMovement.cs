@@ -113,6 +113,8 @@ public class PlayerMovement : MonoBehaviour
 
         m_ControlObject.transform.localPosition = transform.parent.InverseTransformPoint(Camera.main.ViewportToWorldPoint(new Vector3(.5f, .5f, -m_CameraOffsetFromParent)));
         m_CurrentAngle = Vector3.zero;
+
+        m_ControlObject.transform.parent = null;
     }
 
     public void ControlPointXYMovement(Vector2 Vec2Movement)
@@ -122,11 +124,16 @@ public class PlayerMovement : MonoBehaviour
 
         // calculate velocity differential
         Vector3 currentVelocity = m_ControlRigidBody.velocity;
-        Vector3 targetVelocity = (transform.parent.transform.right * inputX + transform.parent.transform.up * inputY) * m_CurrControlSpeed; 
+        // differential for horizontal/vertical movements
+        Vector3 targetVelocity = (transform.parent.transform.right * inputX + transform.parent.transform.up * inputY) * m_CurrControlSpeed;
+        // differential for parent catmull walker movement
+        Vector3 ParentVelocity = PlayerManager.PropertyInstance.PlayerController.PlayerParent.RigidBody.velocity;
+        targetVelocity += ParentVelocity;
         Vector3 velocityDifferential = (targetVelocity - currentVelocity);
 
         float controlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 100);
-        m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration + transform.forward * controlSpeedMultiplier);
+        m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration + 
+            transform.forward * controlSpeedMultiplier);
     }
 
     public void MothXYMovemnent()
@@ -264,7 +271,15 @@ public class PlayerMovement : MonoBehaviour
         callback();
     }
 
-    public Vector3 ControlPosition => m_ControlObject.transform.localPosition;
+    // Set the control point movement to the moth on new tileset generation
+    public void ManuallySetControlPointLocation()
+    {
+        m_ControlRigidBody.isKinematic = true;
+        m_ControlObject.transform.position = transform.parent.transform.position;
+        m_ControlRigidBody.isKinematic = false;
+    }
+
+    public Vector3 ControlPosition => m_ControlObject.transform.position - transform.parent.position;
 
     IEnumerator PlayDodgeParticles()
     {

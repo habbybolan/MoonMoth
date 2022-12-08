@@ -14,6 +14,9 @@ public class CatmullWalker : MonoBehaviour
     private float m_CurrCurveLength = 0;
     protected float m_CurrSpeed;
 
+    // If movement uses RigidBody, child class will set a value for this
+    protected Rigidbody m_RigidBody;
+
     protected virtual void Start()
     {
         m_CurrSpeed = m_Speed;
@@ -22,14 +25,15 @@ public class CatmullWalker : MonoBehaviour
     // Called in controllers update method
     public virtual void TryMove()
     {
-        if (!m_Spline.IsInitialized)
+        bool isSplineInitialized = IsSplineInitialized();
+        if (!isSplineInitialized)
             m_Spline.InitializeSplineAtHead();
 
-        MovePlayerConstant();
+        MovePlayerConstant(!isSplineInitialized);
     }
 
     // Uses distance travelled so far inside current curve 
-    private void MovePlayerConstant()
+    private void MovePlayerConstant(bool isFirstMove)
     {
         // If first move, initialize starting values
         if (m_CurrCurve == -1)
@@ -44,9 +48,28 @@ public class CatmullWalker : MonoBehaviour
         float t = (m_Dist) / m_CurrCurveLength;
 
         Vector3 position = m_Spline.GetPointLocal(t, m_CurrCurve);
-        transform.position = position;
         Vector3 newRotation = m_Spline.GetDirectionLocal(t, m_CurrCurve);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newRotation), m_MaxTurnAngle);
+        Quaternion rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newRotation), m_MaxTurnAngle);
+
+        // If no rigidBody, move transform direction
+        if (m_RigidBody != null)
+        {
+            // If first move, move instantly
+            if (isFirstMove)
+            {
+                m_RigidBody.transform.position = position;
+                m_RigidBody.transform.rotation = rotation;
+            } else
+            {
+                m_RigidBody.MovePosition(position);
+                m_RigidBody.MoveRotation(rotation);
+            }
+            
+        } else
+        {
+            transform.position = position;
+            transform.rotation = rotation;
+        }
 
         // Move to next curve
         if (m_Dist >= m_CurrCurveLength)
@@ -77,10 +100,16 @@ public class CatmullWalker : MonoBehaviour
         m_CurrSpeed = m_Speed;
     }
 
+    protected bool IsSplineInitialized()
+    {
+        return m_Spline.IsInitialized;
+    }
+
     public SplineCreator spline
     {
         get { return m_Spline; }
     }
 
     public float Speed { get { return m_Speed; } }
+    public Rigidbody RigidBody { get { return m_RigidBody; } }
 }
