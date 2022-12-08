@@ -292,8 +292,8 @@ public class PlayerMovement : MonoBehaviour
     {
         get
         {
-            float yOffset = m_ControlObject.transform.localPosition.y * m_CrosshairPercentY;
-            float xOffset = m_ControlObject.transform.localPosition.x * m_CrosshairPercentX;
+            float yOffset = ControlPosition.y * m_CrosshairPercentY;
+            float xOffset = ControlPosition.x * m_CrosshairPercentX;
             return m_ControlObject.transform.position - transform.parent.transform.right * xOffset - transform.parent.transform.up * (yOffset - m_InitialYCrosshairOffset);
         }
     }
