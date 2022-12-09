@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement speed")]
     [Tooltip("Percent of control point's movement speed so player lags behind control point")]
-    [SerializeField] private float m_BaseMothMoveSpeed = 5f; 
+    [SerializeField] private float m_BaseMothMoveSpeed = 7f; 
     [Tooltip("To show visual representation of control point player follows")]
     [SerializeField] private bool m_IsShowControlObject = false;
     [Tooltip("Prefab representing the visuals of the control point")]
@@ -119,28 +119,31 @@ public class PlayerMovement : MonoBehaviour
 
     public void ControlPointXYMovement(Vector2 Vec2Movement)
     {
+        m_ControlRigidBody.MoveRotation(transform.parent.rotation);
+
         float inputX = Vec2Movement.x;
         float inputY = Vec2Movement.y;
 
         // calculate velocity differential
         Vector3 currentVelocity = m_ControlRigidBody.velocity;
         // differential for horizontal/vertical movements
-        Vector3 targetVelocity = (transform.parent.transform.right * inputX + transform.parent.transform.up * inputY) * m_CurrControlSpeed;
+        Vector3 targetVelocity = (transform.parent.right * inputX + transform.parent.up * inputY) * m_CurrControlSpeed;
+
         // differential for parent catmull walker movement
         Vector3 ParentVelocity = PlayerManager.PropertyInstance.PlayerController.PlayerParent.RigidBody.velocity;
         targetVelocity += ParentVelocity;
-        Vector3 velocityDifferential = (targetVelocity - currentVelocity);
 
+        Vector3 velocityDifferential = targetVelocity - currentVelocity;
         float controlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 100);
-        m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration + 
-            transform.forward * controlSpeedMultiplier);
+        m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration +
+            transform.parent.forward * controlSpeedMultiplier);
     }
 
     public void MothXYMovemnent()
     {
         // Move towards control points 
-        Vector3 distanceFromControl = (new Vector3(ControlPosition.x, ControlPosition.y, transform.localPosition.z) - transform.localPosition);
-        transform.localPosition += distanceFromControl * m_CurrMothMoveSpeed * Time.fixedDeltaTime;
+        Vector3 distanceFromControl = new Vector3(ControlPosition.x, ControlPosition.y, transform.localPosition.z) - transform.localPosition;
+        transform.localPosition += distanceFromControl * m_CurrMothMoveSpeed * .02f;
     }
 
     public void RotationLook()
@@ -279,7 +282,7 @@ public class PlayerMovement : MonoBehaviour
         m_ControlRigidBody.isKinematic = false;
     }
 
-    public Vector3 ControlPosition => m_ControlObject.transform.position - transform.parent.position;
+    public Vector3 ControlPosition => transform.parent.transform.InverseTransformPoint(m_ControlRigidBody.position);
 
     IEnumerator PlayDodgeParticles()
     {
