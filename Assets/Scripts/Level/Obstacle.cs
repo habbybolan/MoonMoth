@@ -7,9 +7,9 @@ public class Obstacle : MonoBehaviour
     [Range(0f, 100f)]
     [SerializeField] private float m_DamageAmount = 10f;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        PlayerHealth playerHealth = collision.collider.GetComponent<PlayerHealth>();
+        PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
         if (playerHealth)
         {
             playerHealth.Damage(new DamageInfo(m_DamageAmount, gameObject, playerHealth.gameObject, DamageInfo.DAMAGE_TYPE.OBSTACLE));
