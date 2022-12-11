@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 7452162210851016394}
   - component: {fileID: -7761560041855529281}
   - component: {fileID: 7677804869680016415}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShortStelag
   m_TagString: Stalag
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4233009878210327397, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
 --- !u!1001 &3294738033029150586
@@ -182,6 +182,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 7452162210851016394}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
@@ -261,6 +262,7 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: f962f5e89b114b44b8269ff9a2dc8ec7, type: 3}
 --- !u!4 &3041050930764484753 stripped
 Transform:

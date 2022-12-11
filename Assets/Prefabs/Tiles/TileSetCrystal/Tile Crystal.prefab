@@ -9080,8 +9080,8 @@ MonoBehaviour:
   - {x: -1.2662654, y: -37.71225}
   - {x: -5.13175, y: -9.125565}
   - {x: -1.2662649, y: -9.125565}
-  - {x: -7.282934, y: -37.52005}
-  - {x: 4.8945007, y: -37.52005}
+  - {x: -7.2829347, y: -37.52005}
+  - {x: 4.8945003, y: -37.52005}
   - {x: -7.2829385, y: -8.929871}
   - {x: 4.894497, y: -8.929886}
   - {x: -7.9602747, y: -37.504303}
@@ -9108,7 +9108,7 @@ MonoBehaviour:
   - {x: 7.282948, y: -37.01625}
   - {x: -7.1722655, y: -8.083389}
   - {x: 7.2829704, y: -8.083389}
-  - {x: -5.4829025, y: -37.305664}
+  - {x: -5.482903, y: -37.305664}
   - {x: -0.23788822, y: -37.358124}
   - {x: -5.4829, y: -8.745209}
   - {x: 3.5447376, y: -8.745209}
@@ -9124,8 +9124,8 @@ MonoBehaviour:
   - {x: -2.4469981, y: -9.125557}
   - {x: -6.7285395, y: 19.461113}
   - {x: -2.4469957, y: 19.461113}
-  - {x: -7.282944, y: -8.874924}
-  - {x: 4.894491, y: -8.874924}
+  - {x: -7.2829447, y: -8.874924}
+  - {x: 4.8944907, y: -8.874924}
   - {x: -7.282947, y: 19.717445}
   - {x: 4.8944883, y: 19.717445}
   - {x: -6.829962, y: -8.863098}
@@ -9144,13 +9144,13 @@ MonoBehaviour:
   - {x: 11.627594, y: -9.125557}
   - {x: 0.9754381, y: 14.208908}
   - {x: 11.627598, y: 19.461105}
-  - {x: -7.928355, y: -9.50016}
-  - {x: 6.3925653, y: -9.658562}
+  - {x: -7.9283557, y: -9.50016}
+  - {x: 6.392565, y: -9.658562}
   - {x: -7.8810196, y: 19.021355}
   - {x: 4.4891095, y: 13.752029}
   - {x: -5.5896006, y: -9.15905}
   - {x: 3.4373548, y: -9.1594925}
-  - {x: -5.5895953, y: 19.427406}
+  - {x: -5.589595, y: 19.427406}
   - {x: 3.1076581, y: 19.427399}
   - {x: -3.0586822, y: -9.125572}
   - {x: 0.7603328, y: -9.125572}
@@ -9188,7 +9188,7 @@ MonoBehaviour:
   - {x: 5.1485424, y: 12.670353}
   - {x: -7.1663947, y: 47.56242}
   - {x: 7.288841, y: 47.7531}
-  - {x: -7.326799, y: 18.263775}
+  - {x: -7.3267994, y: 18.263775}
   - {x: 1.3652301, y: 18.260693}
   - {x: -7.3267946, y: 47.826122}
   - {x: 2.371522, y: 47.82609}
@@ -9297,12 +9297,12 @@ MonoBehaviour:
   - {x: 1.1298714, y: 67.10093}
   - {x: -2.2282825, y: 135.6936}
   - {x: -2.2332175, y: 128.54672}
-  - {x: 0.6341461, y: 128.54474}
+  - {x: 0.6341462, y: 128.54474}
   - {x: 0.63908136, y: 135.69162}
   - {x: -2.2282825, y: 128.54704}
   - {x: -2.2332177, y: 121.400154}
-  - {x: 0.63414633, y: 121.39817}
-  - {x: 0.6390815, y: 128.54506}
+  - {x: 0.63414645, y: 121.39817}
+  - {x: 0.6390816, y: 128.54506}
   - {x: 0.6341491, y: 121.39853}
   - {x: 2.7655392, y: 121.40679}
   - {x: 2.7378445, y: 128.55325}
@@ -9321,9 +9321,9 @@ MonoBehaviour:
   - {x: -3.6374278, y: 127.85923}
   - {x: -2.8844342, y: 121.40177}
   - {x: 0.44718933, y: 121.400055}
-  - {x: 0.4506781, y: 128.54684}
+  - {x: 0.45067835, y: 128.54684}
   - {x: -2.5124571, y: 128.54834}
-  - {x: 0.44718575, y: 128.54669}
+  - {x: 0.44718587, y: 128.54669}
   - {x: 0.4506755, y: 135.69345}
   - {x: -2.5124595, y: 135.69495}
   - {x: -2.5159492, y: 128.54819}
@@ -9574,7 +9574,7 @@ MonoBehaviour:
   - {x: -4.3218365, y: 64.42824}
   - {x: -3.4115555, y: 57.26476}
   - {x: -3.2833881, y: 71.60341}
-  - {x: -3.4858513, y: 78.725395}
+  - {x: -3.4858515, y: 78.725395}
   - {x: -5.678976, y: 78.66305}
   - {x: -3.42945, y: 64.47151}
   - {x: -4.6384015, y: 78.64724}
@@ -9701,12 +9701,12 @@ MonoBehaviour:
   - {x: 9.627539, y: 121.48373}
   - {x: 9.725557, y: 114.38022}
   - {x: 9.910091, y: 104.711044}
-  - {x: -6.6682487, y: -9.123993}
+  - {x: -6.668248, y: -9.123993}
   - {x: -5.6497064, y: -16.16307}
   - {x: -5.773862, y: -23.419235}
   - {x: -6.7532225, y: -37.70482}
   - {x: 5.761757, y: -37.87242}
-  - {x: 7.1389685, y: -9.078903}
+  - {x: 7.138969, y: -9.078903}
   - {x: 0.26197428, y: -9.055084}
   - {x: -4.98335, y: 5.118431}
   - {x: -8.964199, y: 19.45678}
@@ -9797,7 +9797,7 @@ MonoBehaviour:
   - {x: 1.740351, y: 107.20532}
   - {x: 2.577221, y: 121.48414}
   - {x: 2.4161592, y: 135.79126}
-  - {x: 0.984295, y: 135.79236}
+  - {x: 0.9842951, y: 135.79236}
   - {x: 1.0383469, y: 118.63995}
   - {x: 0.9639217, y: 135.79164}
   - {x: -0.3631482, y: 135.79266}
@@ -9860,7 +9860,7 @@ MonoBehaviour:
   - {x: 8.633721, y: 139.82448}
   - {x: 4.7533665, y: 115.013664}
   - {x: -7.763139, y: 115.17017}
-  - {x: 4.756466, y: 119.07638}
+  - {x: 4.756467, y: 119.07638}
   - {x: -7.762207, y: 119.23446}
   - {x: 0.43275988, y: 135.77367}
   - {x: -0.9474207, y: 135.77367}
@@ -10732,9 +10732,9 @@ MonoBehaviour:
   - {x: -0.95219755, y: -0.045815866, z: 0.3020275, w: -1}
   - {x: -0.81164193, y: 0.03717021, z: -0.58297163, w: -1}
   - {x: -0.89828795, y: -0.0077880574, z: 0.43933836, w: -1}
-  - {x: -0.10922056, y: -0.01074049, z: -0.9939595, w: -1}
-  - {x: -0.84412175, y: -0.06913619, z: -0.53167534, w: -1}
-  - {x: -0.02234756, y: -0.0029526919, z: -0.9997459, w: -1}
+  - {x: -0.109220564, y: -0.010740489, z: -0.9939595, w: -1}
+  - {x: -0.84412175, y: -0.06913619, z: -0.5316752, w: -1}
+  - {x: -0.022347562, y: -0.0029526916, z: -0.9997459, w: -1}
   - {x: -0.8091271, y: -0.03963227, z: -0.58629566, w: -1}
   - {x: 0.29996303, y: -6.494347e-10, z: -0.9539508, w: -1}
   - {x: -0.10922682, y: -0.0000000047344346, z: -0.9940169, w: -1}
@@ -10772,7 +10772,7 @@ MonoBehaviour:
   - {x: -0.8982781, y: -0.012457683, z: 0.4392507, w: -1}
   - {x: -0.83147365, y: -0.009387385, z: -0.5554849, w: -1}
   - {x: -0.90300006, y: -0.00023654688, z: 0.42964044, w: -1}
-  - {x: -0.022373956, y: 0.0016581113, z: -0.9997483, w: -1}
+  - {x: -0.022373958, y: 0.0016581115, z: -0.9997483, w: -1}
   - {x: -0.80915767, y: -0.03915359, z: -0.5862857, w: -1}
   - {x: 0.0006741437, y: -0.0001955366, z: -0.99999976, w: -1}
   - {x: -0.8314875, y: 0.0024006693, z: -0.55553836, w: -1}
@@ -10812,9 +10812,9 @@ MonoBehaviour:
   - {x: -0.9029958, y: -0.003407513, z: 0.4296358, w: -1}
   - {x: -0.81637925, y: 0.013359007, z: -0.5773617, w: -1}
   - {x: -0.90009224, y: -0.00858479, z: 0.43561485, w: -1}
-  - {x: 0.0006739493, y: -0.0005469052, z: -0.99999964, w: -1}
+  - {x: 0.0006739493, y: -0.00054690515, z: -0.99999964, w: -1}
   - {x: -0.8314879, y: 0.0022613506, z: -0.5555382, w: -1}
-  - {x: 0.014375503, y: 0.0005323285, z: -0.9998965, w: -1}
+  - {x: 0.014375503, y: 0.00053232856, z: -0.9998965, w: -1}
   - {x: -0.8159476, y: -0.017109005, z: -0.57787275, w: -1}
   - {x: 0.2999628, y: 9.919695e-10, z: -0.9539509, w: -1}
   - {x: 0.0006743454, y: 0.00017086211, z: -0.99999976, w: -1}
@@ -10919,13 +10919,13 @@ MonoBehaviour:
   - {x: 0.8038955, y: 0.012264628, z: -0.59464425, w: -1}
   - {x: 0.9457953, y: 0.0053840047, z: -0.32471892, w: -1}
   - {x: 0.82644194, y: 0.0018886257, z: -0.56301874, w: -1}
-  - {x: 0.9927166, y: 0.0006949759, z: 0.12047078, w: -1}
-  - {x: 0.9927166, y: 0.00069498376, z: 0.12047061, w: -1}
-  - {x: 0.9456432, y: 0.0007296205, z: -0.32520503, w: -1}
+  - {x: 0.9927166, y: 0.00069497584, z: 0.12047078, w: -1}
+  - {x: 0.9927166, y: 0.0006949837, z: 0.12047061, w: -1}
+  - {x: 0.9456432, y: 0.00072962046, z: -0.32520503, w: -1}
   - {x: 0.9456431, y: 0.0007295721, z: -0.3252053, w: -1}
-  - {x: 0.99271667, y: 0.00069498457, z: 0.12047061, w: -1}
-  - {x: 0.97275555, y: -0.019280206, z: 0.2310299, w: -1}
-  - {x: 0.97030306, y: 0.021947663, z: -0.24089468, w: -1}
+  - {x: 0.99271667, y: 0.0006949846, z: 0.120470606, w: -1}
+  - {x: 0.97275555, y: -0.019280208, z: 0.2310299, w: -1}
+  - {x: 0.9703031, y: 0.021947665, z: -0.2408947, w: -1}
   - {x: 0.94564325, y: 0.0007296214, z: -0.32520506, w: -1}
   - {x: 0.96839815, y: -0.041191053, z: -0.24598405, w: -1}
   - {x: 0.7351528, y: -0.003322809, z: -0.67789334, w: -1}
@@ -10950,7 +10950,7 @@ MonoBehaviour:
   - {x: 0.9927167, y: 0.0004860343, z: 0.12047062, w: -1}
   - {x: 0.9927167, y: 0.00048604215, z: 0.12047078, w: -1}
   - {x: 0.98204064, y: 0.00048315353, z: 0.18866888, w: -1}
-  - {x: 0.97078997, y: 0.00042329042, z: 0.23993054, w: -1}
+  - {x: 0.97079, y: 0.00042329045, z: 0.23993056, w: -1}
   - {x: 0.9999588, y: 0.0025173533, z: 0.008708244, w: -1}
   - {x: 0.9977269, y: -0.0001380825, z: 0.06738772, w: -1}
   - {x: 0.9776267, y: 0.016472684, z: 0.20970139, w: -1}
@@ -11197,9 +11197,9 @@ MonoBehaviour:
   - {x: -0.760624, y: -0.0020611316, z: -0.6491894, w: -1}
   - {x: -0.6478267, y: 0.02794188, z: -0.7612751, w: -1}
   - {x: -0.9357097, y: 0.014313422, z: -0.35248044, w: -1}
-  - {x: -0.7579666, y: 0.04937436, z: -0.65042204, w: -1}
-  - {x: -0.38792458, y: -0.032699175, z: -0.9211109, w: -1}
-  - {x: -0.38662422, y: -0.08501484, z: -0.9183105, w: -1}
+  - {x: -0.7579665, y: 0.049374357, z: -0.65042216, w: -1}
+  - {x: -0.38792455, y: -0.032699175, z: -0.9211109, w: -1}
+  - {x: -0.38662425, y: -0.08501485, z: -0.9183105, w: -1}
   - {x: -0.6458731, y: -0.047561213, z: -0.7619618, w: -1}
   - {x: -0.39902082, y: 0.031994298, z: -0.91638345, w: -1}
   - {x: -0.64346665, y: 0.0342774, z: -0.7647063, w: -1}
@@ -11329,9 +11329,9 @@ MonoBehaviour:
   - {x: 0.83517545, y: 0.025965806, z: -0.5493703, w: -1}
   - {x: 0.9289018, y: 0.0329553, z: -0.36885688, w: -1}
   - {x: 0.9481803, y: -0.0005632024, z: -0.3177323, w: -1}
-  - {x: 0.8796141, y: -0.054968074, z: 0.47250137, w: -1}
-  - {x: 0.82797, y: 0.018149108, z: 0.5604786, w: -1}
-  - {x: 0.99765605, y: -0.0017328683, z: -0.06840593, w: -1}
+  - {x: 0.8796142, y: -0.054968078, z: 0.47250137, w: -1}
+  - {x: 0.82796997, y: 0.01814911, z: 0.5604787, w: -1}
+  - {x: 0.9976561, y: -0.0017328679, z: -0.06840593, w: -1}
   - {x: 0.8742512, y: 0.0050191833, z: -0.48544794, w: -1}
   - {x: 0.8767554, y: 0.0020187872, z: -0.48093224, w: -1}
   - {x: 0.6061431, y: 0.0040676426, z: -0.7953452, w: -1}
@@ -11419,8 +11419,8 @@ MonoBehaviour:
   - {x: 0.30878973, y: -0.0098386705, z: -0.9510795, w: -1}
   - {x: 0.6052991, y: 0.0034114423, z: -0.7959907, w: -1}
   - {x: 0.70803857, y: 0.0035957964, z: -0.7061646, w: -1}
-  - {x: 0.30859503, y: -0.0017769209, z: -0.9511919, w: -1}
-  - {x: -0.07927559, y: -0.014553086, z: -0.9967465, w: -1}
+  - {x: 0.308595, y: -0.0017769223, z: -0.9511919, w: -1}
+  - {x: -0.07927562, y: -0.014553087, z: -0.9967465, w: -1}
   - {x: 0.4526279, y: 0.0049328255, z: -0.89168584, w: -1}
   - {x: 0.6052724, y: 0.009192832, z: -0.7959654, w: -1}
   - {x: 0.4526432, y: 0.0010190209, z: -0.8916911, w: -1}
@@ -11483,8 +11483,8 @@ MonoBehaviour:
   - {x: -0.8229325, y: 3.7644924e-16, z: 0.5681392, w: -1}
   - {x: -0.82293254, y: 0, z: 0.5681391, w: -1}
   - {x: -0.9990499, y: 0.000000092015846, z: 0.04358094, w: -1}
-  - {x: -0.99906266, y: -0.000004013625, z: 0.043288935, w: -1}
-  - {x: -0.99906266, y: -0.000004013625, z: 0.043288935, w: -1}
+  - {x: -0.99906266, y: -0.0000040135787, z: 0.043288935, w: -1}
+  - {x: -0.99906266, y: -0.0000040135787, z: 0.043288935, w: -1}
   - {x: -0.99907523, y: -0.000008119173, z: 0.04299692, w: -1}
   - {x: 0.3949587, y: -3.8659173e-11, z: -0.91869885, w: -1}
   - {x: 0.39671922, y: 0, z: -0.9179401, w: -1}
@@ -11709,7 +11709,7 @@ GameObject:
   - component: {fileID: 6978630799004381547}
   - component: {fileID: 3961284799128567415}
   - component: {fileID: 6108735066170562764}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Tile Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11877,7 +11877,7 @@ GameObject:
   - component: {fileID: 7029544933919477750}
   - component: {fileID: 8764458259373622897}
   - component: {fileID: 8267556262408417956}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle
   m_TagString: Terrain
   m_Icon: {fileID: 0}
@@ -12744,6 +12744,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -12795,6 +12796,7 @@ PrefabInstance:
       value: CrystalWater (14)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &2750119471994584335 stripped
 Transform:
@@ -12806,6 +12808,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -12857,6 +12860,7 @@ PrefabInstance:
       value: CrystalWater (13)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &2435635064259911346 stripped
 Transform:
@@ -12868,6 +12872,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
@@ -12919,6 +12924,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
 --- !u!4 &8781618053325334158 stripped
 Transform:
@@ -12930,6 +12936,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -12981,6 +12988,7 @@ PrefabInstance:
       value: CrystalWater (7)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &3269659860805755043 stripped
 Transform:
@@ -12992,6 +13000,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -13043,6 +13052,7 @@ PrefabInstance:
       value: CrystalWater (17)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &3245874675780541055 stripped
 Transform:
@@ -13054,6 +13064,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
@@ -13105,6 +13116,7 @@ PrefabInstance:
       value: Crystal2 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
 --- !u!4 &3314528899073041159 stripped
 Transform:
@@ -13116,6 +13128,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
@@ -13167,6 +13180,7 @@ PrefabInstance:
       value: Crystal2 (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
 --- !u!4 &3375414725010222253 stripped
 Transform:
@@ -13178,6 +13192,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: 9282ec14f6c29d34ab35856956e92fa4, type: 3}
@@ -13229,6 +13244,7 @@ PrefabInstance:
       value: 38.178
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 9282ec14f6c29d34ab35856956e92fa4, type: 3}
 --- !u!4 &8460131327437343699 stripped
 Transform:
@@ -13240,6 +13256,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -13291,6 +13308,7 @@ PrefabInstance:
       value: Crystal1 (13)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &3452446115507408505 stripped
 Transform:
@@ -13302,6 +13320,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
@@ -13353,6 +13372,7 @@ PrefabInstance:
       value: Crystal2 (8)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
 --- !u!4 &3437850419458140022 stripped
 Transform:
@@ -13364,6 +13384,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 1850053454607092448, guid: 954f0e690b4910f47ab8042b2e9da9a1, type: 3}
@@ -13415,6 +13436,7 @@ PrefabInstance:
       value: 12.272
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 954f0e690b4910f47ab8042b2e9da9a1, type: 3}
 --- !u!4 &1574484797045024640 stripped
 Transform:
@@ -13426,6 +13448,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: 9282ec14f6c29d34ab35856956e92fa4, type: 3}
@@ -13489,6 +13512,7 @@ PrefabInstance:
       value: -30.274
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 9282ec14f6c29d34ab35856956e92fa4, type: 3}
 --- !u!4 &8115667018122146645 stripped
 Transform:
@@ -13500,6 +13524,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -13551,6 +13576,7 @@ PrefabInstance:
       value: CrystalWater (9)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &3819731480278006944 stripped
 Transform:
@@ -13562,6 +13588,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -13613,6 +13640,7 @@ PrefabInstance:
       value: Crystal1 (8)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &3923377254205068756 stripped
 Transform:
@@ -13624,6 +13652,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: d74601d776983e9408ec60674a576d72, type: 3}
@@ -13675,6 +13704,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d74601d776983e9408ec60674a576d72, type: 3}
 --- !u!4 &7875991344970511266 stripped
 Transform:
@@ -13686,6 +13716,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -13737,6 +13768,7 @@ PrefabInstance:
       value: CrystalWater (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &3531912291230237153 stripped
 Transform:
@@ -13748,6 +13780,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -13799,6 +13832,7 @@ PrefabInstance:
       value: CrystalWater
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &3614698736372462652 stripped
 Transform:
@@ -13810,6 +13844,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
@@ -13861,6 +13896,7 @@ PrefabInstance:
       value: Crystal2 (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
 --- !u!4 &4325308613001728357 stripped
 Transform:
@@ -13872,6 +13908,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -13923,6 +13960,7 @@ PrefabInstance:
       value: CrystalWater (15)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &4566602641490773728 stripped
 Transform:
@@ -13934,6 +13972,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
@@ -13985,6 +14024,7 @@ PrefabInstance:
       value: Crystal2 (6)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
 --- !u!4 &4115022007636124150 stripped
 Transform:
@@ -13996,6 +14036,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: d74601d776983e9408ec60674a576d72, type: 3}
@@ -14047,6 +14088,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d74601d776983e9408ec60674a576d72, type: 3}
 --- !u!4 &7039405972649534982 stripped
 Transform:
@@ -14058,6 +14100,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 7437543222522856882, guid: 719854530fe78b141ac5f1dfd10e107c, type: 3}
@@ -14109,6 +14152,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 719854530fe78b141ac5f1dfd10e107c, type: 3}
 --- !u!4 &8729225192102414754 stripped
 Transform:
@@ -14120,6 +14164,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: d9191ccb2652d6a44adde2aface9f4f6, type: 3}
@@ -14171,6 +14216,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d9191ccb2652d6a44adde2aface9f4f6, type: 3}
 --- !u!4 &6874113784753840268 stripped
 Transform:
@@ -14182,6 +14228,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
@@ -14233,6 +14280,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
 --- !u!4 &6385215264250432241 stripped
 Transform:
@@ -14244,6 +14292,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: d9191ccb2652d6a44adde2aface9f4f6, type: 3}
@@ -14295,6 +14344,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d9191ccb2652d6a44adde2aface9f4f6, type: 3}
 --- !u!4 &6350836459362471022 stripped
 Transform:
@@ -14306,6 +14356,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -14357,6 +14408,7 @@ PrefabInstance:
       value: Crystal1 (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &867764347921402689 stripped
 Transform:
@@ -14368,6 +14420,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -14419,6 +14472,7 @@ PrefabInstance:
       value: Crystal1 (6)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &946248296552956591 stripped
 Transform:
@@ -14430,6 +14484,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
@@ -14481,6 +14536,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
 --- !u!4 &5916086839611268754 stripped
 Transform:
@@ -14492,6 +14548,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 1850053454607092448, guid: 954f0e690b4910f47ab8042b2e9da9a1, type: 3}
@@ -14543,6 +14600,7 @@ PrefabInstance:
       value: -10.355
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 954f0e690b4910f47ab8042b2e9da9a1, type: 3}
 --- !u!4 &3918788231020123039 stripped
 Transform:
@@ -14554,6 +14612,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -14605,6 +14664,7 @@ PrefabInstance:
       value: CrystalWater (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &856540164770283212 stripped
 Transform:
@@ -14616,6 +14676,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
@@ -14667,6 +14728,7 @@ PrefabInstance:
       value: Crystal2 (7)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
 --- !u!4 &1627129390239986472 stripped
 Transform:
@@ -14678,6 +14740,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -14729,6 +14792,7 @@ PrefabInstance:
       value: CrystalWater (12)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &1711645343279662233 stripped
 Transform:
@@ -14740,6 +14804,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 7437543222522856882, guid: 719854530fe78b141ac5f1dfd10e107c, type: 3}
@@ -14791,6 +14856,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 719854530fe78b141ac5f1dfd10e107c, type: 3}
 --- !u!4 &5938776046893040588 stripped
 Transform:
@@ -14802,6 +14868,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -14853,6 +14920,7 @@ PrefabInstance:
       value: Crystal1 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &1289544466316783151 stripped
 Transform:
@@ -14864,6 +14932,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: d9191ccb2652d6a44adde2aface9f4f6, type: 3}
@@ -14915,6 +14984,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d9191ccb2652d6a44adde2aface9f4f6, type: 3}
 --- !u!4 &5274838084786751401 stripped
 Transform:
@@ -14926,6 +14996,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -14977,6 +15048,7 @@ PrefabInstance:
       value: CrystalWater (10)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &2134454147175758626 stripped
 Transform:
@@ -14988,6 +15060,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
@@ -15039,6 +15112,7 @@ PrefabInstance:
       value: Crystal2 (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
 --- !u!4 &1999195246639481570 stripped
 Transform:
@@ -15050,6 +15124,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 1850053454607092448, guid: 954f0e690b4910f47ab8042b2e9da9a1, type: 3}
@@ -15101,6 +15176,7 @@ PrefabInstance:
       value: -25.046
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 954f0e690b4910f47ab8042b2e9da9a1, type: 3}
 --- !u!4 &6429470208611656384 stripped
 Transform:
@@ -15112,6 +15188,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: d74601d776983e9408ec60674a576d72, type: 3}
@@ -15163,6 +15240,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d74601d776983e9408ec60674a576d72, type: 3}
 --- !u!4 &4514588628968175855 stripped
 Transform:
@@ -15174,6 +15252,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
@@ -15225,6 +15304,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
 --- !u!4 &4210858590648809868 stripped
 Transform:
@@ -15236,6 +15316,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: d74601d776983e9408ec60674a576d72, type: 3}
@@ -15287,6 +15368,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d74601d776983e9408ec60674a576d72, type: 3}
 --- !u!4 &4047537633894317880 stripped
 Transform:
@@ -15298,6 +15380,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -15349,6 +15432,7 @@ PrefabInstance:
       value: Crystal1 (15)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &7806933801880625688 stripped
 Transform:
@@ -15360,6 +15444,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
@@ -15411,6 +15496,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
 --- !u!4 &3980002437380633434 stripped
 Transform:
@@ -15422,6 +15508,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 1850053454607092448, guid: 954f0e690b4910f47ab8042b2e9da9a1, type: 3}
@@ -15473,6 +15560,7 @@ PrefabInstance:
       value: -14.086
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 954f0e690b4910f47ab8042b2e9da9a1, type: 3}
 --- !u!4 &5797059419044588880 stripped
 Transform:
@@ -15484,6 +15572,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -15535,6 +15624,7 @@ PrefabInstance:
       value: Crystal1 (7)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &7912077436089744839 stripped
 Transform:
@@ -15546,6 +15636,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: db762d6c65f857745b077acbce3d041d, type: 3}
@@ -15609,6 +15700,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db762d6c65f857745b077acbce3d041d, type: 3}
 --- !u!4 &3793144164042238119 stripped
 Transform:
@@ -15620,6 +15712,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: db762d6c65f857745b077acbce3d041d, type: 3}
@@ -15683,6 +15776,7 @@ PrefabInstance:
       value: -12.847
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db762d6c65f857745b077acbce3d041d, type: 3}
 --- !u!4 &3571390264795419474 stripped
 Transform:
@@ -15694,6 +15788,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
@@ -15745,6 +15840,7 @@ PrefabInstance:
       value: Crystal2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
 --- !u!4 &7725315416184916450 stripped
 Transform:
@@ -15756,6 +15852,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -15807,6 +15904,7 @@ PrefabInstance:
       value: Crystal1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &8389310617093839853 stripped
 Transform:
@@ -15818,6 +15916,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
@@ -15869,6 +15968,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
 --- !u!4 &3440838927673492036 stripped
 Transform:
@@ -15880,6 +15980,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -15931,6 +16032,7 @@ PrefabInstance:
       value: Crystal1 (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &8538948618392137622 stripped
 Transform:
@@ -15942,6 +16044,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -15993,6 +16096,7 @@ PrefabInstance:
       value: Crystal1 (11)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &8193728003694494596 stripped
 Transform:
@@ -16004,6 +16108,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
@@ -16055,6 +16160,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
 --- !u!4 &2957177124597855606 stripped
 Transform:
@@ -16066,6 +16172,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: d74601d776983e9408ec60674a576d72, type: 3}
@@ -16117,6 +16224,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d74601d776983e9408ec60674a576d72, type: 3}
 --- !u!4 &2868161843049743793 stripped
 Transform:
@@ -16128,6 +16236,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -16179,6 +16288,7 @@ PrefabInstance:
       value: Crystal1 (14)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &8939090558218457349 stripped
 Transform:
@@ -16190,6 +16300,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: d74601d776983e9408ec60674a576d72, type: 3}
@@ -16241,6 +16352,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d74601d776983e9408ec60674a576d72, type: 3}
 --- !u!4 &2843490525857592980 stripped
 Transform:
@@ -16252,6 +16364,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 7437543222522856882, guid: 719854530fe78b141ac5f1dfd10e107c, type: 3}
@@ -16303,6 +16416,7 @@ PrefabInstance:
       value: 26.065
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 719854530fe78b141ac5f1dfd10e107c, type: 3}
 --- !u!4 &4419087660439504334 stripped
 Transform:
@@ -16314,6 +16428,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -16365,6 +16480,7 @@ PrefabInstance:
       value: CrystalWater (8)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &9215954462830600393 stripped
 Transform:
@@ -16376,6 +16492,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -16427,6 +16544,7 @@ PrefabInstance:
       value: Crystal1 (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &8908785672755145076 stripped
 Transform:
@@ -16438,6 +16556,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: d74601d776983e9408ec60674a576d72, type: 3}
@@ -16489,6 +16608,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d74601d776983e9408ec60674a576d72, type: 3}
 --- !u!4 &2289459390556978393 stripped
 Transform:
@@ -16500,6 +16620,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -16551,6 +16672,7 @@ PrefabInstance:
       value: CrystalWater (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &5134312725639826197 stripped
 Transform:
@@ -16562,6 +16684,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
@@ -16613,6 +16736,7 @@ PrefabInstance:
       value: Crystal2 (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db990222fccbe8944b0b541a26aab56f, type: 3}
 --- !u!4 &5168532995122398921 stripped
 Transform:
@@ -16624,6 +16748,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -16683,6 +16808,7 @@ PrefabInstance:
       value: 4.0914564
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &4698059170970368014 stripped
 Transform:
@@ -16694,6 +16820,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -16745,6 +16872,7 @@ PrefabInstance:
       value: CrystalWater (16)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &5616667906942254923 stripped
 Transform:
@@ -16756,6 +16884,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -16807,6 +16936,7 @@ PrefabInstance:
       value: CrystalWater (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &5602188368388218307 stripped
 Transform:
@@ -16818,6 +16948,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: 9282ec14f6c29d34ab35856956e92fa4, type: 3}
@@ -16881,6 +17012,7 @@ PrefabInstance:
       value: 6.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 9282ec14f6c29d34ab35856956e92fa4, type: 3}
 --- !u!4 &1550137870332882244 stripped
 Transform:
@@ -16892,6 +17024,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: db762d6c65f857745b077acbce3d041d, type: 3}
@@ -16955,6 +17088,7 @@ PrefabInstance:
       value: -32.905
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db762d6c65f857745b077acbce3d041d, type: 3}
 --- !u!4 &1469383099704923631 stripped
 Transform:
@@ -16966,6 +17100,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -17017,6 +17152,7 @@ PrefabInstance:
       value: CrystalWater (11)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &5741848852228680868 stripped
 Transform:
@@ -17028,6 +17164,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -17079,6 +17216,7 @@ PrefabInstance:
       value: Crystal1 (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &5249229240033732393 stripped
 Transform:
@@ -17090,6 +17228,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
@@ -17141,6 +17280,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eaa6ed90d3d0d34eb52a1350fbf19e9, type: 3}
 --- !u!4 &1363155283192690412 stripped
 Transform:
@@ -17152,6 +17292,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 3546746549286730817, guid: 614c253834c29d24595c1a26d9802af3, type: 3}
@@ -17203,6 +17344,7 @@ PrefabInstance:
       value: spider (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 614c253834c29d24595c1a26d9802af3, type: 3}
 --- !u!4 &6816653268430006656 stripped
 Transform:
@@ -17214,6 +17356,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2430175411216241391, guid: d74601d776983e9408ec60674a576d72, type: 3}
@@ -17265,6 +17408,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d74601d776983e9408ec60674a576d72, type: 3}
 --- !u!4 &1112637632106866047 stripped
 Transform:
@@ -17276,6 +17420,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 1850053454607092448, guid: 954f0e690b4910f47ab8042b2e9da9a1, type: 3}
@@ -17327,6 +17472,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 954f0e690b4910f47ab8042b2e9da9a1, type: 3}
 --- !u!4 &7511993286796290030 stripped
 Transform:
@@ -17338,6 +17484,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -17389,6 +17536,7 @@ PrefabInstance:
       value: CrystalWater (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &6323422142446946898 stripped
 Transform:
@@ -17400,6 +17548,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -17451,6 +17600,7 @@ PrefabInstance:
       value: Crystal1 (9)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &5770853080928609668 stripped
 Transform:
@@ -17462,6 +17612,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 3546746549286730817, guid: 614c253834c29d24595c1a26d9802af3, type: 3}
@@ -17513,6 +17664,7 @@ PrefabInstance:
       value: spider
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 614c253834c29d24595c1a26d9802af3, type: 3}
 --- !u!4 &5414754642452775856 stripped
 Transform:
@@ -17524,6 +17676,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
@@ -17575,6 +17728,7 @@ PrefabInstance:
       value: CrystalWater (6)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5428ae6e661184e9f40be7dfff2c3a, type: 3}
 --- !u!4 &6496697338609977369 stripped
 Transform:
@@ -17586,6 +17740,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6978630799004381547}
     m_Modifications:
     - target: {fileID: 2616834611435900964, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
@@ -17637,6 +17792,7 @@ PrefabInstance:
       value: Crystal1 (10)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 039bd4127b07a1b449d800d154af9576, type: 3}
 --- !u!4 &6600108472934300548 stripped
 Transform:
