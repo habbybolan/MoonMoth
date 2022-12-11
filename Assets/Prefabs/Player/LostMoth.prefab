@@ -1126,7 +1126,7 @@ GameObject:
   - component: {fileID: 8447712976305703134}
   - component: {fileID: 6576197547562888210}
   - component: {fileID: 7059916612857397021}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: LostMoth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
