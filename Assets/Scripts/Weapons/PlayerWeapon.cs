@@ -29,7 +29,7 @@ public class PlayerWeapon : WeaponBase<HomingProjectile>
         RaycastHit hit;
         if (Physics.SphereCast(crosshairRay, m_ShootCastRadius, out hit, Mathf.Infinity, m_AvoidLayerMask))
         {
-            ShootPosition(hit.collider.gameObject.transform.position);
+            ShootPosition(hit.point);
             // if spherecast hits enemy, apply target to Homing projectile
             Health health = hit.collider.gameObject.GetComponent<Health>();
             if (m_LastShotProjectile != null && health != null)
