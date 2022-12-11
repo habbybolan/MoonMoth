@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3660270239675172251}
   - component: {fileID: 2852505493795219179}
   - component: {fileID: 2476826238566011215}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: HealthOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_healthRecovery: 10
   m_FlyUpDuration: 1
   m_FlyUpSpeed: 3
+  m_SpeedIncreaseEachSecond: 2
 --- !u!54 &2476826238566011215
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -141,6 +142,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 6236891995918291706}
     m_Modifications:
     - target: {fileID: 4860987048393004935, guid: 97003555c653d2247b2551ce54b46849, type: 3}
@@ -192,6 +194,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 97003555c653d2247b2551ce54b46849, type: 3}
 --- !u!4 &4981095058228638191 stripped
 Transform:
