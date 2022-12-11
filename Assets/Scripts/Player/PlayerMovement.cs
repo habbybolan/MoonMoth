@@ -86,6 +86,8 @@ public class PlayerMovement : MonoBehaviour
     private float m_MaxYValue;              // Max input Y value for dodge, clamped by m_MaxYDegrees
     private Rigidbody m_ControlRigidBody;
 
+    private Rigidbody m_PlayerRigidBody;
+
     private float m_CurrMothMoveSpeed;
 
     public GameObject ControlObject => m_ControlObject;
@@ -96,6 +98,8 @@ public class PlayerMovement : MonoBehaviour
     {
         m_ControlRigidBody = m_ControlObject.GetComponent<Rigidbody>();
         m_ControlObject.GetComponent<MeshRenderer>().enabled = m_IsShowControlObject;
+
+        m_PlayerRigidBody = GetComponent<Rigidbody>();
     }
 
     void Start()
@@ -141,9 +145,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void MothXYMovemnent()
     {
-        // Move towards control points 
+        // Move towards control points
         Vector3 distanceFromControl = new Vector3(ControlPosition.x, ControlPosition.y, transform.localPosition.z) - transform.localPosition;
-        transform.localPosition += distanceFromControl * m_CurrMothMoveSpeed * .02f;
+        m_PlayerRigidBody.transform.localPosition += distanceFromControl * m_CurrMothMoveSpeed * .02f;
     }
 
     public void RotationLook()
@@ -190,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
         m_ControlRigidBody.isKinematic = false;
 
         // make sure moth resets at parent location
-        transform.localPosition = Vector3.zero;
+        m_PlayerRigidBody.transform.localPosition = Vector3.zero;
     }
 
     public IEnumerator PlayerDodge(System.Action callback, Vector2 vec2Move)
