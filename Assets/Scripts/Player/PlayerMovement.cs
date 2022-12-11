@@ -185,8 +185,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void ResetPosition()
     {
-        transform.localPosition = new Vector3(0, 0, 0);
-        m_ControlRigidBody.position = transform.parent.TransformPoint(new Vector3(0, 0, 0));
+        m_ControlRigidBody.isKinematic = true;
+        m_ControlObject.transform.position = transform.parent.transform.position;
+        m_ControlRigidBody.isKinematic = false;
+
+        // make sure moth resets at parent location
+        transform.localPosition = Vector3.zero;
     }
 
     public IEnumerator PlayerDodge(System.Action callback, Vector2 vec2Move)
@@ -272,14 +276,6 @@ public class PlayerMovement : MonoBehaviour
         m_CurrMothMoveSpeed = m_BaseMothMoveSpeed;
         // Finish dodge state
         callback();
-    }
-
-    // Set the control point movement to the moth on new tileset generation
-    public void ManuallySetControlPointLocation()
-    {
-        m_ControlRigidBody.isKinematic = true;
-        m_ControlObject.transform.position = transform.parent.transform.position;
-        m_ControlRigidBody.isKinematic = false;
     }
 
     public Vector3 ControlPosition => transform.parent.transform.InverseTransformPoint(m_ControlRigidBody.position);

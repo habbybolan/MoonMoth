@@ -41,7 +41,7 @@ public class PlayerParentMovement : CatmullWalker
         // If spline was not initialzied before moving, then update control point location
         if (!bSplineInitialized)
         {
-            PlayerManager.PropertyInstance.PlayerController.PlayerMovement.ManuallySetControlPointLocation();
+            PlayerManager.PropertyInstance.PlayerController.PlayerMovement.ResetPosition();
         }
     }
 

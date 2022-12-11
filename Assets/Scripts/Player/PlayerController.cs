@@ -144,6 +144,9 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     private void FixedUpdate()
     {
+        // Game ended or transitioning to new tileset
+        if (GameState.m_GameState != GameStateEnum.RUNNING) return;
+
         // move parent along spline
         m_PlayerParentMovement.TryMove();
 
@@ -257,7 +260,6 @@ public class PlayerController : CharacterController<PlayerHealth>
         }
 
         m_PlayerParentMovement.ConnectBackToSpline();
-        m_PlayerMovement.ResetPosition();
         m_CameraMovement.ResetPosition();
        
 
