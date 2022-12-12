@@ -189,7 +189,8 @@ public class PlayerMovement : MonoBehaviour
     {
         m_ControlRigidBody.velocity = Vector3.zero;
         m_ControlRigidBody.isKinematic = true;
-        m_ControlObject.transform.position = transform.parent.transform.position;
+        m_ControlRigidBody.transform.position = transform.parent.transform.position;
+        m_ControlRigidBody.position = transform.parent.transform.position;
         m_ControlRigidBody.isKinematic = false;
 
         // make sure moth resets at parent location
