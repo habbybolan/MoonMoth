@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5339650802219469232, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
@@ -60,6 +61,7 @@ PrefabInstance:
       value: PlayerProjectile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 12d7a9251c275a3418ae4f96c62820a4, type: 3}
 --- !u!1 &7913655792338023309 stripped
 GameObject:
@@ -83,3 +85,5 @@ MonoBehaviour:
   m_HitEffect: 0
   m_Duration: 10
   m_MaxHomingAngle: 3
+  m_DistToIncrHomingAngle: 20
+  m_MaxHomingAngleInRange: 10
