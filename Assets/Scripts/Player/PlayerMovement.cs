@@ -131,17 +131,14 @@ public class PlayerMovement : MonoBehaviour
         // differential for horizontal/vertical movements
         Vector3 targetVelocity = (transform.parent.right * inputX + transform.parent.up * inputY) * m_CurrControlSpeed;
 
-        Vector3 velocityDifferential = targetVelocity - currentVelocity;
-        m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration);
-    }
-
-    public void ControlPointZMovement()
-    {
         // differential for parent catmull walker movement
         Vector3 ParentVelocity = PlayerManager.PropertyInstance.PlayerController.PlayerParent.RigidBody.velocity;
+        targetVelocity += ParentVelocity;
 
+        Vector3 velocityDifferential = targetVelocity - currentVelocity;
         float controlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 100);
-        m_ControlRigidBody.AddForce(ParentVelocity + transform.parent.forward * controlSpeedMultiplier);
+        m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration +
+            transform.parent.forward * controlSpeedMultiplier);
     }
 
     public void MothXYMovemnent()
@@ -210,8 +207,6 @@ public class PlayerMovement : MonoBehaviour
 
         m_CurrMothMoveSpeed *= m_DodgeSpeedIncrease;
 
-
-
         float inputX = vec2Move.x;
         float inputY = vec2Move.y;
         inputY = Mathf.Clamp(inputY, -m_MaxYValue, m_MaxYValue);
@@ -271,10 +266,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 controlPointMultiplierY = m_ControlPointMultiplier;
             }
-
-            // Update control point
-            m_ControlRigidBody.velocity =   transform.parent.transform.right * inputXDirection * controlPointMultiplierX * m_BaseControlSpeed +
-                                            transform.parent.transform.up * inputY * controlPointMultiplierY * m_BaseControlSpeed;
+            
+            // Update control point 
+            Vector3 TargetVelocity = transform.parent.transform.right * inputXDirection * controlPointMultiplierX * m_BaseControlSpeed +
+                                        transform.parent.transform.up * inputY * controlPointMultiplierY * m_BaseControlSpeed +
+                                        transform.parent.transform.forward * m_ControlRigidBody.velocity.z;
+            m_ControlRigidBody.AddForce((TargetVelocity - m_ControlRigidBody.velocity), ForceMode.VelocityChange);
 
             currDuration += Time.deltaTime;
             yield return null;

@@ -154,8 +154,12 @@ public class PlayerController : CharacterController<PlayerHealth>
         {
             // move player body along local x, y plane based on inputs
             m_PlayerMovement.ControlPointXYMovement(m_MovementInput);
-            m_PlayerMovement.ControlPointZMovement();
+        } else
+        {
+            // move player only along parent movement
+            m_PlayerMovement.ControlPointXYMovement(new Vector2(0, 0));
         }
+
         m_PlayerMovement.UpdateCrossHair();
         m_PlayerMovement.MothXYMovemnent();
     }

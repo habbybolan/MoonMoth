@@ -5936,7 +5936,7 @@ Transform:
   - {fileID: 1382965300}
   - {fileID: 4798100573658447203}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3977897141832786758
 MonoBehaviour:
@@ -6984,7 +6984,7 @@ MonoBehaviour:
   m_DodgeSpeedX: 30
   m_DodgeSpeedY: 30
   m_CameraFollowOnDodge: 1
-  m_ControlPointMultiplier: 1.4
+  m_ControlPointMultiplier: 25
   m_ControlPointOffsetLimitX: 3
   m_ControlPointOffsetLimitY: 3
   m_MaxYDegrees: 17.8
