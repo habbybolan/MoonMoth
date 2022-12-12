@@ -131,14 +131,17 @@ public class PlayerMovement : MonoBehaviour
         // differential for horizontal/vertical movements
         Vector3 targetVelocity = (transform.parent.right * inputX + transform.parent.up * inputY) * m_CurrControlSpeed;
 
+        Vector3 velocityDifferential = targetVelocity - currentVelocity;
+        m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration);
+    }
+
+    public void ControlPointZMovement()
+    {
         // differential for parent catmull walker movement
         Vector3 ParentVelocity = PlayerManager.PropertyInstance.PlayerController.PlayerParent.RigidBody.velocity;
-        targetVelocity += ParentVelocity;
 
-        Vector3 velocityDifferential = targetVelocity - currentVelocity;
         float controlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 100);
-        m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration +
-            transform.parent.forward * controlSpeedMultiplier);
+        m_ControlRigidBody.AddForce(ParentVelocity + transform.parent.forward * controlSpeedMultiplier);
     }
 
     public void MothXYMovemnent()
