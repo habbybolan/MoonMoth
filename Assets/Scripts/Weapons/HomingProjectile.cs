@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class HomingProjectile : Projectile
 {
-    [SerializeField] private float m_MaxHomingAngle = 1f;
-    [SerializeField] private float m_DistToIncrHomingAngle = 20;
+    [SerializeField] protected float m_MaxHomingAngle = 1f;
+    [SerializeField] protected float m_DistToIncrHomingAngle = 20;
     [Min(1)]
-    [SerializeField] private float m_MaxHomingAngleInRange = 1f;
+    [SerializeField] protected float m_MaxHomingAngleInRange = 1f;
+
+    [SerializeField] protected bool m_IsHoming = true;
 
     protected Health m_Target;
 
     protected override void Start()
     {
         base.Start();
+    }
+
+    protected void FixedUpdate()
+    {
+        
     }
 
     public void SetTarget(Health health)
@@ -28,7 +35,7 @@ public class HomingProjectile : Projectile
 
     private void HomeToTarget()
     {
-        if (m_Target == null)
+        if (m_Target == null || m_IsHoming == false)
             return;
 
         Vector3 targetPos = m_Target.transform.position;

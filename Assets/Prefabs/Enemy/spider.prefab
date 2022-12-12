@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Cooldown: 0.7
-  m_BulletPrefab: {fileID: 1727380606891361871, guid: 4ea9c246f3906354e97630a053b3a4c3, type: 3}
+  m_BulletPrefab: {fileID: 5994380282353450125, guid: 4ea9c246f3906354e97630a053b3a4c3, type: 3}
   m_PitchRange: {x: 0.9, y: 1.1}
   m_WeaponOwner: {fileID: 4211784419857639162}
 --- !u!82 &3674297387789069474
@@ -647,6 +647,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 3546746549286730817}
     m_Modifications:
     - target: {fileID: -9022685961703195627, guid: e3106e7d838685743a7c69f7486c2d9c, type: 3}
@@ -722,6 +723,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 512fd7640c484614cacc33126cca2523, type: 2}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e3106e7d838685743a7c69f7486c2d9c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5774952993033270570}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e3106e7d838685743a7c69f7486c2d9c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3794270073489430758}
   m_SourcePrefab: {fileID: 100100000, guid: e3106e7d838685743a7c69f7486c2d9c, type: 3}
 --- !u!1 &1318949545877515612 stripped
 GameObject:

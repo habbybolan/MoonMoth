@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Cooldown: 1.25
-  m_BulletPrefab: {fileID: 1837633034811288898, guid: 03f402cf49c62a445b0fed794c8ed401, type: 3}
+  m_BulletPrefab: {fileID: 1514417216108096412, guid: 03f402cf49c62a445b0fed794c8ed401, type: 3}
   m_PitchRange: {x: 0.9, y: 1.1}
   m_WeaponOwner: {fileID: 8497452665531714130}
 --- !u!82 &646468883087272117
@@ -355,6 +355,7 @@ MonoBehaviour:
   m_Duration: 5
   m_Spline: {fileID: 4206230537702241074}
   m_Speed: 5
+  m_MaxTurnAngle: 40
   m_DistanceOffsetFromPrev: 10
   m_DistanceFromCamera: 25
   m_BoostSpeed: 10
@@ -376,7 +377,7 @@ MonoBehaviour:
   m_FireflyWalker: {fileID: 2125045404698981339}
   m_Weapon: {fileID: 6146993046470650634}
   m_HealthOrbPrefab: {fileID: 2852505493795219179, guid: 9a21c8104e6aa84498ee6cfda774019c, type: 3}
-  m_DistancePastCameraToStartShooting: 5
+  m_FirstShotDelay: 1
 --- !u!82 &6508454397746641626
 AudioSource:
   m_ObjectHideFlags: 0
@@ -574,6 +575,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 7562424408675687393}
     m_Modifications:
     - target: {fileID: -9021816841480004356, guid: c1d7f3404cd8d624695cc1ba10b7a988, type: 3}
@@ -669,6 +671,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 71bcb846ffd1fe94883c6f8d728dc815, type: 2}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c1d7f3404cd8d624695cc1ba10b7a988, type: 3}
 --- !u!1 &721974522959537681 stripped
 GameObject:
