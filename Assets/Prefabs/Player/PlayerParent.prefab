@@ -6981,14 +6981,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_DodgeSpeedX: 30
-  m_DodgeSpeedY: 30
+  m_DodgeSpeedX: 10
+  m_DodgeSpeedY: 10
   m_CameraFollowOnDodge: 1
-  m_ControlPointMultiplier: 25
+  m_ControlPointMultiplier: 10
   m_ControlPointOffsetLimitX: 3
   m_ControlPointOffsetLimitY: 3
   m_MaxYDegrees: 17.8
-  m_DodgeSpeedIncrease: 2
+  m_DodgeSpeedIncrease: 1.5
   m_RotateSpeed: 10
   m_focalPointOffset: 3
   m_ZRotationSpeed: 0.01

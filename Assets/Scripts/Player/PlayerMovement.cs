@@ -28,10 +28,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_DodgeDuration = 1f;
     [Tooltip("Animation curve representing the movement modification during the dodge")]
     [SerializeField] private AnimationCurve m_AnimationCurve;
-    [Tooltip("How fast the player moves when dodging in X direction")]
-    [SerializeField] private float m_DodgeSpeedX = 20f;
-    [Tooltip("How fast the player moves when dodging in Y direction")]
-    [SerializeField] private float m_DodgeSpeedY = 20f;
     [Tooltip("If the camera should follow the player during the dodge")]
     [SerializeField] private bool m_CameraFollowOnDodge = true;
     [Tooltip("control point speed multiplier if control point is on the opposite side to the player in relation to the direction of the dodge")]
@@ -271,7 +267,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 TargetVelocity = transform.parent.transform.right * inputXDirection * controlPointMultiplierX * m_BaseControlSpeed +
                                         transform.parent.transform.up * inputY * controlPointMultiplierY * m_BaseControlSpeed +
                                         transform.parent.transform.forward * m_ControlRigidBody.velocity.z;
-            m_ControlRigidBody.AddForce((TargetVelocity - m_ControlRigidBody.velocity), ForceMode.VelocityChange);
+            m_ControlRigidBody.AddForce((TargetVelocity - m_ControlRigidBody.velocity), ForceMode.Force);
 
             currDuration += Time.deltaTime;
             yield return null;
