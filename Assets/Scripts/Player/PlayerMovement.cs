@@ -123,8 +123,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void ControlPointXYMovement(Vector2 Vec2Movement)
     {
-        m_ControlRigidBody.MoveRotation(transform.parent.rotation);
-
         float inputX = Vec2Movement.x;
         float inputY = Vec2Movement.y;
 
@@ -189,6 +187,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ResetPosition()
     {
+        m_ControlRigidBody.velocity = Vector3.zero;
         m_ControlRigidBody.isKinematic = true;
         m_ControlObject.transform.position = transform.parent.transform.position;
         m_ControlRigidBody.isKinematic = false;
