@@ -91,7 +91,7 @@ public class TileManager : MonoBehaviour
         {
             Debug.LogWarning("There should be a transition tile m_TileTransitions for each tile transition between sets m_TileSets in TileManager");
         }
-        StartCoroutine(SpawnPercentagesPrint());
+        //StartCoroutine(SpawnPercentagesPrint());
     }
 
     IEnumerator SpawnPercentagesPrint()
