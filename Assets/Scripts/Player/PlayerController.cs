@@ -83,9 +83,10 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_Health.d_DamageDelegate = OnDamageTaken;
         UpdateLostMothText();
 
-        //InputSystem.EnableDevice(Accelerometer.current);
-        //InputSystem.EnableDevice(AttitudeSensor.current);
-        //InputSystem.EnableDevice(GravitySensor.current);
+        if (Accelerometer.current != null)
+        {
+            InputSystem.EnableDevice(Accelerometer.current);
+        }
     }
 
     private void OnDamageTaken(DamageInfo damageInfo) 
@@ -156,16 +157,11 @@ public class PlayerController : CharacterController<PlayerHealth>
 
         if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
-            if (AttitudeSensor.current != null && AttitudeSensor.current.enabled)
+            if (Accelerometer.current != null && Accelerometer.current.enabled)
             {
-                Quaternion attitude = AttitudeSensor.current.attitude.ReadValue();
-                float inputY = Math.Clamp(attitude.eulerAngles.x, -20, 20);
-                inputY = (Math.Abs(inputY) / 20) * (inputY < 0 ? 1 : -1);
-
-                float inputX = Math.Clamp(attitude.eulerAngles.z, -45, 45);
-                inputX = (Math.Abs(inputX) / 45) * (inputX < 0 ? 1 : -1);
+                Vector3 accelerometer = Accelerometer.current.acceleration.ReadValue();
                 // move player body along local x, y plane based on inputs
-                m_PlayerMovement.ControlPointXYMovement(new Vector2(inputX, inputY));
+                m_PlayerMovement.ControlPointXYMovement(new Vector2(accelerometer.x, accelerometer.z));
             } else
             {
                 // move player body along local x, y plane based on inputs
@@ -180,11 +176,6 @@ public class PlayerController : CharacterController<PlayerHealth>
 
         m_PlayerMovement.UpdateCrossHair();
         m_PlayerMovement.MothXYMovemnent();
-
-        if (AttitudeSensor.current != null && !AttitudeSensor.current.enabled)
-        {
-            InputSystem.EnableDevice(AttitudeSensor.current);
-        }
     }
 
     public float DistanceFromPlayer(Vector3 pointToCompare)
