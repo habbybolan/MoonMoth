@@ -87,6 +87,8 @@ public class PlayerController : CharacterController<PlayerHealth>
         {
             InputSystem.EnableDevice(Accelerometer.current);
         }
+
+        Application.targetFrameRate = -1;
     }
 
     private void OnDamageTaken(DamageInfo damageInfo) 
