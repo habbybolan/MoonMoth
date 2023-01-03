@@ -163,7 +163,7 @@ public class PlayerController : CharacterController<PlayerHealth>
             {
                 Vector3 accelerometer = Accelerometer.current.acceleration.ReadValue();
                 // move player body along local x, y plane based on inputs
-                m_PlayerMovement.ControlPointXYMovement(new Vector2(accelerometer.x, accelerometer.z));
+                m_PlayerMovement.ControlPointXYMovement(new Vector2(accelerometer.x, accelerometer.z), true);
             } else
             {
                 // move player body along local x, y plane based on inputs

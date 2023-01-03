@@ -76,6 +76,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Particles")]
     [SerializeField] private ParticleSystem m_DodgeParticles;
 
+    [Header("Mobile")]
+    [Tooltip("The resting offset Y position of phone for moving forward. If position, then resting position will be phone tilted downwards")]
+    [SerializeField] private float m_OriginYPhonePosition = 0.55f;
+    [SerializeField] private float m_YMobileControlSpeedMult = 1.3f;
+    [SerializeField] private float m_XMobileControlSpeedMult = 1f;
+
     //private Vector3 m_ControlPoint;         // Location of the controil point
     private Vector3 m_CurrentAngle;         // Currrent rotational angle in EulerAngles
     private float m_CurrControlSpeed;       // The current speed of the controller point movement
@@ -117,10 +123,18 @@ public class PlayerMovement : MonoBehaviour
         m_ControlObject.transform.parent = null;
     }
 
-    public void ControlPointXYMovement(Vector2 Vec2Movement)
+    public void ControlPointXYMovement(Vector2 Vec2Movement, bool bMobileMovement = false)
     {
         float inputX = Vec2Movement.x;
         float inputY = Vec2Movement.y;
+
+        // if mobile movement
+        if (bMobileMovement)
+        {
+            inputY += m_OriginYPhonePosition;
+            inputX *= m_XMobileControlSpeedMult;
+            inputY *= m_YMobileControlSpeedMult;
+        }
 
         // calculate velocity differential
         Vector3 currentVelocity = m_ControlRigidBody.velocity;

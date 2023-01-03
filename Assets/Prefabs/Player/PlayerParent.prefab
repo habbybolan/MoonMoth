@@ -6929,6 +6929,7 @@ MonoBehaviour:
   m_DodgeCooldown: 1
   m_GlideFlapDelayMin: 0.2
   m_GlideFlapDelayMax: 0.5
+  m_OriginYPhonePosition: 0.55
 --- !u!114 &7166930479057285041
 MonoBehaviour:
   m_ObjectHideFlags: 0
