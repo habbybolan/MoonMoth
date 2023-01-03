@@ -41,12 +41,18 @@ public class PlayerController : CharacterController<PlayerHealth>
     [SerializeField] private float m_GlideFlapDelayMin = .2f;
     [SerializeField] private float m_GlideFlapDelayMax = .5f;
 
-    [Header("Mobile Input")]
+    [Header("Mobile")]
+    [Tooltip("Either uses Gyro controls, or Attitude + Accelerometer values")]
+    [SerializeField] private bool m_UseGyro = true;
+
+    [Header("Gyroscope")]
     //[SerializeField] private float MaxMobileYawRotationFromOrigin = 25;
     [Min(1)]
     [SerializeField] private float m_GryoscopePitchMult = 17;
     [Min(1)]
     [SerializeField] private float m_GryoscopeYawMult = 10;
+
+    [Header("Attitude")]
 
     private PlayerInput m_PlayerInput; 
 
@@ -97,10 +103,11 @@ public class PlayerController : CharacterController<PlayerHealth>
         if (Accelerometer.current != null)
         {
             InputSystem.EnableDevice(Accelerometer.current);
-            //InputSystem.EnableDevice(AttitudeSensor.current);
+            InputSystem.EnableDevice(AttitudeSensor.current);
             InputSystem.EnableDevice(Gyroscope.current);
 
-            //Quaternion attitude = AttitudeSensor.current.attitude.ReadValue();
+            Quaternion q = AttitudeSensor.current.attitude.ReadValue();
+            BasePhoneYawRotation = (float)Math.Atan2(2.0 * (q.y * q.z + q.w * q.x), q.w * q.w - q.x * q.x - q.y * q.y + q.z * q.z);
             //BasePhoneYawRotation = attitude.eulerAngles.y;
         }
 
@@ -177,23 +184,34 @@ public class PlayerController : CharacterController<PlayerHealth>
         {
             if (Accelerometer.current != null && Gyroscope.current != null && Accelerometer.current.enabled)
             {
-                //Vector3 accelerometer = Accelerometer.current.acceleration.ReadValue();
-                Vector3 gyroscope = Gyroscope.current.angularVelocity.ReadValue();
+                if (m_UseGyro)
+                {
+                    Vector3 gyroscope = Gyroscope.current.angularVelocity.ReadValue();
 
-                // calculate the Y movement
-                CurrPitchRot += gyroscope.x / m_GryoscopePitchMult;
-                float YInput = CurrPitchRot;
-                // Clamp Pitch rotation
-                YInput = Math.Clamp(YInput, -1, 1);
+                    // calculate the Y movement
+                    CurrPitchRot += gyroscope.x / m_GryoscopePitchMult;
+                    float YInput = CurrPitchRot;
+                    // Clamp Pitch rotation
+                    YInput = Math.Clamp(YInput, -1, 1);
 
-                // calculate the X movement
-                CurrYawRot += (gyroscope.y * -1) / m_GryoscopeYawMult;
-                float XInput = CurrYawRot;
-                // Clamp yaw rotation
-                XInput = Math.Clamp(XInput, -1, 1);
+                    // calculate the X movement
+                    CurrYawRot += (gyroscope.y * -1) / m_GryoscopeYawMult;
+                    float XInput = CurrYawRot;
+                    // Clamp yaw rotation
+                    XInput = Math.Clamp(XInput, -1, 1);
 
-                // move player body along local x, y plane based on inputs
-                m_PlayerMovement.ControlPointXYMovement(new Vector2(XInput, YInput), true);
+                    // move player body along local x, y plane based on inputs
+                    m_PlayerMovement.ControlPointXYMovement(new Vector2(XInput, YInput), true);
+                } else
+                {
+                    Vector3 accelerometer = Accelerometer.current.acceleration.ReadValue();
+
+                    Quaternion q = AttitudeSensor.current.attitude.ReadValue();
+                   
+                    // move player body along local x, y plane based on inputs
+                    m_PlayerMovement.ControlPointXYMovement(new Vector2(0, accelerometer.z), true);
+                }
+                
             } else
             {
                 // move player body along local x, y plane based on inputs
