@@ -41,6 +41,13 @@ public class PlayerController : CharacterController<PlayerHealth>
     [SerializeField] private float m_GlideFlapDelayMin = .2f;
     [SerializeField] private float m_GlideFlapDelayMax = .5f;
 
+    [Header("Mobile Input")]
+    //[SerializeField] private float MaxMobileYawRotationFromOrigin = 25;
+    [Min(1)]
+    [SerializeField] private float m_GryoscopePitchMult = 17;
+    [Min(1)]
+    [SerializeField] private float m_GryoscopeYawMult = 10;
+
     private PlayerInput m_PlayerInput; 
 
     private PLAYER_ACTION_STATE m_playerState;  // Current player state given the actions performed / effects applied
@@ -48,13 +55,17 @@ public class PlayerController : CharacterController<PlayerHealth>
     private int m_LostMothCount = 0;
     private Vector2 m_MovementInput;            // Input object for moving player along x-y axis
 
-    private DamageInfo.HIT_EFFECT m_CurrEffect;   // Current hit effect applied to player
+    private DamageInfo.HIT_EFFECT m_CurrEffect; // Current hit effect applied to player
     private Coroutine m_SlowEffectCoroutine;
 
     private bool m_IsDodgeCooldown;
     private Animator m_Animator;
     private bool m_IsFirstUpdate = true;
 
+    private float BasePhoneYawRotation;
+    private float CurrYawRot = 0;
+    private float CurrPitchRot = 0;
+    
     public MoonBarAbility MoonBarAbility { get { return m_MoonBarAbility; }}
 
     // Add a new enemy's boost duration to list
@@ -86,6 +97,11 @@ public class PlayerController : CharacterController<PlayerHealth>
         if (Accelerometer.current != null)
         {
             InputSystem.EnableDevice(Accelerometer.current);
+            //InputSystem.EnableDevice(AttitudeSensor.current);
+            InputSystem.EnableDevice(Gyroscope.current);
+
+            //Quaternion attitude = AttitudeSensor.current.attitude.ReadValue();
+            //BasePhoneYawRotation = attitude.eulerAngles.y;
         }
 
         Application.targetFrameRate = -1;
@@ -159,11 +175,25 @@ public class PlayerController : CharacterController<PlayerHealth>
 
         if (m_playerState == PLAYER_ACTION_STATE.FLYING || m_playerState == PLAYER_ACTION_STATE.DASHING)
         {
-            if (Accelerometer.current != null && Accelerometer.current.enabled)
+            if (Accelerometer.current != null && Gyroscope.current != null && Accelerometer.current.enabled)
             {
-                Vector3 accelerometer = Accelerometer.current.acceleration.ReadValue();
+                //Vector3 accelerometer = Accelerometer.current.acceleration.ReadValue();
+                Vector3 gyroscope = Gyroscope.current.angularVelocity.ReadValue();
+
+                // calculate the Y movement
+                CurrPitchRot += gyroscope.x / m_GryoscopePitchMult;
+                float YInput = CurrPitchRot;
+                // Clamp Pitch rotation
+                YInput = Math.Clamp(YInput, -1, 1);
+
+                // calculate the X movement
+                CurrYawRot += (gyroscope.y * -1) / m_GryoscopeYawMult;
+                float XInput = CurrYawRot;
+                // Clamp yaw rotation
+                XInput = Math.Clamp(XInput, -1, 1);
+
                 // move player body along local x, y plane based on inputs
-                m_PlayerMovement.ControlPointXYMovement(new Vector2(accelerometer.x, accelerometer.z), true);
+                m_PlayerMovement.ControlPointXYMovement(new Vector2(XInput, YInput), true);
             } else
             {
                 // move player body along local x, y plane based on inputs

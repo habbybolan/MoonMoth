@@ -77,8 +77,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ParticleSystem m_DodgeParticles;
 
     [Header("Mobile")]
-    [Tooltip("The resting offset Y position of phone for moving forward. If position, then resting position will be phone tilted downwards")]
-    [SerializeField] private float m_OriginYPhonePosition = 0.55f;
+    //[Tooltip("The resting offset Y position of phone for moving forward. If position, then resting position will be phone tilted downwards")]
+    //[SerializeField] private float m_OriginYPhonePosition = 0.55f;
     [SerializeField] private float m_YMobileControlSpeedMult = 1.3f;
     [SerializeField] private float m_XMobileControlSpeedMult = 1f;
 
@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
         // if mobile movement
         if (bMobileMovement)
         {
-            inputY += m_OriginYPhonePosition;
+            //inputY += m_OriginYPhonePosition;
             inputX *= m_XMobileControlSpeedMult;
             inputY *= m_YMobileControlSpeedMult;
         }
