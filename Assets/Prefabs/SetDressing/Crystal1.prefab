@@ -153,6 +153,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2616834611435900964}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9f19132488dd3344e9ae31727fb49b01, type: 3}
@@ -220,6 +221,7 @@ PrefabInstance:
       value: crystal_cluster
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f19132488dd3344e9ae31727fb49b01, type: 3}
 --- !u!4 &4287473670316927249 stripped
 Transform:

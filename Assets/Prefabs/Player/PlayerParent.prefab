@@ -5474,8 +5474,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 100
-  m_Range: 200
+  m_Intensity: 5
+  m_Range: 4
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -5621,8 +5621,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 50
-  m_Range: 200
+  m_Intensity: 4
+  m_Range: 4.4
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -5936,7 +5936,7 @@ Transform:
   - {fileID: 1382965300}
   - {fileID: 4798100573658447203}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3977897141832786758
 MonoBehaviour:
@@ -6981,8 +6981,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_DodgeSpeedX: 10
-  m_DodgeSpeedY: 10
   m_CameraFollowOnDodge: 1
   m_ControlPointMultiplier: 10
   m_ControlPointOffsetLimitX: 3
@@ -7380,6 +7378,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7220169483612253314, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220169483612253314, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220169483612253314, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220169483612253314, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7220169483612253314, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
