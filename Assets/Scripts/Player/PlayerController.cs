@@ -139,19 +139,23 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_AimModeStartSound.Play();
         m_PlayerMovement.AimModeEnter();
         m_CameraMovement.CameraAimModeZoom();
+        UpdateAimModeButton();
     }
     private void AimModeEnd() {
         m_AimModeEndSound.Play();
         m_PlayerMovement.AimModeExit();
         m_CameraMovement.ResetZoom();
+        UpdateAimModeButton();
     }
     private void DashModeStart() {
         m_PlayerParentMovement.DashStart();
         m_CameraMovement.CameraDashZoom();
+        UpdateDashButton();
     }
     private void DashModeEnd() {
         m_PlayerParentMovement.DashEnd();
         m_CameraMovement.ResetZoom();
+        UpdateDashButton();
     }
 
     public void OnMove(InputValue value)
@@ -299,7 +303,6 @@ public class PlayerController : CharacterController<PlayerHealth>
     {
         if (m_CurrEffect == DamageInfo.HIT_EFFECT.SLOW) return;
         m_MoonBarAbility.AimModeStartHelper();
-        UpdateAimModeButton();
     }
 
     public void OnAimModeEnd(InputValue value)
@@ -310,7 +313,6 @@ public class PlayerController : CharacterController<PlayerHealth>
     public void StopAimingMode()
     {
         m_MoonBarAbility.AimModeEndHelper();
-        UpdateAimModeButton();
     }
 
     public void FlipAimMode()
@@ -340,7 +342,6 @@ public class PlayerController : CharacterController<PlayerHealth>
     {
         if (m_CurrEffect == DamageInfo.HIT_EFFECT.SLOW) return;
         m_MoonBarAbility.OnDashStartHelper();
-        UpdateDashButton();
     }
 
     public void OnDashEnd(InputValue value)
@@ -351,7 +352,6 @@ public class PlayerController : CharacterController<PlayerHealth>
     public void StopDashing()
     {
         m_MoonBarAbility.OnDashEndHelper();
-        UpdateDashButton();
     }
 
     public void FlipDashing()
