@@ -270,6 +270,14 @@ PrefabInstance:
       propertyPath: m_PlayerInput
       value: 
       objectReference: {fileID: -944628639613478452, guid: c2f4dca1ded701444b13ecddee924b7d, type: 3}
+    - target: {fileID: 3423429185748109339, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -58
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423429185748109339, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3963921320302061341, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Delegates.Array.size
       value: 1
