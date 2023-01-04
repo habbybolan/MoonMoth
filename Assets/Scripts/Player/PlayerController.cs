@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 using Gyroscope = UnityEngine.InputSystem.Gyroscope;
+using UnityEngine.EventSystems;
 
 
 /*
@@ -54,6 +55,10 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     [Header("Attitude")]
 
+    [Header("Mobile UI")]
+    [SerializeField] private bool m_IsJoystickMovement = false;
+    [SerializeField] private GameObject MobileUI;
+
     private PlayerInput m_PlayerInput; 
 
     private PLAYER_ACTION_STATE m_playerState;  // Current player state given the actions performed / effects applied
@@ -100,6 +105,8 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_Health.d_DamageDelegate = OnDamageTaken;
         UpdateLostMothText();
 
+#if UNITY_ANDROID && !UNITY_EDITOR
+
         if (Accelerometer.current != null)
         {
             InputSystem.EnableDevice(Accelerometer.current);
@@ -110,6 +117,12 @@ public class PlayerController : CharacterController<PlayerHealth>
             BasePhoneYawRotation = (float)Math.Atan2(2.0 * (q.y * q.z + q.w * q.x), q.w * q.w - q.x * q.x - q.y * q.y + q.z * q.z);
             //BasePhoneYawRotation = attitude.eulerAngles.y;
         }
+
+        SetMobileMovementType(m_IsJoystickMovement);
+
+        MobileUI.SetActive(true);
+
+#endif
 
         Application.targetFrameRate = -1;
     }
@@ -228,6 +241,18 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_PlayerMovement.MothXYMovemnent();
     }
 
+    private void SetMobileMovementType(bool IsJoystickMovement)
+    {
+        m_IsJoystickMovement = IsJoystickMovement;
+        if (m_IsJoystickMovement)
+        {
+            // TODO:
+        } else
+        {
+            // TODO:
+        }
+    }
+
     public float DistanceFromPlayer(Vector3 pointToCompare)
     {
         return Vector3.Distance(pointToCompare, transform.position);
@@ -235,10 +260,20 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void OnFireStart(InputValue value)
     {
+        FireWeapon();
+    }
+
+    public void FireWeapon()
+    {
         m_Weapon.IsShooting = true;
-    } 
+    }
 
     public void OnFireStop(InputValue value)
+    {
+        StopFiringWeapon();
+    }
+
+    public void StopFiringWeapon()
     {
         m_Weapon.IsShooting = false;
     }
