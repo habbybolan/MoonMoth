@@ -50,9 +50,17 @@ public class MoonBarAbility : MonoBehaviour
 
     // Aim Mode
     private bool m_IsAimMode = false;
+    public bool IsAimMode
+    {
+        get => m_IsAimMode;
+    }
 
     // Dash
     private bool m_IsDashing = false;
+    public bool IsDashing
+    {
+        get => m_IsDashing;
+    }
 
     private LinkedList<float> m_AimModeEnemyKilledList;  // Keeps track of the enemies killed and their remaining time to apply aim mode amount boost 
 

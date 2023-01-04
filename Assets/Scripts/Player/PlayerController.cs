@@ -58,6 +58,8 @@ public class PlayerController : CharacterController<PlayerHealth>
     [Header("Mobile UI")]
     [SerializeField] private bool m_IsJoystickMovement = false;
     [SerializeField] private GameObject MobileUI;
+    [SerializeField] private Button AimModeButton;
+    [SerializeField] private Button DashButton;
 
     private PlayerInput m_PlayerInput; 
 
@@ -290,25 +292,84 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void OnAimModeStart(InputValue value)
     {
-        if (m_CurrEffect == DamageInfo.HIT_EFFECT.SLOW) return;
+        StartAimMode();
+    }
 
+    public void StartAimMode()
+    {
+        if (m_CurrEffect == DamageInfo.HIT_EFFECT.SLOW) return;
         m_MoonBarAbility.AimModeStartHelper();
+        UpdateAimModeButton();
     }
 
     public void OnAimModeEnd(InputValue value)
     {
+        StopAimingMode();
+    }
+
+    public void StopAimingMode()
+    {
         m_MoonBarAbility.AimModeEndHelper();
+        UpdateAimModeButton();
+    }
+
+    public void FlipAimMode()
+    {
+        if (m_MoonBarAbility.IsAimMode)
+        {
+            StopAimingMode();
+        } else
+        {
+            StartAimMode();
+        }
+    }
+
+    private void UpdateAimModeButton()
+    {
+#if UNITY_ANDROID
+        // Update Aim mode button
+#endif
     }
 
     public void OnDashStart(InputValue value)
     {
+        StartDash();
+    }
+
+    public void StartDash()
+    {
         if (m_CurrEffect == DamageInfo.HIT_EFFECT.SLOW) return;
         m_MoonBarAbility.OnDashStartHelper();
+        UpdateDashButton();
     }
 
     public void OnDashEnd(InputValue value)
     {
+        StopDashing();
+    }
+
+    public void StopDashing()
+    {
         m_MoonBarAbility.OnDashEndHelper();
+        UpdateDashButton();
+    }
+
+    public void FlipDashing()
+    {
+        if (m_MoonBarAbility.IsDashing)
+        {
+            StopDashing();
+        } else
+        {
+            StartDash();
+        }
+    }
+
+    private void UpdateDashButton()
+    {
+#if UNITY_ANDROID
+        // Update Dash button
+#endif
     }
 
     public void LostMothCollected()
