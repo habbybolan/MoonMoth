@@ -8,7 +8,7 @@ using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement speed")]
-    [Tooltip("Percent of control point's movement speed so player lags behind control point")]
+    [Tooltip("Moth movement speed while following control point")]
     [SerializeField] private float m_BaseMothMoveSpeed = 7f; 
     [Tooltip("To show visual representation of control point player follows")]
     [SerializeField] private bool m_IsShowControlObject = false;
@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("The moth's speed increase while dodging")]
     [Range(1, 10)]
     [SerializeField] private float m_DodgeSpeedIncrease = 2f;
+    [SerializeField] private float m_ControlPointSpeedIncrDuringDodge = 5f;
     
 
     [Header("Rotation")]
@@ -96,6 +97,14 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 m_PrevCrosshairPoint;
 
+    // Start Dodging properties
+    private float m_CurrDodgeDuration = 0;
+    private float m_DodgeInputXDirection;
+    private float m_DodgeInputYDirection;
+    // Amount to rotate to perform at least a full rotation, given current rotation
+    private float m_DodgeRotationAmount;
+    // End Dodging properties
+
     private void Awake()
     {
         m_ControlRigidBody = m_ControlObject.GetComponent<Rigidbody>();
@@ -139,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
         // calculate velocity differential
         Vector3 currentVelocity = m_ControlRigidBody.velocity;
         // differential for horizontal/vertical movements
-        Vector3 targetVelocity = (transform.parent.right * inputX + transform.parent.up * inputY) * m_CurrControlSpeed;
+        Vector3 targetVelocity = (transform.parent.right * inputX + transform.parent.up * inputY) * m_CurrControlSpeed * Time.fixedDeltaTime;
 
         // differential for parent catmull walker movement
         Vector3 ParentVelocity = PlayerManager.PropertyInstance.PlayerController.PlayerParent.RigidBody.velocity;
@@ -148,14 +157,14 @@ public class PlayerMovement : MonoBehaviour
         Vector3 velocityDifferential = targetVelocity - currentVelocity;
         float controlSpeedMultiplier = 1 + (ControlPosition.z * -1 * 100);
         m_ControlRigidBody.AddForce(velocityDifferential * m_ControlPointAcceleration +
-            transform.parent.forward * controlSpeedMultiplier);
+            transform.parent.forward * controlSpeedMultiplier, ForceMode.Force);
     }
 
     public void MothXYMovemnent()
     {
         // Move towards control points
         Vector3 distanceFromControl = new Vector3(ControlPosition.x, ControlPosition.y, transform.localPosition.z) - transform.localPosition;
-        m_PlayerRigidBody.transform.localPosition += distanceFromControl * m_CurrMothMoveSpeed * .02f;
+        m_PlayerRigidBody.transform.localPosition += distanceFromControl * m_CurrMothMoveSpeed * Time.fixedDeltaTime;
     }
 
     public void RotationLook()
@@ -219,77 +228,86 @@ public class PlayerMovement : MonoBehaviour
 
         float inputX = vec2Move.x;
         float inputY = vec2Move.y;
-        inputY = Mathf.Clamp(inputY, -m_MaxYValue, m_MaxYValue);
+        m_DodgeInputYDirection = Mathf.Clamp(inputY, -m_MaxYValue, m_MaxYValue);
         float currZRot = transform.localRotation.eulerAngles.z;
 
-        float inputXDirection = inputX == 0 ? -1 : inputX < 0 ? -1 : 1;
-
-        float rotationAmount;   // Amount to rotate to perform at least a full rotation, given current rotation
+        m_DodgeInputXDirection = inputX == 0 ? -1 : inputX < 0 ? -1 : 1;
+ 
         float difference = Mathf.Abs(360 - transform.localRotation.eulerAngles.z);
         // player angled to the right
         if (currZRot > 180)
         {
             // rotating to the right
             if (inputX > 0)
-                rotationAmount = -(360 - difference);
+                m_DodgeRotationAmount = -(360 - difference);
             // otherwise rotating to the left
             else
-                rotationAmount = difference + 360;
+                m_DodgeRotationAmount = difference + 360;
         }
         // otherwise player angled to the left
         else
         {
             // rotating to the right
             if (inputX > 0)
-                rotationAmount = -(currZRot + 360);
+                m_DodgeRotationAmount = -(currZRot + 360);
             // otherwise rotating to the left
             else
-                rotationAmount = 360 - currZRot;
+                m_DodgeRotationAmount = 360 - currZRot;
         }
 
-        float currDuration = 0;
+        m_CurrDodgeDuration = 0;
 
-        while (currDuration < m_DodgeDuration)
+        while (m_CurrDodgeDuration < m_DodgeDuration)
         {
-            float angle = rotationAmount * (Time.deltaTime / m_DodgeDuration);
-
-            // spin player around z axis
-            m_CurrentAngle = new Vector3(
-                transform.localEulerAngles.x,
-                transform.localEulerAngles.y,
-                m_CurrentAngle.z + angle);
-
-            transform.localEulerAngles = m_CurrentAngle;
-
-            float controlPointMultiplierX = 1f;
-            // if control point on opposite side X of the player fromthe direction player is dodging, apply speed multiplier
-            if (inputXDirection < 0 && ControlPosition.x > transform.localPosition.x - m_ControlPointOffsetLimitX ||
-                inputXDirection > 0 && ControlPosition.x < transform.localPosition.x + m_ControlPointOffsetLimitX)
-            {
-                controlPointMultiplierX = m_ControlPointMultiplier;
-            }
-
-            float controlPointMultiplierY = 1f;
-            // if control point on opposite side Y of the player from the direction player is dodging, apply speed multiplier
-            if (inputY < 0 && ControlPosition.y > transform.localPosition.y - m_ControlPointOffsetLimitY ||
-                inputY > 0 && ControlPosition.y < transform.localPosition.y + m_ControlPointOffsetLimitY)
-            {
-                controlPointMultiplierY = m_ControlPointMultiplier;
-            }
-            
-            // Update control point 
-            Vector3 TargetVelocity = transform.parent.transform.right * inputXDirection * controlPointMultiplierX * m_BaseControlSpeed +
-                                        transform.parent.transform.up * inputY * controlPointMultiplierY * m_BaseControlSpeed +
-                                        transform.parent.transform.forward * m_ControlRigidBody.velocity.z;
-            m_ControlRigidBody.AddForce((TargetVelocity - m_ControlRigidBody.velocity), ForceMode.Force);
-
-            currDuration += Time.deltaTime;
             yield return null;
         }
 
         m_CurrMothMoveSpeed = m_BaseMothMoveSpeed;
         // Finish dodge state
         callback();
+    }
+
+    public void PerformDodge()
+    {
+        float angle = m_DodgeRotationAmount * (Time.fixedDeltaTime / m_DodgeDuration);
+
+        // spin player around z axis
+        m_CurrentAngle = new Vector3(
+            transform.localEulerAngles.x,
+            transform.localEulerAngles.y,
+            m_CurrentAngle.z + angle);
+
+        transform.localEulerAngles = m_CurrentAngle;
+
+        float controlPointMultiplierX = m_ControlPointSpeedIncrDuringDodge;
+        // if control point on opposite side X of the player fromthe direction player is dodging, apply speed multiplier
+        if (m_DodgeInputXDirection < 0 && ControlPosition.x > transform.localPosition.x - m_ControlPointOffsetLimitX ||
+            m_DodgeInputXDirection > 0 && ControlPosition.x < transform.localPosition.x + m_ControlPointOffsetLimitX)
+        {
+            controlPointMultiplierX *= m_ControlPointMultiplier;
+        }
+
+        float controlPointMultiplierY = m_ControlPointSpeedIncrDuringDodge;
+        // if control point on opposite side Y of the player from the direction player is dodging, apply speed multiplier
+        if (m_DodgeInputYDirection < 0 && ControlPosition.y > transform.localPosition.y - m_ControlPointOffsetLimitY ||
+            m_DodgeInputYDirection > 0 && ControlPosition.y < transform.localPosition.y + m_ControlPointOffsetLimitY)
+        {
+            controlPointMultiplierY *= m_ControlPointMultiplier;
+        }
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+            controlPointMultiplierX *= m_XMobileControlSpeedMult;
+            controlPointMultiplierY *= m_YMobileControlSpeedMult;
+#endif
+
+        // Update control point 
+        Vector3 targetVelocity = transform.parent.transform.right * m_DodgeInputXDirection * controlPointMultiplierX * m_BaseControlSpeed * Time.fixedDeltaTime +
+                                    transform.parent.transform.up * m_DodgeInputYDirection * controlPointMultiplierY * m_BaseControlSpeed * Time.fixedDeltaTime;
+        //Vector3 parentVelocity = PlayerManager.PropertyInstance.PlayerController.PlayerParent.RigidBody.velocity;
+        //targetVelocity += parentVelocity;
+        m_ControlRigidBody.AddForce(targetVelocity - m_ControlRigidBody.velocity, ForceMode.Force);
+
+        m_CurrDodgeDuration += Time.fixedDeltaTime;
     }
 
     public Vector3 ControlPosition => transform.parent.transform.InverseTransformPoint(m_ControlRigidBody.position);

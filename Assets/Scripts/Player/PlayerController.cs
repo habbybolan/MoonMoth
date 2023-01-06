@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 using Gyroscope = UnityEngine.InputSystem.Gyroscope;
-using UnityEngine.EventSystems;
+using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 
 
 /*
@@ -45,6 +45,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     [Header("Mobile")]
     [Tooltip("Either uses Gyro controls, or Attitude + Accelerometer values")]
     [SerializeField] private bool m_UseGyro = true;
+    [SerializeField] private float m_MinSwipeLengthToDodge = 500.0f;
 
     [Header("Gyroscope")]
     //[SerializeField] private float MaxMobileYawRotationFromOrigin = 25;
@@ -121,6 +122,9 @@ public class PlayerController : CharacterController<PlayerHealth>
         }
 
         SetMobileMovementType(m_IsJoystickMovement);
+        EnhancedTouch.EnhancedTouchSupport.Enable();
+        // delegate for checking after swipe
+        EnhancedTouch.Touch.onFingerUp += OnFingerUp;
 
         MobileUI.SetActive(true);
 
@@ -241,10 +245,39 @@ public class PlayerController : CharacterController<PlayerHealth>
         {
             // move player only along parent movement
             m_PlayerMovement.ControlPointXYMovement(new Vector2(0, 0));
+            if (m_playerState == PLAYER_ACTION_STATE.DODGING)
+            {
+                m_PlayerMovement.PerformDodge();
+            }
         }
 
         m_PlayerMovement.UpdateCrossHair();
         m_PlayerMovement.MothXYMovemnent();
+    }
+
+    private void OnFingerUp(EnhancedTouch.Finger finger)
+    {
+        CheckSwipeDodge(finger);
+    }
+
+    // Check if user tried performing dodge
+    private void CheckSwipeDodge(EnhancedTouch.Finger finger)
+    {
+        EnhancedTouch.TouchHistory touchHistory = finger.touchHistory;
+        // check for swipes, not single touches
+        if (touchHistory.Count == 1) return;
+
+        Vector2 firstTouchVec = touchHistory[touchHistory.Count - 1].screenPosition;
+        Vector2 lastTouchVec = touchHistory[0].screenPosition;
+
+        float dotSwipe = Vector2.Dot(firstTouchVec, lastTouchVec);
+        Vector2 DodgeDirection = lastTouchVec - firstTouchVec;
+        // valid dodge if swipe in single direction and swiping left/right
+        if (dotSwipe > 0 && DodgeDirection.magnitude > m_MinSwipeLengthToDodge)
+        {
+            StartDodge(DodgeDirection);
+        }
+
     }
 
     private void SetMobileMovementType(bool IsJoystickMovement)
@@ -286,12 +319,17 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void OnDodge(InputValue value)
     {
+        StartDodge(m_MovementInput);
+    }
+
+    public void StartDodge(Vector2 DodgeDirection)
+    {
         if (m_playerState == PLAYER_ACTION_STATE.FLYING && !m_IsDodgeCooldown)
         {
             m_playerState = PLAYER_ACTION_STATE.DODGING;
             m_Health.SetProjectileInvulnFrames(m_PlayerMovement.GetDodgeDuration());
-            StartCoroutine(m_PlayerMovement.PlayerDodge(FinishAction, m_MovementInput));
-        }   
+            StartCoroutine(m_PlayerMovement.PlayerDodge(FinishAction, DodgeDirection));
+        }
     }
 
     public void OnAimModeStart(InputValue value)
