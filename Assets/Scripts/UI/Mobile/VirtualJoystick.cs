@@ -15,12 +15,18 @@ public class VirtualJoystick : MonoBehaviour
     private float m_RadiusDifference;
 
     private RectTransform m_BackgroundRectTransform;
+    private RectTransform m_JoystickRectTransform;
 
     protected void Start()
     {
+        // background values
         m_BackgroundRectTransform = m_VirtualJoystickImageBackground.transform.GetComponent<RectTransform>();
-        m_RadiusBackground = m_BackgroundRectTransform.rect.width / 2;
-        m_RadiusJoystick = m_VirtualJoystickImage.transform.GetComponent<RectTransform>().rect.width / 2;
+        m_RadiusBackground = (m_BackgroundRectTransform.rect.width / 2) * m_BackgroundRectTransform.localScale.x;
+
+        // joystick values
+        m_JoystickRectTransform = m_VirtualJoystickImage.transform.GetComponent<RectTransform>();
+        m_RadiusJoystick = (m_JoystickRectTransform.rect.width / 2) * m_JoystickRectTransform.localScale.x * m_BackgroundRectTransform.localScale.x;
+
         m_RadiusDifference = m_RadiusBackground - m_RadiusJoystick;
 
         SetVisibility(false);
@@ -43,7 +49,8 @@ public class VirtualJoystick : MonoBehaviour
             // Update joystick position and input values
             else
             {
-                Vector2 backgroundPos = new Vector2(m_VirtualJoystickImageBackground.transform.position.x, m_VirtualJoystickImageBackground.transform.position.y);
+                Vector2 backgroundPos = new Vector2(m_VirtualJoystickImageBackground.transform.position.x, m_VirtualJoystickImageBackground.transform.position.y) +
+                    new Vector2(m_RadiusBackground, m_RadiusBackground);
                 Vector2 touchVecFromCenter = m_CurrFinger.lastTouch.screenPosition - backgroundPos;
                 // normalize Vec for [-1,1] input
                 Input.x = Mathf.Clamp(touchVecFromCenter.x / m_RadiusDifference, -1, 1);
@@ -57,7 +64,9 @@ public class VirtualJoystick : MonoBehaviour
         // Update virtual joystick position
         if (m_CurrFinger != null)
         {
-            m_VirtualJoystickImage.transform.localPosition = new Vector2(Input.x* m_RadiusDifference, Input.y* m_RadiusDifference);
+            m_JoystickRectTransform.position = m_BackgroundRectTransform.position +
+                new Vector3(m_RadiusBackground, m_RadiusBackground, 0) +
+                new Vector3(Input.x * m_RadiusDifference, Input.y * m_RadiusDifference, 0);
         }
     }
 
@@ -69,9 +78,8 @@ public class VirtualJoystick : MonoBehaviour
         m_CurrFinger = finger;
         SetVisibility(true);
         // Set position of joystick to position touched, offset from size
-        float offset = -m_RadiusBackground * m_BackgroundRectTransform.localScale.x;
         m_BackgroundRectTransform.position = finger.lastTouch.screenPosition + 
-            new Vector2(offset, offset);
+            new Vector2(-m_RadiusBackground, -m_RadiusBackground);
     }
 
     private void SetVisibility(bool isVisible)

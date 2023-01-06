@@ -108,7 +108,7 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_Health.d_DamageDelegate = OnDamageTaken;
         UpdateLostMothText();
 
-#if UNITY_ANDROID //&& !UNITY_EDITOR
+#if UNITY_ANDROID && !UNITY_EDITOR
 
         if (Accelerometer.current != null)
         {
