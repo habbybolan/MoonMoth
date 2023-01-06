@@ -6930,11 +6930,14 @@ MonoBehaviour:
   m_DodgeCooldown: 1
   m_GlideFlapDelayMin: 0.2
   m_GlideFlapDelayMax: 0.5
-  m_UseGyro: 1
+  m_IsJoystickMovement: 0
+  m_MinSwipeLengthToDodge: 500
   m_GryoscopePitchMult: 17
   m_GryoscopeYawMult: 10
-  m_IsJoystickMovement: 0
-  MobileUI: {fileID: 0}
+  MobileUI: {fileID: 6657925442271159906}
+  AimModeButton: {fileID: 7344114271007057050}
+  DashButton: {fileID: 2181149058146762658}
+  m_VirtualJoystick: {fileID: 2493744791088286238}
 --- !u!114 &7166930479057285041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6993,6 +6996,7 @@ MonoBehaviour:
   m_ControlPointOffsetLimitY: 3
   m_MaxYDegrees: 17.8
   m_DodgeSpeedIncrease: 1.5
+  m_ControlPointSpeedIncrDuringDodge: 5
   m_RotateSpeed: 10
   m_focalPointOffset: 3
   m_ZRotationSpeed: 0.01
@@ -7601,8 +7605,46 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb7ec9380a48584795b06331c4a3aea, type: 3}
+--- !u!114 &2181149058146762658 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3334864278124597685, guid: 3bb7ec9380a48584795b06331c4a3aea, type: 3}
+  m_PrefabInstance: {fileID: 3459660509543034391}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2493744791088286238 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1339998235112907785, guid: 3bb7ec9380a48584795b06331c4a3aea, type: 3}
+  m_PrefabInstance: {fileID: 3459660509543034391}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370d04bb513b6c342b81270823863fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6348254210947081772 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7501494450416420923, guid: 3bb7ec9380a48584795b06331c4a3aea, type: 3}
   m_PrefabInstance: {fileID: 3459660509543034391}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6657925442271159906 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7811103284447004789, guid: 3bb7ec9380a48584795b06331c4a3aea, type: 3}
+  m_PrefabInstance: {fileID: 3459660509543034391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7344114271007057050 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6190382283560766093, guid: 3bb7ec9380a48584795b06331c4a3aea, type: 3}
+  m_PrefabInstance: {fileID: 3459660509543034391}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

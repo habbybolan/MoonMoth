@@ -132,13 +132,13 @@ public class PlayerMovement : MonoBehaviour
         m_ControlObject.transform.parent = null;
     }
 
-    public void ControlPointXYMovement(Vector2 Vec2Movement, bool bMobileMovement = false)
+    public void ControlPointXYMovement(Vector2 Vec2Movement, bool bGyroMovement = false)
     {
         float inputX = Vec2Movement.x;
         float inputY = Vec2Movement.y;
 
         // if mobile movement
-        if (bMobileMovement)
+        if (bGyroMovement)
         {
             //inputY += m_OriginYPhonePosition;
             inputX *= m_XMobileControlSpeedMult;

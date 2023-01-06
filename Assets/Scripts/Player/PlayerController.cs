@@ -44,7 +44,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     [Header("Mobile")]
     [Tooltip("Either uses Gyro controls, or Attitude + Accelerometer values")]
-    [SerializeField] private bool m_UseGyro = true;
+    [SerializeField] private bool m_IsJoystickMovement = false;
     [SerializeField] private float m_MinSwipeLengthToDodge = 500.0f;
 
     [Header("Gyroscope")]
@@ -57,10 +57,10 @@ public class PlayerController : CharacterController<PlayerHealth>
     [Header("Attitude")]
 
     [Header("Mobile UI")]
-    [SerializeField] private bool m_IsJoystickMovement = false;
     [SerializeField] private GameObject MobileUI;
     [SerializeField] private Button AimModeButton;
     [SerializeField] private Button DashButton;
+    [SerializeField] private VirtualJoystick m_VirtualJoystick;
 
     private PlayerInput m_PlayerInput; 
 
@@ -108,7 +108,7 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_Health.d_DamageDelegate = OnDamageTaken;
         UpdateLostMothText();
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID //&& !UNITY_EDITOR
 
         if (Accelerometer.current != null)
         {
@@ -125,6 +125,7 @@ public class PlayerController : CharacterController<PlayerHealth>
         EnhancedTouch.EnhancedTouchSupport.Enable();
         // delegate for checking after swipe
         EnhancedTouch.Touch.onFingerUp += OnFingerUp;
+        EnhancedTouch.Touch.onFingerDown += OnFingerDown;
 
         MobileUI.SetActive(true);
 
@@ -207,7 +208,15 @@ public class PlayerController : CharacterController<PlayerHealth>
         {
             if (Accelerometer.current != null && Gyroscope.current != null && Accelerometer.current.enabled)
             {
-                if (m_UseGyro)
+                // TODO: Move Joystick/Gyro flag to settings class
+                // Joystick controls
+                if (m_IsJoystickMovement)
+                {
+                    // move player body along local x, y plane based on inputs
+                    m_PlayerMovement.ControlPointXYMovement(VirtualJoystick.Input, false);
+                }
+                // Gyro controls
+                else
                 {
                     Vector3 gyroscope = Gyroscope.current.angularVelocity.ReadValue();
 
@@ -225,16 +234,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
                     // move player body along local x, y plane based on inputs
                     m_PlayerMovement.ControlPointXYMovement(new Vector2(XInput, YInput), true);
-                } else
-                {
-                    Vector3 accelerometer = Accelerometer.current.acceleration.ReadValue();
-
-                    Quaternion q = AttitudeSensor.current.attitude.ReadValue();
-                   
-                    // move player body along local x, y plane based on inputs
-                    m_PlayerMovement.ControlPointXYMovement(new Vector2(0, accelerometer.z), true);
                 }
-                
             } else
             {
                 // move player body along local x, y plane based on inputs
@@ -277,19 +277,21 @@ public class PlayerController : CharacterController<PlayerHealth>
         {
             StartDodge(DodgeDirection);
         }
-
+    }
+    
+    private void OnFingerDown(EnhancedTouch.Finger finger)
+    {
+        // check if touching left side of screen
+        if (finger.lastTouch.screenPosition.x < Screen.width / 2)
+        {
+            m_VirtualJoystick.StartJoystickTouch(finger);
+        }
     }
 
     private void SetMobileMovementType(bool IsJoystickMovement)
     {
         m_IsJoystickMovement = IsJoystickMovement;
-        if (m_IsJoystickMovement)
-        {
-            // TODO:
-        } else
-        {
-            // TODO:
-        }
+        m_VirtualJoystick.gameObject.SetActive(m_IsJoystickMovement);
     }
 
     public float DistanceFromPlayer(Vector3 pointToCompare)
