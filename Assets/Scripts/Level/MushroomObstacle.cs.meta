@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 18f4b3f2c096f534ca5df965353eafc5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_MushroomExplosionParticle: {fileID: 1338685332006623429, guid: 44722895049660142b7052ea8010d2f8, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 668b96ff658495c4283e8a01b10641b8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_StalagPrefab: {fileID: 8046770995568307375, guid: f02e75b0a6a62b04582be1c600ced6ab, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

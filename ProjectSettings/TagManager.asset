@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Terrain
+  - Spider
+  - Mushroom
+  - Stalag
   layers:
   - Default
   - TransparentFX
@@ -14,13 +19,13 @@ TagManager:
   - XRay
   - Glass
   - Character
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Obstacle
+  - PlayerControl
+  - Terrain
+  - Player
+  - Health
+  - Projectile
   - 
   - 
   - 
