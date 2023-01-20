@@ -35,18 +35,13 @@ public class HealthOrb : HomingProjectile
         }
     }
 
-    protected override void Update() 
-    {
-        base.Update();
-        Debug.Log(m_rigidBody.velocity.magnitude);
-    }
-
     private void FixedUpdate()
     {
         if (m_IsGoingUp) return;
+        base.FixedUpdate();
 
         m_SpeedMultiplier += m_SpeedIncreaseEachSecond * Time.fixedDeltaTime;
-        m_rigidBody.velocity = m_Speed * m_SpeedMultiplier * transform.forward;
+        m_CurrSpeed = m_Speed * m_SpeedMultiplier;
     }
 
     private void DetachParticles()
