@@ -11,7 +11,7 @@ Movement             | Left Stick
 Shoot                | Right Trigger    
 Dodge                | B 
 Dash                 | A                 
-Aim-Mode             | Right-Bumper  
+Aim-Mode             | Left Trigger 
 
 ### Team:
 
