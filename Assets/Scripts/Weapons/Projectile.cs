@@ -12,10 +12,12 @@ public class Projectile : MonoBehaviour
     protected Rigidbody m_rigidBody;
 
     protected GameObject m_Owner;
+    protected float m_CurrSpeed;
 
     private void Awake()
     {
         m_rigidBody = GetComponent<Rigidbody>();
+        m_CurrSpeed = m_Speed;
     }
 
     // Start is called before the first frame update
@@ -26,7 +28,7 @@ public class Projectile : MonoBehaviour
 
     public void Shoot()
     {
-        m_rigidBody.velocity = m_Speed * transform.forward;
+        m_rigidBody.velocity = m_CurrSpeed * transform.forward;
         StartCoroutine(durationCoroutine());
     }
      

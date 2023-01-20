@@ -20,7 +20,7 @@ public class HomingProjectile : Projectile
 
     protected void FixedUpdate()
     {
-        
+        HomeToTarget();
     }
 
     public void SetTarget(Health health)
@@ -30,7 +30,7 @@ public class HomingProjectile : Projectile
 
     protected virtual void Update()
     {
-        HomeToTarget();
+        
     }
 
     private void HomeToTarget()
@@ -49,6 +49,6 @@ public class HomingProjectile : Projectile
             homingAngle = 1 + (1 - dist / m_DistToIncrHomingAngle) * (m_MaxHomingAngleInRange - 1);
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationToTarget, m_MaxHomingAngle);
-        m_rigidBody.velocity = transform.forward * m_Speed;
+        m_rigidBody.velocity = transform.forward * m_CurrSpeed;
     }
 }
