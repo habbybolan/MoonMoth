@@ -13,8 +13,10 @@ public class Tile : MonoBehaviour
     public Quaternion m_EndPointRotation;
     public List<EnemySetWrapper> m_EnemyPointSet;
     public List<Vector3> m_LostMothPoints;
-    
-    
+
+    [SerializeField]
+    private int m_NumChecksStartEndPoint = 16;
+
     // prefabs
     public LostMoth m_LostMothPrefab;
 
@@ -284,6 +286,53 @@ public class Tile : MonoBehaviour
         }
         m_LostMothPoints.RemoveAt(index);
     }
+
+    // Start/End Point repositioning **********
+    public void RepositionStartPoint()
+    {
+        StartPoint = RepositionPointHelper(StartPoint, Quaternion.identity);
+    }
+    public void RepositionEndPoint()
+    {
+        EndPoint = RepositionPointHelper(EndPoint, EndPointRotation);
+    }
+    // Gets the point for setting end/start point directly in the center of the end/start piece
+    public Vector3 RepositionPointHelper(Vector3 Position, Quaternion rotation)
+    {
+        Vector3 LastPos = transform.TransformPoint(Position);
+        // repeat the centering multiple times to eventually find the center point
+        for (int j = 0; j < 20; j++)
+        {
+            Vector3 StartPointWorld = LastPos;
+            // TODO: Doesn't work if tile angles up/down
+            Vector3 ForwardVec = rotation * Vector3.forward;
+            Vector3 StartVecDir = Vector3.up;
+            Vector3 SumVec = Vector3.zero;
+
+            Vector3 CurrVecDirection;
+            float StepAngle = 360 / m_NumChecksStartEndPoint;
+            for (int i = 0; i < m_NumChecksStartEndPoint; i++)
+            {
+                CurrVecDirection = Quaternion.AngleAxis(StepAngle * i, ForwardVec) * StartVecDir;
+                // If nothing hit, do nothing 
+                int terrainLayer = 1 << LayerMask.NameToLayer("Terrain");
+                RaycastHit hitInfo;
+                //Debug.DrawLine(StartPointWorld, StartPointWorld + CurrVecDirection * 1000, Color.green, 5);
+                if (!gameObject.scene.GetPhysicsScene().Raycast(StartPointWorld, CurrVecDirection, out hitInfo, 10000, terrainLayer))
+                {
+                    Debug.LogError("Start/End point at position " + LastPos.ToString() + " with rotation " + rotation.ToString() + " is invalid for centering. Make sure it is placed so that " +
+                        "all casts outwards towards the circle edges collide with the tile.");
+                    return Position;
+                }
+                SumVec += hitInfo.point;
+            }
+            SumVec /= m_NumChecksStartEndPoint;
+            LastPos = SumVec;
+        }
+        
+        return transform.InverseTransformPoint(LastPos);
+    }
+    // End Start/End Point repositioning **********
 
     // End Point ************
     public Quaternion EndPointRotation

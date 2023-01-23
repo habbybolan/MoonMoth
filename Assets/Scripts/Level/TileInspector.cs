@@ -176,7 +176,6 @@ public class TileInspector : Editor
                     tile.UpdateAllPointsInSet(index, point - centerPoint);
                 }
             }
-            
         }
     }
 
@@ -346,6 +345,22 @@ public class TileInspector : Editor
                 EditorUtility.SetDirty(tile);
                 UnselectAll();
             }
+        }
+
+        GUILayout.Label("Start/End Point");
+        // button for reposition start point to center of tile
+        if (GUILayout.Button("Reposition Start Point"))
+        {
+            Undo.RecordObject(tile, "Reposition Start Point");
+            tile.RepositionStartPoint();
+            EditorUtility.SetDirty(tile);
+        }
+        // button for reposition end point to center of tile
+        if (GUILayout.Button("Reposition End Point"))
+        {
+            Undo.RecordObject(tile, "Reposition End Point");
+            tile.RepositionEndPoint();
+            EditorUtility.SetDirty(tile);
         }
     }  
 }
