@@ -6931,7 +6931,7 @@ MonoBehaviour:
   m_GlideFlapDelayMin: 0.2
   m_GlideFlapDelayMax: 0.5
   m_IsJoystickMovement: 0
-  m_MinSwipeLengthToDodge: 500
+  m_MinSwipeLengthToDodge: 200
   m_GryoscopePitchMult: 17
   m_GryoscopeYawMult: 10
   MobileUI: {fileID: 6657925442271159906}

@@ -267,15 +267,21 @@ public class PlayerController : CharacterController<PlayerHealth>
         // check for swipes, not single touches
         if (touchHistory.Count == 1) return;
 
-        Vector2 firstTouchVec = touchHistory[touchHistory.Count - 1].screenPosition;
-        Vector2 lastTouchVec = touchHistory[0].screenPosition;
+        Vector2 firstTouchVec = finger.lastTouch.startScreenPosition;
+        Vector2 lastTouchVec = finger.lastTouch.screenPosition;
 
-        float dotSwipe = Vector2.Dot(firstTouchVec, lastTouchVec);
+        // If start or end of touch at left of screen, dont perform dodge
+        if (firstTouchVec.x < Screen.width / 2 || lastTouchVec.x < Screen.width / 2)
+        {
+            return;
+        }
+
+        //float dotSwipe = Vector2.Dot(firstTouchVec, lastTouchVec);
         Vector2 DodgeDirection = lastTouchVec - firstTouchVec;
         // valid dodge if swipe in single direction and swiping left/right
-        if (dotSwipe > 0 && DodgeDirection.magnitude > m_MinSwipeLengthToDodge)
+        if (/*dotSwipe > 0 &&*/ DodgeDirection.magnitude > m_MinSwipeLengthToDodge)
         {
-            StartDodge(DodgeDirection);
+            StartDodge(DodgeDirection.normalized);
         }
     }
     
