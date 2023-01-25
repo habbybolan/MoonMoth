@@ -28,22 +28,7 @@ public class CatmullRom : MonoBehaviour
 		return position;
 	}
 
-	//Calculates curve position at t[0, 1]
-	public static Vector3 GetPointConstant(Vector3 start, Vector3 end, Vector3 tanPoint1, Vector3 tanPoint2, float distPrevPoint, float curveLength, float speed)
-	{
-		// Hermite curve formula: 
-		// (2t^3 - 3t^2 + 1) * p0 + (t^3 - 2t^2 + t) * m0 + (-2t^3 + 3t^2) * p1 + (t^3 - t^2) * m1
-		float t = (distPrevPoint + speed) / curveLength;
-		t = Mathf.Clamp01(t);
-		Vector3 position = (2.0f * t * t * t - 3.0f * t * t + 1.0f) * start
-			+ (t * t * t - 2.0f * t * t + t) * tanPoint1
-			+ (-2.0f * t * t * t + 3.0f * t * t) * end
-			+ (t * t * t - t * t) * tanPoint2;
-
-		return position;
-	}
-
-	public static float GetCurveLength(Vector3 start, Vector3 end, Vector3 tanPoint1, Vector3 tanPoint2, float n)
+	public static float GetCurveLength(Vector3 start, Vector3 end, Vector3 tanPoint1, Vector3 tanPoint2, int n)
 	{
 		float sumDistance = 0;
 		for (int i = 0; i < n; i++)

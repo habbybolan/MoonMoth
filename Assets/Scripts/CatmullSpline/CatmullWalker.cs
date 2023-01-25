@@ -41,14 +41,23 @@ public class CatmullWalker : MonoBehaviour
             m_Dist = 0;
             m_CurrCurve = 1;
             m_CurrCurveLength = m_Spline.GetCurveLength(m_CurrCurve);
+
+            // Set initial position
+            if (m_RigidBody != null)
+            {
+                m_RigidBody.transform.position = m_Spline.GetPointLocal(0, m_CurrCurve);
+            } else
+            {
+                transform.position = m_Spline.GetPointLocal(0, m_CurrCurve);
+            }
         }
 
         // convert distance travelled to percent curve has been walked along
         m_Dist += m_CurrSpeed * Time.fixedDeltaTime;  
-        float t = (m_Dist) / m_CurrCurveLength;
+        float t = m_Dist / m_CurrCurveLength;
 
-        Vector3 position = m_Spline.GetPointLocal(t, m_CurrCurve);
         Vector3 newRotation = m_Spline.GetDirectionLocal(t, m_CurrCurve);
+        Vector3 position = transform.position + newRotation * m_CurrSpeed * Time.fixedDeltaTime; //m_Spline.GetPointLocal(t, m_CurrCurve);
         Quaternion rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newRotation), m_MaxTurnAngle);
 
         // If no rigidBody, move transform direction

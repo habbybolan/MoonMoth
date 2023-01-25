@@ -49,9 +49,9 @@ public class CatmullRomInspector : Editor
 	private void ShowCurve(int curve)
 	{
 		Handles.color = Color.white;
-		int start = (curve - 1) * stepsPerCurve;
-		int steps = stepsPerCurve * spline.CurveCount;
-		Vector3 lineStart = spline.GetPoint(start / (float)steps);
+		int start = (curve - 1) * stepsPerCurve;		
+		int steps = stepsPerCurve * spline.CurveCount;	
+		Vector3 lineStart = spline.GetPoint(start / (float)steps);	// (start / steps) = time t along the curve
 		// Get time t along the curve, using the number of steps and the curve index
 		for (int i = start + 1; i <= stepsPerCurve * (curve); i++)
 		{
