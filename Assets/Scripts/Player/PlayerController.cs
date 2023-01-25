@@ -251,7 +251,6 @@ public class PlayerController : CharacterController<PlayerHealth>
             }
         }
 
-        m_PlayerMovement.UpdateCrossHair();
         m_PlayerMovement.MothXYMovemnent();
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Events;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class CameraMovement : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin m_Noise;
 
     private Coroutine m_ShakeCoroutine;
+    private UnityAction<CinemachineBrain> m_UpdateUI;
 
     private void Start()
     {
@@ -36,6 +38,10 @@ public class CameraMovement : MonoBehaviour
         m_Noise = m_Camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         m_Noise.m_AmplitudeGain = 0;
         m_TargetFov = m_BaseFov;
+
+        // Update UI tied to in-game objects to prevent jittering
+        m_UpdateUI += PlayerManager.PropertyInstance.PlayerController.PlayerMovement.UpdateCrossHair;
+        CinemachineCore.CameraUpdatedEvent.AddListener(m_UpdateUI);
     }
 
     private void Update()

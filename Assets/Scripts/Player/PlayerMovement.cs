@@ -196,11 +196,9 @@ public class PlayerMovement : MonoBehaviour
         transform.localEulerAngles = m_CurrentAngle;
     }
 
-    public void UpdateCrossHair()
+    public void UpdateCrossHair(Cinemachine.CinemachineBrain brain)
     {
-        Vector3 newCrosshairPoint = (CrossHairPoint - m_Crosshair.position) * 0.5f;
         m_Crosshair.position = Camera.main.WorldToScreenPoint(CrossHairPoint);
-        
         m_ReticlePoint.position = CrossHairPoint;
     }
 
