@@ -60,6 +60,16 @@ public class Tile : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        // Delete all spawned objects
+        foreach (GameObject spawnedObject in m_SpawnedTileObjects)
+        {
+            Destroy(spawnedObject);
+        }
+        m_SpawnedTileObjects.Clear();
+    }
+
     public void TileInspectorInitialize()
     {
         if (m_EnemyPointSet == null)
