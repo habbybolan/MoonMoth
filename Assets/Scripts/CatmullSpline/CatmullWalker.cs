@@ -8,6 +8,9 @@ public class CatmullWalker : MonoBehaviour
     [SerializeField] protected SplineCreator m_Spline;
     [SerializeField] protected float m_Speed = 1;
     [SerializeField] protected float m_MaxTurnAngle = 40f;
+    [Tooltip("If the walker follows the spline exactly. Don't use for player as movement along the spline is not completely constant. " +
+        "If turned on, there will be drifting from the spline point, but movement is much smoother.")]
+    [SerializeField] protected bool m_IsFollowSplineExact = false;
 
     private float m_Dist = 0;
     protected int m_CurrCurve = -1;
@@ -57,7 +60,14 @@ public class CatmullWalker : MonoBehaviour
         float t = m_Dist / m_CurrCurveLength;
 
         Vector3 newRotation = m_Spline.GetDirectionLocal(t, m_CurrCurve);
-        Vector3 position = transform.position + newRotation * m_CurrSpeed * Time.fixedDeltaTime; //m_Spline.GetPointLocal(t, m_CurrCurve);
+        Vector3 position;
+        if (m_IsFollowSplineExact)
+        {
+            position = m_Spline.GetPointLocal(t, m_CurrCurve);
+        } else
+        {
+            position = transform.position + newRotation * m_CurrSpeed * Time.fixedDeltaTime;
+        }
         Quaternion rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newRotation), m_MaxTurnAngle);
 
         // If no rigidBody, move transform direction

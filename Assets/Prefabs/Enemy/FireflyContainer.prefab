@@ -238,6 +238,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Points: []
   isConstantSpeed: 1
+  NextPointBlockingMask: 0
+  m_MinDotProdCheck: 0.75
 --- !u!1 &7185757372758606171
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,6 +358,7 @@ MonoBehaviour:
   m_Spline: {fileID: 4206230537702241074}
   m_Speed: 5
   m_MaxTurnAngle: 40
+  m_IsFollowSplineExact: 1
   m_DistanceOffsetFromPrev: 10
   m_DistanceFromCamera: 25
   m_BoostSpeed: 10
