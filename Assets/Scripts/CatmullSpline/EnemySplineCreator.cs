@@ -16,7 +16,9 @@ struct PossiblePoint
 public class EnemySplineCreator : SplineCreator
 {
     public int NextPointBlockingMask;
-    
+
+    [SerializeField] private float m_MinDotProdCheck = 0.75f;
+
     private void Start()
     {
         m_IsActive = false;
@@ -83,6 +85,7 @@ public class EnemySplineCreator : SplineCreator
         // Otherwise choose best point based on angle to last point and its spline tangent
         else
         {
+            int countDotProdAboveMin = 0;   // Keep track of points with a dot product above min check
             Vector3 EndingDirection = GetDirection(1);
             List<PossiblePoint> possiblePoints = new List<PossiblePoint>();
             for (int i = 0; i < followSet.Count; i++)
@@ -92,10 +95,23 @@ public class EnemySplineCreator : SplineCreator
                 point.Point = followSet[i];
                 point.Dot = dotProd;
                 possiblePoints.Add(point);
+
+                if (dotProd >= m_MinDotProdCheck) countDotProdAboveMin++;
             }
 
+            // Perform check for dot product
             possiblePoints.Sort(PossiblePoint.SortByDot);
-            AddPoint(possiblePoints[0].Point);
+            // If any points above the min dot product check, choose from them
+            if (countDotProdAboveMin > 0)
+            {
+                int rand = Random.Range(0, countDotProdAboveMin);
+                AddPoint(possiblePoints[rand].Point);
+            } 
+            // Otherwise none passed check, choose random
+            else
+            {
+                AddPoint(possiblePoints[0].Point);
+            }
         }
     }
 }
