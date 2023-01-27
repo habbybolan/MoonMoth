@@ -1768,17 +1768,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DamageAmount: 10
---- !u!114 &577888226 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-  m_PrefabInstance: {fileID: 911829215}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98e03b73b2fa69445added13f99edb0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &592073595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2701,12 +2690,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3324045045170556717, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Health
       value: 
-      objectReference: {fileID: 1518710807}
+      objectReference: {fileID: 0}
     - target: {fileID: 3977897141832786757, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_Name
       value: PlayerParent
@@ -2770,7 +2760,7 @@ PrefabInstance:
     - target: {fileID: 7576343698478518934, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_OnDeathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 577888226}
+      objectReference: {fileID: 0}
     - target: {fileID: 7576343698478518934, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_OnDeathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -2788,6 +2778,7 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
 --- !u!1 &912437643
 GameObject:
@@ -4487,17 +4478,6 @@ Transform:
   m_Father: {fileID: 942486295}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1518710807 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7576343698478518934, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
-  m_PrefabInstance: {fileID: 911829215}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3fdf590ea2c8b84fa544ea430c42086, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1527026095
 GameObject:
   m_ObjectHideFlags: 0
@@ -6483,7 +6463,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PartPrefab: {fileID: 2213021387093853698, guid: a6c3f52eb7e0a73459f55ca36a1e7cf6, type: 3}
-  m_StartingPoint: {fileID: 2017603141}
   m_Spider: {fileID: 0}
   m_Length: 5
   m_AutoLength: 1
@@ -7116,7 +7095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b910b3352a66c2a4f884494de08484af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayerController: {fileID: 577888226}
+  m_PlayerController: {fileID: 0}
 --- !u!4 &2125208849
 Transform:
   m_ObjectHideFlags: 0

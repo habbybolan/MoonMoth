@@ -30,7 +30,7 @@ public class FireflyManager : MonoBehaviour
     private void Start()
     {
         m_FireflyList = new List<FireflyContainer> ();
-        GameManager.PropertyInstance.d_NextLevelDelegate += TileSetFinished;
+        GameState.PropertyInstance.d_GameTransitioningDelegate += TileSetFinished;
         StartCoroutine(SpawnFireflyDelay());
     }
 
@@ -58,7 +58,7 @@ public class FireflyManager : MonoBehaviour
         while (true)
         {
             // prevent spawning more fireflies if game not running
-            if (GameState.m_GameState != GameStateEnum.RUNNING)
+            if (GameState.PropertyInstance.GameStateEnum != GameStateEnum.RUNNING)
             {
                 currDuration = 0;
                 yield return null;

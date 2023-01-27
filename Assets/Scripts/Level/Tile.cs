@@ -62,6 +62,7 @@ public class Tile : MonoBehaviour
 
     private void OnDisable()
     {
+        if (m_SpawnedTileObjects == null) return;
         // Delete all spawned objects
         foreach (GameObject spawnedObject in m_SpawnedTileObjects)
         {

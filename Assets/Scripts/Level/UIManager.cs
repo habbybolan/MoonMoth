@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
     {
         // set fog of first level
         NextLevel();
-        GameManager.PropertyInstance.d_NextLevelDelegate += NextLevel;
+        GameState.PropertyInstance.d_GameRunningDelegate += NextLevel;
     }
 
     // Called when player reaches next level, update fog

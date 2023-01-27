@@ -38,6 +38,9 @@ public class PlayerController : CharacterController<PlayerHealth>
     [Header("Dodge")]
     [SerializeField] private float m_DodgeCooldown = 1;
 
+    [Header("Tutorial")]
+    [SerializeField] private Checklist m_ChecklistPrefab;
+
     [Header("Animation")]
     [SerializeField] private float m_GlideFlapDelayMin = .2f;
     [SerializeField] private float m_GlideFlapDelayMax = .5f;
@@ -66,7 +69,6 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     private PLAYER_ACTION_STATE m_playerState;  // Current player state given the actions performed / effects applied
 
-    private int m_LostMothCount = 0;
     private Vector2 m_MovementInput;            // Input object for moving player along x-y axis
 
     private DamageInfo.HIT_EFFECT m_CurrEffect; // Current hit effect applied to player
@@ -79,6 +81,16 @@ public class PlayerController : CharacterController<PlayerHealth>
     private float BasePhoneYawRotation;
     private float CurrYawRot = 0;
     private float CurrPitchRot = 0;
+
+    public delegate void LostMothCollectedDelegate();
+    public LostMothCollectedDelegate lostMothCollectedDelegate;
+
+    private Checklist m_Checklist;
+    public Checklist Checklist
+
+    {
+        get { return m_Checklist; }
+    }
     
     public MoonBarAbility MoonBarAbility { get { return m_MoonBarAbility; }}
 
@@ -108,6 +120,8 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_Health.d_DamageDelegate = OnDamageTaken;
         UpdateLostMothText();
 
+        GameState.PropertyInstance.d_GameTransitioningDelegate += StartTransition;
+
 #if UNITY_ANDROID && !UNITY_EDITOR
 
         if (Accelerometer.current != null)
@@ -132,6 +146,16 @@ public class PlayerController : CharacterController<PlayerHealth>
 #endif
 
         Application.targetFrameRate = -1;
+    }
+
+    public void InitializeTutorialUI()
+    {
+        m_Checklist = Instantiate(m_ChecklistPrefab);
+    } 
+
+    public void TutorialEnded()
+    {
+        Destroy(m_Checklist);
     }
 
     private void OnDamageTaken(DamageInfo damageInfo) 
@@ -171,7 +195,6 @@ public class PlayerController : CharacterController<PlayerHealth>
     // Main Update controller for all Player components, Dealing with actions/effects that happen each frame
     void Update()
     {
-        CheckWin();
 
         if (!TileManager.PropertyInstance.IsInitialized)
             return;
@@ -198,8 +221,8 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     private void FixedUpdate()
     {
-        // Game ended or transitioning to new tileset
-        if (GameState.m_GameState != GameStateEnum.RUNNING) return;
+        if (!TileManager.PropertyInstance.IsInitialized)
+            return;
 
         // move parent along spline
         m_PlayerParentMovement.TryMove();
@@ -419,31 +442,23 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void LostMothCollected()
     {
-        m_LostMothCount++;
+        if (lostMothCollectedDelegate != null)
+            lostMothCollectedDelegate();
         UpdateLostMothText();
     }
 
     private void UpdateLostMothText()
     {
-        m_LostMothUI.text = m_LostMothCount.ToString() + "/" + GameManager.PropertyInstance.CurrLostMothWinCondition();
+        m_LostMothUI.text = GameManager.PropertyInstance.LostMothCount.ToString() + "/" + GameManager.PropertyInstance.CurrLostMothWinCondition();
     }
 
     public override void Death() 
     {
-        GameManager.PropertyInstance.OnGameOver();
+        // TODO: Fall down? add delay to next screen in GameManager?
     } 
 
-    public void CheckWin() 
-    {
-        // if not currently transitioning and met the lost moth win threshold for the tile set
-        if (m_LostMothCount >= GameManager.PropertyInstance.CurrLostMothWinCondition())
-        {
-            WinLevel();
-        }        
-    }
-
     // Set current level as won, goto next or win game
-    public void WinLevel()
+    public void StartTransition()
     {
         StartCoroutine(TransitionPhase());
     }
@@ -453,7 +468,6 @@ public class PlayerController : CharacterController<PlayerHealth>
     {
         // invincible during transition
         m_Health.SetAllInvulnFrames(3f);
-        m_LostMothCount = 0;
         UIManager.PropertyInstance.FadeIn(m_FogInTransitionDuration);
 
         yield return new WaitForSeconds(m_FogInTransitionDuration);
@@ -461,16 +475,25 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_PlayerInput.enabled = false;
         // Call rest of transition logic
         m_PlayerParentMovement.DisconnectFromSpline();
-        GameManager.PropertyInstance.OnAllLostMothsCollected();
+
+        // Begin tile transition
+        TileManager.PropertyInstance.TileSetFinished();
         
         // wait for transition state to be over to reconnect to spline
-        while (GameState.m_GameState != GameStateEnum.RUNNING)
+        while (GameState.PropertyInstance.GameStateEnum != GameStateEnum.RUNNING)
         {
             yield return null;
         }
 
         m_PlayerParentMovement.ConnectBackToSpline();
         m_CameraMovement.ResetPosition();
+
+        float delay = 1f;
+        while (delay > 0)
+        {
+            delay -= Time.deltaTime;
+            yield return null;
+        }
        
 
         UIManager.PropertyInstance.FadeOut(m_FogOutTransitionDuration);

@@ -953,6 +953,7 @@ GameObject:
   - component: {fileID: 951211382}
   - component: {fileID: 951211383}
   - component: {fileID: 951211384}
+  - component: {fileID: 951211385}
   m_Layer: 0
   m_Name: = Manager
   m_TagString: Untagged
@@ -1003,6 +1004,7 @@ MonoBehaviour:
   m_SpiderStartingSpawnPercent: 10
   m_MushroomMaxSpawnPercent: 50
   m_MushroomStartingSpawnPercent: 10
+  m_IsDifficultyValuesLogged: 0
 --- !u!4 &951211377
 Transform:
   m_ObjectHideFlags: 0
@@ -1186,6 +1188,18 @@ MonoBehaviour:
   - {r: 0.7264151, g: 0.5769713, b: 0.10622107, a: 0}
   m_DefaultFogColor: {r: 185, g: 181, b: 171, a: 255}
   m_FadeScreen: {fileID: 266740771}
+--- !u!114 &951211385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951211375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bda2dcf3bbc0654449146d39bc378cdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1213463291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,7 +1495,15 @@ PrefabInstance:
     - target: {fileID: 8657425138570730159, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1380375362}
+      objectReference: {fileID: 951211381}
+    - target: {fileID: 8657425138570730159, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: WinLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657425138570730159, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: DeveloperModes, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}

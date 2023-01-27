@@ -29,7 +29,7 @@ public class DeveloperModes : MonoBehaviour
 
     public void WinLevel()
     {
-        m_PlayerController.WinLevel();
+        GameManager.PropertyInstance.OnAllLostMothsCollected();
     }
 
 }
