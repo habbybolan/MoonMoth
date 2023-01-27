@@ -1,24 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Checklist : MonoBehaviour
 {
     [SerializeField] private CheckListItem m_ChecklistItemPrefab;
+    [SerializeField] private GameObject m_ChecklistContainer;
     
-    // TODO: Property for vertical list of tutorials
     private Dictionary<int, CheckListItem> m_CheckListDictionary;
 
     public void AddChecklistItem(TutorialInfo tutorialInfo)
     {
-        // TODO:
-        // Create Checklist item UI element
-        // Add checklist item to map
+        CheckListItem checklistItem = Instantiate(m_ChecklistItemPrefab);
+        checklistItem.InitializeItem(tutorialInfo.TextToDisplay, tutorialInfo.MaxCount);
+        checklistItem.transform.SetParent(m_ChecklistContainer.transform);
+
+        m_CheckListDictionary.Add(tutorialInfo.Id, checklistItem);
+    }
+
+    public void AddChecklistItems(List<TutorialInfo> tutorialInfoList)
+    {
+        foreach (TutorialInfo info in tutorialInfoList)
+        {
+            AddChecklistItem(info);
+        }
+    }
+
+    public void Reset()
+    {
+        foreach (GameObject child in m_ChecklistContainer.transform)
+        {
+            Destroy(child);
+        }
     }
 
     public void UpdateChecklistItem(int itemID)
     {
-        // TODO:
-        // Get checklist item by id and notify to update it
+        CheckListItem checklistItem;
+        if (m_CheckListDictionary.TryGetValue(itemID, out checklistItem))
+        {
+            checklistItem.UpdateText();
+        }
     }
 }

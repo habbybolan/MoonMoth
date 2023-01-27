@@ -4,48 +4,64 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
-    [SerializeField] private List<Tutorial> AllTutorials;
+    [SerializeField] private List<Tutorial> AllTutorialPrefabs;
 
+    private List<Tutorial> AllTutorials;
 
     protected bool m_isTutorialsRunning = false;
-    protected bool m_IsTutorialEnded = false;
     protected int m_CurrTutorialIndex = 0;
 
     private void Start()
     {
-        // TODO:
-        // Spawn all tutorial objects
-        // Cache all tutorials
-        // Bind to tutorial finishing delegate
+        // create all tutorials and bind delegates
+        foreach (Tutorial tutorialPrefab in AllTutorialPrefabs)
+        {
+            Tutorial NewTutorial = Instantiate(tutorialPrefab);
+            NewTutorial.d_TutorialFinishedDelegate += GotoNextTutorial;
+            AllTutorials.Add(NewTutorial);
+        }
+
+        GameState.PropertyInstance.d_GameTutorialDelegate += StartTutorials;
     }
 
     public void StartTutorials()
     {
-        // TODO:
-        // Initialize player for tutorial
-        // Initialize First tutorial
+        m_isTutorialsRunning = true;
+        if (AllTutorials.Count == 0)
+        {
+            // TODO:
+            // Notify game state tutorial ended
+            return;
+        }
+        PlayerManager.PropertyInstance.PlayerController.InitializeTutorialUI();
+        StartNextTutorial();
     }
 
     public void GotoNextTutorial()
     {
-        // TODO:
-        // Check if all tutorials finished
-        // If not, increment index and set delay on going to next tutorial
+        m_CurrTutorialIndex++;
+        // if all tutorials finished
+        if (m_CurrTutorialIndex >= AllTutorials.Count)
+        {
+            // TODO:
+            // Notify game state tutorial ended
+        }
+        else
+        {
+            StartNextTutorial();
+        }
     }
 
     // Called to manually end the tutorial section, such as player skipping the tutorial
     public void SetTutorialsFinished()
     {
-        // TODO:
-        // End current tutorial
-        // Set tutorials as not running
+        PlayerManager.PropertyInstance.PlayerController.TutorialEnded();
+        m_isTutorialsRunning = false;
     }
 
     private void StartNextTutorial()
     {
-        // TODO:
-        // Get next tutorial and set it up
-        // notify player next tutorial started
+        AllTutorials[m_CurrTutorialIndex].SetupTutorial();
     }
 
     List<TutorialInfo> GetCurrentTutorialInfo()

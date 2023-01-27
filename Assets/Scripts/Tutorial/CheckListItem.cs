@@ -1,29 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CheckListItem : MonoBehaviour
 {
-    private int m_MaxCount;
-    private int m_CurrCount;
 
-    public void InitializeItem(string text, int MaxCount)
+    [SerializeField] private TextMeshProUGUI m_ItemTextbox;
+
+    private int m_MaxCount;
+    private int m_CurrCount = 0;
+    private string m_ItemText;
+
+    public void InitializeItem(string text, int maxCount)
     {
-        // TODO: 
-        // Store inital values
-        // Setup text
+        m_ItemText = text;
+        m_MaxCount = maxCount;
+        SetText();
     }
 
     public void UpdateText()
     {
-        // TODO:
-        // Increment Checklist item by 1
-        // Cross out item if reached count
+        m_CurrCount++;
+        SetText();
     }
-
-    private void CreateText()
+    
+    private void SetText()
     {
-        // TODO:
-        // Setup the initial text
+        string text = $"{m_ItemText} {m_CurrCount} / {m_MaxCount}";
+        // Check if checklist item finished
+        if (m_CurrCount >= m_MaxCount)
+        {
+            text = $"<s>{text}</s>";
+        }
+        m_ItemTextbox.text = text;
     }
 }
