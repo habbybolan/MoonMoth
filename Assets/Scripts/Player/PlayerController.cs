@@ -370,6 +370,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     {
         if (m_playerState == PLAYER_ACTION_STATE.FLYING && !m_IsDodgeCooldown)
         {
+            m_TutorialManager.ReceiveTutorialInput(TutorialInputs.DODGE);
             m_playerState = PLAYER_ACTION_STATE.DODGING;
             m_Health.SetProjectileInvulnFrames(m_PlayerMovement.GetDodgeDuration());
             StartCoroutine(m_PlayerMovement.PlayerDodge(FinishAction, DodgeDirection));

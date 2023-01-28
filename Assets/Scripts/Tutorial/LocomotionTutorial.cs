@@ -13,6 +13,7 @@ public class LocomotionTutorial : Tutorial
         AddChecklistItem("Move the left joystick down", 0);
         AddChecklistItem("Move the left joystick left", 0);
         AddChecklistItem("Move the left joystick right", 0);
+        AddChecklistItem("Press b to dodge", 2);
     }
 
     public override void EndTutorialLogic()
@@ -37,6 +38,9 @@ public class LocomotionTutorial : Tutorial
                 break;
             case TutorialInputs.RIGHT:
                 UpdateTutorial(3);
+                break;
+            case TutorialInputs.DODGE:
+                UpdateTutorial(4);
                 break;
             default:    // Wrong input, do nothing
                 break;
