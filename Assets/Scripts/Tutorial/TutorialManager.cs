@@ -13,31 +13,29 @@ public enum TutorialInputs
     DASH,
     AIM_MODE
 }
+
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private List<Tutorial> AllTutorialPrefabs;
 
-    private List<Tutorial> AllTutorials;
+    private List<Tutorial> AllTutorials = new List<Tutorial>();
 
     protected bool m_isTutorialsRunning = false;
     protected int m_CurrTutorialIndex = 0;
 
+    private void Awake()
+    {
+        GameState.PropertyInstance.d_GameTutorialDelegate += StartTutorials;
+    }
+
     private void Start()
     {
-        AllTutorials = new List<Tutorial>();
-        // create all tutorials and bind delegates
-        foreach (Tutorial tutorialPrefab in AllTutorialPrefabs)
-        {
-            Tutorial NewTutorial = Instantiate(tutorialPrefab);
-            NewTutorial.d_TutorialFinishedDelegate += GotoNextTutorial;
-            AllTutorials.Add(NewTutorial);
-        }
-
-        GameState.PropertyInstance.d_GameTutorialDelegate += StartTutorials;
+        
     }
 
     public void StartTutorials()
     {
+        InitializeTutorials();
         m_isTutorialsRunning = true;
         if (AllTutorials.Count == 0)
         {
@@ -46,6 +44,17 @@ public class TutorialManager : MonoBehaviour
         }
         PlayerManager.PropertyInstance.PlayerController.InitializeTutorialUI();
         StartNextTutorial();
+    }
+
+    private void InitializeTutorials()
+    {
+        // create all tutorials and bind delegates
+        foreach (Tutorial tutorialPrefab in AllTutorialPrefabs)
+        {
+            Tutorial NewTutorial = Instantiate(tutorialPrefab);
+            NewTutorial.d_TutorialFinishedDelegate += GotoNextTutorial;
+            AllTutorials.Add(NewTutorial);
+        }
     }
 
     public void GotoNextTutorial()

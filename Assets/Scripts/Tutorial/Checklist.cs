@@ -38,6 +38,7 @@ public class Checklist : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        m_CheckListDictionary.Clear();
     }
 
     public void UpdateChecklistItem(int itemID)

@@ -1223,6 +1223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllTutorialPrefabs:
   - {fileID: 8692865855915086652, guid: c42f6b4ce8326eb45875aefae2b88a83, type: 3}
+  - {fileID: 8215612089393599449, guid: b4a6f08881aad454895c1b277b65f6ec, type: 3}
 --- !u!1 &1213463291
 GameObject:
   m_ObjectHideFlags: 0

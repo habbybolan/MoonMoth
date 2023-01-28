@@ -33,14 +33,19 @@ public abstract class Tutorial : MonoBehaviour
     }
 
     protected int CurrID = 0;
+    private bool m_IsEnded = false;
     
     virtual public void SetupTutorial()
     {
         // Override in child
+        m_IsEnded = false;
     }
 
     public void EndTutorial()
     {
+        if (m_IsEnded) return;
+
+        m_IsEnded = true;
         Invoke("EndTutorialLogic", m_EndTutorialDelay);
     }
 
