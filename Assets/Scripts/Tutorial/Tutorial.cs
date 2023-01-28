@@ -33,19 +33,23 @@ public abstract class Tutorial : MonoBehaviour
     }
 
     protected int CurrID = 0;
-    private bool m_IsEnded = false;
-    
+    private bool m_IsRunning = false;
+    protected bool IsRunning
+    {
+        get { return m_IsRunning; }
+    }
+
+
     virtual public void SetupTutorial()
     {
         // Override in child
-        m_IsEnded = false;
+        m_IsRunning = true;
     }
 
     public void EndTutorial()
     {
-        if (m_IsEnded) return;
-
-        m_IsEnded = true;
+        if (!m_IsRunning) return;
+        m_IsRunning = false;
         Invoke("EndTutorialLogic", m_EndTutorialDelay);
     }
 
@@ -61,6 +65,8 @@ public abstract class Tutorial : MonoBehaviour
 
     public void UpdateTutorial(int checklistId)
     {
+        if (!m_IsRunning) return;
+
         Checklist checklist = PlayerManager.PropertyInstance.PlayerController.Checklist;
         if (checklist != null) 
         {
