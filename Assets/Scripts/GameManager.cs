@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateState(GameStateEnum.RUNNING);
+        UpdateState(GameStateEnum.TUTORIAL);
         PlayerManager.PropertyInstance.PlayerController.Health.d_DeathDelegate += OnPlayerDeath;
         PlayerManager.PropertyInstance.PlayerController.lostMothCollectedDelegate += OnLostMothCollected;
     }

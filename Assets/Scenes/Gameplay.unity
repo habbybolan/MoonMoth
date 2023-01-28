@@ -279,6 +279,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -944628639613478452, guid: c2f4dca1ded701444b13ecddee924b7d, type: 3}
     - target: {fileID: 2626716119223292289, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_ChecklistPrefab
+      value: 
+      objectReference: {fileID: 6049300994637200193, guid: 00d9888fe4ec5bf4fac019367d6869bb, type: 3}
+    - target: {fileID: 2626716119223292289, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+      propertyPath: m_TutorialManager
+      value: 
+      objectReference: {fileID: 951211386}
+    - target: {fileID: 2626716119223292289, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
       propertyPath: m_IsJoystickMovement
       value: 1
       objectReference: {fileID: 0}
@@ -954,6 +962,7 @@ GameObject:
   - component: {fileID: 951211383}
   - component: {fileID: 951211384}
   - component: {fileID: 951211385}
+  - component: {fileID: 951211386}
   m_Layer: 0
   m_Name: = Manager
   m_TagString: Untagged
@@ -1186,7 +1195,7 @@ MonoBehaviour:
   - {r: 0.745283, g: 0.6714578, b: 0.6714578, a: 0}
   - {r: 0.5377358, g: 0.23589353, b: 0.50254345, a: 0}
   - {r: 0.7264151, g: 0.5769713, b: 0.10622107, a: 0}
-  m_DefaultFogColor: {r: 185, g: 181, b: 171, a: 255}
+  m_DefaultFogColor: {r: 0, g: 0, b: 0, a: 255}
   m_FadeScreen: {fileID: 266740771}
 --- !u!114 &951211385
 MonoBehaviour:
@@ -1200,6 +1209,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda2dcf3bbc0654449146d39bc378cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &951211386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951211375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b18c2f70b0b2d4681148bded03a689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllTutorialPrefabs:
+  - {fileID: 8692865855915086652, guid: c42f6b4ce8326eb45875aefae2b88a83, type: 3}
 --- !u!1 &1213463291
 GameObject:
   m_ObjectHideFlags: 0

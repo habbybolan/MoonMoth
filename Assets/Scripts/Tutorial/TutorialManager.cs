@@ -2,6 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TutorialInputs
+{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    SHOOT,
+    DODGE,
+    DASH,
+    AIM_MODE
+}
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private List<Tutorial> AllTutorialPrefabs;
@@ -13,6 +24,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
+        AllTutorials = new List<Tutorial>();
         // create all tutorials and bind delegates
         foreach (Tutorial tutorialPrefab in AllTutorialPrefabs)
         {
@@ -29,8 +41,7 @@ public class TutorialManager : MonoBehaviour
         m_isTutorialsRunning = true;
         if (AllTutorials.Count == 0)
         {
-            // TODO:
-            // Notify game state tutorial ended
+            TutorialPhaseEnded();
             return;
         }
         PlayerManager.PropertyInstance.PlayerController.InitializeTutorialUI();
@@ -43,8 +54,7 @@ public class TutorialManager : MonoBehaviour
         // if all tutorials finished
         if (m_CurrTutorialIndex >= AllTutorials.Count)
         {
-            // TODO:
-            // Notify game state tutorial ended
+            TutorialPhaseEnded();
         }
         else
         {
@@ -56,7 +66,13 @@ public class TutorialManager : MonoBehaviour
     public void SetTutorialsFinished()
     {
         PlayerManager.PropertyInstance.PlayerController.TutorialEnded();
+        TutorialPhaseEnded();
+    }
+
+    private void TutorialPhaseEnded()
+    {
         m_isTutorialsRunning = false;
+        GameManager.PropertyInstance.UpdateState(GameStateEnum.TRANSITIONING);
     }
 
     private void StartNextTutorial()
@@ -67,5 +83,13 @@ public class TutorialManager : MonoBehaviour
     List<TutorialInfo> GetCurrentTutorialInfo()
     {
         return AllTutorials[m_CurrTutorialIndex].TutorialInfoList;
+    }
+
+    public void ReceiveTutorialInput(TutorialInputs Input)
+    {
+        if (AllTutorials[m_CurrTutorialIndex] != null)
+        {
+            AllTutorials[m_CurrTutorialIndex].ReceiveTutorialInput(Input);
+        }
     }
 }

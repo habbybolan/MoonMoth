@@ -27,9 +27,17 @@ public class CheckListItem : MonoBehaviour
     
     private void SetText()
     {
-        string text = $"{m_ItemText} {m_CurrCount} / {m_MaxCount}";
+        string text;
+        if (m_MaxCount <= 0)
+        {
+            text = $"{m_ItemText}";
+        } else
+        {
+            text = $"{m_ItemText} {m_CurrCount} / {m_MaxCount}";
+        }
+        
         // Check if checklist item finished
-        if (m_CurrCount >= m_MaxCount)
+        if (m_CurrCount > 0 && m_CurrCount >= m_MaxCount)
         {
             text = $"<s>{text}</s>";
         }

@@ -24,19 +24,19 @@ public abstract class Tutorial : MonoBehaviour
     public delegate void TutorialFinishedDelegate();
     public TutorialFinishedDelegate d_TutorialFinishedDelegate;
 
-    private List<(int, int)> ChecklistCounter; // index corresponds to the checklist id, values is the curr and max count
+    private List<(int, int)> ChecklistCounter = new List<(int, int)>(); // index corresponds to the checklist id, values is the curr and max count
 
     private List<TutorialInfo> m_TutorialInfoList;
     public List<TutorialInfo> TutorialInfoList
     {
         get { return m_TutorialInfoList; }
     }
+
+    protected int CurrID = 0;
     
     virtual public void SetupTutorial()
     {
-        // TODO:
-        // Spawn anything needed
-        // Setup tasks to finish
+        // Override in child
     }
 
     public void EndTutorial()
@@ -51,10 +51,7 @@ public abstract class Tutorial : MonoBehaviour
         {
             checklist.Reset();
         }
-        // TODO:
-        // Acutally end tutorial
-        // Destroy checklist
-        // call delegate that tutorial ended for tutorial manager to go to next tutorial
+        d_TutorialFinishedDelegate();
     }
 
     public void UpdateTutorial(int checklistId)
@@ -64,11 +61,10 @@ public abstract class Tutorial : MonoBehaviour
         {
             checklist.UpdateChecklistItem(checklistId);
         }
-        (int, int) Checker = ChecklistCounter[checklistId];
-        Checker.Item1 = Checker.Item1 + 1;
+        ChecklistCounter[checklistId] = (ChecklistCounter[checklistId].Item1 + 1, ChecklistCounter[checklistId].Item2);
         if (IsTutorialFinished())
         {
-            d_TutorialFinishedDelegate();
+            EndTutorial();
         }
     }
 
@@ -76,12 +72,12 @@ public abstract class Tutorial : MonoBehaviour
     {
         foreach ((int, int) Checker in ChecklistCounter)
         {
-            if (Checker.Item1 >= Checker.Item2) return true;
+            if (Checker.Item1 <= 0 || Checker.Item1 < Checker.Item2) return false;
         }
-        return false;
+        return true;
     }
 
-    public void AddChecklistItem(int id, string textToDisplay, int maxCount)
+    public void AddChecklistItem(string textToDisplay, int maxCount)
     {
         Checklist checklist = PlayerManager.PropertyInstance.PlayerController.Checklist;
         if (checklist == null)
@@ -89,7 +85,13 @@ public abstract class Tutorial : MonoBehaviour
             throw new NullReferenceException("Cannot add to a checklist before it's initialized for the player.");
         }
         TutorialInfo info = new TutorialInfo();
-        info.Initialize(id, textToDisplay, maxCount);
+        info.Initialize(CurrID++, textToDisplay, maxCount);
         checklist.AddChecklistItem(info);
+        ChecklistCounter.Add((0, maxCount));
+    }
+
+    public virtual void ReceiveTutorialInput(TutorialInputs input)
+    {
+        // Override in child
     }
 }

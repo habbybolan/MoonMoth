@@ -40,6 +40,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     [Header("Tutorial")]
     [SerializeField] private Checklist m_ChecklistPrefab;
+    [SerializeField] private TutorialManager m_TutorialManager;
 
     [Header("Animation")]
     [SerializeField] private float m_GlideFlapDelayMin = .2f;
@@ -189,7 +190,20 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void OnMove(InputValue value)
     {
-        m_MovementInput = value.Get<Vector2>();
+        RecordInput(value.Get<Vector2>());
+    }
+
+    public void RecordInput(Vector2 inputValue)
+    {
+        m_MovementInput = inputValue;
+
+        if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.TUTORIAL)
+        {
+            if (inputValue.y > .1) m_TutorialManager.ReceiveTutorialInput(TutorialInputs.UP);
+            if (inputValue.y < -.1) m_TutorialManager.ReceiveTutorialInput(TutorialInputs.DOWN);
+            if (inputValue.x > .1) m_TutorialManager.ReceiveTutorialInput(TutorialInputs.RIGHT);
+            if (inputValue.x < -.1) m_TutorialManager.ReceiveTutorialInput(TutorialInputs.LEFT);
+        }
     }
 
     // Main Update controller for all Player components, Dealing with actions/effects that happen each frame
@@ -221,9 +235,6 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     private void FixedUpdate()
     {
-        if (!TileManager.PropertyInstance.IsInitialized)
-            return;
-
         // move parent along spline
         m_PlayerParentMovement.TryMove();
 
@@ -236,11 +247,14 @@ public class PlayerController : CharacterController<PlayerHealth>
                 if (m_IsJoystickMovement)
                 {
                     // move player body along local x, y plane based on inputs
-                    m_PlayerMovement.ControlPointXYMovement(VirtualJoystick.Input, false);
+                    m_PlayerMovement.ControlPointXYMovement(m_MovementInput, false);
                 }
                 // Gyro controls
                 else
                 {
+                    // TODO: Use m_MovementInput for gyro movement
+                    // TODO: Fix drifting
+
                     Vector3 gyroscope = Gyroscope.current.angularVelocity.ReadValue();
 
                     // calculate the Y movement

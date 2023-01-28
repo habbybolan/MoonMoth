@@ -44,6 +44,15 @@ public class UIManager : MonoBehaviour
     // Called when player reaches next level, update fog
     public void NextLevel()
     {
+        // If game not running yet ie. Tutorial
+        if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.TUTORIAL ||
+            GameState.PropertyInstance.GameStateEnum == GameStateEnum.NOTHING)
+        {
+            UpdateFog(m_DefaultFogColor);
+            return;
+        }
+
+        // Set colors based on current level
         int currLevel = GameManager.PropertyInstance.CurrLevel;
         if (currLevel >= m_FogLevelColors.Length)
             UpdateFog(m_DefaultFogColor);

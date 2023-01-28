@@ -10,6 +10,11 @@ public class Checklist : MonoBehaviour
     
     private Dictionary<int, CheckListItem> m_CheckListDictionary;
 
+    private void Awake()
+    {
+        m_CheckListDictionary = new Dictionary<int, CheckListItem>();
+    }
+
     public void AddChecklistItem(TutorialInfo tutorialInfo)
     {
         CheckListItem checklistItem = Instantiate(m_ChecklistItemPrefab);
@@ -29,16 +34,15 @@ public class Checklist : MonoBehaviour
 
     public void Reset()
     {
-        foreach (GameObject child in m_ChecklistContainer.transform)
+        foreach (Transform child in m_ChecklistContainer.transform)
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
     }
 
     public void UpdateChecklistItem(int itemID)
     {
-        CheckListItem checklistItem;
-        if (m_CheckListDictionary.TryGetValue(itemID, out checklistItem))
+        if (m_CheckListDictionary.TryGetValue(itemID, out CheckListItem checklistItem))
         {
             checklistItem.UpdateText();
         }

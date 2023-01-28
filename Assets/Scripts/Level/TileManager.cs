@@ -260,13 +260,20 @@ public class TileManager : MonoBehaviour
     // Asynchronously 
     IEnumerator TransitionToNextSet()
     {
-        Destroy(m_transitionTile.gameObject);
+        if (m_transitionTile != null)
+        {
+            Destroy(m_transitionTile.gameObject);
+        }
 
         foreach (Tile tile in m_PoolTiles)
         {
-            Destroy(tile.gameObject);
-            yield return new WaitForSeconds(.02f);
+            if (tile != null)
+            {
+                Destroy(tile.gameObject);
+                yield return new WaitForSeconds(.02f);
+            }
         }
+
         m_PoolTiles = new Tile[m_TilePoolSize];
         m_VisibleTiles.Clear();
 

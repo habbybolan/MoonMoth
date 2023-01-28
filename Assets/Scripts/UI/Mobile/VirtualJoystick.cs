@@ -57,6 +57,8 @@ public class VirtualJoystick : MonoBehaviour
                 Input.y = Mathf.Clamp(touchVecFromCenter.y / m_RadiusDifference, -1, 1);
             }
         }
+        PlayerManager.PropertyInstance.PlayerController.RecordInput(Input);
+
     }
 
     private void FixedUpdate()
