@@ -90,8 +90,6 @@ public class FireflyManager : MonoBehaviour
                 isDeleted = true;
             }
         }
-        // TODO:
-        //  Update offset positions of all alive fireflies in list
     }
 
     public void TileSetFinished() 
