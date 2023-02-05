@@ -109,6 +109,7 @@ public class CatmullRomInspector : Editor
 	// Add button to inspector for adding new curve
 	public override void OnInspectorGUI()
 	{
+		base.OnInspectorGUI();
 		spline = target as SplineCreator;
 		if (selectedIndex >= 0 && selectedIndex < spline.PointCount)
 		{
