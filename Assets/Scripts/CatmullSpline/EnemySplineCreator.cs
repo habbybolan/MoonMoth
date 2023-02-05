@@ -16,7 +16,7 @@ struct PossiblePoint
 public class EnemySplineCreator : SplineCreator
 {
     public int NextPointBlockingMask;
-
+    
     [SerializeField] private float m_MinDotProdCheck = 0.75f;
 
     private void Start()
@@ -30,24 +30,42 @@ public class EnemySplineCreator : SplineCreator
     public override void AddNewPoint()
     {
         base.AddNewPoint();
-        Tile currTile = m_CurrTile.Value;
 
-        // If at least 2 points on spline, find best next point for smooth movement
-        if (PointCount > 1)
+        // Add points forward in tutorial phase
+        if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.TUTORIAL)
         {
-            AddBestPoint();
-        } 
-        // otherwise just choose random follow point
+            Vector3 direction = PlayerManager.PropertyInstance.PlayerController.PlayerParent.transform.forward;
+            if (m_Points == null)
+            {
+                AddPoint(m_Walker.transform.position);
+            }
+            else
+            {
+                AddPoint(EndOfSpline + direction * 50);
+            }
+        }
+        // Otherwise game is running, add points based on known tile points
         else
         {
-            AddRandPoint();
-        }
+            Tile currTile = m_CurrTile.Value;
 
-        m_CurrFollowPointInTile++;
-        // reached all of enemy follow point sets, goto next tile
-        if (currTile.EnemyFollowSetCount <= m_CurrFollowPointInTile)
-        {
-            GotoNextTile();
+            // If at least 2 points on spline, find best next point for smooth movement
+            if (PointCount > 1)
+            {
+                AddBestPoint();
+            }
+            // otherwise just choose random follow point
+            else
+            {
+                AddRandPoint();
+            }
+
+            m_CurrFollowPointInTile++;
+            // reached all of enemy follow point sets, goto next tile
+            if (currTile.EnemyFollowSetCount <= m_CurrFollowPointInTile)
+            {
+                GotoNextTile();
+            }
         }
     }
 

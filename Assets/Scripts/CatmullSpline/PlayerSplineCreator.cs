@@ -11,10 +11,10 @@ public class PlayerSplineCreator : SplineCreator
         // Add points forward in tutorial phase
         if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.TUTORIAL)
         {
-            Vector3 direction = PlayerManager.PropertyInstance.PlayerController.PlayerParent.transform.forward;
+            Vector3 direction = m_Walker.transform.forward;
             if (m_Points == null)
             {
-                AddPoint(PlayerManager.PropertyInstance.PlayerController.PlayerParent.RigidBody.transform.position + direction * 50);
+                AddPoint(m_Walker.RigidBody.transform.position + direction * 50);
             } else
             {
                 AddPoint(EndOfSpline + direction * 50);
