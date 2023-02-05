@@ -6928,6 +6928,9 @@ MonoBehaviour:
   m_AimModeStartSound: {fileID: 8718531766064261588}
   m_AimModeEndSound: {fileID: 1371643444647074668}
   m_DodgeCooldown: 1
+  m_ChecklistPrefab: {fileID: 0}
+  m_TutorialManager: {fileID: 0}
+  m_ButtonHoldLengthToSkip: 2
   m_GlideFlapDelayMin: 0.2
   m_GlideFlapDelayMax: 0.5
   m_IsJoystickMovement: 0

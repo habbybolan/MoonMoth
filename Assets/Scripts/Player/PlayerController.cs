@@ -41,6 +41,8 @@ public class PlayerController : CharacterController<PlayerHealth>
     [Header("Tutorial")]
     [SerializeField] private Checklist m_ChecklistPrefab;
     [SerializeField] private TutorialManager m_TutorialManager;
+    [Min(0)]
+    [SerializeField] private float m_ButtonHoldLengthToSkip = 3;
 
     [Header("Animation")]
     [SerializeField] private float m_GlideFlapDelayMin = .2f;
@@ -92,6 +94,9 @@ public class PlayerController : CharacterController<PlayerHealth>
     {
         get { return m_Checklist; }
     }
+
+    // Time that skip button was pressed and held. -1 if not pressed yet
+    private float m_TimeSkipPressed = -1;
     
     public MoonBarAbility MoonBarAbility { get { return m_MoonBarAbility; }}
 
@@ -156,7 +161,8 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void TutorialEnded()
     {
-        Destroy(m_Checklist);
+        Destroy(m_Checklist.gameObject);
+        m_Checklist = null;
     }
 
     private void OnDamageTaken(DamageInfo damageInfo) 
@@ -430,6 +436,36 @@ public class PlayerController : CharacterController<PlayerHealth>
     public void OnDashEnd(InputValue value)
     {
         StopDashing();
+    }
+
+    public void OnSkipStart()
+    {
+        m_TimeSkipPressed = Time.time;
+        // TODO: Start skipping UI?
+    }
+
+    public void OnSkipEnd()
+    {
+        // Check if skip button held for long enough
+        if (Time.time - m_TimeSkipPressed >= m_ButtonHoldLengthToSkip)
+        {
+            PerformSkip();
+            m_TimeSkipPressed = 0;
+            // TODO: Stop skipping UI?
+        }
+    }
+
+    private void PerformSkip()
+    {
+        // If in the tutorial, skip tutorial
+        if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.TUTORIAL)
+        {
+            if (m_TutorialManager != null)
+            {
+                m_TutorialManager.SetTutorialsFinished();
+            }
+            
+        }
     }
 
     public void StopDashing()

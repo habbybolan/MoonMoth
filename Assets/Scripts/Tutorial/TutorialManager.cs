@@ -81,6 +81,11 @@ public class TutorialManager : MonoBehaviour
     private void TutorialPhaseEnded()
     {
         m_isTutorialsRunning = false;
+        foreach (Tutorial tutorial in AllTutorials)
+        {
+            Destroy(tutorial.gameObject);
+        }
+        AllTutorials.Clear();
         GameManager.PropertyInstance.UpdateState(GameStateEnum.TRANSITIONING);
     }
 
