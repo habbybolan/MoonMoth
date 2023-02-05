@@ -120,6 +120,11 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void ManuallyKill()
+    {
+        Death();
+    }
+
     protected virtual void Death()
     {
         if (d_DeathDelegate != null)
