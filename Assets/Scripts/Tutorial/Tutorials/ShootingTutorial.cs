@@ -9,6 +9,7 @@ public class ShootingTutorial : Tutorial
     [SerializeField] private float m_SpawnDistanceForward = 50;
     [SerializeField] private float m_MaxSpawnDistanceX = 50;
     [SerializeField] private float m_MaxSpawnDistanceY = 50;
+    [SerializeField] private int m_NumTargetsToDestroy = 4;
 
     List<TutorialTarget> m_SpawnedTargets = new List<TutorialTarget>();
 
@@ -24,7 +25,7 @@ public class ShootingTutorial : Tutorial
     {
         base.SetupTutorial();
 
-        AddChecklistItem("Right trigger to shoot. Take down the targets", 4);
+        AddChecklistItem("Right trigger to shoot. Take down the targets", m_NumTargetsToDestroy);
     }
 
     private void FixedUpdate()

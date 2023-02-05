@@ -83,6 +83,9 @@ public class PlayerHealth : Health
 
     public override void Damage(DamageInfo damageInfo)
     {
+        // prevent all damage when inside a tutorial
+        if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.TUTORIAL) return;
+
         base.Damage(damageInfo);
         if (damageInfo.m_DamageType != DamageInfo.DAMAGE_TYPE.TICK && !m_IsAllInvul)
         {
