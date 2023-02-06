@@ -8,7 +8,7 @@ public class MoonBarTutorial : Tutorial
     {
         base.SetupTutorial();
 
-        AddChecklistItem("Hold right trigger to perform dash", 0);
+        AddChecklistItem("Hold A trigger to perform dash", 0);
         AddChecklistItem("Hold left trigger to enter aim mode", 0);
 
         PlayerManager.PropertyInstance.PlayerController.MoonBarAbility.d_DashEndDelegate += DashEnded;
