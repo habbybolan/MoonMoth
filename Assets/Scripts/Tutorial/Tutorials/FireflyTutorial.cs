@@ -38,6 +38,7 @@ public class FireflyTutorial : Tutorial
 
     private void FixedUpdate()
     {
+        if (!IsRunning) return;
         m_CurrSpawnDelay += Time.fixedDeltaTime;
         if (m_CurrSpawnDelay > m_FireflySpawnDelay)
         {
