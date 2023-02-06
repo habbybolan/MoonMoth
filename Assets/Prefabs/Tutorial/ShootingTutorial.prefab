@@ -48,5 +48,6 @@ MonoBehaviour:
   m_TutorialTargetPrefab: {fileID: 3029552430774755089, guid: 2b812f8ca35389b4eb9acdf35327732e, type: 3}
   m_TargetSpawnDelay: 1.5
   m_SpawnDistanceForward: 50
-  m_MaxSpawnDistanceX: 50
-  m_MaxSpawnDistanceY: 40
+  m_MaxSpawnDistanceX: 18
+  m_MaxSpawnDistanceY: 13
+  m_NumTargetsToDestroy: 4

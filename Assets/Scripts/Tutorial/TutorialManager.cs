@@ -17,8 +17,11 @@ public enum TutorialInputs
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private List<Tutorial> AllTutorialPrefabs;
+    [Tooltip("Bounding box that follows the player to limit XY movement")]
+    [SerializeField] private GameObject m_TutorialBoundingBoxPrefab;
 
     private List<Tutorial> AllTutorials = new List<Tutorial>();
+    private GameObject m_BoundingBox;
 
     protected bool m_isTutorialsRunning = false;
     protected int m_CurrTutorialIndex = 0;
@@ -33,6 +36,13 @@ public class TutorialManager : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        if (!m_isTutorialsRunning) return;
+        Vector3 newPos = new Vector3(0, 0, PlayerManager.PropertyInstance.PlayerController.PlayerParent.transform.position.z);
+        m_BoundingBox.transform.position = newPos;
+    }
+
     public void StartTutorials()
     {
         InitializeTutorials();
@@ -42,6 +52,7 @@ public class TutorialManager : MonoBehaviour
             TutorialPhaseEnded();
             return;
         }
+        m_BoundingBox = Instantiate(m_TutorialBoundingBoxPrefab, PlayerManager.PropertyInstance.PlayerController.PlayerMovement.transform.position, Quaternion.identity);
         PlayerManager.PropertyInstance.PlayerController.InitializeTutorialUI();
         StartNextTutorial();
     }
@@ -85,6 +96,7 @@ public class TutorialManager : MonoBehaviour
         {
             Destroy(tutorial.gameObject);
         }
+        Destroy(m_BoundingBox);
         AllTutorials.Clear();
         GameManager.PropertyInstance.UpdateState(GameStateEnum.TRANSITIONING);
     }

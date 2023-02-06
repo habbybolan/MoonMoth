@@ -1215,6 +1215,7 @@ MonoBehaviour:
   - {fileID: 8215612089393599449, guid: b4a6f08881aad454895c1b277b65f6ec, type: 3}
   - {fileID: 6620300013929260181, guid: bedc91d8d836a1a4c9e443d2569943eb, type: 3}
   - {fileID: 3535301665706929677, guid: 1132911294198e24e8ffed86a13e1410, type: 3}
+  m_TutorialBoundingBoxPrefab: {fileID: 6267348656165035308, guid: 2d35c79492a4b0a47adf5fe935bd3139, type: 3}
 --- !u!1 &1213463291
 GameObject:
   m_ObjectHideFlags: 0
