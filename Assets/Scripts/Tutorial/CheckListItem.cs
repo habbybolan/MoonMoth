@@ -30,10 +30,10 @@ public class CheckListItem : MonoBehaviour
         string text;
         if (m_MaxCount <= 0)
         {
-            text = $"{m_ItemText}";
+            text = $" - {m_ItemText}";
         } else
         {
-            text = $"{m_ItemText} {m_CurrCount} / {m_MaxCount}";
+            text = $" - {m_ItemText} {m_CurrCount} / {m_MaxCount}";
         }
         
         // Check if checklist item finished

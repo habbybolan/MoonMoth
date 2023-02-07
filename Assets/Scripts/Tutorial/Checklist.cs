@@ -9,10 +9,12 @@ public class Checklist : MonoBehaviour
     [SerializeField] private GameObject m_ChecklistContainer;
     
     private Dictionary<int, CheckListItem> m_CheckListDictionary;
+    private VerticalLayoutGroup m_ChecklistVerticalContainer;
 
     private void Awake()
     {
         m_CheckListDictionary = new Dictionary<int, CheckListItem>();
+        m_ChecklistVerticalContainer = GetComponentInChildren<VerticalLayoutGroup>();
     }
 
     public void AddChecklistItem(TutorialInfo tutorialInfo)

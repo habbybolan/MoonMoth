@@ -9,10 +9,10 @@ public class LocomotionTutorial : Tutorial
         base.SetupTutorial();
 
         // TODO: Display differnt text based on input type and platform
-        AddChecklistItem("Move the left joystick left", 0);
-        AddChecklistItem("Move the left joystick down", 0);
-        AddChecklistItem("Move the left joystick left", 0);
-        AddChecklistItem("Move the left joystick right", 0);
+        AddChecklistItem("Move the left joystick Up", 0);
+        AddChecklistItem("Move the left joystick Down", 0);
+        AddChecklistItem("Move the left joystick Left", 0);
+        AddChecklistItem("Move the left joystick Right", 0);
         AddChecklistItem("Press b to dodge", 2);
     }
 
