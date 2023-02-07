@@ -7,6 +7,7 @@ public class Checklist : MonoBehaviour
 {
     [SerializeField] private CheckListItem m_ChecklistItemPrefab;
     [SerializeField] private GameObject m_TaskContainer;
+    [SerializeField] private GameObject m_ChecklistContainer;
     
     private Dictionary<int, CheckListItem> m_CheckListDictionary;
 
@@ -22,7 +23,7 @@ public class Checklist : MonoBehaviour
         checklistItem.transform.SetParent(m_TaskContainer.transform, false);
 
         m_CheckListDictionary.Add(tutorialInfo.Id, checklistItem);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(m_TaskContainer.transform as RectTransform);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(m_ChecklistContainer.transform as RectTransform);
     }
 
     public void AddChecklistItems(List<TutorialInfo> tutorialInfoList)
