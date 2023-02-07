@@ -6,24 +6,23 @@ using UnityEngine.UI;
 public class Checklist : MonoBehaviour
 {
     [SerializeField] private CheckListItem m_ChecklistItemPrefab;
-    [SerializeField] private GameObject m_ChecklistContainer;
+    [SerializeField] private GameObject m_TaskContainer;
     
     private Dictionary<int, CheckListItem> m_CheckListDictionary;
-    private VerticalLayoutGroup m_ChecklistVerticalContainer;
 
     private void Awake()
     {
         m_CheckListDictionary = new Dictionary<int, CheckListItem>();
-        m_ChecklistVerticalContainer = GetComponentInChildren<VerticalLayoutGroup>();
     }
 
     public void AddChecklistItem(TutorialInfo tutorialInfo)
     {
         CheckListItem checklistItem = Instantiate(m_ChecklistItemPrefab);
         checklistItem.InitializeItem(tutorialInfo.TextToDisplay, tutorialInfo.MaxCount);
-        checklistItem.transform.SetParent(m_ChecklistContainer.transform);
+        checklistItem.transform.SetParent(m_TaskContainer.transform, false);
 
         m_CheckListDictionary.Add(tutorialInfo.Id, checklistItem);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(m_TaskContainer.transform as RectTransform);
     }
 
     public void AddChecklistItems(List<TutorialInfo> tutorialInfoList)
@@ -36,7 +35,7 @@ public class Checklist : MonoBehaviour
 
     public void Reset()
     {
-        foreach (Transform child in m_ChecklistContainer.transform)
+        foreach (Transform child in m_TaskContainer.transform)
         {
             Destroy(child.gameObject);
         }
