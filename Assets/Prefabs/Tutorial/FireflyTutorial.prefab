@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EndTutorialDelay: 1
+  m_Title: Defeat the fireflies
   m_FireflySpawnDelay: 2
   m_MaxSpawnDistanceX: 18
   m_MaxSpawnDistanceY: 13

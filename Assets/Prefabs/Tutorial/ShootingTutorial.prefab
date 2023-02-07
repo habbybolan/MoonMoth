@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EndTutorialDelay: 1
+  m_Title: Shooting
   m_TutorialTargetPrefab: {fileID: 3029552430774755089, guid: 2b812f8ca35389b4eb9acdf35327732e, type: 3}
   m_TargetSpawnDelay: 1.5
   m_SpawnDistanceForward: 50

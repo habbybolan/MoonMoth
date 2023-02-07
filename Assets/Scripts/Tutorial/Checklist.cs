@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Checklist : MonoBehaviour
 {
     [SerializeField] private CheckListItem m_ChecklistItemPrefab;
     [SerializeField] private GameObject m_TaskContainer;
     [SerializeField] private GameObject m_ChecklistContainer;
-    
+    [SerializeField] private TextMeshProUGUI m_TitleText;
+
     private Dictionary<int, CheckListItem> m_CheckListDictionary;
 
     private void Awake()
@@ -49,5 +51,10 @@ public class Checklist : MonoBehaviour
         {
             checklistItem.UpdateText();
         }
+    }
+
+    public void UpdateTitle(string title)
+    {
+        m_TitleText.text = title;
     }
 }

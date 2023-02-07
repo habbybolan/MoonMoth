@@ -20,6 +20,7 @@ public struct TutorialInfo
 public abstract class Tutorial : MonoBehaviour
 {
     [SerializeField] private float m_EndTutorialDelay = 1f;
+    [SerializeField] private string m_Title;
 
     public delegate void TutorialFinishedDelegate();
     public TutorialFinishedDelegate d_TutorialFinishedDelegate;
@@ -44,6 +45,7 @@ public abstract class Tutorial : MonoBehaviour
     {
         // Override in child
         m_IsRunning = true;
+        SetTitle();
     }
 
     public void EndTutorial()
@@ -104,5 +106,14 @@ public abstract class Tutorial : MonoBehaviour
     public virtual void ReceiveTutorialInput(TutorialInputs input)
     {
         // Override in child
+    }
+
+    protected void SetTitle()
+    {
+        Checklist checklist = PlayerManager.PropertyInstance.PlayerController.Checklist;
+        if (checklist != null)
+        {
+            checklist.UpdateTitle(m_Title);
+        }
     }
 }
