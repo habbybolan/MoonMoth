@@ -9,8 +9,8 @@ public class MoonBarTutorial : Tutorial
     {
         base.SetupTutorial();
 
-        AddChecklistItem("Hold A trigger to perform dash", 0, Group0, false);
-        AddChecklistItem("Hold left trigger to enter aim mode", 0, Group0, false);
+        AddChecklistItem("Hold [A] trigger to perform dash", 0, Group0, true, "Both abilities use the same meter with a shared cooldown");
+        AddChecklistItem("Hold [Left Trigger] to enter aim mode", 0, Group0, false);
 
         PlayerManager.PropertyInstance.PlayerController.MoonBarAbility.d_DashEndDelegate += DashEnded;
         PlayerManager.PropertyInstance.PlayerController.MoonBarAbility.d_AimModeEndDelegate += AimModeEnded;
