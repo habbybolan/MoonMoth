@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class LocomotionTutorial : Tutorial
 {
+    private const int GroupMovement = 0;
+    private const int GroupDodge = 1;
     public override void SetupTutorial()
     {
         base.SetupTutorial();
 
-        // TODO: Display differnt text based on input type and platform
-        AddChecklistItem("Move the left joystick Up", 0);
-        AddChecklistItem("Move the left joystick Down", 0);
-        AddChecklistItem("Move the left joystick Left", 0);
-        AddChecklistItem("Move the left joystick Right", 0);
-        AddChecklistItem("Press b to dodge", 2);
+        AddChecklistItem("Move the left joystick Up", 0, GroupMovement, true, "Move left joystick to move");
+        AddChecklistItem("Move the left joystick Down", 0, GroupMovement);
+        AddChecklistItem("Move the left joystick Left", 0, GroupMovement);
+        AddChecklistItem("Move the left joystick Right", 0, GroupMovement);
+        AddChecklistItem("Press b to dodge", 2, GroupDodge);
     }
 
     public override void EndTutorialLogic()
@@ -28,19 +29,19 @@ public class LocomotionTutorial : Tutorial
         switch (input)
         {
             case TutorialInputs.UP:
-                UpdateTutorial(0);
+                UpdateTutorial(0, GroupMovement);
                 break;
             case TutorialInputs.DOWN:
-                UpdateTutorial(1);
+                UpdateTutorial(1, GroupMovement);
                 break;
             case TutorialInputs.LEFT:
-                UpdateTutorial(2);
+                UpdateTutorial(2, GroupMovement);
                 break;
             case TutorialInputs.RIGHT:
-                UpdateTutorial(3);
+                UpdateTutorial(3, GroupMovement);
                 break;
             case TutorialInputs.DODGE:
-                UpdateTutorial(4);
+                UpdateTutorial(4, GroupDodge);
                 break;
             default:    // Wrong input, do nothing
                 break;

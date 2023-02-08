@@ -11,6 +11,8 @@ public class ShootingTutorial : Tutorial
     [SerializeField] private float m_MaxSpawnDistanceY = 50;
     [SerializeField] private int m_NumTargetsToDestroy = 4;
 
+    const int Group0 = 0;
+
     List<TutorialTarget> m_SpawnedTargets = new List<TutorialTarget>();
 
     private float m_CurrSpawnTime = 0;
@@ -24,8 +26,8 @@ public class ShootingTutorial : Tutorial
     public override void SetupTutorial()
     {
         base.SetupTutorial();
-
-        AddChecklistItem("Right trigger to shoot. Take down the targets", m_NumTargetsToDestroy);
+        
+        AddChecklistItem("Targets destroyed", m_NumTargetsToDestroy, Group0, true, "Hold or press right trigger to shoot at targets");
     }
 
     private void FixedUpdate()
@@ -60,7 +62,7 @@ public class ShootingTutorial : Tutorial
                 break;
             }
         }
-        UpdateTutorial(0);
+        UpdateTutorial(0, Group0);
     }
 
     public override void EndTutorialLogic()

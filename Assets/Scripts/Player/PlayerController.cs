@@ -95,6 +95,11 @@ public class PlayerController : CharacterController<PlayerHealth>
         get { return m_Checklist; }
     }
 
+    public bool IsJoystickMovement
+    {
+        get { return IsJoystickMovement; }
+    }
+
     // Time that skip button was pressed and held. -1 if not pressed yet
     private float m_TimeSkipPressed = -1;
     

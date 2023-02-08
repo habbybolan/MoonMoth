@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class MoonBarTutorial : Tutorial
 {
+    private const int Group0 = 0;
     public override void SetupTutorial()
     {
         base.SetupTutorial();
 
-        AddChecklistItem("Hold A trigger to perform dash", 0);
-        AddChecklistItem("Hold left trigger to enter aim mode", 0);
+        AddChecklistItem("Hold A trigger to perform dash", 0, Group0, false);
+        AddChecklistItem("Hold left trigger to enter aim mode", 0, Group0, false);
 
         PlayerManager.PropertyInstance.PlayerController.MoonBarAbility.d_DashEndDelegate += DashEnded;
         PlayerManager.PropertyInstance.PlayerController.MoonBarAbility.d_AimModeEndDelegate += AimModeEnded;
@@ -24,11 +25,11 @@ public class MoonBarTutorial : Tutorial
 
     private void DashEnded()
     {
-        UpdateTutorial(0);
+        UpdateTutorial(0, Group0);
     }
 
     private void AimModeEnded()
     {
-        UpdateTutorial(1);
+        UpdateTutorial(1, Group0);
     }
 }

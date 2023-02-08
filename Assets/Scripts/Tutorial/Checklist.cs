@@ -7,24 +7,38 @@ using TMPro;
 public class Checklist : MonoBehaviour
 {
     [SerializeField] private CheckListItem m_ChecklistItemPrefab;
+    [SerializeField] private ChecklistGroup m_ChecklistGroupPrefab;
     [SerializeField] private GameObject m_TaskContainer;
     [SerializeField] private GameObject m_ChecklistContainer;
     [SerializeField] private TextMeshProUGUI m_TitleText;
 
-    private Dictionary<int, CheckListItem> m_CheckListDictionary;
+    private int m_NumGroupsFinished = 0;
+    private int m_NumGroups = 0;
+
+    // Holds groupID and the checklist(Item/Group)
+    private Dictionary<int, ChecklistGroup> m_CheckListGroupDictionary;
+    private VerticalLayoutGroup m_TaskContainerLayoutGroup;
 
     private void Awake()
     {
-        m_CheckListDictionary = new Dictionary<int, CheckListItem>();
+        m_CheckListGroupDictionary = new Dictionary<int, ChecklistGroup>();
+        m_TaskContainerLayoutGroup = m_TaskContainer.GetComponent<VerticalLayoutGroup>();
     }
 
     public void AddChecklistItem(TutorialInfo tutorialInfo)
     {
-        CheckListItem checklistItem = Instantiate(m_ChecklistItemPrefab);
-        checklistItem.InitializeItem(tutorialInfo.TextToDisplay, tutorialInfo.MaxCount);
-        checklistItem.transform.SetParent(m_TaskContainer.transform, false);
+        ChecklistGroup checklistGroup;
+        // If group doesn't yet exist
+        if (!m_CheckListGroupDictionary.TryGetValue(tutorialInfo.GroupID, out checklistGroup))
+        {
+            checklistGroup = Instantiate(m_ChecklistGroupPrefab);
+            m_CheckListGroupDictionary.Add(tutorialInfo.GroupID, checklistGroup);
+            checklistGroup.transform.SetParent(m_TaskContainerLayoutGroup.transform, false);
+            checklistGroup.InitializeGroup(tutorialInfo.GroupID, tutorialInfo.HasGroupTitle, tutorialInfo.GroupName);
+            m_NumGroups++;
+        }
+        checklistGroup.InitializeItem(tutorialInfo.Id, tutorialInfo.TextToDisplay, tutorialInfo.MaxCount, m_TaskContainerLayoutGroup);
 
-        m_CheckListDictionary.Add(tutorialInfo.Id, checklistItem);
         LayoutRebuilder.ForceRebuildLayoutImmediate(m_ChecklistContainer.transform as RectTransform);
     }
 
@@ -42,15 +56,24 @@ public class Checklist : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        m_CheckListDictionary.Clear();
+        m_CheckListGroupDictionary.Clear();
     }
 
-    public void UpdateChecklistItem(int itemID)
+    /**
+     * Update a checklist item, in group or outside
+     * @param itemID    ID of checklist item to update
+     * @param groupID   ID of group that holds the checklist to update. -1 if the checklist has no group
+     */
+    public bool UpdateChecklistItem(int itemID, int groupID)
     {
-        if (m_CheckListDictionary.TryGetValue(itemID, out CheckListItem checklistItem))
+        if (m_CheckListGroupDictionary.TryGetValue(groupID, out ChecklistGroup checklistItem))
         {
-            checklistItem.UpdateText();
+            if (checklistItem.UpdateChecklistItem(itemID))
+            {
+                m_NumGroupsFinished++;
+            }
         }
+        return m_NumGroupsFinished >= m_NumGroups;
     }
 
     public void UpdateTitle(string title)

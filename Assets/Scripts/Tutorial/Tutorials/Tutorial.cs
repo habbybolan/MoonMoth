@@ -5,16 +5,22 @@ using UnityEngine;
 
 public struct TutorialInfo
 {
-    public void Initialize(int id, string textToDisplay, int maxCount)
+    public void Initialize(int id, string textToDisplay, int maxCount, int groupID, bool hasGroupTitle = false, string groupName = "")
     {
         Id = id;
         TextToDisplay = textToDisplay;
         MaxCount = maxCount;
+        GroupID = groupID;
+        HasGroupTitle = hasGroupTitle;
+        GroupName = groupName;
     }
 
     public int Id;
     public string TextToDisplay;
     public int MaxCount;
+    public int GroupID;
+    public bool HasGroupTitle;
+    public string GroupName;
 }
 
 public abstract class Tutorial : MonoBehaviour
@@ -40,6 +46,12 @@ public abstract class Tutorial : MonoBehaviour
         get { return m_IsRunning; }
     }
 
+    protected PlayerController m_PlayerController;
+
+    private void Start()
+    {
+        m_PlayerController = PlayerManager.PropertyInstance.PlayerController;
+    }
 
     virtual public void SetupTutorial()
     {
@@ -65,32 +77,24 @@ public abstract class Tutorial : MonoBehaviour
         d_TutorialFinishedDelegate();
     }
 
-    public void UpdateTutorial(int checklistId)
+    public void UpdateTutorial(int checklistId, int groupId)
     {
         if (!m_IsRunning) return;
 
         Checklist checklist = PlayerManager.PropertyInstance.PlayerController.Checklist;
+        bool isChecklistFinished = false;
         if (checklist != null) 
         {
-            checklist.UpdateChecklistItem(checklistId);
+            isChecklistFinished = checklist.UpdateChecklistItem(checklistId, groupId);
         }
         ChecklistCounter[checklistId] = (ChecklistCounter[checklistId].Item1 + 1, ChecklistCounter[checklistId].Item2);
-        if (IsTutorialFinished())
+        if (isChecklistFinished)
         {
             EndTutorial();
         }
     }
 
-    private bool IsTutorialFinished()
-    {
-        foreach ((int, int) Checker in ChecklistCounter)
-        {
-            if (Checker.Item1 <= 0 || Checker.Item1 < Checker.Item2) return false;
-        }
-        return true;
-    }
-
-    public void AddChecklistItem(string textToDisplay, int maxCount)
+    public void AddChecklistItem(string textToDisplay, int maxCount, int groupID, bool hasGroupTitle = false, string groupName = "")
     {
         Checklist checklist = PlayerManager.PropertyInstance.PlayerController.Checklist;
         if (checklist == null)
@@ -98,7 +102,7 @@ public abstract class Tutorial : MonoBehaviour
             throw new NullReferenceException("Cannot add to a checklist before it's initialized for the player.");
         }
         TutorialInfo info = new TutorialInfo();
-        info.Initialize(CurrID++, textToDisplay, maxCount);
+        info.Initialize(CurrID++, textToDisplay, maxCount, groupID, hasGroupTitle, groupName);
         checklist.AddChecklistItem(info);
         ChecklistCounter.Add((0, maxCount));
     }

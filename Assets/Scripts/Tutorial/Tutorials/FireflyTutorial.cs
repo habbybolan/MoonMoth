@@ -13,6 +13,8 @@ public class FireflyTutorial : Tutorial
     private float m_CurrSpawnDelay = 0;
     private FireflyManager m_FireflyManager;
 
+    private const int Group0 = 0;
+
     private PlayerParentMovement m_PlayerParent;
 
     private void Start()
@@ -26,7 +28,7 @@ public class FireflyTutorial : Tutorial
 
         m_FireflyManager = FireflyManager.PropertyInstance;
 
-        AddChecklistItem("Number of fireflies shot", m_NumFirefliesToKill);
+        AddChecklistItem("Defeat fireflies to get health back", m_NumFirefliesToKill, Group0, true, "Hold or press right trigger to shoot at fireflies");
     }
 
     public override void EndTutorialLogic()
@@ -55,6 +57,6 @@ public class FireflyTutorial : Tutorial
 
     private void OnFireflyDeath()
     {
-        UpdateTutorial(0);
+        UpdateTutorial(0, Group0);
     }
 }

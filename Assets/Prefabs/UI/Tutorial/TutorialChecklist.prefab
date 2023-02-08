@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ChecklistItemPrefab: {fileID: 4616180764448311308, guid: 6ba172df6bb775541b037a2c30511865, type: 3}
+  m_ChecklistGroupPrefab: {fileID: 7128229540332978855, guid: dd131127b1132d844a46d195c8c403df, type: 3}
   m_TaskContainer: {fileID: 7175685964320718643}
   m_ChecklistContainer: {fileID: 3262759869293047154}
   m_TitleText: {fileID: 2733759126214359832}
