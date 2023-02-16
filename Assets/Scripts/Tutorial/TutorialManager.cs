@@ -85,12 +85,12 @@ public class TutorialManager : MonoBehaviour
     // Called to manually end the tutorial section, such as player skipping the tutorial
     public void SetTutorialsFinished()
     {
-        PlayerManager.PropertyInstance.PlayerController.TutorialEnded();
         TutorialPhaseEnded();
     }
 
     private void TutorialPhaseEnded()
     {
+        PlayerManager.PropertyInstance.PlayerController.TutorialEnded();
         m_isTutorialsRunning = false;
         foreach (Tutorial tutorial in AllTutorials)
         {
