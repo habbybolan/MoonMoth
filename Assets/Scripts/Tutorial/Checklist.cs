@@ -38,15 +38,6 @@ public class Checklist : MonoBehaviour
             m_NumGroups++;
         }
         checklistGroup.InitializeItem(tutorialInfo.Id, tutorialInfo.TextToDisplay, tutorialInfo.MaxCount, m_TaskContainerLayoutGroup);
-
-        //foreach (ChecklistGroup group in m_CheckListGroupDictionary.Values)
-        //{
-        //    group.RebuildLayout();
-        //}
-        //LayoutRebuilder.MarkLayoutForRebuild(m_TaskContainer.transform as RectTransform);
-        //LayoutRebuilder.MarkLayoutForRebuild(m_ChecklistContainer.transform as RectTransform);
-
-        //LayoutRebuilder.MarkLayoutForRebuild(m_ChecklistContainer.transform as RectTransform);
     }
 
     public void NotifyAllItemsAdded()
