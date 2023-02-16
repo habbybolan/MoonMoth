@@ -28,6 +28,8 @@ public class ShootingTutorial : Tutorial
         base.SetupTutorial();
         
         AddChecklistItem("Targets destroyed", m_NumTargetsToDestroy, Group0, true, "Hold or press right trigger to shoot at targets");
+
+        TutorialSetupFinished();
     }
 
     private void FixedUpdate()

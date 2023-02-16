@@ -14,6 +14,8 @@ public class MoonBarTutorial : Tutorial
 
         PlayerManager.PropertyInstance.PlayerController.MoonBarAbility.d_DashEndDelegate += DashEnded;
         PlayerManager.PropertyInstance.PlayerController.MoonBarAbility.d_AimModeEndDelegate += AimModeEnded;
+
+        TutorialSetupFinished();
     }
 
     public override void EndTutorialLogic()

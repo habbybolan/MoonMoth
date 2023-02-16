@@ -44,6 +44,14 @@ public class ChecklistGroup : MonoBehaviour
         m_GroupID = groupID;
     }
 
+    public void RebuildLayout()
+    {
+        foreach (CheckListItem item in m_CheckListDictionary.Values) {
+            LayoutRebuilder.MarkLayoutForRebuild(item.transform as RectTransform);
+        }
+        LayoutRebuilder.MarkLayoutForRebuild(transform as RectTransform);
+    }
+
     public void InitializeItem(int itemID, string text, int maxCount, VerticalLayoutGroup taskContainer)
     {
         CheckListItem checklistItem = Instantiate(m_ChecklistItemPrefab);

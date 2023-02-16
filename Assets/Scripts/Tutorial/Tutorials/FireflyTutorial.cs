@@ -29,6 +29,7 @@ public class FireflyTutorial : Tutorial
         m_FireflyManager = FireflyManager.PropertyInstance;
 
         AddChecklistItem("Defeat fireflies to get health back", m_NumFirefliesToKill, Group0, true, "Hold or press right trigger to shoot at fireflies");
+        TutorialSetupFinished();
     }
 
     public override void EndTutorialLogic()

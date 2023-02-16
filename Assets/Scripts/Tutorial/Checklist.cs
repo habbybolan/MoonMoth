@@ -39,7 +39,29 @@ public class Checklist : MonoBehaviour
         }
         checklistGroup.InitializeItem(tutorialInfo.Id, tutorialInfo.TextToDisplay, tutorialInfo.MaxCount, m_TaskContainerLayoutGroup);
 
-        LayoutRebuilder.ForceRebuildLayoutImmediate(m_ChecklistContainer.transform as RectTransform);
+        //foreach (ChecklistGroup group in m_CheckListGroupDictionary.Values)
+        //{
+        //    group.RebuildLayout();
+        //}
+        //LayoutRebuilder.MarkLayoutForRebuild(m_TaskContainer.transform as RectTransform);
+        //LayoutRebuilder.MarkLayoutForRebuild(m_ChecklistContainer.transform as RectTransform);
+
+        //LayoutRebuilder.MarkLayoutForRebuild(m_ChecklistContainer.transform as RectTransform);
+    }
+
+    public void NotifyAllItemsAdded()
+    {
+        StartCoroutine(CRUseMarkLayoutForRebuild());
+    }
+
+    private IEnumerator CRUseMarkLayoutForRebuild()
+    {
+        yield return new WaitForEndOfFrame();
+
+        foreach (var layoutGroup in GetComponentsInChildren<LayoutGroup>())
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(layoutGroup.GetComponent<RectTransform>());
+        }
     }
 
     public void AddChecklistItems(List<TutorialInfo> tutorialInfoList)

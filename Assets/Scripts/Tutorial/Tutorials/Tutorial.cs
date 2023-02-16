@@ -60,6 +60,16 @@ public abstract class Tutorial : MonoBehaviour
         SetTitle();
     }
 
+    protected void TutorialSetupFinished()
+    {
+        Checklist checklist = PlayerManager.PropertyInstance.PlayerController.Checklist;
+        if (checklist == null)
+        {
+            throw new NullReferenceException("Cannot add to a checklist before it's initialized for the player.");
+        }
+        checklist.NotifyAllItemsAdded();
+    }
+
     public void EndTutorial()
     {
         if (!m_IsRunning) return;

@@ -15,6 +15,8 @@ public class LocomotionTutorial : Tutorial
         AddChecklistItem("Move the left joystick Left", 0, GroupMovement);
         AddChecklistItem("Move the left joystick Right", 0, GroupMovement);
         AddChecklistItem("Press b to dodge", 2, GroupDodge);
+
+        TutorialSetupFinished();
     }
 
     public override void EndTutorialLogic()
