@@ -18,8 +18,9 @@ public class ShootingTutorial : Tutorial
     private float m_CurrSpawnTime = 0;
     private PlayerParentMovement m_PlayerParent;
 
-    private void Start()
+    override protected void Start()
     {
+        base.Start();
         m_PlayerParent = PlayerManager.PropertyInstance.PlayerController.PlayerParent;
     }
 

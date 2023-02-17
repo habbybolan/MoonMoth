@@ -17,8 +17,9 @@ public class FireflyTutorial : Tutorial
 
     private PlayerParentMovement m_PlayerParent;
 
-    private void Start()
+    override protected void Start()
     {
+        base.Start();
         m_PlayerParent = PlayerManager.PropertyInstance.PlayerController.PlayerParent;
     }
 

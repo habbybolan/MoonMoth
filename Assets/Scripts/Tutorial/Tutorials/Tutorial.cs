@@ -48,7 +48,7 @@ public abstract class Tutorial : MonoBehaviour
 
     protected PlayerController m_PlayerController;
 
-    private void Start()
+    virtual protected void Start()
     {
         m_PlayerController = PlayerManager.PropertyInstance.PlayerController;
     }
