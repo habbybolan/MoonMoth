@@ -9,29 +9,53 @@ public class MoonBarTutorial : Tutorial
     {
         base.SetupTutorial();
 
-        AddChecklistItem("Hold [A] trigger to perform dash", 0, Group0, true, "Both abilities use the same meter with a shared cooldown");
+#if UNITY_ANDROID && !UNITY_EDITOR
+        AddChecklistItem("Hold [Dash Button] trigger to perform dash", 0, Group0, true, "Both abilities use the same meter with a shared cooldown");
+        AddChecklistItem("Hold [Aim-Mode Button] to enter aim mode", 0, Group0, false);
+#else
+        AddChecklistItem("Hold [A button] trigger to perform dash", 0, Group0, true, "Both abilities use the same meter with a shared cooldown");
         AddChecklistItem("Hold [Left Trigger] to enter aim mode", 0, Group0, false);
+#endif
 
-        PlayerManager.PropertyInstance.PlayerController.MoonBarAbility.d_DashEndDelegate += DashEnded;
-        PlayerManager.PropertyInstance.PlayerController.MoonBarAbility.d_AimModeEndDelegate += AimModeEnded;
+        m_PlayerController.MoonBarAbility.d_DashEndDelegate += DashEnded;
+        m_PlayerController.MoonBarAbility.d_AimModeEndDelegate += AimModeEnded;
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+        m_PlayerController.AimModeButton.StartHighlighting();
+        m_PlayerController.DashButton.StartHighlighting();
+#endif
 
         TutorialSetupFinished();
     }
 
     public override void EndTutorialLogic()
     {
-        PlayerManager.PropertyInstance.PlayerController.MoonBarAbility.d_DashEndDelegate -= DashEnded;
-        PlayerManager.PropertyInstance.PlayerController.MoonBarAbility.d_AimModeEndDelegate -= AimModeEnded;
+        m_PlayerController.MoonBarAbility.d_DashEndDelegate -= DashEnded;
+        m_PlayerController.MoonBarAbility.d_AimModeEndDelegate -= AimModeEnded;
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+        m_PlayerController.AimModeButton.StopHighlighting();
+        m_PlayerController.DashButton.StopHighlighting();
+#endif
+
         base.EndTutorialLogic();
     }
 
     private void DashEnded()
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        m_PlayerController.DashButton.StartHighlighting();
+#endif
+
         UpdateTutorial(0, Group0);
     }
 
     private void AimModeEnded()
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        m_PlayerController.AimModeButton.StartHighlighting();
+#endif
+        
         UpdateTutorial(1, Group0);
     }
 }

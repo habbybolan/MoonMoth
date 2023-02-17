@@ -26,8 +26,12 @@ public class ShootingTutorial : Tutorial
     public override void SetupTutorial()
     {
         base.SetupTutorial();
-        
-        AddChecklistItem("Targets destroyed", m_NumTargetsToDestroy, Group0, true, "Hold or press right trigger to shoot at targets");
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+        AddChecklistItem("Targets destroyed", m_NumTargetsToDestroy, Group0, true, "Hold or press [Fire Button] to shoot at targets");
+#else
+        AddChecklistItem("Targets destroyed", m_NumTargetsToDestroy, Group0, true, "Hold or press [Right Trigger] to shoot at targets");
+#endif
 
         TutorialSetupFinished();
     }

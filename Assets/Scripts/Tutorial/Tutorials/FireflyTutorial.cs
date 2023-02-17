@@ -28,7 +28,15 @@ public class FireflyTutorial : Tutorial
 
         m_FireflyManager = FireflyManager.PropertyInstance;
 
-        AddChecklistItem("Defeat fireflies to get health back", m_NumFirefliesToKill, Group0, true, "Hold or press right trigger to shoot at fireflies");
+#if UNITY_ANDROID && !UNITY_EDITOR
+        AddChecklistItem("Defeat fireflies to get health back", m_NumFirefliesToKill, Group0, true, "Hold or press [Fire Button] to shoot at fireflies");
+#else
+        AddChecklistItem("Defeat fireflies to get health back", m_NumFirefliesToKill, Group0, true, "Hold or press [Right Trigger] to shoot at fireflies");
+#endif
+
+
+
+
         TutorialSetupFinished();
     }
 

@@ -10,11 +10,19 @@ public class LocomotionTutorial : Tutorial
     {
         base.SetupTutorial();
 
-        AddChecklistItem("Move the left joystick Up", 0, GroupMovement, true, "Move left joystick to move");
-        AddChecklistItem("Move the left joystick Down", 0, GroupMovement);
-        AddChecklistItem("Move the left joystick Left", 0, GroupMovement);
-        AddChecklistItem("Move the left joystick Right", 0, GroupMovement);
-        AddChecklistItem("Press b to dodge", 2, GroupDodge);
+#if UNITY_ANDROID && !UNITY_EDITOR
+        AddChecklistItem("Move up", 0, GroupMovement, true, "Hold the left side of the screen to bring up the [virtual joystick] to move");
+        AddChecklistItem("Move down", 0, GroupMovement);
+        AddChecklistItem("Move left", 0, GroupMovement);
+        AddChecklistItem("Move right", 0, GroupMovement);
+        AddChecklistItem("Dodge", 2, GroupDodge, true, "Press [dodge button] to dodge");
+#else
+        AddChecklistItem("Move up", 0, GroupMovement, true, "Use [Left Joystick] to move");
+        AddChecklistItem("Move down", 0, GroupMovement);
+        AddChecklistItem("Move left", 0, GroupMovement);
+        AddChecklistItem("Move right", 0, GroupMovement);
+        AddChecklistItem("Dodge", 2, GroupDodge, true, "Press [B button] to dodge");
+#endif
 
         TutorialSetupFinished();
     }
