@@ -34,14 +34,19 @@ public class FireflyTutorial : Tutorial
         AddChecklistItem("Defeat fireflies to get health back", m_NumFirefliesToKill, Group0, true, "Hold or press [Right Trigger] to shoot at fireflies");
 #endif
 
-
-
+#if UNITY_ANDROID && !UNITY_EDITOR
+        m_PlayerController.FireButton.StartHighlighting();
+#endif
 
         TutorialSetupFinished();
     }
 
     public override void EndTutorialLogic()
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        m_PlayerController.FireButton.StopHighlighting();
+#endif
+
         base.EndTutorialLogic();
 
         m_FireflyManager.KillAllFireflies();

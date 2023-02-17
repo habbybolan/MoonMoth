@@ -33,6 +33,10 @@ public class ShootingTutorial : Tutorial
         AddChecklistItem("Targets destroyed", m_NumTargetsToDestroy, Group0, true, "Hold or press [Right Trigger] to shoot at targets");
 #endif
 
+#if UNITY_ANDROID && !UNITY_EDITOR
+        m_PlayerController.FireButton.StartHighlighting();
+#endif
+
         TutorialSetupFinished();
     }
 
@@ -78,6 +82,10 @@ public class ShootingTutorial : Tutorial
             Destroy(target.gameObject);
         }
         m_SpawnedTargets.Clear();
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+        m_PlayerController.FireButton.StopHighlighting();
+#endif
 
         base.EndTutorialLogic();
     }
