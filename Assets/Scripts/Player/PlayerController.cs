@@ -63,10 +63,24 @@ public class PlayerController : CharacterController<PlayerHealth>
     [Header("Attitude")]
 
     [Header("Mobile UI")]
-    [SerializeField] private GameObject MobileUI;
-    [SerializeField] private Button AimModeButton;
-    [SerializeField] private Button DashButton;
+    [SerializeField] private GameObject m_MobileUI;
+    [SerializeField] private MobileActionButton m_AimModeButton;
+    [SerializeField] private MobileActionButton m_DashButton;
+    [SerializeField] private MobileActionButton m_FireButton;
     [SerializeField] private VirtualJoystick m_VirtualJoystick;
+
+    public MobileActionButton AimModeButton
+    {
+        get { return m_AimModeButton; }
+    }
+    public MobileActionButton DashButton
+    {
+        get { return m_DashButton; }
+    }
+    public MobileActionButton FireButton
+    {
+        get { return m_FireButton; }
+    }
 
     private PlayerInput m_PlayerInput; 
 
@@ -152,7 +166,7 @@ public class PlayerController : CharacterController<PlayerHealth>
         EnhancedTouch.Touch.onFingerUp += OnFingerUp;
         EnhancedTouch.Touch.onFingerDown += OnFingerDown;
 
-        MobileUI.SetActive(true);
+        m_MobileUI.SetActive(true);
 
 #endif
 
