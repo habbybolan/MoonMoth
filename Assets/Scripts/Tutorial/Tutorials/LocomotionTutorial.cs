@@ -15,7 +15,7 @@ public class LocomotionTutorial : Tutorial
         AddChecklistItem("Move down", 0, GroupMovement);
         AddChecklistItem("Move left", 0, GroupMovement);
         AddChecklistItem("Move right", 0, GroupMovement);
-        AddChecklistItem("Dodge", 2, GroupDodge, true, "Press [dodge button] to dodge");
+        AddChecklistItem("Dodge", 2, GroupDodge, true, "[Swipe] left side of your screen to dodge in direction of the swipe");
 #else
         AddChecklistItem("Move up", 0, GroupMovement, true, "Use [Left Joystick] to move");
         AddChecklistItem("Move down", 0, GroupMovement);
