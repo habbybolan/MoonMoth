@@ -14,9 +14,10 @@ public class Checklist : MonoBehaviour
 
     [Header("Skipping")]
     [SerializeField] private Button m_SkipButton;
-    [SerializeField] private Image m_SkipImageMobile;
-    [SerializeField] private Image m_SkipImagePC;
-    [SerializeField] private Image m_SkipFillBar;
+    [SerializeField] private GameObject m_MobileSkipContainer;
+    [SerializeField] private GameObject m_PCSkipContainer;
+    [SerializeField] private Image m_MobileSkipFillBar;
+    [SerializeField] private Image m_PCSkipFillBar;
 
     private int m_NumGroupsFinished = 0;
     private int m_NumGroups = 0;
@@ -47,14 +48,15 @@ public class Checklist : MonoBehaviour
         m_TaskContainerLayoutGroup = m_TaskContainer.GetComponent<VerticalLayoutGroup>();
 
         // Set proper skip graphics as enabled
-        m_SkipImagePC.enabled = false;
-        m_SkipImageMobile.enabled = false;
-        m_SkipFillBar.fillAmount = 0;
+        m_MobileSkipContainer.SetActive(false);
+        m_PCSkipContainer.SetActive(false);
+        m_MobileSkipFillBar.fillAmount = 0;
+        m_PCSkipFillBar.fillAmount = 0;
 
-#if UNITY_STANDALONE_WIN
-        m_SkipImageMobile.enabled = true;
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        m_PCSkipContainer.SetActive(true);
 #elif UNITY_ANDROID
-        m_SkipImagePC.enabled = true;
+        m_MobileSkipContainer.SetActive(true);
 #endif
     }
 
@@ -140,8 +142,12 @@ public class Checklist : MonoBehaviour
         {
             m_CurrSkipAmount += Time.deltaTime;
             float SkipPercent = m_CurrSkipAmount / SkipLength;
-            m_SkipFillBar.fillAmount = SkipPercent;
 
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+            m_PCSkipFillBar.fillAmount = SkipPercent;
+#elif UNITY_ANDROID
+            m_MobileSkipFillBar.fillAmount = SkipPercent;
+#endif
             yield return null;
         }
     }
@@ -150,7 +156,11 @@ public class Checklist : MonoBehaviour
     {
         m_IsSkipping = false;
         StopCoroutine(m_SkipCoroutine);
-        m_SkipFillBar.fillAmount = 0;
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        m_PCSkipFillBar.fillAmount = 0;
+#elif UNITY_ANDROID
+        m_MobileSkipFillBar.fillAmount = 0;
+#endif
         m_CurrSkipAmount = 0;
     }
 
