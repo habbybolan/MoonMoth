@@ -99,6 +99,8 @@ public class PlayerController : CharacterController<PlayerHealth>
     private float CurrYawRot = 0;
     private float CurrPitchRot = 0;
 
+    private Coroutine m_SkipCoroutine;
+
     public delegate void LostMothCollectedDelegate();
     public LostMothCollectedDelegate lostMothCollectedDelegate;
 
@@ -459,18 +461,43 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void OnSkipStart()
     {
+        if (GameState.PropertyInstance.GameStateEnum != GameStateEnum.TUTORIAL) return;
+
         m_TimeSkipPressed = Time.time;
-        // TODO: Start skipping UI?
+        if (m_Checklist)
+        {
+            m_Checklist.StartSkipping(m_ButtonHoldLengthToSkip);
+        }
+        m_SkipCoroutine = StartCoroutine(SkipCoroutine());
+    }
+
+    private IEnumerator SkipCoroutine()
+    {
+        // Loop while full skip time not reached
+        while (Time.time - m_TimeSkipPressed < m_ButtonHoldLengthToSkip)
+        {
+            yield return null;
+        }
+        OnSkipEnd();
     }
 
     public void OnSkipEnd()
     {
+        if (GameState.PropertyInstance.GameStateEnum != GameStateEnum.TUTORIAL) return;
+
         // Check if skip button held for long enough
         if (Time.time - m_TimeSkipPressed >= m_ButtonHoldLengthToSkip)
         {
             PerformSkip();
-            m_TimeSkipPressed = 0;
-            // TODO: Stop skipping UI?
+        }
+
+        m_TimeSkipPressed = 0;
+        StopCoroutine(m_SkipCoroutine);
+
+        // Stop Skipping graphic
+        if (m_Checklist)
+        {
+            m_Checklist.StopSkipping();
         }
     }
 
