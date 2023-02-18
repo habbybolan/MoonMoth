@@ -10,8 +10,8 @@ public class MoonBarTutorial : Tutorial
         base.SetupTutorial();
 
 #if UNITY_ANDROID && !UNITY_EDITOR
-        AddChecklistItem("Hold [Dash Button] trigger to perform dash", 0, Group0, true, "Both abilities use the same meter with a shared cooldown");
-        AddChecklistItem("Hold [Aim-Mode Button] to enter aim mode", 0, Group0, false);
+        AddChecklistItem("Tap [Dash Button] to toggle dash mode", 0, Group0, true, "Both abilities use the same meter with a shared cooldown");
+        AddChecklistItem("Tap [Aim-Mode Button] to toggle aim mode", 0, Group0, false);
 #else
         AddChecklistItem("Hold [A button] trigger to perform dash", 0, Group0, true, "Both abilities use the same meter with a shared cooldown");
         AddChecklistItem("Hold [Left Trigger] to enter aim mode", 0, Group0, false);
