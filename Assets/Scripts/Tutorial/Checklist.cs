@@ -22,6 +22,11 @@ public class Checklist : MonoBehaviour
     private int m_NumGroups = 0;
 
     private Coroutine m_SkipCoroutine;
+    
+    public delegate void SkipButtonDownDelegate();
+    public SkipButtonDownDelegate skipButtonDownDelegate;
+    public delegate void SkipButtonUpDelegate();
+    public SkipButtonUpDelegate skipButtonUpDelegate;
 
     public Button SkipButton
     {
@@ -147,5 +152,15 @@ public class Checklist : MonoBehaviour
         StopCoroutine(m_SkipCoroutine);
         m_SkipFillBar.fillAmount = 0;
         m_CurrSkipAmount = 0;
+    }
+
+    public void OnSkipButtonDown()
+    {
+        skipButtonDownDelegate();
+    }
+
+    public void OnSkipButtonUp()
+    {
+        skipButtonUpDelegate();
     }
 }

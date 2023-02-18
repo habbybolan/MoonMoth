@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine.UI;
 using Gyroscope = UnityEngine.InputSystem.Gyroscope;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.EventSystems;
 
 
 /*
@@ -30,6 +31,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     [Header("Lost Moth")]
     [SerializeField] private TextMeshProUGUI m_LostMothUI;
+    [SerializeField] private GameObject m_LostMothContainer;
 
     [Header("Sound")]
     [SerializeField] private AudioSource m_AimModeStartSound;
@@ -175,15 +177,21 @@ public class PlayerController : CharacterController<PlayerHealth>
         Application.targetFrameRate = -1;
     }
 
+    // Event on entering tutorial
     public void InitializeTutorialUI()
     {
         m_Checklist = Instantiate(m_ChecklistPrefab);
-    } 
+        m_Checklist.skipButtonDownDelegate += OnSkipStart;
+        m_Checklist.skipButtonUpDelegate += OnSkipEnd;
+        m_LostMothContainer.SetActive(false);
+    }
 
+    // Event on tutorial finished or skipped
     public void TutorialEnded()
     {
         Destroy(m_Checklist.gameObject);
         m_Checklist = null;
+        m_LostMothContainer.SetActive(true);
     }
 
     private void OnDamageTaken(DamageInfo damageInfo) 
