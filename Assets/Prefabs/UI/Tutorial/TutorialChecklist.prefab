@@ -81,6 +81,9 @@ MonoBehaviour:
   m_TaskContainer: {fileID: 7175685964320718643}
   m_ChecklistContainer: {fileID: 3262759869293047154}
   m_TitleText: {fileID: 2733759126214359832}
+  m_EmissionBackground: {fileID: 8238843348392940048}
+  m_MaxEmissionOnBackground: 0.8
+  m_EmissionBoostLength: 0.5
   m_SkipButton: {fileID: 3102409366953841887}
   m_MobileSkipContainer: {fileID: 8287565346745732707}
   m_PCSkipContainer: {fileID: 1573690841503309772}

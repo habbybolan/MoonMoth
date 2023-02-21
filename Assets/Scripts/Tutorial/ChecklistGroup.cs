@@ -27,7 +27,7 @@ public class ChecklistGroup : MonoBehaviour
 
     public bool GetIsFinished()
     {
-        return false;
+        return m_IsFinished;
     }
 
     public void InitializeGroup(int groupID, bool hasTitle = false, string groupTitle = "")
@@ -61,6 +61,7 @@ public class ChecklistGroup : MonoBehaviour
         m_Numitems++;
     }
 
+    // Returns true if the item was finished and sets group as finished if all tasks were finished
     public bool UpdateChecklistItem(int itemID)
     {
         if (m_CheckListDictionary.TryGetValue(itemID, out CheckListItem checklistItem))
@@ -68,15 +69,14 @@ public class ChecklistGroup : MonoBehaviour
             if (checklistItem.UpdateChecklistItem())
             {
                 m_NumFinishedItems++;
+                // strike out group title if all checklist items finished
+                if (!m_IsFinished && m_NumFinishedItems >= m_Numitems)
+                {
+                    m_IsFinished = true;
+                    m_GroupTitle.text = $"<s>{m_GroupTitle.text}</s>";
+                }
+                return true;
             }
-        }
-
-        // strike out group title if all checklist items finished
-        if (!m_IsFinished && m_NumFinishedItems >= m_Numitems)
-        {
-            m_IsFinished = true;
-            m_GroupTitle.text = $"<s>{m_GroupTitle.text}</s>";
-            return true;
         }
         return false;
     }

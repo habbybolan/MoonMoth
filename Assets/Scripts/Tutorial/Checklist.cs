@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UIElements.Experimental;
 
 public class Checklist : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class Checklist : MonoBehaviour
     [SerializeField] private GameObject m_ChecklistContainer;
     [SerializeField] private TextMeshProUGUI m_TitleText;
 
+    [Header("Emission Background")]
+    [SerializeField] private Image m_EmissionBackground;
+    [Range(0f, 1f)]
+    [SerializeField] private float m_MaxEmissionOnBackground = 0.8f;
+    [SerializeField] private float m_EmissionBoostLength = 1f;
+    
     [Header("Skipping")]
     [SerializeField] private Button m_SkipButton;
     [SerializeField] private GameObject m_MobileSkipContainer;
@@ -23,6 +30,9 @@ public class Checklist : MonoBehaviour
     private int m_NumGroups = 0;
 
     private Coroutine m_SkipCoroutine;
+    private float m_CachedBackgroundStartEmission;
+    private Coroutine m_BackgroundEmissionCoroutine;
+    private float m_CurrEmissionBoostTime = 0;
     
     public delegate void SkipButtonDownDelegate();
     public SkipButtonDownDelegate skipButtonDownDelegate;
@@ -46,6 +56,8 @@ public class Checklist : MonoBehaviour
     {
         m_CheckListGroupDictionary = new Dictionary<int, ChecklistGroup>();
         m_TaskContainerLayoutGroup = m_TaskContainer.GetComponent<VerticalLayoutGroup>();
+
+        m_CachedBackgroundStartEmission = m_EmissionBackground.color.a;
 
         // Set proper skip graphics as enabled
         m_MobileSkipContainer.SetActive(false);
@@ -116,12 +128,59 @@ public class Checklist : MonoBehaviour
     {
         if (m_CheckListGroupDictionary.TryGetValue(groupID, out ChecklistGroup checklistItem))
         {
-            if (checklistItem.UpdateChecklistItem(itemID))
+            // Check if group finished and was not previously finshed
+            if (checklistItem.GetIsFinished() == false && checklistItem.UpdateChecklistItem(itemID))
             {
-                m_NumGroupsFinished++;
+                // if it just finished, then update number of groups finished
+                if (checklistItem.GetIsFinished())
+                {
+                    m_NumGroupsFinished++;
+                }
+                StartEmissionChecklistBoost();
             }
         }
         return m_NumGroupsFinished >= m_NumGroups;
+    }
+
+    // display an 'emission' boost on completing a tutorial task
+    private void StartEmissionChecklistBoost()
+    {
+        if (m_BackgroundEmissionCoroutine == null)
+        {
+            m_BackgroundEmissionCoroutine = StartCoroutine(EmissionBoostCoroutine());
+        }
+    }
+
+    private void StopEmissionChecklistBoost()
+    {
+        StopCoroutine(m_BackgroundEmissionCoroutine);
+        m_BackgroundEmissionCoroutine = null;
+    }
+
+    // Performs the emission boost, increasing then decreasing background emission values
+    private IEnumerator EmissionBoostCoroutine()
+    {
+        bool bIncrBoost = true;
+        // If Emission going down and above zero, or emission going up and below max length
+        while ((bIncrBoost == false && m_CurrEmissionBoostTime > 0) || bIncrBoost == true)
+        {
+            if (m_CurrEmissionBoostTime > m_EmissionBoostLength)
+            {
+                bIncrBoost = !bIncrBoost;
+            }
+            m_CurrEmissionBoostTime += bIncrBoost ? Time.deltaTime : -Time.deltaTime;
+            EmissionBoostHelper();
+            yield return null;
+        }
+        m_BackgroundEmissionCoroutine = null;
+    }
+
+    private void EmissionBoostHelper()
+    {
+        float t = Easing.OutCubic(m_CurrEmissionBoostTime);
+        Color NewAlphaColor = m_EmissionBackground.color;
+        NewAlphaColor.a = Mathf.Lerp(m_CachedBackgroundStartEmission, m_MaxEmissionOnBackground, t);
+        m_EmissionBackground.color = NewAlphaColor;
     }
 
     public void UpdateTitle(string title)
