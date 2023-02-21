@@ -6902,7 +6902,7 @@ MonoBehaviour:
   m_EnemyBoostDuration: 2
   m_MoonBarReticle: {fileID: 7690210407055213460}
   m_MoonBarBorder: {fileID: 3090155825997834393}
-  m_BarCooldownFlickerTime: 0.5
+  m_BarCooldownFlickerTime: 0.4
 --- !u!114 &2626716119223292289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6925,6 +6925,7 @@ MonoBehaviour:
   m_FogInTransitionDuration: 1
   m_FogOutTransitionDuration: 3
   m_LostMothUI: {fileID: 8894022941869152368}
+  m_LostMothContainer: {fileID: 0}
   m_AimModeStartSound: {fileID: 8718531766064261588}
   m_AimModeEndSound: {fileID: 1371643444647074668}
   m_DodgeCooldown: 1
@@ -7320,6 +7321,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 3977897141832786759}
     m_Modifications:
+    - target: {fileID: 3520880250439569606, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3520880250439569606, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3520880250439569606, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -57.73999
