@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FireflyWalker: {fileID: 2125045404698981339}
+  m_Firefly: {fileID: 4826371176101236819}
 --- !u!1 &4206230537702241072
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Points: []
   isConstantSpeed: 1
+  m_Walker: {fileID: 2125045404698981339}
   NextPointBlockingMask: 0
   m_MinDotProdCheck: 0.75
 --- !u!1 &7185757372758606171
