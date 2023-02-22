@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine.UI;
 using Gyroscope = UnityEngine.InputSystem.Gyroscope;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.EventSystems;
 
 
 /*
@@ -30,6 +31,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     [Header("Lost Moth")]
     [SerializeField] private TextMeshProUGUI m_LostMothUI;
+    [SerializeField] private GameObject m_LostMothContainer;
 
     [Header("Sound")]
     [SerializeField] private AudioSource m_AimModeStartSound;
@@ -37,6 +39,13 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     [Header("Dodge")]
     [SerializeField] private float m_DodgeCooldown = 1;
+
+    [Header("Tutorial")]
+    [SerializeField] private Checklist m_ChecklistPrefab;
+    [SerializeField] private TutorialManager m_TutorialManager;
+    [Min(0)]
+    [SerializeField] private float m_ButtonHoldLengthToSkip = 3;
+    [SerializeField] private ParticleSystem m_TutorialDustParticlesPrefab;
 
     [Header("Animation")]
     [SerializeField] private float m_GlideFlapDelayMin = .2f;
@@ -57,16 +66,29 @@ public class PlayerController : CharacterController<PlayerHealth>
     [Header("Attitude")]
 
     [Header("Mobile UI")]
-    [SerializeField] private GameObject MobileUI;
-    [SerializeField] private Button AimModeButton;
-    [SerializeField] private Button DashButton;
+    [SerializeField] private GameObject m_MobileUI;
+    [SerializeField] private MobileActionButton m_AimModeButton;
+    [SerializeField] private MobileActionButton m_DashButton;
+    [SerializeField] private MobileActionButton m_FireButton;
     [SerializeField] private VirtualJoystick m_VirtualJoystick;
+
+    public MobileActionButton AimModeButton
+    {
+        get { return m_AimModeButton; }
+    }
+    public MobileActionButton DashButton
+    {
+        get { return m_DashButton; }
+    }
+    public MobileActionButton FireButton
+    {
+        get { return m_FireButton; }
+    }
 
     private PlayerInput m_PlayerInput; 
 
     private PLAYER_ACTION_STATE m_playerState;  // Current player state given the actions performed / effects applied
 
-    private int m_LostMothCount = 0;
     private Vector2 m_MovementInput;            // Input object for moving player along x-y axis
 
     private DamageInfo.HIT_EFFECT m_CurrEffect; // Current hit effect applied to player
@@ -79,6 +101,27 @@ public class PlayerController : CharacterController<PlayerHealth>
     private float BasePhoneYawRotation;
     private float CurrYawRot = 0;
     private float CurrPitchRot = 0;
+    private ParticleSystem m_SpawnedDustParticle;
+
+    private Coroutine m_SkipCoroutine;
+
+    public delegate void LostMothCollectedDelegate();
+    public LostMothCollectedDelegate lostMothCollectedDelegate;
+
+    private Checklist m_Checklist;
+    public Checklist Checklist
+
+    {
+        get { return m_Checklist; }
+    }
+
+    public bool IsJoystickMovement
+    {
+        get { return IsJoystickMovement; }
+    }
+
+    // Time that skip button was pressed and held. -1 if not pressed yet
+    private float m_TimeSkipPressed = -1;
     
     public MoonBarAbility MoonBarAbility { get { return m_MoonBarAbility; }}
 
@@ -108,6 +151,8 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_Health.d_DamageDelegate = OnDamageTaken;
         UpdateLostMothText();
 
+        GameState.PropertyInstance.d_GameTransitioningDelegate += StartTransition;
+
 #if UNITY_ANDROID && !UNITY_EDITOR
 
         if (Accelerometer.current != null)
@@ -127,11 +172,61 @@ public class PlayerController : CharacterController<PlayerHealth>
         EnhancedTouch.Touch.onFingerUp += OnFingerUp;
         EnhancedTouch.Touch.onFingerDown += OnFingerDown;
 
-        MobileUI.SetActive(true);
+        m_MobileUI.SetActive(true);
 
 #endif
 
         Application.targetFrameRate = -1;
+    }
+
+    // Event on entering tutorial
+    public void InitializeTutorialUI()
+    {
+        m_Checklist = Instantiate(m_ChecklistPrefab);
+        m_Checklist.skipButtonDownDelegate += OnSkipStart;
+        m_Checklist.skipButtonUpDelegate += OnSkipEnd;
+        m_LostMothContainer.SetActive(false);
+
+        m_SpawnedDustParticle = Instantiate(m_TutorialDustParticlesPrefab);
+        m_SpawnedDustParticle.transform.parent = m_PlayerParentMovement.transform;
+        m_SpawnedDustParticle.Play();
+
+        m_TutorialManager.NewTutorialEnteredDelegate += NewTutorialEntered;
+    }
+
+    private void NewTutorialEntered(Tutorial tutorial)
+    {
+        if (tutorial == null) return;
+
+        // If lost moth tutorial, show lost moth tutorial text
+        LostMothTutorial lostMothTutorial = tutorial as LostMothTutorial;
+        if (lostMothTutorial != null)
+        {
+            ActivateLostMothUI();
+        }
+    }
+
+    // Event on tutorial finished or skipped
+    public void TutorialEnded()
+    {
+        Destroy(m_Checklist.gameObject);
+        m_Checklist = null;
+        m_SpawnedDustParticle.Stop();
+    }
+
+    private void ActivateLostMothUI()
+    {
+        m_LostMothContainer.SetActive(true);
+        UpdateLostMothText();
+    }
+
+    public Tutorial GetCurrTutorial()
+    {
+        if (m_TutorialManager != null)
+        {
+            return m_TutorialManager.CurrTutorial;
+        }
+        return null;
     }
 
     private void OnDamageTaken(DamageInfo damageInfo) 
@@ -165,17 +260,25 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void OnMove(InputValue value)
     {
-        m_MovementInput = value.Get<Vector2>();
+        RecordInput(value.Get<Vector2>());
+    }
+
+    public void RecordInput(Vector2 inputValue)
+    {
+        m_MovementInput = inputValue;
+
+        if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.TUTORIAL)
+        {
+            if (inputValue.y > .1) m_TutorialManager.ReceiveTutorialInput(TutorialInputs.UP);
+            if (inputValue.y < -.1) m_TutorialManager.ReceiveTutorialInput(TutorialInputs.DOWN);
+            if (inputValue.x > .1) m_TutorialManager.ReceiveTutorialInput(TutorialInputs.RIGHT);
+            if (inputValue.x < -.1) m_TutorialManager.ReceiveTutorialInput(TutorialInputs.LEFT);
+        }
     }
 
     // Main Update controller for all Player components, Dealing with actions/effects that happen each frame
     void Update()
     {
-        CheckWin();
-
-        if (!TileManager.PropertyInstance.IsInitialized)
-            return;
-
         m_Weapon.TryShoot();
         m_MoonBarAbility.UpdateAimModeEnemyKilledList();
         m_MoonBarAbility.UpdateAimModeReticleBar();
@@ -198,9 +301,6 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     private void FixedUpdate()
     {
-        // Game ended or transitioning to new tileset
-        if (GameState.m_GameState != GameStateEnum.RUNNING) return;
-
         // move parent along spline
         m_PlayerParentMovement.TryMove();
 
@@ -213,11 +313,14 @@ public class PlayerController : CharacterController<PlayerHealth>
                 if (m_IsJoystickMovement)
                 {
                     // move player body along local x, y plane based on inputs
-                    m_PlayerMovement.ControlPointXYMovement(VirtualJoystick.Input, false);
+                    m_PlayerMovement.ControlPointXYMovement(m_MovementInput, false);
                 }
                 // Gyro controls
                 else
                 {
+                    // TODO: Use m_MovementInput for gyro movement
+                    // TODO: Fix drifting
+
                     Vector3 gyroscope = Gyroscope.current.angularVelocity.ReadValue();
 
                     // calculate the Y movement
@@ -333,6 +436,11 @@ public class PlayerController : CharacterController<PlayerHealth>
     {
         if (m_playerState == PLAYER_ACTION_STATE.FLYING && !m_IsDodgeCooldown)
         {
+            if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.TUTORIAL)
+            {
+                m_TutorialManager.ReceiveTutorialInput(TutorialInputs.DODGE);
+            }
+            
             m_playerState = PLAYER_ACTION_STATE.DODGING;
             m_Health.SetProjectileInvulnFrames(m_PlayerMovement.GetDodgeDuration());
             StartCoroutine(m_PlayerMovement.PlayerDodge(FinishAction, DodgeDirection));
@@ -394,6 +502,61 @@ public class PlayerController : CharacterController<PlayerHealth>
         StopDashing();
     }
 
+    public void OnSkipStart()
+    {
+        if (GameState.PropertyInstance.GameStateEnum != GameStateEnum.TUTORIAL) return;
+
+        m_TimeSkipPressed = Time.time;
+        if (m_Checklist)
+        {
+            m_Checklist.StartSkipping(m_ButtonHoldLengthToSkip);
+        }
+        m_SkipCoroutine = StartCoroutine(SkipCoroutine());
+    }
+
+    private IEnumerator SkipCoroutine()
+    {
+        // Loop while full skip time not reached
+        while (Time.time - m_TimeSkipPressed < m_ButtonHoldLengthToSkip)
+        {
+            yield return null;
+        }
+        OnSkipEnd();
+    }
+
+    public void OnSkipEnd()
+    {
+        if (GameState.PropertyInstance.GameStateEnum != GameStateEnum.TUTORIAL) return;
+
+        // Check if skip button held for long enough
+        if (Time.time - m_TimeSkipPressed >= m_ButtonHoldLengthToSkip)
+        {
+            PerformSkip();
+        }
+
+        m_TimeSkipPressed = 0;
+        StopCoroutine(m_SkipCoroutine);
+
+        // Stop Skipping graphic
+        if (m_Checklist)
+        {
+            m_Checklist.StopSkipping();
+        }
+    }
+
+    private void PerformSkip()
+    {
+        // If in the tutorial, skip tutorial
+        if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.TUTORIAL)
+        {
+            if (m_TutorialManager != null)
+            {
+                m_TutorialManager.SetTutorialsFinished();
+            }
+            
+        }
+    }
+
     public void StopDashing()
     {
         m_MoonBarAbility.OnDashEndHelper();
@@ -419,31 +582,23 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public void LostMothCollected()
     {
-        m_LostMothCount++;
+        if (lostMothCollectedDelegate != null)
+            lostMothCollectedDelegate();
         UpdateLostMothText();
     }
 
     private void UpdateLostMothText()
     {
-        m_LostMothUI.text = m_LostMothCount.ToString() + "/" + GameManager.PropertyInstance.CurrLostMothWinCondition();
+        m_LostMothUI.text = GameManager.PropertyInstance.LostMothCount.ToString() + "/" + GameManager.PropertyInstance.CurrLostMothWinCondition();
     }
 
     public override void Death() 
     {
-        GameManager.PropertyInstance.OnGameOver();
+        // TODO: Fall down? add delay to next screen in GameManager?
     } 
 
-    public void CheckWin() 
-    {
-        // if not currently transitioning and met the lost moth win threshold for the tile set
-        if (m_LostMothCount >= GameManager.PropertyInstance.CurrLostMothWinCondition())
-        {
-            WinLevel();
-        }        
-    }
-
     // Set current level as won, goto next or win game
-    public void WinLevel()
+    public void StartTransition()
     {
         StartCoroutine(TransitionPhase());
     }
@@ -453,7 +608,6 @@ public class PlayerController : CharacterController<PlayerHealth>
     {
         // invincible during transition
         m_Health.SetAllInvulnFrames(3f);
-        m_LostMothCount = 0;
         UIManager.PropertyInstance.FadeIn(m_FogInTransitionDuration);
 
         yield return new WaitForSeconds(m_FogInTransitionDuration);
@@ -461,20 +615,29 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_PlayerInput.enabled = false;
         // Call rest of transition logic
         m_PlayerParentMovement.DisconnectFromSpline();
-        GameManager.PropertyInstance.OnAllLostMothsCollected();
+
+        // Begin tile transition
+        TileManager.PropertyInstance.TileSetFinished();
         
         // wait for transition state to be over to reconnect to spline
-        while (GameState.m_GameState != GameStateEnum.RUNNING)
+        while (GameState.PropertyInstance.GameStateEnum != GameStateEnum.RUNNING)
         {
             yield return null;
         }
 
         m_PlayerParentMovement.ConnectBackToSpline();
         m_CameraMovement.ResetPosition();
+
+        float delay = 1f;
+        while (delay > 0)
+        {
+            delay -= Time.deltaTime;
+            yield return null;
+        }
        
 
         UIManager.PropertyInstance.FadeOut(m_FogOutTransitionDuration);
-        UpdateLostMothText();
+        ActivateLostMothUI();
         m_PlayerInput.enabled = true;
     }
 

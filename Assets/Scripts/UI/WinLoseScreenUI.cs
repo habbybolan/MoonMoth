@@ -9,7 +9,7 @@ public class WinLoseScreenUI : MonoBehaviour
 
     private void Awake()
     {
-        if (GameState.m_GameState == GameStateEnum.WON)
+        if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.WON)
         {
             WinUI.SetActive(true);
         } else

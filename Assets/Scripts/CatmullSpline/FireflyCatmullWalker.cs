@@ -22,7 +22,7 @@ public class FireflyCatmullWalker : CatmullWalker
     {
         // Copy the base movement speed of the player
         m_Speed = PlayerManager.PropertyInstance.PlayerController.PlayerParent.Speed;
-        if (!m_IsIndependent)
+        if (GameState.PropertyInstance.GameStateEnum != GameStateEnum.TUTORIAL && !m_IsIndependent)
         {
             m_Spline.IntializeAtEndOfHead();
             base.Start();

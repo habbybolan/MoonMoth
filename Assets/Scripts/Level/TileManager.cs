@@ -38,8 +38,7 @@ public class TileManager : MonoBehaviour
     [Tooltip("Starting spawn percent of mushrooms")]
     [Range(0, 100)]
     [SerializeField] private float m_MushroomStartingSpawnPercent = 10;
-
-    private int m_CurrentTileSet = 0;
+    [SerializeField] private bool m_IsDifficultyValuesLogged = false;
 
     // Delegate for every time a new tile is added
     public delegate void TileAddedDelegate(Tile addedTile);
@@ -84,16 +83,20 @@ public class TileManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.PropertyInstance.d_NextLevelDelegate += TileSetFinished;
-        InitializeStartTile();
-        m_IsInitialized = true;
+        GameState.PropertyInstance.d_GameRunningDelegate += InitializeStartTile;
+        
         if (m_TileTransitions.Length < m_TileSets.Length - 1)
         {
             Debug.LogWarning("There should be a transition tile m_TileTransitions for each tile transition between sets m_TileSets in TileManager");
         }
-        //StartCoroutine(SpawnPercentagesPrint());
+
+        if (m_IsDifficultyValuesLogged)
+        {
+            StartCoroutine(SpawnPercentagesPrint());
+        }
     }
 
+    // For debugging percentage values
     IEnumerator SpawnPercentagesPrint()
     {
         while (true)
@@ -108,8 +111,9 @@ public class TileManager : MonoBehaviour
 
     private void InitializeStartTile()
     {
+        m_IsInitialized = true;
         // create uniform distribution of all prefab tiles
-        int numEachTile = m_PoolTiles.Length / m_TileSets[m_CurrentTileSet].tiles.Length;
+        int numEachTile = m_PoolTiles.Length / m_TileSets[GameManager.PropertyInstance.CurrLevel].tiles.Length;
         int indexPrefab = 0;
         int indexPool = 0;
         int numEachCurrTile = 0;
@@ -118,12 +122,12 @@ public class TileManager : MonoBehaviour
         while (indexPool < m_PoolTiles.Length)
         {
             // Reached max number of current prefab inside pool and not at last prefab
-            if (numEachCurrTile == numEachTile && indexPrefab != m_TileSets[m_CurrentTileSet].tiles.Length - 1)
+            if (numEachCurrTile == numEachTile && indexPrefab != m_TileSets[GameManager.PropertyInstance.CurrLevel].tiles.Length - 1)
             {
                 indexPrefab++;
                 numEachCurrTile = 0;
             }
-            Tile newTile = Instantiate(m_TileSets[m_CurrentTileSet].tiles[indexPrefab], Vector3.zero, Quaternion.identity, transform);
+            Tile newTile = Instantiate(m_TileSets[GameManager.PropertyInstance.CurrLevel].tiles[indexPrefab], Vector3.zero, Quaternion.identity, transform);
             m_PoolTiles[indexPool] = newTile;
             newTile.gameObject.SetActive(false);
             indexPool++;
@@ -144,9 +148,9 @@ public class TileManager : MonoBehaviour
     {
         Tile newTile;
         // if adding the first tile on transitions to new tileset, start with designated tile transition
-        if (m_VisibleTiles.Count == 0 && m_TileTransitions.Length > m_CurrentTileSet - 1)
+        if (m_VisibleTiles.Count == 0 && m_TileTransitions.Length > GameManager.PropertyInstance.CurrLevel - 1)
         {
-            newTile = Instantiate(m_TileTransitions[m_CurrentTileSet], Vector3.zero, Quaternion.identity, transform);
+            newTile = Instantiate(m_TileTransitions[GameManager.PropertyInstance.CurrLevel], Vector3.zero, Quaternion.identity, transform);
             m_transitionTile = newTile;
         } else
         {
@@ -216,7 +220,7 @@ public class TileManager : MonoBehaviour
 
     private void IncrementSpawnPercents()
     {
-        switch(m_CurrentTileSet)
+        switch(GameManager.PropertyInstance.CurrLevel)
         {
             case 0:
                 m_StalagCurrentSpawnPercent += m_PercentDifficultyIncreasePerSecond * Time.deltaTime;
@@ -239,11 +243,7 @@ public class TileManager : MonoBehaviour
     // On conditions of tile set being fulfilled, goto next set or player won the game
     public void TileSetFinished()
     {
-        // only delete set if game was running so there's a set to delete
-        if (GameState.m_GameState == GameStateEnum.RUNNING)
-        {
-            DeleteSet();
-        }
+        DeleteSet();
     }
 
     private void DeleteSet()
@@ -260,27 +260,27 @@ public class TileManager : MonoBehaviour
     // Asynchronously 
     IEnumerator TransitionToNextSet()
     {
-        // if reached all levels added, then player wins
-        if (m_CurrentTileSet == m_TileSets.Length - 1)
+        if (m_transitionTile != null)
         {
-            GameManager.PropertyInstance.OnGameWon();
-            yield break;
+            Destroy(m_transitionTile.gameObject);
         }
-        Destroy(m_transitionTile.gameObject);
-        m_CurrentTileSet++;
 
         foreach (Tile tile in m_PoolTiles)
         {
-            Destroy(tile.gameObject);
-            yield return new WaitForSeconds(.02f);
+            if (tile != null)
+            {
+                Destroy(tile.gameObject);
+                yield return new WaitForSeconds(.02f);
+            }
         }
+
         m_PoolTiles = new Tile[m_TilePoolSize];
         m_VisibleTiles.Clear();
 
 
         // TODO: Make asynchronous instead of all in one frame
-        InitializeStartTile();
-        GameState.m_GameState = GameStateEnum.RUNNING;
+        GameManager.PropertyInstance.UpdateState(GameStateEnum.RUNNING);
+        
     }
 
     public bool IsInitialized { get { return m_IsInitialized; } }
@@ -298,7 +298,7 @@ public class TileManager : MonoBehaviour
     void Update()
     {
         // only update if game is in normal running state
-        if (GameState.m_GameState != GameStateEnum.RUNNING) return;
+        if (GameState.PropertyInstance.GameStateEnum != GameStateEnum.RUNNING) return;
 
         CheckRemoveTile();
         IncrementSpawnPercents();

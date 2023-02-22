@@ -30,23 +30,42 @@ public class FireflyManager : MonoBehaviour
     private void Start()
     {
         m_FireflyList = new List<FireflyContainer> ();
-        GameManager.PropertyInstance.d_NextLevelDelegate += TileSetFinished;
+        GameState.PropertyInstance.d_GameTransitioningDelegate += TileSetFinished;
         StartCoroutine(SpawnFireflyDelay());
     }
 
-    public bool SpawnNewFirefly()
+    /*
+     * Spawns a firefly that is managed by this manager.
+     */
+    public FireflyController SpawnNewFirefly()
+    {
+        return SpawnNewFirefly(m_FireflyPrefab, Vector3.zero);
+    }
+
+    /*
+     * Spawn a specific prefab firefly type. Utilized mostly by tutorial to spawn tutorial fireflies.
+     * @param fireflyPrefab Custom prefab type to spawn
+     * @param spawnLocation Location to spawn the parent object. Only matters when in tutorial.
+     */
+    public FireflyController SpawnNewFirefly(FireflyContainer fireflyPrefab, Vector3 spawnLocation)
     {
         // prevent spawning new fireflies if firefly limit reached
-        if (m_FireflyLimit == m_FireflyList.Count) return false;
+        if (m_FireflyLimit == m_FireflyList.Count) return null;
 
         // prevent spawning if player not passed first tile
-        if (!TileManager.PropertyInstance.IsValidToSpawnFirefly()) return false;
+        if (GameState.PropertyInstance.GameStateEnum != GameStateEnum.TUTORIAL &&
+            !TileManager.PropertyInstance.IsValidToSpawnFirefly())
+        {
+            return null;
+        }
 
         // Spawn new firefly
-        FireflyContainer fireflyContainer = Instantiate(m_FireflyPrefab);
+        FireflyContainer fireflyContainer = Instantiate(fireflyPrefab, spawnLocation, Quaternion.identity);
         fireflyContainer.FireflyWalker.Offset = m_FireflyList.Count;
         m_FireflyList.Add(fireflyContainer);
-        return true;
+
+        // TODO: return null if no firefly spawned, otherwise return firefly spawned
+        return fireflyContainer.Firefly;
     }
 
     // Coroutine to spawn a firefly after certain amount of time
@@ -58,7 +77,7 @@ public class FireflyManager : MonoBehaviour
         while (true)
         {
             // prevent spawning more fireflies if game not running
-            if (GameState.m_GameState != GameStateEnum.RUNNING)
+            if (GameState.PropertyInstance.GameStateEnum != GameStateEnum.RUNNING)
             {
                 currDuration = 0;
                 yield return null;
@@ -90,8 +109,15 @@ public class FireflyManager : MonoBehaviour
                 isDeleted = true;
             }
         }
-        // TODO:
-        //  Update offset positions of all alive fireflies in list
+    }
+
+    public void KillAllFireflies()
+    {
+        // TODO: Calling OnFireflyDeath not optimized, but probably doesn't matter
+        for (int i = m_FireflyList.Count - 1; i >= 0; i--)
+        {
+            m_FireflyList[i].Firefly.Health.ManuallyKill();
+        }
     }
 
     public void TileSetFinished() 

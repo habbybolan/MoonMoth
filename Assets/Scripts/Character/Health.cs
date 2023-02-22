@@ -120,8 +120,16 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void ManuallyKill()
+    {
+        Death();
+    }
+
     protected virtual void Death()
     {
+        if (d_DeathDelegate != null)
+            d_DeathDelegate();
+
         // play death sound
         if (m_DeathSound != null)
         {
@@ -132,8 +140,7 @@ public class Health : MonoBehaviour
         {
             Transform currentTransform = transform;
             Destroy(Instantiate(m_deathParticles, currentTransform.position, currentTransform.rotation), m_deathParticlesDuration);
-        }
-        d_DeathDelegate();
+        }        
     }
 
     public void SetAllInvulnFrames(float invulnDuration)

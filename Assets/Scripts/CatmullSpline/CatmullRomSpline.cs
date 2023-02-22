@@ -221,4 +221,9 @@ public class CatmullRomSpline : MonoBehaviour
             return (m_Points.Length - 1);
         }
     }
+
+    public Vector3 EndOfSpline
+    {
+        get { return m_Points[m_Points.Length - 1]; }
+    }
 }

@@ -107,6 +107,24 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipStart"",
+                    ""type"": ""Button"",
+                    ""id"": ""58b167c1-0a68-486c-bb88-8f0c65416252"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipEnd"",
+                    ""type"": ""Button"",
+                    ""id"": ""69bc3336-1fad-432d-a377-9de138713c67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -239,6 +257,28 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""FireStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""012a3c9d-ffc7-4682-825f-9474710ba1a2"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SkipStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00ede09b-adc2-440b-b8be-cc241c508f82"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipEnd"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -835,6 +875,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_AimModeEnd = m_Player.FindAction("AimModeEnd", throwIfNotFound: true);
         m_Player_DashStart = m_Player.FindAction("DashStart", throwIfNotFound: true);
         m_Player_DashEnd = m_Player.FindAction("DashEnd", throwIfNotFound: true);
+        m_Player_SkipStart = m_Player.FindAction("SkipStart", throwIfNotFound: true);
+        m_Player_SkipEnd = m_Player.FindAction("SkipEnd", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -915,6 +957,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_AimModeEnd;
     private readonly InputAction m_Player_DashStart;
     private readonly InputAction m_Player_DashEnd;
+    private readonly InputAction m_Player_SkipStart;
+    private readonly InputAction m_Player_SkipEnd;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -928,6 +972,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @AimModeEnd => m_Wrapper.m_Player_AimModeEnd;
         public InputAction @DashStart => m_Wrapper.m_Player_DashStart;
         public InputAction @DashEnd => m_Wrapper.m_Player_DashEnd;
+        public InputAction @SkipStart => m_Wrapper.m_Player_SkipStart;
+        public InputAction @SkipEnd => m_Wrapper.m_Player_SkipEnd;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -964,6 +1010,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @DashEnd.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashEnd;
                 @DashEnd.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashEnd;
                 @DashEnd.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDashEnd;
+                @SkipStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkipStart;
+                @SkipStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkipStart;
+                @SkipStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkipStart;
+                @SkipEnd.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkipEnd;
+                @SkipEnd.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkipEnd;
+                @SkipEnd.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkipEnd;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -995,6 +1047,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @DashEnd.started += instance.OnDashEnd;
                 @DashEnd.performed += instance.OnDashEnd;
                 @DashEnd.canceled += instance.OnDashEnd;
+                @SkipStart.started += instance.OnSkipStart;
+                @SkipStart.performed += instance.OnSkipStart;
+                @SkipStart.canceled += instance.OnSkipStart;
+                @SkipEnd.started += instance.OnSkipEnd;
+                @SkipEnd.performed += instance.OnSkipEnd;
+                @SkipEnd.canceled += instance.OnSkipEnd;
             }
         }
     }
@@ -1160,6 +1218,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnAimModeEnd(InputAction.CallbackContext context);
         void OnDashStart(InputAction.CallbackContext context);
         void OnDashEnd(InputAction.CallbackContext context);
+        void OnSkipStart(InputAction.CallbackContext context);
+        void OnSkipEnd(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

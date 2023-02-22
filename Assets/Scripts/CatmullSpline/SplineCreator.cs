@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class SplineCreator : CatmullRomSpline
 {
+    [SerializeField] protected CatmullWalker m_Walker;
+
     protected LinkedListNode<Tile> m_CurrTile;  // Tile holding the last added spline point
     protected int m_CurrFollowPointInTile;      // Index of the follow point inside the current tile
 

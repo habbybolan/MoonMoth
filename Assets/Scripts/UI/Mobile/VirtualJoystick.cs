@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
+using TMPro;
 
 public class VirtualJoystick : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class VirtualJoystick : MonoBehaviour
     private EnhancedTouch.Finger m_CurrFinger = null;
     private float m_RadiusBackground;
     private float m_RadiusJoystick;
-    private float m_RadiusDifference;
+    private float m_AmountJoystickCanMove;
 
     private RectTransform m_BackgroundRectTransform;
     private RectTransform m_JoystickRectTransform;
@@ -21,13 +22,13 @@ public class VirtualJoystick : MonoBehaviour
     {
         // background values
         m_BackgroundRectTransform = m_VirtualJoystickImageBackground.transform.GetComponent<RectTransform>();
-        m_RadiusBackground = (m_BackgroundRectTransform.rect.width / 2) * m_BackgroundRectTransform.localScale.x;
+        m_RadiusBackground = (m_BackgroundRectTransform.rect.width / 2);// * m_BackgroundRectTransform.localScale.x;
 
         // joystick values
         m_JoystickRectTransform = m_VirtualJoystickImage.transform.GetComponent<RectTransform>();
-        m_RadiusJoystick = (m_JoystickRectTransform.rect.width / 2) * m_JoystickRectTransform.localScale.x * m_BackgroundRectTransform.localScale.x;
+        m_RadiusJoystick = (m_JoystickRectTransform.rect.width / 2);// * m_JoystickRectTransform.localScale.x * m_BackgroundRectTransform.localScale.x;
 
-        m_RadiusDifference = m_RadiusBackground - m_RadiusJoystick;
+        m_AmountJoystickCanMove = m_RadiusBackground;// - m_RadiusJoystick;
 
         SetVisibility(false);
     }
@@ -49,14 +50,26 @@ public class VirtualJoystick : MonoBehaviour
             // Update joystick position and input values
             else
             {
-                Vector2 backgroundPos = new Vector2(m_VirtualJoystickImageBackground.transform.position.x, m_VirtualJoystickImageBackground.transform.position.y) +
-                    new Vector2(m_RadiusBackground, m_RadiusBackground);
+                Vector2 backgroundPos = new Vector2(m_BackgroundRectTransform.position.x, m_BackgroundRectTransform.position.y);
                 Vector2 touchVecFromCenter = m_CurrFinger.lastTouch.screenPosition - backgroundPos;
-                // normalize Vec for [-1,1] input
-                Input.x = Mathf.Clamp(touchVecFromCenter.x / m_RadiusDifference, -1, 1);
-                Input.y = Mathf.Clamp(touchVecFromCenter.y / m_RadiusDifference, -1, 1);
+
+                // Scale Inputs to radius of background
+                Input.x = touchVecFromCenter.x / m_AmountJoystickCanMove;
+                Input.y = touchVecFromCenter.y / m_AmountJoystickCanMove;
+
+                // Normalize values to be within the background circle rather than a square
+                float size = Input.magnitude;
+                if (size > 1)
+                {
+                    Input /= size;
+                }
+
+                Vector3 JoystickVec = Input * m_AmountJoystickCanMove;
+                m_JoystickRectTransform.localPosition = JoystickVec;
             }
         }
+        PlayerManager.PropertyInstance.PlayerController.RecordInput(Input);
+
     }
 
     private void FixedUpdate()
@@ -64,9 +77,7 @@ public class VirtualJoystick : MonoBehaviour
         // Update virtual joystick position
         if (m_CurrFinger != null)
         {
-            m_JoystickRectTransform.position = m_BackgroundRectTransform.position +
-                new Vector3(m_RadiusBackground, m_RadiusBackground, 0) +
-                new Vector3(Input.x * m_RadiusDifference, Input.y * m_RadiusDifference, 0);
+            
         }
     }
 
@@ -78,8 +89,7 @@ public class VirtualJoystick : MonoBehaviour
         m_CurrFinger = finger;
         SetVisibility(true);
         // Set position of joystick to position touched, offset from size
-        m_BackgroundRectTransform.position = finger.lastTouch.screenPosition + 
-            new Vector2(-m_RadiusBackground, -m_RadiusBackground);
+        m_BackgroundRectTransform.position = finger.lastTouch.screenPosition;
     }
 
     private void SetVisibility(bool isVisible)
