@@ -65,8 +65,11 @@ public class FireflyTutorial : Tutorial
                 m_PlayerParent.transform.position.z - 25);
 
             FireflyController spawnedFirefly = m_FireflyManager.SpawnNewFirefly(m_FireflyPrefab, spawnPos);
-            spawnedFirefly.Health.d_DeathDelegate += OnFireflyDeath;
-            m_CurrSpawnDelay = 0;
+            if (spawnedFirefly != null)
+            {
+                spawnedFirefly.Health.d_DeathDelegate += OnFireflyDeath;
+                m_CurrSpawnDelay = 0;
+            }
         }
     }
 
