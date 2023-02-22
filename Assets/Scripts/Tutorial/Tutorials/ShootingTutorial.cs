@@ -65,6 +65,7 @@ public class ShootingTutorial : Tutorial
 
     private void OnTargetDestroyed(DamageInfo damageInfo)
     {
+        // TODO: Just delete all when tutorial finished, set as inactive on target killed
         for (int i = 0; i < m_SpawnedTargets.Count; i++)
         {
             if (GameObject.ReferenceEquals(m_SpawnedTargets[i].gameObject, damageInfo.m_Victim))

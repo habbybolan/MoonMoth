@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.UIElements.Experimental;
 
+// Holds all tutorial checklist items. Displays checklist items, updates when finished, and keeps track if all tasks finished.
 public class Checklist : MonoBehaviour
 {
     [SerializeField] private CheckListItem m_ChecklistItemPrefab;

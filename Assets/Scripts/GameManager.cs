@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
         get { return s_PropertyInstance; }
     }
 
+    private PlayerController m_PlayerController;
+
     private void Awake()
     {
         // Singleton
@@ -33,9 +35,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        m_PlayerController = PlayerManager.PropertyInstance.PlayerController;
         UpdateState(GameStateEnum.TUTORIAL);
-        PlayerManager.PropertyInstance.PlayerController.Health.d_DeathDelegate += OnPlayerDeath;
-        PlayerManager.PropertyInstance.PlayerController.lostMothCollectedDelegate += OnLostMothCollected;
+        m_PlayerController.Health.d_DeathDelegate += OnPlayerDeath;
+        m_PlayerController.lostMothCollectedDelegate += OnLostMothCollected;
     }
 
     public void UpdateState(GameStateEnum newState)
@@ -108,6 +111,10 @@ public class GameManager : MonoBehaviour
     private void OnLostMothCollected()
     {
         m_LostMothCount++;
+
+        // prevent updating game state if in tutorial
+        if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.TUTORIAL) return;
+
         // if not currently transitioning and met the lost moth win threshold for the tile set
         if (m_LostMothCount >= CurrLostMothWinCondition())
         {
@@ -135,6 +142,20 @@ public class GameManager : MonoBehaviour
     // Gets the moth with condition count based on the curr set level
     public int CurrLostMothWinCondition()
     {
+        if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.TUTORIAL)
+        {
+            // Check if current tutorial is the lost moth tutorial
+            Tutorial currTutorial = m_PlayerController.GetCurrTutorial();
+            if (currTutorial != null)
+            {
+                LostMothTutorial lostMothTutorial = currTutorial as LostMothTutorial;
+                // If current tutorial is lost moth tutorial, then get its win condition as lost moth count
+                if (lostMothTutorial != null)
+                {
+                    return lostMothTutorial.LostMothWinCondition;
+                }
+            }
+        }
         return m_LostMothCountWinConditions[m_CurrLevel];
     }
 

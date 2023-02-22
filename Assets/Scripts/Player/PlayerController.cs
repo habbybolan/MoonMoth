@@ -190,6 +190,20 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_SpawnedDustParticle = Instantiate(m_TutorialDustParticlesPrefab);
         m_SpawnedDustParticle.transform.parent = m_PlayerParentMovement.transform;
         m_SpawnedDustParticle.Play();
+
+        m_TutorialManager.NewTutorialEnteredDelegate += NewTutorialEntered;
+    }
+
+    private void NewTutorialEntered(Tutorial tutorial)
+    {
+        if (tutorial == null) return;
+
+        // If lost moth tutorial, show lost moth tutorial text
+        LostMothTutorial lostMothTutorial = tutorial as LostMothTutorial;
+        if (lostMothTutorial != null)
+        {
+            ActivateLostMothUI();
+        }
     }
 
     // Event on tutorial finished or skipped
@@ -197,8 +211,22 @@ public class PlayerController : CharacterController<PlayerHealth>
     {
         Destroy(m_Checklist.gameObject);
         m_Checklist = null;
-        m_LostMothContainer.SetActive(true);
         m_SpawnedDustParticle.Stop();
+    }
+
+    private void ActivateLostMothUI()
+    {
+        m_LostMothContainer.SetActive(true);
+        UpdateLostMothText();
+    }
+
+    public Tutorial GetCurrTutorial()
+    {
+        if (m_TutorialManager != null)
+        {
+            return m_TutorialManager.CurrTutorial;
+        }
+        return null;
     }
 
     private void OnDamageTaken(DamageInfo damageInfo) 
@@ -609,7 +637,7 @@ public class PlayerController : CharacterController<PlayerHealth>
        
 
         UIManager.PropertyInstance.FadeOut(m_FogOutTransitionDuration);
-        UpdateLostMothText();
+        ActivateLostMothUI();
         m_PlayerInput.enabled = true;
     }
 

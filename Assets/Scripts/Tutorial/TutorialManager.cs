@@ -26,6 +26,15 @@ public class TutorialManager : MonoBehaviour
     protected bool m_isTutorialsRunning = false;
     protected int m_CurrTutorialIndex = 0;
 
+    public delegate void NewTutorialEntered(Tutorial tutorial);
+    public NewTutorialEntered NewTutorialEnteredDelegate;
+
+
+    public Tutorial CurrTutorial
+    {
+        get { return m_isTutorialsRunning ? AllTutorials[m_CurrTutorialIndex] : null; }
+    }
+
     private void Awake()
     {
         GameState.PropertyInstance.d_GameTutorialDelegate += StartTutorials;
@@ -104,6 +113,7 @@ public class TutorialManager : MonoBehaviour
     private void StartNextTutorial()
     {
         AllTutorials[m_CurrTutorialIndex].SetupTutorial();
+        NewTutorialEnteredDelegate.Invoke(AllTutorials[m_CurrTutorialIndex]);
     }
 
     List<TutorialInfo> GetCurrentTutorialInfo()
