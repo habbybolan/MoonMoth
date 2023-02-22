@@ -198,7 +198,7 @@ public class PlayerController : CharacterController<PlayerHealth>
         Destroy(m_Checklist.gameObject);
         m_Checklist = null;
         m_LostMothContainer.SetActive(true);
-        m_SpawnedDustParticle.Pause();
+        m_SpawnedDustParticle.Stop();
     }
 
     private void OnDamageTaken(DamageInfo damageInfo) 
