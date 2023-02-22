@@ -41,7 +41,7 @@ public class EnemySplineCreator : SplineCreator
             }
             else
             {
-                AddPoint(EndOfSpline + direction * 50);
+                AddPoint(transform.TransformPoint(EndOfSpline) + direction * 50);
             }
         }
         // Otherwise game is running, add points based on known tile points

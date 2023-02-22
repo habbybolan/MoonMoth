@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4206230536891125250, guid: add9e2afb9114954f86ca2dea61cb8a2, type: 3}
       propertyPath: m_Name
-      value: FireflyContainer Variant
+      value: TutorialFirefly
       objectReference: {fileID: 0}
     - target: {fileID: 4206230536891125251, guid: add9e2afb9114954f86ca2dea61cb8a2, type: 3}
       propertyPath: m_RootOrder
