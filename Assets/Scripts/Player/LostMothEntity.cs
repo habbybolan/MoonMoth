@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
  
+/**
+ * Actual lost moth entity that deals with visual flickering and quick up/down movement inside its container
+ */
 public class LostMothEntity : MonoBehaviour
 {
     [Header("Movement")]

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Contrainer for the lost moth. Deals with overall movement and player collecting it.
+ */
 public class LostMoth : MonoBehaviour
 {
     [SerializeField] private float m_DurationInDirection = 1f;
