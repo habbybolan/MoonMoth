@@ -21,7 +21,7 @@ public class LocomotionTutorial : Tutorial
         AddChecklistItem("Move down", 0, GroupMovement);
         AddChecklistItem("Move left", 0, GroupMovement);
         AddChecklistItem("Move right", 0, GroupMovement);
-        AddChecklistItem("Dodge", 2, GroupDodge, true, "Press [B button] to dodge");
+        AddChecklistItem("Dodge", 2, GroupDodge, true, "Move [Left Stick] to choose a direction and press [B button] to dodge");
 #endif
 
         TutorialSetupFinished();
