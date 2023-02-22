@@ -6932,6 +6932,7 @@ MonoBehaviour:
   m_ChecklistPrefab: {fileID: 6049300994637200193, guid: 00d9888fe4ec5bf4fac019367d6869bb, type: 3}
   m_TutorialManager: {fileID: 0}
   m_ButtonHoldLengthToSkip: 2
+  m_TutorialDustParticlesPrefab: {fileID: 19857802, guid: 96736993115afc44abb607c81d6e1da4, type: 3}
   m_GlideFlapDelayMin: 0.2
   m_GlideFlapDelayMax: 0.5
   m_IsJoystickMovement: 0

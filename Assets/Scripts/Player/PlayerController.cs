@@ -45,6 +45,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     [SerializeField] private TutorialManager m_TutorialManager;
     [Min(0)]
     [SerializeField] private float m_ButtonHoldLengthToSkip = 3;
+    [SerializeField] private ParticleSystem m_TutorialDustParticlesPrefab;
 
     [Header("Animation")]
     [SerializeField] private float m_GlideFlapDelayMin = .2f;
@@ -100,6 +101,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     private float BasePhoneYawRotation;
     private float CurrYawRot = 0;
     private float CurrPitchRot = 0;
+    private ParticleSystem m_SpawnedDustParticle;
 
     private Coroutine m_SkipCoroutine;
 
@@ -184,6 +186,10 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_Checklist.skipButtonDownDelegate += OnSkipStart;
         m_Checklist.skipButtonUpDelegate += OnSkipEnd;
         m_LostMothContainer.SetActive(false);
+
+        m_SpawnedDustParticle = Instantiate(m_TutorialDustParticlesPrefab);
+        m_SpawnedDustParticle.transform.parent = m_PlayerParentMovement.transform;
+        m_SpawnedDustParticle.Play();
     }
 
     // Event on tutorial finished or skipped
@@ -192,6 +198,7 @@ public class PlayerController : CharacterController<PlayerHealth>
         Destroy(m_Checklist.gameObject);
         m_Checklist = null;
         m_LostMothContainer.SetActive(true);
+        m_SpawnedDustParticle.Pause();
     }
 
     private void OnDamageTaken(DamageInfo damageInfo) 
