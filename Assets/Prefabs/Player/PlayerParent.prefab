@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 375853360}
   - component: {fileID: 375853362}
   - component: {fileID: 375853361}
+  - component: {fileID: 2253258346641526173}
   m_Layer: 0
   m_Name: PlayerCam
   m_TagString: Untagged
@@ -53,7 +54,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 1382965300}
+  m_Follow: {fileID: 3977897140022987258}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -90,6 +91,40 @@ MonoBehaviour:
   m_ShakeIntensity: 5
   m_DashFovOffset: 20
   m_AimModeFovOffset: -20
+--- !u!114 &2253258346641526173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375853359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 1
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 0
+  m_BlendUpdateMethod: 0
+  m_DefaultBlend:
+    m_Style: 7
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &829801870
 GameObject:
   m_ObjectHideFlags: 0
@@ -5955,6 +5990,7 @@ MonoBehaviour:
   m_Spline: {fileID: 0}
   m_Speed: 17
   m_MaxTurnAngle: 10
+  m_IsFollowSplineExact: 0
   m_SpeedIncreasePercent: 1
   m_IsIndependentMovement: 0
   m_SlowEffectSpeedDecreasePercent: 0.5
@@ -7013,7 +7049,6 @@ MonoBehaviour:
   m_CrosshairPercentX: 0.05
   m_CameraOffsetFromParent: -15
   m_InitialYCrosshairOffset: 1
-  m_ReticlePoint: {fileID: 1382965300}
   m_DodgeParticles: {fileID: 3724928139645373970, guid: 5c9621af3bcb72f4abeaf37c094dcf6f, type: 3}
   m_YMobileControlSpeedMult: 1.7
   m_XMobileControlSpeedMult: 1

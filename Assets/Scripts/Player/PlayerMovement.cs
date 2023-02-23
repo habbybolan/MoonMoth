@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_BaseMothMoveSpeed = 7f; 
     [Tooltip("To show visual representation of control point player follows")]
     [SerializeField] private bool m_IsShowControlObject = false;
-    [Tooltip("Prefab representing the visuals of the control point")]
+    [Tooltip("Object representing the visuals of the control point")]
     [SerializeField] private GameObject m_ControlObject;
     [Tooltip("Base speed of the control point")]
     [SerializeField] private float m_BaseControlSpeed = 20f;
@@ -72,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_CameraOffsetFromParent = -15;
     [Tooltip("Initial Y offset of crosshair")]
     [SerializeField] private float m_InitialYCrosshairOffset = 1f;
-    [SerializeField] private Transform m_ReticlePoint;
 
     [Header("Particles")]
     [SerializeField] private ParticleSystem m_DodgeParticles;
@@ -199,7 +198,6 @@ public class PlayerMovement : MonoBehaviour
     public void UpdateCrossHair(Cinemachine.CinemachineBrain brain)
     {
         m_Crosshair.position = Camera.main.WorldToScreenPoint(CrossHairPoint);
-        m_ReticlePoint.position = CrossHairPoint;
     }
 
     public void ResetPosition()
