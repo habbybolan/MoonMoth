@@ -44,7 +44,7 @@ public class SpiderController : CharacterController<SpiderHealth>
             return;
         }
 
-        if (PlayerManager.PropertyInstance.PlayerController.DistanceFromPlayer(transform.position) < m_ShootDistance)
+        if (PlayerManager.PropertyInstance.PlayerController && PlayerManager.PropertyInstance.PlayerController.DistanceFromPlayer(transform.position) < m_ShootDistance)
         {
             m_SpiderMovement.LookTowardPlayer();
             // only shoot at player if passed a certain distance from camera
