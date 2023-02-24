@@ -84,6 +84,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_YMobileControlSpeedMult = 1.3f;
     [SerializeField] private float m_XMobileControlSpeedMult = 1f;
 
+    [Header("Misc")]
+    [SerializeField] private Canvas m_PlayerUICanvas;
+
     //private Vector3 m_ControlPoint;         // Location of the controil point
     private Vector3 m_CurrentAngle;         // Currrent rotational angle in EulerAngles
     private float m_CurrControlSpeed;       // The current speed of the controller point movement
@@ -105,6 +108,8 @@ public class PlayerMovement : MonoBehaviour
     // Amount to rotate to perform at least a full rotation, given current rotation
     private float m_DodgeRotationAmount;
     // End Dodging properties
+
+    private float m_CanvasScale;
 
     private void Awake()
     {
@@ -130,6 +135,7 @@ public class PlayerMovement : MonoBehaviour
         m_ControlObject.transform.localPosition = transform.parent.InverseTransformPoint(Camera.main.ViewportToWorldPoint(new Vector3(.5f, .5f, -m_CameraOffsetFromParent)));
         m_CurrentAngle = Vector3.zero;
 
+        m_CanvasScale = m_PlayerUICanvas.scaleFactor;
         m_ControlObject.transform.parent = null;
     }
 
@@ -199,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpdateCrossHair(Cinemachine.CinemachineBrain brain)
     {
-        m_Crosshair.position = CrossHairPoint;
+        m_Crosshair.anchoredPosition = (CrossHairPoint / m_CanvasScale) + new Vector3(-(m_Crosshair.rect.width / m_CanvasScale) / 2, -(m_Crosshair.rect.height / m_CanvasScale) / 2, 0);
     }
 
     public void ResetPosition()

@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375853359}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -231,37 +231,6 @@ MonoBehaviour:
   m_AmplitudeGain: 0
   m_FrequencyGain: 1
   mNoiseOffsets: {x: -48.94815, y: 496.83472, z: 344.6555}
---- !u!1 &1382965299
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1382965300}
-  m_Layer: 0
-  m_Name: ReticlePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1382965300
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382965299}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3977897141832786759}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &190028990388058296
 GameObject:
   m_ObjectHideFlags: 0
@@ -5969,7 +5938,6 @@ Transform:
   - {fileID: 6348254210947081772}
   - {fileID: 8894022941072290911}
   - {fileID: 375853360}
-  - {fileID: 1382965300}
   - {fileID: 4798100573658447203}
   m_Father: {fileID: 0}
   m_RootOrder: -1
@@ -6961,7 +6929,7 @@ MonoBehaviour:
   m_FogInTransitionDuration: 1
   m_FogOutTransitionDuration: 3
   m_LostMothUI: {fileID: 8894022941869152368}
-  m_LostMothContainer: {fileID: 0}
+  m_LostMothContainer: {fileID: 489458130343437467}
   m_AimModeStartSound: {fileID: 8718531766064261588}
   m_AimModeEndSound: {fileID: 1371643444647074668}
   m_DodgeCooldown: 1
@@ -6971,7 +6939,7 @@ MonoBehaviour:
   m_TutorialDustParticlesPrefab: {fileID: 19857802, guid: 96736993115afc44abb607c81d6e1da4, type: 3}
   m_GlideFlapDelayMin: 0.2
   m_GlideFlapDelayMax: 0.5
-  m_IsJoystickMovement: 0
+  m_IsJoystickMovement: 1
   m_MinSwipeLengthToDodge: 200
   m_GryoscopePitchMult: 17
   m_GryoscopeYawMult: 10
@@ -7053,6 +7021,7 @@ MonoBehaviour:
   m_DodgeParticles: {fileID: 3724928139645373970, guid: 5c9621af3bcb72f4abeaf37c094dcf6f, type: 3}
   m_YMobileControlSpeedMult: 1.7
   m_XMobileControlSpeedMult: 1
+  m_PlayerUICanvas: {fileID: 8894022941072290910}
 --- !u!114 &7166930477189024826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7509,6 +7478,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
+--- !u!1 &489458130343437467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1843164984265620550, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
+  m_PrefabInstance: {fileID: 2260485243152308445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3090155825997834393 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3872157812615245892, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
@@ -7531,6 +7505,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &8894022941072290910 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7220169483612253315, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
+  m_PrefabInstance: {fileID: 2260485243152308445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8894022941072290911 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7220169483612253314, guid: ef7d3b5bfa302c54dad2b9a677259dac, type: 3}
