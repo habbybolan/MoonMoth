@@ -28,11 +28,6 @@ public class HomingProjectile : Projectile
         m_Target = health;
     }
 
-    protected virtual void Update()
-    {
-        
-    }
-
     private void HomeToTarget()
     {
         if (m_Target == null || m_IsHoming == false)
@@ -46,9 +41,12 @@ public class HomingProjectile : Projectile
         float dist = Vector3.Distance(targetPos, transform.position);
         // check to increase homing amount when closer to target
         if (dist <= m_DistToIncrHomingAngle)
-            homingAngle = 1 + (1 - dist / m_DistToIncrHomingAngle) * (m_MaxHomingAngleInRange - 1);
+        {
+            // Add the extra homing power when within certain range of target
+            homingAngle += Mathf.Lerp(m_MaxHomingAngleInRange, 0, dist / m_DistToIncrHomingAngle);
+        }
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationToTarget, m_MaxHomingAngle);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationToTarget, homingAngle);
         m_rigidBody.velocity = transform.forward * m_CurrSpeed;
     }
 }
