@@ -199,8 +199,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpdateCrossHair(Cinemachine.CinemachineBrain brain)
     {
-        Vector3 NewCrosshairPoint = Vector3.Lerp(m_Crosshair.position, Camera.main.WorldToScreenPoint(CrossHairPoint), m_CrosshairLerpSmoothing);
-        m_Crosshair.position = NewCrosshairPoint;
+        m_Crosshair.position = CrossHairPoint;
     }
 
     public void ResetPosition()
@@ -324,7 +323,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float yOffset = ControlPosition.y * m_CrosshairPercentY;
             float xOffset = ControlPosition.x * m_CrosshairPercentX;
-            return m_ControlObject.transform.position - transform.parent.transform.right * xOffset - transform.parent.transform.up * (yOffset - m_InitialYCrosshairOffset);
+            return Camera.main.WorldToScreenPoint(m_ControlRigidBody.position - Camera.main.transform.right * xOffset - Camera.main.transform.up * (yOffset - m_InitialYCrosshairOffset));
         }
     }
 
