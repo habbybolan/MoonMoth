@@ -6995,8 +6995,9 @@ MonoBehaviour:
   m_BaseMothMoveSpeed: 7
   m_IsShowControlObject: 1
   m_ControlObject: {fileID: 3977897140022987257}
-  m_BaseControlSpeed: 17
+  m_BaseControlSpeed: 850
   m_ControlPointAcceleration: 10
+  m_CrosshairLerpSmoothing: 0.25
   m_AimModeSpeedIncrease: 1.8
   m_DodgeDuration: 0.5
   m_AnimationCurve:
@@ -7038,7 +7039,7 @@ MonoBehaviour:
   m_ControlPointOffsetLimitY: 3
   m_MaxYDegrees: 17.8
   m_DodgeSpeedIncrease: 1.5
-  m_ControlPointSpeedIncrDuringDodge: 5
+  m_ControlPointSpeedIncrDuringDodge: 2
   m_RotateSpeed: 10
   m_focalPointOffset: 3
   m_ZRotationSpeed: 0.01

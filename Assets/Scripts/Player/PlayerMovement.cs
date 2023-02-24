@@ -7,7 +7,7 @@ using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement speed")]
+    [Header("Movement")]
     [Tooltip("Moth movement speed while following control point")]
     [SerializeField] private float m_BaseMothMoveSpeed = 7f; 
     [Tooltip("To show visual representation of control point player follows")]
@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Base speed of the control point")]
     [SerializeField] private float m_BaseControlSpeed = 20f;
     [SerializeField] private float m_ControlPointAcceleration = 10f;
+    [Range(0f, 1f)]
+    [SerializeField] private float m_CrosshairLerpSmoothing = 10f;
 
     [Header("Aim Mode")]
     [Tooltip("The speed increase on player movement while in aim mode to move faster in relation to everything else")]
@@ -197,7 +199,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpdateCrossHair(Cinemachine.CinemachineBrain brain)
     {
-        m_Crosshair.position = Camera.main.WorldToScreenPoint(CrossHairPoint);
+        Vector3 NewCrosshairPoint = Vector3.Lerp(m_Crosshair.position, Camera.main.WorldToScreenPoint(CrossHairPoint), m_CrosshairLerpSmoothing);
+        m_Crosshair.position = NewCrosshairPoint;
     }
 
     public void ResetPosition()
