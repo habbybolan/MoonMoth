@@ -104,12 +104,16 @@ public class TutorialManager : MonoBehaviour
         // Set as ended before ending tutorial to prevent triggering the next tutorial start
         m_isTutorialsRunning = false;
 
-        Tutorial currTutorial = AllTutorials[m_CurrTutorialIndex];
-        // If curr tutorial is running, automatically end it
-        if (currTutorial != null && currTutorial.IsRunning)
+        if (m_CurrTutorialIndex < AllTutorials.Count)
         {
-            AllTutorials[m_CurrTutorialIndex].EndTutorialLogic();
+            Tutorial currTutorial = AllTutorials[m_CurrTutorialIndex];
+            // If curr tutorial is running, automatically end it
+            if (currTutorial != null && currTutorial.IsRunning)
+            {
+                AllTutorials[m_CurrTutorialIndex].EndTutorialLogic();
+            }
         }
+        
 
         PlayerManager.PropertyInstance.PlayerController.TutorialEnded();
         foreach (Tutorial tutorial in AllTutorials)
