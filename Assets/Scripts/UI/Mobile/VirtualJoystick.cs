@@ -9,6 +9,7 @@ public class VirtualJoystick : MonoBehaviour
 {
     [SerializeField] private Image m_VirtualJoystickImageBackground;
     [SerializeField] private Image m_VirtualJoystickImage;
+    [SerializeField] private Canvas m_RootCanvas;
 
     private EnhancedTouch.Finger m_CurrFinger = null;
     private float m_RadiusBackground;
@@ -17,16 +18,19 @@ public class VirtualJoystick : MonoBehaviour
 
     private RectTransform m_BackgroundRectTransform;
     private RectTransform m_JoystickRectTransform;
+    private float m_CanvasScale;
+    private Vector2 m_TouchedScreenPosition;
 
     protected void Start()
     {
+        m_CanvasScale = m_RootCanvas.scaleFactor;
+
         // background values
         m_BackgroundRectTransform = m_VirtualJoystickImageBackground.transform.GetComponent<RectTransform>();
-        m_RadiusBackground = (m_BackgroundRectTransform.rect.width / 2);// * m_BackgroundRectTransform.localScale.x;
+        m_RadiusBackground = (m_BackgroundRectTransform.rect.width) / 2;// * m_BackgroundRectTransform.localScale.x;
 
         // joystick values
         m_JoystickRectTransform = m_VirtualJoystickImage.transform.GetComponent<RectTransform>();
-        m_RadiusJoystick = (m_JoystickRectTransform.rect.width / 2);// * m_JoystickRectTransform.localScale.x * m_BackgroundRectTransform.localScale.x;
 
         m_AmountJoystickCanMove = m_RadiusBackground;// - m_RadiusJoystick;
 
@@ -50,8 +54,7 @@ public class VirtualJoystick : MonoBehaviour
             // Update joystick position and input values
             else
             {
-                Vector2 backgroundPos = new Vector2(m_BackgroundRectTransform.position.x, m_BackgroundRectTransform.position.y);
-                Vector2 touchVecFromCenter = m_CurrFinger.lastTouch.screenPosition - backgroundPos;
+                Vector2 touchVecFromCenter = (m_CurrFinger.lastTouch.screenPosition - m_TouchedScreenPosition) / m_CanvasScale;
 
                 // Scale Inputs to radius of background
                 Input.x = touchVecFromCenter.x / m_AmountJoystickCanMove;
@@ -65,20 +68,11 @@ public class VirtualJoystick : MonoBehaviour
                 }
 
                 Vector3 JoystickVec = Input * m_AmountJoystickCanMove;
-                m_JoystickRectTransform.localPosition = JoystickVec;
+                m_JoystickRectTransform.localPosition = JoystickVec + new Vector3(m_AmountJoystickCanMove, m_AmountJoystickCanMove, 0);
             }
         }
         PlayerManager.PropertyInstance.PlayerController.RecordInput(Input);
 
-    }
-
-    private void FixedUpdate()
-    {
-        // Update virtual joystick position
-        if (m_CurrFinger != null)
-        {
-            
-        }
     }
 
     public void StartJoystickTouch(EnhancedTouch.Finger finger)
@@ -87,9 +81,19 @@ public class VirtualJoystick : MonoBehaviour
         if (m_CurrFinger != null) return;
 
         m_CurrFinger = finger;
+        m_TouchedScreenPosition = finger.lastTouch.screenPosition;
         SetVisibility(true);
         // Set position of joystick to position touched, offset from size
-        m_BackgroundRectTransform.position = finger.lastTouch.screenPosition;
+        m_BackgroundRectTransform.anchoredPosition = BackgroundPositionScaled;
+    }
+    
+    private Vector2 BackgroundPositionScaled
+    {
+        get 
+        {
+            return (m_CurrFinger.lastTouch.screenPosition / m_CanvasScale) +
+            new Vector2(-(m_BackgroundRectTransform.rect.width) / 2, -(m_BackgroundRectTransform.rect.height) / 2);
+        }
     }
 
     private void SetVisibility(bool isVisible)
