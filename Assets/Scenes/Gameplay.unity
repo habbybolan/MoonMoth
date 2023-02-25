@@ -623,6 +623,17 @@ PrefabInstance:
     - {fileID: 0}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+--- !u!114 &153880105 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2580668247041734101, guid: 7cb1ec646047916469e401fcb372efe2, type: 3}
+  m_PrefabInstance: {fileID: 153880104}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &266740771 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2826384825407630650, guid: c3ca7fc1d09fccf44ae739bb73b90375, type: 3}
@@ -1390,9 +1401,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 951211381}
     - target: {fileID: 868986256776915728, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
+      propertyPath: _activateButton
+      value: 
+      objectReference: {fileID: 153880105}
+    - target: {fileID: 868986256776915728, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
       propertyPath: OnPerformed.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
       objectReference: {fileID: 951211382}
+    - target: {fileID: 986713025809573368, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
+      propertyPath: m_Pivot.x
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 986713025809573368, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -74.999985
+      objectReference: {fileID: 0}
     - target: {fileID: 1099418567748886598, guid: 9b2f6179a5a9f5740a0f08e9b0f3ff66, type: 3}
       propertyPath: m_Pivot.x
       value: 0

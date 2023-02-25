@@ -17,6 +17,9 @@ public class InputActionListener : MonoBehaviour
     {
         if (_action != null)
             _action.action.performed += Performed;
+        if (_activateButton)
+            _activateButton.onClick.AddListener(ForcePerform);
+
     }
 
     private void OnDisable()
@@ -28,7 +31,7 @@ public class InputActionListener : MonoBehaviour
     private void Performed(InputAction.CallbackContext ctx)
     {
         OnPerformed.Invoke();
-        _activateButton?.onClick.Invoke();
+        //_activateButton?.onClick.Invoke();
     }
 
     // force execution of OnPerformed without input from user
