@@ -41,7 +41,7 @@ public abstract class Tutorial : MonoBehaviour
 
     protected int CurrID = 0;
     private bool m_IsRunning = false;
-    protected bool IsRunning
+    public bool IsRunning
     {
         get { return m_IsRunning; }
     }

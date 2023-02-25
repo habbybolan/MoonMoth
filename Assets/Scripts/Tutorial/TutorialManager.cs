@@ -79,6 +79,8 @@ public class TutorialManager : MonoBehaviour
 
     public void GotoNextTutorial()
     {
+        if (m_isTutorialsRunning == false) return;
+
         m_CurrTutorialIndex++;
         // if all tutorials finished
         if (m_CurrTutorialIndex >= AllTutorials.Count)
@@ -99,8 +101,17 @@ public class TutorialManager : MonoBehaviour
 
     private void TutorialPhaseEnded()
     {
-        PlayerManager.PropertyInstance.PlayerController.TutorialEnded();
+        // Set as ended before ending tutorial to prevent triggering the next tutorial start
         m_isTutorialsRunning = false;
+
+        Tutorial currTutorial = AllTutorials[m_CurrTutorialIndex];
+        // If curr tutorial is running, automatically end it
+        if (currTutorial != null && currTutorial.IsRunning)
+        {
+            AllTutorials[m_CurrTutorialIndex].EndTutorialLogic();
+        }
+
+        PlayerManager.PropertyInstance.PlayerController.TutorialEnded();
         foreach (Tutorial tutorial in AllTutorials)
         {
             Destroy(tutorial.gameObject);

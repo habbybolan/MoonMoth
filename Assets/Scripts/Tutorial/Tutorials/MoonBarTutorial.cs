@@ -44,7 +44,7 @@ public class MoonBarTutorial : Tutorial
     private void DashEnded()
     {
 #if UNITY_ANDROID && !UNITY_EDITOR
-        m_PlayerController.DashButton.StartHighlighting();
+        m_PlayerController.DashButton.StopHighlighting();
 #endif
 
         UpdateTutorial(0, Group0);
@@ -53,9 +53,9 @@ public class MoonBarTutorial : Tutorial
     private void AimModeEnded()
     {
 #if UNITY_ANDROID && !UNITY_EDITOR
-        m_PlayerController.AimModeButton.StartHighlighting();
+        m_PlayerController.AimModeButton.StopHighlighting();
 #endif
-        
+
         UpdateTutorial(1, Group0);
     }
 }
