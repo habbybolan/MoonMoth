@@ -331,7 +331,7 @@ public class PlayerMovement : MonoBehaviour
                    // Scale due to canvas scaling with screen size
                    / m_CanvasScale 
                    // Offset by size of the crosshair, scaled with screensize
-                   + new Vector3(-(m_Crosshair.rect.width / m_CanvasScale) / 2, -(m_Crosshair.rect.height / m_CanvasScale) / 2, 0);
+                   + new Vector3(-(m_Crosshair.rect.width) / 2, -(m_Crosshair.rect.height) / 2, 0);
         }
     }
 
