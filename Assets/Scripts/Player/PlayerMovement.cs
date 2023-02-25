@@ -205,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpdateCrossHair(Cinemachine.CinemachineBrain brain)
     {
-        m_Crosshair.anchoredPosition = (CrossHairPoint / m_CanvasScale) + new Vector3(-(m_Crosshair.rect.width / m_CanvasScale) / 2, -(m_Crosshair.rect.height / m_CanvasScale) / 2, 0);
+        m_Crosshair.anchoredPosition = CrossHairScreenPointScaled;
     }
 
     public void ResetPosition()
@@ -323,28 +323,33 @@ public class PlayerMovement : MonoBehaviour
         dodgeParticles.Stop();
     }
 
-    public Vector3 CrossHairPoint
+    public Vector3 CrossHairScreenPointScaled
     {
         get
         {
-            float yOffset = ControlPosition.y * m_CrosshairPercentY;
-            float xOffset = ControlPosition.x * m_CrosshairPercentX;
-            return Camera.main.WorldToScreenPoint(m_ControlRigidBody.position - Camera.main.transform.right * xOffset - Camera.main.transform.up * (yOffset - m_InitialYCrosshairOffset));
+            return CrossHairScreenPoint
+                   // Scale due to canvas scaling with screen size
+                   / m_CanvasScale 
+                   // Offset by size of the crosshair, scaled with screensize
+                   + new Vector3(-(m_Crosshair.rect.width / m_CanvasScale) / 2, -(m_Crosshair.rect.height / m_CanvasScale) / 2, 0);
         }
     }
 
     public Ray CrosshairScreenRay
     {
-        get { return Camera.main.ScreenPointToRay(m_Crosshair.position);  }
+        get { return Camera.main.ScreenPointToRay(CrossHairScreenPoint);  }
     }
 
-    public Vector3 CrossHairPointLocal
+    // Crosshair screenpoint, offset based on parent location
+    public Vector3 CrossHairScreenPoint
     {
         get
         {
-            float yOffset = (0 - m_ControlObject.transform.localPosition.y) * m_CrosshairPercentY;
-            float xOffset = (0 - m_ControlObject.transform.localPosition.x) * m_CrosshairPercentX;
-            return new Vector3(m_ControlObject.transform.localPosition.x + xOffset, m_ControlObject.transform.localPosition.y + yOffset, transform.localPosition.z);
+            float yOffset = ControlPosition.y * m_CrosshairPercentY;
+            float xOffset = ControlPosition.x * m_CrosshairPercentX;
+            return Camera.main.WorldToScreenPoint(m_ControlRigidBody.position -
+                                                    Camera.main.transform.right * xOffset -
+                                                    Camera.main.transform.up * (yOffset - m_InitialYCrosshairOffset));
         }
     }
 
