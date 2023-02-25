@@ -46,7 +46,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.21226418, b: 0.8375962, a: 1}
   m_Intensity: 20
-  m_Range: 150
+  m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -153,6 +153,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2616834611435900964}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c76386b0dc4014b4abb65a7fe77995f7, type: 3}
@@ -220,6 +221,7 @@ PrefabInstance:
       value: crystal_cluster2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c76386b0dc4014b4abb65a7fe77995f7, type: 3}
 --- !u!4 &7546195745941588718 stripped
 Transform:
