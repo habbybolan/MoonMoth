@@ -8,14 +8,14 @@ public class CatmullWalker : MonoBehaviour
     [SerializeField] protected SplineCreator m_Spline;
     [SerializeField] protected float m_Speed = 1;
     [SerializeField] protected float m_MaxTurnAngle = 40f;
-    [Tooltip("If the walker follows the spline exactly. Don't use for player as movement along the spline is not completely constant. " +
-        "If turned on, there will be drifting from the spline point, but movement is much smoother.")]
-    [SerializeField] protected bool m_IsFollowSplineExact = false;
+    [SerializeField] protected int m_numLUTSegments = 20;
 
     private float m_Dist = 0;
     protected int m_CurrCurve = -1;
     private float m_CurrCurveLength = 0;
     protected float m_CurrSpeed;
+    protected float[] m_LUT;
+
 
     // If movement uses RigidBody, child class will set a value for this
     protected Rigidbody m_RigidBody;
@@ -23,6 +23,7 @@ public class CatmullWalker : MonoBehaviour
     protected virtual void Start()
     {
         m_CurrSpeed = m_Speed;
+        m_LUT = new float[m_numLUTSegments];
     }
 
     // Called in controllers update method
@@ -35,6 +36,41 @@ public class CatmullWalker : MonoBehaviour
         MovePlayerConstant(!isSplineInitialized);
     }
 
+    private void CreateLUTForCurrCurve()
+    {
+        Vector3 prevPos = m_Spline.GetPointLocal(0, m_CurrCurve);
+        float currDist = 0;
+        m_LUT[0] = 0;
+        for (int i = 1; i < m_numLUTSegments; i++)
+        {
+            Vector3 nextPos = m_Spline.GetPointLocal((float)i/ m_numLUTSegments, m_CurrCurve);
+            currDist += Vector3.Distance(prevPos, nextPos);
+            m_LUT[i] = currDist;
+            prevPos = nextPos;
+        }
+    }
+
+    private float TFromLUT(float distance)
+    {
+        float arcLength = m_LUT[m_LUT.Length - 1];
+        int n = m_LUT.Length;
+
+        if (distance >= 0 && distance <= arcLength)
+        {
+            for (int i = 0; i < n - 1; i++)
+            {
+                if (distance >= m_LUT[i] && distance <= m_LUT[i + 1])
+                {
+                    float distT = Mathf.InverseLerp(m_LUT[i], m_LUT[i + 1], distance);
+                    float seg = Mathf.Lerp(i , i + 1, distT);
+                    return seg / (m_numLUTSegments - 1);
+                }
+            }
+        }
+        // distance outside of length of curve
+        return distance / arcLength;
+    }
+
     // Uses distance travelled so far inside current curve 
     private void MovePlayerConstant(bool isFirstMove)
     {
@@ -44,6 +80,7 @@ public class CatmullWalker : MonoBehaviour
             m_Dist = 0;
             m_CurrCurve = 1;
             m_CurrCurveLength = m_Spline.GetCurveLength(m_CurrCurve);
+            CreateLUTForCurrCurve();
 
             // Set initial position
             if (m_RigidBody != null)
@@ -56,18 +93,13 @@ public class CatmullWalker : MonoBehaviour
         }
 
         // convert distance travelled to percent curve has been walked along
-        m_Dist += m_CurrSpeed * Time.fixedDeltaTime;  
-        float t = m_Dist / m_CurrCurveLength;
+        m_Dist += m_CurrSpeed * Time.fixedDeltaTime;
+        float t = Mathf.Clamp01(TFromLUT(m_Dist));
 
         Vector3 newRotation = m_Spline.GetDirectionLocal(t, m_CurrCurve);
         Vector3 position;
-        if (m_IsFollowSplineExact)
-        {
-            position = m_Spline.GetPointLocal(t, m_CurrCurve);
-        } else
-        {
-            position = transform.position + newRotation * m_CurrSpeed * Time.fixedDeltaTime;
-        }
+        position = m_Spline.GetPointLocal(t, m_CurrCurve);
+
         Quaternion rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newRotation), m_MaxTurnAngle);
 
         // If no rigidBody, move transform direction
@@ -91,7 +123,7 @@ public class CatmullWalker : MonoBehaviour
         }
 
         // Move to next curve
-        if (m_Dist >= m_CurrCurveLength)
+        if (t >= 1) // m_Dist >= m_CurrCurveLength)
         {
             NewCurveEntered();
         }
@@ -109,6 +141,7 @@ public class CatmullWalker : MonoBehaviour
         else
             m_CurrCurve++;
         m_CurrCurveLength = m_Spline.GetCurveLength(m_CurrCurve);
+        CreateLUTForCurrCurve();
     }
 
     protected void ResetValues()

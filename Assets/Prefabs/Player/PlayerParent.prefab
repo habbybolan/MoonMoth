@@ -5940,7 +5940,7 @@ Transform:
   - {fileID: 375853360}
   - {fileID: 4798100573658447203}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3977897141832786758
 MonoBehaviour:
@@ -5958,7 +5958,8 @@ MonoBehaviour:
   m_Spline: {fileID: 0}
   m_Speed: 17
   m_MaxTurnAngle: 10
-  m_IsFollowSplineExact: 0
+  m_IsFollowSplineExact: 1
+  m_numLUTSegments: 20
   m_SpeedIncreasePercent: 1
   m_IsIndependentMovement: 0
   m_SlowEffectSpeedDecreasePercent: 0.5
