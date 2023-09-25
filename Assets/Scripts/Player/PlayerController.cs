@@ -67,6 +67,7 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     [Header("Mobile UI")]
     [SerializeField] private GameObject m_MobileUI;
+    [SerializeField] private TextMeshProUGUI m_MobileFPSTest;
     [SerializeField] private MobileActionButton m_AimModeButton;
     [SerializeField] private MobileActionButton m_DashButton;
     [SerializeField] private MobileActionButton m_FireButton;
@@ -107,6 +108,9 @@ public class PlayerController : CharacterController<PlayerHealth>
 
     public delegate void LostMothCollectedDelegate();
     public LostMothCollectedDelegate lostMothCollectedDelegate;
+
+    private float currFpsDelay = 0.25f;
+    private float avgFpsCount = 0;
 
     private Checklist m_Checklist;
     public Checklist Checklist
@@ -154,30 +158,28 @@ public class PlayerController : CharacterController<PlayerHealth>
         GameState.PropertyInstance.d_GameTransitioningDelegate += StartTransition;
 
 #if UNITY_ANDROID && !UNITY_EDITOR
+                /*if (Accelerometer.current != null)
+                {
+                    InputSystem.EnableDevice(Accelerometer.current);
+                    InputSystem.EnableDevice(AttitudeSensor.current);
+                    InputSystem.EnableDevice(Gyroscope.current);
 
-        if (Accelerometer.current != null)
-        {
-            InputSystem.EnableDevice(Accelerometer.current);
-            InputSystem.EnableDevice(AttitudeSensor.current);
-            InputSystem.EnableDevice(Gyroscope.current);
+                    Quaternion q = AttitudeSensor.current.attitude.ReadValue();
+                    BasePhoneYawRotation = (float)Math.Atan2(2.0 * (q.y * q.z + q.w * q.x), q.w * q.w - q.x * q.x - q.y * q.y + q.z * q.z);
+                    //BasePhoneYawRotation = attitude.eulerAngles.y;
+                }
 
-            Quaternion q = AttitudeSensor.current.attitude.ReadValue();
-            BasePhoneYawRotation = (float)Math.Atan2(2.0 * (q.y * q.z + q.w * q.x), q.w * q.w - q.x * q.x - q.y * q.y + q.z * q.z);
-            //BasePhoneYawRotation = attitude.eulerAngles.y;
-        }
-
-        SetMobileMovementType(m_IsJoystickMovement);
-        EnhancedTouch.EnhancedTouchSupport.Enable();
-        // delegate for checking after swipe
-        EnhancedTouch.Touch.onFingerUp += OnFingerUp;
-        EnhancedTouch.Touch.onFingerDown += OnFingerDown;
-
-        m_MobileUI.SetActive(true);
-
+                SetMobileMovementType(m_IsJoystickMovement);
+                EnhancedTouch.EnhancedTouchSupport.Enable();
+                // delegate for checking after swipe
+                EnhancedTouch.Touch.onFingerUp += OnFingerUp;
+                EnhancedTouch.Touch.onFingerDown += OnFingerDown;*/
+                m_MobileUI.SetActive(true);
 #endif
 
         Application.targetFrameRate = -1;
     }
+
 
     // Event on entering tutorial
     public void InitializeTutorialUI()
@@ -297,6 +299,17 @@ public class PlayerController : CharacterController<PlayerHealth>
             m_CameraMovement.ResetPosition();
             m_IsFirstUpdate = !m_IsFirstUpdate;
         }
+#if UNITY_ANDROID && !UNITY_EDITOR
+        currFpsDelay += Time.deltaTime;
+        avgFpsCount += 1;
+        if (currFpsDelay > 0.25)
+        {
+            m_MobileFPSTest.SetText((1 / (currFpsDelay / avgFpsCount)).ToString());
+            currFpsDelay = 0;
+            avgFpsCount = 0;
+        }
+        
+#endif
     }
 
     private void FixedUpdate()
