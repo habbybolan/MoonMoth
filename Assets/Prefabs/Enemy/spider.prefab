@@ -332,7 +332,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
@@ -490,13 +490,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a50ae6eafbd1745a0f966d3e7bc930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PartPrefab: {fileID: 5441418102619988055, guid: a6c3f52eb7e0a73459f55ca36a1e7cf6, type: 3}
+  m_PartPrefab: {fileID: 4974982855772048617, guid: a6c3f52eb7e0a73459f55ca36a1e7cf6, type: 3}
   m_Spider: {fileID: 4211784419857639163}
   m_Length: 1
   m_AutoLength: 1
-  m_partDistance: 0.45
+  m_partDistance: 0.1
   spawn: 1
   snapLast: 1
+  numIterations: 5
 --- !u!1 &6755493020259301490
 GameObject:
   m_ObjectHideFlags: 0
