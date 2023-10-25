@@ -23,6 +23,26 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _MyFunctionCustomFunction_2f3cb1102da44088b3ee68f8505671c7_New2_8:
+        m_Texture: {fileID: 2800000, guid: d4041a0d87bcddd43b9caf926962dcbb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2396fcaef74e49cbb09e36b60a822588_Texture_1:
+        m_Texture: {fileID: 2800000, guid: a223aee6a348f2a40b1b6534fa854b49, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_7cdd6ed61d8e40dcbd58969d16e4258a_Texture_1:
+        m_Texture: {fileID: 2800000, guid: d4041a0d87bcddd43b9caf926962dcbb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_3bfd5577123d41a0a81ea22dc06e561c_Texture_1:
+        m_Texture: {fileID: 2800000, guid: bf69fe7bc0f403c4a87f786040e07ecb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_a2e961aa61b94d2096173a7be2c63b36_Texture_1:
+        m_Texture: {fileID: 2800000, guid: af8edf011e1423348a4a2c4fb28dcf79, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
