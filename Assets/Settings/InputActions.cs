@@ -125,6 +125,24 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChargeFireStart"",
+                    ""type"": ""Button"",
+                    ""id"": ""67a86b7b-67b5-463e-ba71-e15dd55707e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChargeFireStop"",
+                    ""type"": ""Button"",
+                    ""id"": ""667eecdb-b1d1-4e72-8bfd-a0d5fcba7dd4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -279,6 +297,28 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SkipEnd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5321d538-0975-48d4-9a8f-02ac3281048f"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ChargeFireStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e3f41db2-0837-49fd-8109-45d17004ad20"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ChargeFireStop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -877,6 +917,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_DashEnd = m_Player.FindAction("DashEnd", throwIfNotFound: true);
         m_Player_SkipStart = m_Player.FindAction("SkipStart", throwIfNotFound: true);
         m_Player_SkipEnd = m_Player.FindAction("SkipEnd", throwIfNotFound: true);
+        m_Player_ChargeFireStart = m_Player.FindAction("ChargeFireStart", throwIfNotFound: true);
+        m_Player_ChargeFireStop = m_Player.FindAction("ChargeFireStop", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -959,6 +1001,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DashEnd;
     private readonly InputAction m_Player_SkipStart;
     private readonly InputAction m_Player_SkipEnd;
+    private readonly InputAction m_Player_ChargeFireStart;
+    private readonly InputAction m_Player_ChargeFireStop;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -974,6 +1018,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @DashEnd => m_Wrapper.m_Player_DashEnd;
         public InputAction @SkipStart => m_Wrapper.m_Player_SkipStart;
         public InputAction @SkipEnd => m_Wrapper.m_Player_SkipEnd;
+        public InputAction @ChargeFireStart => m_Wrapper.m_Player_ChargeFireStart;
+        public InputAction @ChargeFireStop => m_Wrapper.m_Player_ChargeFireStop;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1016,6 +1062,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @SkipEnd.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkipEnd;
                 @SkipEnd.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkipEnd;
                 @SkipEnd.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkipEnd;
+                @ChargeFireStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeFireStart;
+                @ChargeFireStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeFireStart;
+                @ChargeFireStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeFireStart;
+                @ChargeFireStop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeFireStop;
+                @ChargeFireStop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeFireStop;
+                @ChargeFireStop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChargeFireStop;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1053,6 +1105,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @SkipEnd.started += instance.OnSkipEnd;
                 @SkipEnd.performed += instance.OnSkipEnd;
                 @SkipEnd.canceled += instance.OnSkipEnd;
+                @ChargeFireStart.started += instance.OnChargeFireStart;
+                @ChargeFireStart.performed += instance.OnChargeFireStart;
+                @ChargeFireStart.canceled += instance.OnChargeFireStart;
+                @ChargeFireStop.started += instance.OnChargeFireStop;
+                @ChargeFireStop.performed += instance.OnChargeFireStop;
+                @ChargeFireStop.canceled += instance.OnChargeFireStop;
             }
         }
     }
@@ -1220,6 +1278,8 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnDashEnd(InputAction.CallbackContext context);
         void OnSkipStart(InputAction.CallbackContext context);
         void OnSkipEnd(InputAction.CallbackContext context);
+        void OnChargeFireStart(InputAction.CallbackContext context);
+        void OnChargeFireStop(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -55,10 +55,13 @@ public class WeaponBase<T> : MonoBehaviour where T : Projectile
         StartCoroutine(WeaponCooldown());
     }
 
+    protected virtual void OnCooldownEnded() {}
+
     IEnumerator WeaponCooldown()
     {
         isCooldown = true;
         yield return new WaitForSeconds(m_Cooldown);
         isCooldown = false;
+        OnCooldownEnded();
     }
 }

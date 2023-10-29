@@ -22,6 +22,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     [Tooltip("CameraMovement component")]
     [SerializeField] private CameraMovement m_CameraMovement;
     [SerializeField] private PlayerWeapon m_Weapon;
+    [SerializeField] private PlayerChargeWeapon m_ChargeWeapon;
     [SerializeField] private MoonBarAbility m_MoonBarAbility;
 
     [Header("Effects")]
@@ -420,6 +421,8 @@ public class PlayerController : CharacterController<PlayerHealth>
         return Vector3.Distance(pointToCompare, transform.position);
     }
 
+    // Normal Shot
+
     public void OnFireStart(InputValue value)
     {
         FireWeapon();
@@ -438,6 +441,28 @@ public class PlayerController : CharacterController<PlayerHealth>
     public void StopFiringWeapon()
     {
         m_Weapon.IsShooting = false;
+    }
+
+    // Charge shot
+
+    public void OnChargeFireStart(InputValue value)
+    {
+        ChargeFireWeapon();
+    }
+
+    public void ChargeFireWeapon()
+    {
+        m_ChargeWeapon.IsCharging = true;
+    }
+
+    public void OnChargeFireStop(InputValue value)
+    {
+        m_ChargeWeapon.TryShoot();
+    }
+
+    public void StopChargeFiringWeapon()
+    {
+        m_ChargeWeapon.IsCharging = false;
     }
 
     public void OnDodge(InputValue value)
