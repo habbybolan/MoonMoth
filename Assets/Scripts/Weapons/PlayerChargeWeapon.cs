@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerChargeWeapon : WeaponBase<HomingProjectile>
+public class PlayerChargeWeapon : WeaponBase<ChargedProjectile>
 {
     [SerializeField] private float m_ShootCastRadius = 10f;
     [SerializeField] private float m_MaxChargeTime = 2;
@@ -39,16 +39,14 @@ public class PlayerChargeWeapon : WeaponBase<HomingProjectile>
             m_CurrChargeTime = Mathf.Min(m_MaxChargeTime, m_CurrChargeTime);
 
             ParticleSystem.MainModule main = m_ChargeParticle.main;
-            main.startSpeed = Mathf.Lerp(m_cpStartSpeedMin, m_cpStartSpeedMax, m_CurrChargeTime / m_MaxChargeTime);
-            main.startSize = Mathf.Lerp(m_cpSizeMin, m_cpSizeMax, m_CurrChargeTime / m_MaxChargeTime);
+            main.startSpeed = Mathf.Lerp(m_cpStartSpeedMin, m_cpStartSpeedMax, ChargePercent);
+            main.startSize = Mathf.Lerp(m_cpSizeMin, m_cpSizeMax, ChargePercent);
         }
     }
 
     public void TryShoot()
     {
         if (!m_IsCharging) return;
-
-        TryStopCharging();
 
         Ray crosshairRay = m_Controller.PlayerMovement.CrosshairScreenRay;
 
@@ -79,6 +77,11 @@ public class PlayerChargeWeapon : WeaponBase<HomingProjectile>
                 ShootDirection(crosshairRay.direction);
             }
         }
+        if (m_LastShotProjectile != null)
+        {
+            m_LastShotProjectile.SetPercent(ChargePercent);
+        }
+        TryStopCharging();
     }
 
     protected override void OnCooldownEnded()
@@ -113,6 +116,11 @@ public class PlayerChargeWeapon : WeaponBase<HomingProjectile>
             m_IsCharging = false;
             m_ChargeParticle.Stop();
         }
+    }
+
+    private float ChargePercent
+    {
+        get { return m_CurrChargeTime / m_MaxChargeTime; }
     }
 
     public bool IsCharging

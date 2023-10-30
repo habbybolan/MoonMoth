@@ -37,16 +37,6 @@ public class Projectile : MonoBehaviour
         // For overriding functionality in children classes
         // - ex) radius explosion
     }
-     
-    protected virtual void ApplyHit(Collider collider)
-    {
-        Health health = collider.gameObject.GetComponent<Health>();
-        if (health != null)
-        {
-            DamageInfo damageInfo = new DamageInfo(m_DamageAmount, m_Owner, health.gameObject, DamageInfo.DAMAGE_TYPE.PROJECTILE, m_HitEffect);
-            health.Damage(damageInfo);
-        }
-    }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
@@ -57,7 +47,7 @@ public class Projectile : MonoBehaviour
             // prevent instigator from hitting self
             if (m_Owner == health.gameObject) return;
 
-            DamageInfo damageInfo = new DamageInfo(m_DamageAmount, m_Owner, health.gameObject, DamageInfo.DAMAGE_TYPE.PROJECTILE, m_HitEffect);
+            DamageInfo damageInfo = new DamageInfo(CalculateDamage(), m_Owner, health.gameObject, DamageInfo.DAMAGE_TYPE.PROJECTILE, m_HitEffect);
             health.Damage(damageInfo);
             CollisionPoint(other);
             Destroy(gameObject);
@@ -69,6 +59,12 @@ public class Projectile : MonoBehaviour
             CollisionPoint(other);
             Destroy(gameObject);
         }     
+    }
+
+    // Allows children to determine the amount of damage
+    protected virtual float CalculateDamage()
+    {
+        return m_DamageAmount;
     }
 
     // destroy projectile after a certain duration of not colliding with anything

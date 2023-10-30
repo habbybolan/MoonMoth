@@ -5941,7 +5941,7 @@ Transform:
   - {fileID: 375853360}
   - {fileID: 4798100573658447203}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3977897141832786758
 MonoBehaviour:
@@ -6334,7 +6334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Cooldown: 2
-  m_BulletPrefab: {fileID: -6493103738896622588, guid: 8b3e812354b22794c96829401e73f043, type: 3}
+  m_BulletPrefab: {fileID: 5832771964907733788, guid: 8b3e812354b22794c96829401e73f043, type: 3}
   m_PitchRange: {x: 0.9, y: 1.1}
   m_WeaponOwner: {fileID: 7166930477189024826}
   m_ShootCastRadius: 2
