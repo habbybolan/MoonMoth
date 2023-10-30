@@ -1,7 +1,7 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Custom/SpaceDustShader"
+Shader"Custom/SpaceDustShader"
 {
 	//Derek Edrich, 2016
 
@@ -35,7 +35,8 @@ Shader "Custom/SpaceDustShader"
 				float4 vertex : POSITION;
 				float2 uv : TEXCOORD0;
 				float4 color : COLOR;
-			};
+				float4 dustColor : TEXCOORD1;
+};
 
 			struct v2f
 			{
@@ -75,7 +76,7 @@ Shader "Custom/SpaceDustShader"
 				o.dist = distance(_WorldSpaceCameraPos, mul(unity_ObjectToWorld, v.vertex));
 
 				o.uv = v.uv;
-				o.color = v.color;
+				o.color = v.color * v.dustColor;
 
 				return o;
 			}

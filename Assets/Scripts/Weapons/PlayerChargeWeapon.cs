@@ -6,7 +6,14 @@ public class PlayerChargeWeapon : WeaponBase<HomingProjectile>
 {
     [SerializeField] private float m_ShootCastRadius = 10f;
     [SerializeField] private float m_MaxChargeTime = 2;
+
+    [Tooltip("Charged Particles")]
     [SerializeField] private ParticleSystem m_ChargeParticle;
+    [SerializeField] private float m_cpStartSpeedMin = 0.25f;
+    [SerializeField] private float m_cpStartSpeedMax = 0.75f;
+    [SerializeField] private float m_cpSizeMin = 0.3f;
+    [SerializeField] private float m_cpSizeMax = 1f;
+
 
     private PlayerController m_Controller;      // Player Controller
     private int m_TargetableLayerMask;
@@ -28,8 +35,12 @@ public class PlayerChargeWeapon : WeaponBase<HomingProjectile>
     {
         if (m_IsCharging & !isCooldown)
         {
-            m_CurrChargeTime++;
+            m_CurrChargeTime += Time.deltaTime;
             m_CurrChargeTime = Mathf.Min(m_MaxChargeTime, m_CurrChargeTime);
+
+            ParticleSystem.MainModule main = m_ChargeParticle.main;
+            main.startSpeed = Mathf.Lerp(m_cpStartSpeedMin, m_cpStartSpeedMax, m_CurrChargeTime / m_MaxChargeTime);
+            main.startSize = Mathf.Lerp(m_cpSizeMin, m_cpSizeMax, m_CurrChargeTime / m_MaxChargeTime);
         }
     }
 
@@ -87,6 +98,10 @@ public class PlayerChargeWeapon : WeaponBase<HomingProjectile>
         {
             m_CurrChargeTime = 0;
             m_ChargeParticle.Play();
+
+            ParticleSystem.MainModule main = m_ChargeParticle.main;
+            main.startSpeed = Mathf.Lerp(m_cpStartSpeedMin, m_cpStartSpeedMax, 0);
+            main.startSize = Mathf.Lerp(m_cpSizeMin, m_cpSizeMax, 0);
         }
     }
 

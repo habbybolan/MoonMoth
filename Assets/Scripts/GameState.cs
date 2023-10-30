@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
+    [SerializeField] private PlayerController m_PlayerController;
+
     static GameState s_PropertyInstance;
     public static GameState PropertyInstance
     {
@@ -17,6 +19,11 @@ public class GameState : MonoBehaviour
             Destroy(this);
         else
             s_PropertyInstance = this;
+    }
+
+    public PlayerController PlayerController
+    {
+        get { return m_PlayerController; }
     }
 
     protected GameStateEnum m_GameState = GameStateEnum.NOTHING;

@@ -29,6 +29,7 @@ public class PlayerController : CharacterController<PlayerHealth>
     [SerializeField] private float m_SlowEffectDuration = 3f;
     [SerializeField] private float m_FogInTransitionDuration = 1f;
     [SerializeField] private float m_FogOutTransitionDuration = 3f;
+    [SerializeField] private ParticleSystem m_SpaceDustParticle;
 
     [Header("Lost Moth")]
     [SerializeField] private TextMeshProUGUI m_LostMothUI;
@@ -46,7 +47,6 @@ public class PlayerController : CharacterController<PlayerHealth>
     [SerializeField] private TutorialManager m_TutorialManager;
     [Min(0)]
     [SerializeField] private float m_ButtonHoldLengthToSkip = 3;
-    [SerializeField] private ParticleSystem m_TutorialDustParticlesPrefab;
 
     [Header("Animation")]
     [SerializeField] private float m_GlideFlapDelayMin = .2f;
@@ -103,7 +103,6 @@ public class PlayerController : CharacterController<PlayerHealth>
     private float BasePhoneYawRotation;
     private float CurrYawRot = 0;
     private float CurrPitchRot = 0;
-    private ParticleSystem m_SpawnedDustParticle;
 
     private Coroutine m_SkipCoroutine;
 
@@ -190,10 +189,6 @@ public class PlayerController : CharacterController<PlayerHealth>
         m_Checklist.skipButtonUpDelegate += OnSkipEnd;
         m_LostMothContainer.SetActive(false);
 
-        m_SpawnedDustParticle = Instantiate(m_TutorialDustParticlesPrefab);
-        m_SpawnedDustParticle.transform.parent = m_PlayerParentMovement.transform;
-        m_SpawnedDustParticle.Play();
-
         m_TutorialManager.NewTutorialEnteredDelegate += NewTutorialEntered;
     }
 
@@ -214,7 +209,6 @@ public class PlayerController : CharacterController<PlayerHealth>
     {
         Destroy(m_Checklist.gameObject);
         m_Checklist = null;
-        m_SpawnedDustParticle.Stop();
     }
 
     private void ActivateLostMothUI()
@@ -752,6 +746,12 @@ public class PlayerController : CharacterController<PlayerHealth>
         else
             m_Animator.SetBool("isLargeFlap", false);
         m_Animator.SetBool("isGlideDelay", false);
+    }
+
+    public void SetSpaceDustColor(Color color)
+    {
+        ParticleSystem.CustomDataModule customData = m_SpaceDustParticle.customData;
+        customData.SetColor(ParticleSystemCustomData.Custom1, color);
     }
 
     public PlayerParentMovement PlayerParent { get { return m_PlayerParentMovement;  } }

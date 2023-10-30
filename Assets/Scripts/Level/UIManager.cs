@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     [Header("Atmospheric fog")]
     [SerializeField] private Color[] m_FogLevelColors;
     [SerializeField] private Color m_DefaultFogColor = new Color(185, 181, 171, 255);
+    [SerializeField] private Color[] m_SpaceDustColors;
+    [SerializeField] private Color m_DefaultSpaceDustColor = new Color(1, 1, 1, 1);
 
     [Header("Screen fade")]
     [SerializeField] private Image m_FadeScreen;
@@ -18,6 +20,7 @@ public class UIManager : MonoBehaviour
     private Coroutine m_FadeInCoroutine;
     private bool m_IsFadeOut;
     private Coroutine m_FadeOutCoroutine;
+    private PlayerController m_PlayerController;
 
     static UIManager s_PropertyInstance;
     public static UIManager PropertyInstance
@@ -36,6 +39,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        m_PlayerController = GameState.PropertyInstance.PlayerController;
         // set fog of first level
         NextLevel();
         GameState.PropertyInstance.d_GameRunningDelegate += NextLevel;
@@ -48,22 +52,23 @@ public class UIManager : MonoBehaviour
         if (GameState.PropertyInstance.GameStateEnum == GameStateEnum.TUTORIAL ||
             GameState.PropertyInstance.GameStateEnum == GameStateEnum.NOTHING)
         {
-            UpdateFog(m_DefaultFogColor);
+            UpdateColors(m_DefaultFogColor, m_DefaultSpaceDustColor);
             return;
         }
 
         // Set colors based on current level
         int currLevel = GameManager.PropertyInstance.CurrLevel;
-        if (currLevel >= m_FogLevelColors.Length)
-            UpdateFog(m_DefaultFogColor);
+        if (currLevel >= m_FogLevelColors.Length || currLevel >= m_SpaceDustColors.Length)
+            UpdateColors(m_DefaultFogColor, m_DefaultSpaceDustColor);
         else
-            UpdateFog(m_FogLevelColors[currLevel]);
+            UpdateColors(m_FogLevelColors[currLevel], m_SpaceDustColors[currLevel]);
     }
 
-    private void UpdateFog(Color color)
+    private void UpdateColors(Color fogColor, Color dustParticleColor)
     {
-        RenderSettings.fogColor = color;
-        RenderSettings.skybox.SetColor("_Color", color);
+        m_PlayerController.SetSpaceDustColor(dustParticleColor);
+        RenderSettings.fogColor = fogColor;
+        RenderSettings.skybox.SetColor("_Color", fogColor);
     }
 
     // Fade screen into black
